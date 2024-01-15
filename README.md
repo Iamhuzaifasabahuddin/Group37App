@@ -15,8 +15,12 @@ git pull origin main
 ```bash
 git add .
 git commit -a -m "Commit Message"
-git push -u origin your-local-branch-name
+git push --set-upstream origin your-branch-name
 ```
+
+* Now Youll need to Merge the Commit from your local branch to the main branch
+
+* If you go to **Merge Request** you can use it to merge the commit
 
 ## 2. Installation Guide
 Follow these steps to install and run the project on your local machine.
