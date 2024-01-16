@@ -18,6 +18,11 @@ git commit -a -m "Commit Message"
 git push --set-upstream origin your-branch-name
 ```
 
+* After Setting **upstream** to the origin branch You can use this as normal 
+```bash
+git push
+```
+
 * Now Youll need to Merge the Commit from your local branch to the main branch
 
 * If you go to **Merge Request** you can use it to merge the commit
