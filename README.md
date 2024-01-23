@@ -42,7 +42,7 @@ Follow these steps to install and run the project on your local machine.
  [![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)](https://www.java.com/) [![Gradle](https://img.shields.io/badge/Gradle-%2302303A.svg?style=for-the-badge&logo=gradle&logoColor=white)](https://gradle.org/) [![Spring](https://img.shields.io/badge/Spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white)](https://spring.io/)
  [![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/HTML) [![CSS](https://img.shields.io/badge/CSS-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS) 
  [![MySQL](https://img.shields.io/badge/MySQL-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white)](https://www.mysql.com/) 
- [![Railway](https://img.shields.io/badge/Railway-%23669966.svg?style=for-the-badge&logo=train&logoColor=white)](https://railway.app/)
+ [![Railway Logo](https://img.shields.io/badge/Railway-%23669966.svg?style=for-the-badge&logo=railway&logoColor=white)](https://railway.app/)
 
 
 ### Step 1: Clone the Repository
