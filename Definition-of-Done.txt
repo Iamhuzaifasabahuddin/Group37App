@@ -1,0 +1,5 @@
+1. Code is written
+2. Code is documented
+3. Peer code review completed and passed
+4. All testing is completed successfully
+5. No known bugs or defects
