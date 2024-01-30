@@ -26,6 +26,8 @@ public class Group37SoftwareEngineeringApplication implements CommandLineRunner 
         MyUser user = new MyUser();
 
         user.setUsername("Hs540");
+        user.setFirstname("Huzaifa Sabah");
+        user.setLastname("Uddin");
         user.setEmail("Hs540@student.le.ac.uk");
         user.setPassword(passwordEncoder.encode("password"));
 

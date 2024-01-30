@@ -22,6 +22,18 @@ public class MainController {
     public String getDashboard(Model model, Principal principal) {
         MyUser user = userRepository.findByUsername(principal.getName());
         model.addAttribute("username", user.getUsername());
+
         return "dashboard";
     }
+
+    @GetMapping("/admin")
+    public String getadmin(Model model, Principal principal) {
+        MyUser user = userRepository.findByUsername(principal.getName());
+        model.addAttribute("username", user.getUsername());
+        model.addAttribute("firstName", user.getFirstname());
+        model.addAttribute("lastName", user.getLastname());
+        return "admin";
+    }
+
+
 }

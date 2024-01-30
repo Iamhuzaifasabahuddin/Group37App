@@ -34,6 +34,7 @@ public class SecurityConfig {
                         .requestMatchers(mvc.pattern("/dashboard")).hasAnyRole("NORMAL", "ADMIN")
                         .requestMatchers(mvc.pattern("/NewUser")).permitAll()
                         .requestMatchers(mvc.pattern("/AddUser")).permitAll()
+                        .requestMatchers(mvc.pattern(("/**"))).permitAll()
                         .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
                         .anyRequest().authenticated()
         ).formLogin(login -> login.loginPage("/login-form")
