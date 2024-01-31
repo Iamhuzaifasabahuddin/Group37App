@@ -10,6 +10,11 @@
 <div class="container">
     <h1>Welcome to Our Website!</h1>
     <br/><br>
+    <c:if test="${not empty error}">
+        <div class="error-message">
+                ${error}
+        </div>
+    </c:if>
     <form action="/myLogin" method="post">
         <label>
             Username:

@@ -3,6 +3,7 @@ package com.example.group37software_engineering.model;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -18,8 +19,8 @@ public class MyUser {
     private String password;
     private String email;
 
-    @ManyToMany(mappedBy = "user", fetch = FetchType.EAGER)
-    private List<Course> course;
+    @ManyToMany(mappedBy = "users")
+    private List<Course> course = new ArrayList<>();
 
     public int getId() {
         return id;
@@ -75,5 +76,18 @@ public class MyUser {
 
     public void setCourse(List<Course> course) {
         this.course = course;
+    }
+
+    @Override
+    public String toString() {
+        return "MyUser{" +
+                "id=" + id +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", course=" + course +
+                '}';
     }
 }

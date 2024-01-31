@@ -1,5 +1,7 @@
 package com.example.group37software_engineering.controller;
 
+import com.example.group37software_engineering.model.MyUser;
+import com.example.group37software_engineering.repo.CourseRepository;
 import com.example.group37software_engineering.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -24,6 +26,8 @@ public class LoginController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private CourseRepository courseRepository;
     /**
      * Display the login form.
      *
@@ -50,10 +54,10 @@ public class LoginController {
      * @return The view name for the login form.
      */
     @RequestMapping(value = "/error-login")
-    public String errorLogin() {
+    public String errorLogin(Model model) {
+        model.addAttribute("error", "Invalid Credentials!");
         return "Login/login";
     }
-
     /**
      * Handle successful login and redirect to the dashboard.
      *
@@ -62,7 +66,12 @@ public class LoginController {
      */
     @RequestMapping(value = "/success-login", method = RequestMethod.GET)
     public String successLogin(Principal principal) {
-        return "redirect:/dashboard";
+        MyUser user = userRepository.findByUsername(principal.getName());
+        if (user.getCourse().isEmpty()) {
+            return "redirect:/courses";
+        } else {
+            return "redirect:/dashboard";
+        }
     }
 
     /**

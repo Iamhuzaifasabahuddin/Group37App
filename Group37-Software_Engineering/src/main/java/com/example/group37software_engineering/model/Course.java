@@ -4,6 +4,9 @@ package com.example.group37software_engineering.model;
 import jakarta.persistence.*;
 
 import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -15,12 +18,12 @@ public class Course {
     private Integer id;
     private String title;
 
-    private Date startDate;
-    private Date endDate;
+    private LocalDate startDate;
+    private LocalDate endDate;
 
-    private Time startTime;
+    private LocalTime startTime;
 
-    private Time endTime;
+    private LocalTime endTime;
 
     private boolean completed;
 
@@ -34,12 +37,11 @@ public class Course {
 
     private String imageUrl;
 
+    @Column(length = 1000)
     private String link;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    private List<MyUser> user;
-
-
+    @ManyToMany
+    List<MyUser> users = new ArrayList<>();
     public Integer getId() {
         return id;
     }
@@ -56,38 +58,39 @@ public class Course {
         this.title = course_name;
     }
 
-    public Date getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date start_date) {
-        this.startDate = start_date;
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date end_date) {
-        this.endDate = end_date;
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
     }
 
-
-    public Time getStartTime() {
+    public LocalTime getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Time start_time) {
-        this.startTime = start_time;
+    public void setStartTime(LocalTime startTime) {
+        this.startTime = startTime;
     }
 
-    public Time getEndTime() {
+    public LocalTime getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Time end_time) {
-        this.endTime = end_time;
+    public void setEndTime(LocalTime endTime) {
+        this.endTime = endTime;
     }
+
+
 
     public boolean isCompleted() {
         return completed;
@@ -147,12 +150,12 @@ public class Course {
         this.link = link;
     }
 
-    public List<MyUser> getUser() {
-        return user;
+    public List<MyUser> getUsers() {
+        return users;
     }
 
-    public void setUser(List<MyUser> user) {
-        this.user = user;
+    public void setUsers(List<MyUser> users) {
+        this.users = users;
     }
 }
 
