@@ -7,7 +7,9 @@
 </head>
 <body>
 
-<h2>New User:</h2>
+<h1>New User:</h1>
+<br/>
+<br/>
 <form:form modelAttribute="user" action="/AddUser" method="post">
 
         <h2>First Name: </h2>

@@ -8,6 +8,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * Implementation of the RegistrationService interface for user registration.
+ */
 @Service
 public class MyRegisterationService implements RegistrationService {
 
@@ -17,10 +20,15 @@ public class MyRegisterationService implements RegistrationService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    /**
+     * Register a new user by encoding the password and saving the user in the repository.
+     *
+     * @param user The MyUser object representing the new user.
+     */
     @Override
+    @Transactional
     public void registerUser(MyUser user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }
 }
-
