@@ -18,8 +18,8 @@ public class MyUser {
     private String password;
     private String email;
 
-    @ManyToMany(mappedBy = "course", fetch = FetchType.EAGER)
-    private List<Courses> course;
+    @ManyToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private List<Course> course;
 
     public int getId() {
         return id;
@@ -69,11 +69,11 @@ public class MyUser {
         this.lastname = lastname;
     }
 
-    public List<Courses> getCourse() {
+    public List<Course> getCourse() {
         return course;
     }
 
-    public void setCourse(List<Courses> course) {
+    public void setCourse(List<Course> course) {
         this.course = course;
     }
 }

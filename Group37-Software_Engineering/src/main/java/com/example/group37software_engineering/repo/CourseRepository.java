@@ -6,10 +6,13 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface UserRepository extends CrudRepository<MyUser, Integer> {
-    public MyUser findByUsername(String username);
-    public MyUser findByEmail(String email);
-    public List<MyUser> findByCourse(Course course);
+public interface CourseRepository extends CrudRepository<Course, Integer> {
+
+    public Course findCoursesByTitle(String title);
+
+    public Course findCoursesByCategory(String category);
+
+    public List<Course> findCoursesByUser(MyUser user);
 
 
 }

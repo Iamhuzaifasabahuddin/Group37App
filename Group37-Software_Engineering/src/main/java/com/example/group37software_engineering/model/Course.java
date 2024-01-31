@@ -8,19 +8,19 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-public class Courses {
+public class Course {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    private String course_name;
+    private String title;
 
-    private Date start_date;
-    private Date end_date;
+    private Date startDate;
+    private Date endDate;
 
-    private Time start_time;
+    private Time startTime;
 
-    private Time end_time;
+    private Time endTime;
 
     private boolean completed;
 
@@ -31,6 +31,8 @@ public class Courses {
     private String category;
 
     private String description;
+
+    private String imageUrl;
 
     private String link;
 
@@ -46,45 +48,45 @@ public class Courses {
         this.id = id;
     }
 
-    public String getCourse_name() {
-        return course_name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setCourse_name(String course_name) {
-        this.course_name = course_name;
+    public void setTitle(String course_name) {
+        this.title = course_name;
     }
 
-    public Date getStart_date() {
-        return start_date;
+    public Date getStartDate() {
+        return startDate;
     }
 
-    public void setStart_date(Date start_date) {
-        this.start_date = start_date;
+    public void setStartDate(Date start_date) {
+        this.startDate = start_date;
     }
 
-    public Date getEnd_date() {
-        return end_date;
+    public Date getEndDate() {
+        return endDate;
     }
 
-    public void setEnd_date(Date end_date) {
-        this.end_date = end_date;
+    public void setEndDate(Date end_date) {
+        this.endDate = end_date;
     }
 
 
-    public Time getStart_time() {
-        return start_time;
+    public Time getStartTime() {
+        return startTime;
     }
 
-    public void setStart_time(Time start_time) {
-        this.start_time = start_time;
+    public void setStartTime(Time start_time) {
+        this.startTime = start_time;
     }
 
-    public Time getEnd_time() {
-        return end_time;
+    public Time getEndTime() {
+        return endTime;
     }
 
-    public void setEnd_time(Time end_time) {
-        this.end_time = end_time;
+    public void setEndTime(Time end_time) {
+        this.endTime = end_time;
     }
 
     public boolean isCompleted() {
@@ -129,6 +131,14 @@ public class Courses {
         this.description = description;
     }
 
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imgUrl) {
+        this.imageUrl = imgUrl;
+    }
+
     public String getLink() {
         return link;
     }
@@ -145,3 +155,4 @@ public class Courses {
         this.user = user;
     }
 }
+
