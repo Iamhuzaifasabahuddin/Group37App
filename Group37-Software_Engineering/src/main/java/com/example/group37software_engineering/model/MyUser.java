@@ -3,6 +3,8 @@ package com.example.group37software_engineering.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 public class MyUser {
 
@@ -15,6 +17,9 @@ public class MyUser {
     private String username;
     private String password;
     private String email;
+
+    @ManyToMany(mappedBy = "course", fetch = FetchType.EAGER)
+    private List<Courses> course;
 
     public int getId() {
         return id;
@@ -62,5 +67,13 @@ public class MyUser {
 
     public void setLastname(String lastname) {
         this.lastname = lastname;
+    }
+
+    public List<Courses> getCourse() {
+        return course;
+    }
+
+    public void setCourse(List<Courses> course) {
+        this.course = course;
     }
 }
