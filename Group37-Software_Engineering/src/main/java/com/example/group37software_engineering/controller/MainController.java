@@ -23,9 +23,12 @@ public class MainController {
     @GetMapping("/dashboard")
     public String getDashboard(Model model, Principal principal) {
         MyUser user = userRepository.findByUsername(principal.getName());
-
         model.addAttribute("user", user);
-        model.addAttribute("courseList", user.getCourse());
+        if(user.getCourse().isEmpty()){
+            model.addAttribute("error", "Uhoh no course selected please select a course from courses");
+        }else{
+            model.addAttribute("courseList", user.getCourse());
+        }
         return "dashboard";
     }
 
