@@ -29,15 +29,33 @@ public class MyUserDetailsService implements UserDetailsService {
     /**
      * Load user details by username for authentication.
      *
-     * @param username The username of the user to load.
+     * @param usernameorEmail The username of the user to load.
      * @return UserDetails object representing the user.
      * @throws UsernameNotFoundException If the user is not found.
      */
+//    @Override
+//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+//        MyUser user = userRepository.findByUsername(username);
+//        if (user == null) {
+//            throw new UsernameNotFoundException("User not found with username: " + username);
+//        }
+//
+//        // Create a list of granted authorities based on user roles
+//        List<GrantedAuthority> authorities = new ArrayList<>();
+//        if (isAdmin(user.getUsername())) {
+//            authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+//        } else {
+//            authorities.add(new SimpleGrantedAuthority("ROLE_NORMAL"));
+//        }
+//
+//        // Create UserDetails object with the user's details
+//        return new User(user.getUsername(), user.getPassword(), true, true, true, true, authorities);
+//    }
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        MyUser user = userRepository.findByUsername(username);
+    public UserDetails loadUserByUsername(String usernameorEmail) throws UsernameNotFoundException {
+        MyUser user = userRepository.findByUsernameOrEmail(usernameorEmail, usernameorEmail);
         if (user == null) {
-            throw new UsernameNotFoundException("User not found with username: " + username);
+            throw new UsernameNotFoundException("User not found with username: " + usernameorEmail);
         }
 
         // Create a list of granted authorities based on user roles
@@ -51,7 +69,6 @@ public class MyUserDetailsService implements UserDetailsService {
         // Create UserDetails object with the user's details
         return new User(user.getUsername(), user.getPassword(), true, true, true, true, authorities);
     }
-
     /**
      * Check if a username is considered as an admin user.
      *

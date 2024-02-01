@@ -11,5 +11,8 @@ public interface UserRepository extends CrudRepository<MyUser, Integer> {
     public MyUser findByEmail(String email);
     public List<MyUser> findByCourse(Course course);
 
+    MyUser findByUsernameOrEmail(String username, String email);
+
+
 
 }

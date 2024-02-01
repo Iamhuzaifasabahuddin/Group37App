@@ -45,23 +45,18 @@ public class RegistrationValidator implements Validator {
 
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "", "Username cannot be empty!");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "firstname", "", "First Name cannot be empty!");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "", "Last Name cannot be empty!");
-
-        // Check if the username is already taken
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "lastname", "", "Last Name cannot be empty!");
         if (userRepository.findByUsername(user.getUsername()) != null) {
             errors.rejectValue("username", "", "Username already taken!");
         }
 
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "", "Email cannot be empty!");
-
-        // Check if the email is already taken
         if (userRepository.findByEmail(user.getEmail()) != null) {
             errors.rejectValue("email", "", "Email already taken!");
         }
 
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "", "Password cannot be empty!");
 
-        // Check password length
         if (user.getPassword().length() < 8 || user.getPassword().length() > 32) {
             errors.rejectValue("password", "", "Password must be between 8 and 32 characters");
         }

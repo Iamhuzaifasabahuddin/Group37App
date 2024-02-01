@@ -13,10 +13,8 @@
     <h1>Welcome to Our Website!</h1>
     <br/><br>
     <form action="/myLogin" method="post">
-        <label>
-            Username:
-            <input type="text" name="username" class="login-input" placeholder="User Name" required/>
-        </label>
+        <label for="usernameOrEmail">Username/Email:</label>
+        <input type="text" id="usernameOrEmail" name="usernameOrEmail" required>
         <br/>
         <br/>
         <label>

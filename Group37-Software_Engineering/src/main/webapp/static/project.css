@@ -106,8 +106,8 @@ p {
 
 /* Style for the Submit button */
 .container input[type="submit"] {
-    background-color: #ffff00;
-    color: #000000;
+    background-color: #007bff;
+    color: #fff;
     cursor: pointer;
     font-size: 15px;
     font-style: italic;
@@ -115,5 +115,5 @@ p {
 }
 
 .container input[type="submit"]:hover {
-    background-color: #ffff33;
+    background-color: darkblue;
 }
