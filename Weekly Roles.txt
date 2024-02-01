@@ -1,0 +1,9 @@
+ROLES for the week:
+
+Ansel & Avi: Html and Css management.
+
+Shagana & Gennadios: Css according to Html team.
+
+Andre & Kamran: Review and Documenting. (Beforehand until the development is completed assit in Html & css elements)
+
+Huzaifa: Backend and main functionality. 
