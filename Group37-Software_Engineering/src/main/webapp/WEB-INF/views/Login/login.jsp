@@ -14,7 +14,7 @@
     <br/><br>
     <form action="/myLogin" method="post">
         <label for="usernameOrEmail">Username/Email:</label>
-        <input type="text" id="usernameOrEmail" name="usernameOrEmail" required>
+        <input type="text" id="usernameOrEmail" name="usernameOrEmail" placeholder="Username or Email" required>
         <br/>
         <br/>
         <label>

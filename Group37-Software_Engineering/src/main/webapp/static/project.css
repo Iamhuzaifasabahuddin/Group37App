@@ -117,3 +117,7 @@ p {
 .container input[type="submit"]:hover {
     background-color: darkblue;
 }
+
+.error-message {
+    color: red;
+}
