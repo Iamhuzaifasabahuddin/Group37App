@@ -40,7 +40,7 @@ public class Course {
     @Column(length = 1000)
     private String link;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     List<MyUser> users = new ArrayList<>();
     public Integer getId() {
         return id;

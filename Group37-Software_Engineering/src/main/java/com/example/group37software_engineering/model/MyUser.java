@@ -19,7 +19,7 @@ public class MyUser {
     private String password;
     private String email;
 
-    @ManyToMany(mappedBy = "users")
+    @ManyToMany(mappedBy = "users", fetch = FetchType.EAGER)
     private List<Course> course = new ArrayList<>();
 
     public int getId() {

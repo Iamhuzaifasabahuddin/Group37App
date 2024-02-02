@@ -31,8 +31,7 @@ public class CourseController {
         return "Course/courses";
     }
     @RequestMapping("/enroll")
-    public String enroll(@RequestParam int course, Principal principal){
-        System.out.println(course);
+    public String enroll(@RequestParam int course, Principal principal, Model model) {
         MyUser user = userRepository.findByUsername(principal.getName());
         Course c = courseRepository.findCourseById(course);
         if (c != null && !user.getCourse().contains(c)) {
@@ -42,6 +41,9 @@ public class CourseController {
             courseRepository.save(c);
             return "redirect:/dashboard";
         }
-        return "redirect:/courses";
+        model.addAttribute("error", "You already have enrolled in this course!");
+        model.addAttribute("user", user);
+        model.addAttribute("courseList", courseRepository.findAll());
+        return "Course/courses";
     }
 }
