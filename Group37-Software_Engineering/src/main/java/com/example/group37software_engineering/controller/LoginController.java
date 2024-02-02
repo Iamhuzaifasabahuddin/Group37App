@@ -12,6 +12,8 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.Valid;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import java.security.Principal;
 
 /**
@@ -65,14 +67,16 @@ public class LoginController {
      * @return The redirection URL to the dashboard.
      */
     @RequestMapping(value = "/success-login", method = RequestMethod.GET)
-    public String successLogin(Principal principal) {
+    public String successLogin(Principal principal, Model model, RedirectAttributes redirectAttributes) {
         MyUser user = userRepository.findByUsername(principal.getName());
         if (user.getCourse().isEmpty()) {
             return "redirect:/courses";
         } else {
+            redirectAttributes.addFlashAttribute("message", "Successfully logged in");
             return "redirect:/dashboard";
         }
     }
+
 
     /**
      * Handle user logout and redirect to the login form with a logout parameter.

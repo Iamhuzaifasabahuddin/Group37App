@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="static/project.css" rel="stylesheet" type="text/css">
     <title>Dashboard</title>
     <script src="chrome-extension://nngceckbapebfimnlniiiahkandclblb/content/fido2/page-script.js" id="bw-fido2-page-script"></script>
 </head>
@@ -26,10 +27,13 @@
     <li><a href="/courses">Courses</a></li>
 </div>
 </c:if>
+<c:if test="${not empty message}">
+    <h2 id="message" class="message">
+            ${message}
+    </h2>
+</c:if>
     <section>
     <div class="courses">
-    </div>
-
         <c:forEach items="${courseList}" var="course">
             <div class="card">
                 <h3>${course.category}</h3>
@@ -42,4 +46,14 @@
     </div>
 </section>
 </body>
+<script>
+    window.onload = function() {
+        var messageElement = document.getElementById('message');
+        if (messageElement) {
+            setTimeout(function() {
+                messageElement.style.display = 'none';
+            }, 5000);
+        }
+    };
+</script>
 </html>

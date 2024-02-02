@@ -13,6 +13,8 @@
     <h1>Welcome to Our Website!</h1>
     <br/><br>
     <form action="/myLogin" method="post">
+        <br/>
+        <br/>
         <label for="usernameOrEmail">Username/Email:</label>
         <input type="text" id="usernameOrEmail" name="usernameOrEmail" placeholder="Username or Email" required>
         <br/>
@@ -24,11 +26,8 @@
         <br/>
         <br/>
         <c:if test="${not empty error}">
-            <div class="error-message">
-                    ${error}
-            </div>
+            <h2 id="error-message" class="error-message">${error}</h2>
         </c:if>
-        <br/>
         <br/>
         <input type="submit" value="Sign In" class="login-button" /> <br/>
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
@@ -36,4 +35,14 @@
     <p>If you are a new user, <a href="${pageContext.request.contextPath}/NewUser" class="link-style">register here</a>.</p>
 </div>
 </body>
+<script>
+    window.onload = function() {
+        var errorElement = document.getElementById('error-message');
+        if (errorElement) {
+            setTimeout(function() {
+                errorElement.style.display = 'none';
+            }, 5000);
+        }
+    };
+</script>
 </html>
