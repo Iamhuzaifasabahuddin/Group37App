@@ -1,5 +1,6 @@
 package com.example.group37software_engineering.controller;
 
+import com.example.group37software_engineering.CourseData;
 import com.example.group37software_engineering.model.Course;
 import com.example.group37software_engineering.model.MyUser;
 import com.example.group37software_engineering.repo.CourseRepository;
@@ -21,8 +22,6 @@ public class CourseController {
 
     @Autowired
     private CourseRepository courseRepository;
-
-
     @GetMapping("/courses")
     public String getCourse(Model model, Principal principal) {
         MyUser user = userRepository.findByUsername(principal.getName());
