@@ -13,7 +13,7 @@
 <header class="header">
     <a href="/dashboard" class="IBM_SkillsBuild">IBM SkillsBuild</a>
     <nav class="navbar">
-        <a href="#">Profile</a>
+        <a href="/profile">Profile</a>
         <a href="/courses">Courses</a>
         <a href="#">Friends</a>
         <a href="#">Leaderboard</a>
