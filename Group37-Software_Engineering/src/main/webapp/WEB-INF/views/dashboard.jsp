@@ -9,18 +9,19 @@
     <script src="chrome-extension://nngceckbapebfimnlniiiahkandclblb/content/fido2/page-script.js" id="bw-fido2-page-script"></script>
 </head>
 <body>
-<header>
-    <p>IBM SkillsBuild</p>
-    <nav>
-        <ul>
-            <li><a href="/courses">Courses</a></li>
-            <li>Friends</li>
-            <li>Leaderboard</li>
-        </ul>
+
+<header class="header">
+    <a href="/dashboard" class="IBM_SkillsBuild">IBM SkillsBuild</a>
+    <nav class="navbar">
+        <a href="#">Profile</a>
+        <a href="/courses">Courses</a>
+        <a href="#">Friends</a>
+        <a href="#">Leaderboard</a>
+        <a href="/logout">Logout</a>
     </nav>
-    <a href="/logout">Logout</a>
 </header>
-<h2>Welcome to Your Dashboard, ${user.username}!</h2>
+
+<h2 class="nav_h2">Welcome to Your Dashboard, ${user.username}!</h2>
 <c:if test="${not empty error}">
 <div class="error-message">
         ${error}

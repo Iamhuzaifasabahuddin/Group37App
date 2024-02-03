@@ -5,19 +5,19 @@
     <title>Courses</title>
     <link href="static/project.css" rel="stylesheet" type="text/css">
 </head>
-<header>
-    <p>IBM SkillsBuild</p>
-    <nav>
-        <ul>
-            <li><a href="/dashboard">Profile</a></li>
-            <li>Friends</li>
-            <li>Leaderboard</li>
 
-        </ul>
+<header class="header">
+    <a href="/dashboard" class="IBM_SkillsBuild">IBM SkillsBuild</a>
+    <nav class="navbar">
+        <a href="#">Profile</a>
+        <a href="/dashboard">Dashboard</a>
+        <a href="#">Friends</a>
+        <a href="#">Leaderboard</a>
+        <a href="/logout">Logout</a>
     </nav>
-    <a href="/logout">Logout</a>
 </header>
-<h2>Welcome, ${user.username}!</h2>
+
+<h2 class="nav_h2">Welcome, ${user.username}!</h2>
 <h2>Here is the list of all available courses: </h2>
 <c:if test="${not empty error}">
     <h2 id="error-message" class="error-message">${error}</h2>
