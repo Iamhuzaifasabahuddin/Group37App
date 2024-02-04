@@ -18,6 +18,8 @@ import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 
+import static org.springframework.security.config.Customizer.withDefaults;
+
 /**
  * Configuration class for Spring Security settings.
  */
@@ -70,7 +72,9 @@ public class SecurityConfig {
                 .permitAll()
         ).exceptionHandling(exceptionHandler ->
                 exceptionHandler.accessDeniedPage("/access-denied")
-        );
+        )
+                .oauth2Client(Customizer.withDefaults())
+                .oauth2Login(Customizer.withDefaults());
         return http.build();
     }
 

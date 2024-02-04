@@ -5,10 +5,12 @@ import com.example.group37software_engineering.model.MyUser;
 import com.example.group37software_engineering.repo.CourseRepository;
 import com.example.group37software_engineering.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import com.example.group37software_engineering.CourseData;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.security.Principal;
 import java.util.List;
@@ -22,6 +24,13 @@ public class MainController {
     @Autowired
     private CourseRepository courseRepository;
 
+    @GetMapping("/")
+    public String homePage(OAuth2AuthenticationToken oAuth2AuthenticationToken, Model model) {
+        model.addAttribute("user", oAuth2AuthenticationToken.getPrincipal().getName());
+        model.addAttribute("username", oAuth2AuthenticationToken.getPrincipal().getAttributes().get("given_name"));
+        return "oauth";
+
+    }
     @GetMapping("/dashboard")
     public String getDashboard(Model model, Principal principal) {
         MyUser user = userRepository.findByUsername(principal.getName());

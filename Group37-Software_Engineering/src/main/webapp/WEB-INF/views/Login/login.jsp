@@ -32,6 +32,7 @@
         <input type="submit" value="Sign In" class="login-button" /> <br/>
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
     </form>
+    <a href="${pageContext.request.contextPath}/oauth2/authorization/google">Login with Google</a>
     <p>If you are a new user, <a href="${pageContext.request.contextPath}/NewUser" class="link-style">register here</a>.</p>
 </div>
 </body>
