@@ -10,8 +10,12 @@ public interface CourseRepository extends CrudRepository<Course, Integer> {
 
     public Course findCoursesByTitle(String title);
 
+    List<Course> findAllByCategory(String category);
+
     public Course findCourseById(Integer id);
 
     public Course findCoursesByCategory(String category);
+
+    List<Course> findAllByDurationGreaterThanEqual(double duration);
 
 }

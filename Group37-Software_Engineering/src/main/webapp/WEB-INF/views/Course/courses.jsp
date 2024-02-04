@@ -7,7 +7,7 @@
 </head>
 
 <header class="header">
-    <a href="/dashboard" class="IBM_SkillsBuild">IBM SkillsBuild</a>
+    <a href="${pageContext.request.contextPath}/dashboard" class="IBM_SkillsBuild">IBM SkillsBuild</a>
     <nav class="navbar">
         <a href="#">Profile</a>
         <a href="/dashboard">Dashboard</a>
@@ -18,6 +18,35 @@
 </header>
 
 <h2 class="nav_h2">Welcome, ${user.username}!</h2>
+<form action="${pageContext.request.contextPath}/filter" method="get" id="filterForm">
+    <label for="category">Select Category:</label>
+    <select id="category" name="category">
+        <option value="Artificial Intelligence">AI</option>
+        <option value="Cloud">Cloud</option>
+        <option value="Data Science">Data Science</option>
+        <option value="CyberSecurity">CyberSecurity</option>
+    </select>
+    <input type="submit" value="Sort by Course">
+</form>
+
+<form action="/search" method="get">
+    <input type="text" name="searchTerm" id="searchTerm">
+    <input type="submit">
+</form>
+
+<form action="/duration" method="get">
+    <label for="duration">Select Duration:</label>
+    <select name="duration" id="duration">
+        <option value="5.0">5 hours</option>
+        <option value="10.0">10 hours</option>
+        <option value="20.0">20 hours</option>
+        <option value="21.0">20+ hours</option>
+    </select>
+    <input type="submit" value="Sort By Duration">
+</form>
+
+
+
 <h2>Here is the list of all available courses: </h2>
 <c:if test="${not empty error}">
     <h2 id="error-message" class="error-message">${error}</h2>
