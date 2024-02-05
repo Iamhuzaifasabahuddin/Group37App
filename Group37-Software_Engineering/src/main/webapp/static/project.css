@@ -72,14 +72,13 @@ p {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    /*margin-top:20%;*/
 }
 
 .container label {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
-    font-family: "Open Sans", "Helvetica Neue";
+    font-family: "Open Sans", "Helvetica Neue", serif;
     font-size: 20px;
     font-style: italic;
 
@@ -138,17 +137,19 @@ li, a {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 2%;
+    padding: 20px 2%;
 }
-.nav_h2{
-    padding-top: 80px;
-}
+
 .IBM_SkillsBuild{
     cursor: pointer;
     font-size: 25px;
     color: #edf0f1;
     font-style: italic;
-    font-family: "Open Sans", "Helvetica Neue";
+    font-family: "Open Sans", "Helvetica Neue", serif;
+}
+
+.navbar ul {
+    list-style: none;
 }
 .navbar li {
     display: inline-block;
@@ -209,4 +210,47 @@ li, a {
 
 .card form input[type="submit"]:hover {
     background-color: #45a049; /* Change the background color on hover */
+}
+
+/*Filter */
+.filter_container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 2%;
+    margin-right: 2%;
+
+}
+.filter_container label {
+    font-size: 20px;
+    color: black;
+    font-weight: bold;
+}
+.filter_container input[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    font-style: italic;
+}
+
+.filter_container input[type="submit"]:hover {
+    background-color: darkblue;
+}
+
+/*Welcome */
+.Welcome{
+    padding-top:10px ;
+    padding-bottom:10px ;
+    text-align: center;
+    text-transform: capitalize;
+    font-size: 40px;
+}
+
+/* List Courses */
+.list_courses {
+    padding-top: 20px ;
+    padding-bottom: 10px ;
+}
+.message_container h2{
+    text-align: center;
 }

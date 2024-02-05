@@ -8,6 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.server.ErrorPage;
+import org.springframework.boot.web.server.ErrorPageRegistrar;
+import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
@@ -35,5 +39,11 @@ public class Group37SoftwareEngineeringApplication implements CommandLineRunner 
     public void run(String... args) throws Exception {
 //        courseData.readDataAndSaveToRepo("courses_data.csv");
 
+    }
+    @Bean
+    public ErrorPageRegistrar errorPageRegistrar() {
+        return registry -> {
+            registry.addErrorPages(new ErrorPage(HttpStatus.NOT_FOUND, "/404"));
+        };
     }
 }

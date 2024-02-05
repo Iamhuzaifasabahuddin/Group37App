@@ -10,29 +10,35 @@
 </head>
 <body>
 
-<div class="header">
-    <a href="/dashboard" class="IBM_SkillsBuild">IBM SkillsBuild Simulator</a>
+<header class="header">
+    <div class="IBM_SkillsBuild">IBM Skills Build</div>
     <nav class="navbar">
-        <a href="/profile">Profile</a>
-        <a href="/courses">Courses</a>
-        <a href="#">Friends</a>
-        <a href="#">Leaderboard</a>
-        <a href="/logout">Logout</a>
+        <ul>
+            <li> <a href="#">Profile</a> </li>
+            <li><a href="/courses">Courses</a></li>
+            <li><a href="#">Friends</a></li>
+            <li><a href="#">Leaderboard</a></li>
+            <li><a href="/logout">Logout</a></li>
+        </ul>
     </nav>
-</div>
+</header>
 
-<h2 class="nav_h2">Welcome to Your Dashboard, ${user.username}!</h2>
-<c:if test="${not empty error}">
-<div class="error-message">
-        ${error}
-    <li><a href="/courses">Courses</a></li>
+<h1 class="Welcome">Welcome to Your Dashboard, ${user.username}!</h1>
+<div class="message_container">
+    <c:if test="${not empty error}">
+        <div class="error-message">
+                ${error}
+            <h2>
+                <a href="/courses">Courses</a>
+            </h2>
+        </div>
+    </c:if>
+    <c:if test="${not empty message}">
+        <h2 id="message" class="message">
+                ${message}
+        </h2>
+    </c:if>
 </div>
-</c:if>
-<c:if test="${not empty message}">
-    <h2 id="message" class="message">
-            ${message}
-    </h2>
-</c:if>
     <section>
     <div class="courses">
         <c:forEach items="${courseList}" var="course">

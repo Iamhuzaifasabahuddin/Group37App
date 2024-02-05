@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import com.example.group37software_engineering.CourseData;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.security.Principal;
@@ -60,6 +61,11 @@ public class MainController {
         model.addAttribute("firstName", user.getFirstname());
         model.addAttribute("lastName", user.getLastname());
         return "admin";
+    }
+
+    @RequestMapping("/404")
+    public String handle404() {
+        return "redirect:/dashboard";
     }
 
     private Integer countCompleted(String username) {

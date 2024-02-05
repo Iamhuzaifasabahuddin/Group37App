@@ -7,7 +7,7 @@
 </head>
 
 <header class="header">
-    <a href="${pageContext.request.contextPath}/dashboard" class="IBM_SkillsBuild">IBM SkillsBuild Simulator</a>
+    <div class="IBM_SkillsBuild">IBM Skills Build</div>
     <nav class="navbar">
         <ul>
             <li> <a href="#">Profile</a> </li>
@@ -18,8 +18,8 @@
         </ul>
     </nav>
 </header>
-
-<h2 class="nav_h2">Welcome, ${user.username}!</h2>
+<h1 class="Welcome">Welcome, ${user.username}!</h1>
+<div class="filter_container">
 <form action="${pageContext.request.contextPath}/filter" method="get" id="filterForm">
     <label for="category">Select Category:</label>
     <select id="category" name="category">
@@ -32,7 +32,8 @@
 </form>
 
 <form action="/search" method="get">
-    <input type="text" name="searchTerm" id="searchTerm">
+    <label for="searchTerm">Search Courses: </label
+    ><input type="text" name="searchTerm" id="searchTerm">
     <input type="submit">
 </form>
 
@@ -42,14 +43,11 @@
         <option value="5.0">5 hours</option>
         <option value="10.0">10 hours</option>
         <option value="20.0">20 hours</option>
-        <option value="21.0">20+ hours</option>
     </select>
     <input type="submit" value="Sort By Duration">
 </form>
-
-
-
-<h2>Here is the list of all available courses: </h2>
+</div>
+<h2 class="list_courses">Here is the list of all available courses: </h2>
 <c:if test="${not empty error}">
     <h2 id="error-message" class="error-message">${error}</h2>
 </c:if>
@@ -63,6 +61,8 @@
                 <h4>${course.getTitle()}</h4>
                 <br/>
                 <p>Duration: ${course.getDuration()} hours</p>
+                <br/>
+                <p>Points: ${course.getDuration() * 100} available</p>
                 <a href="${course.getLink()}">Get Started</a>
                 <form action="${pageContext.request.contextPath}/enroll" onsubmit="return confirmEnrollment()">
                     <input type="hidden" name="course" value="${course.id}">
