@@ -12,6 +12,7 @@
         <h3>${course.getCategory()}</h3>
         <img src="${course.getImageUrl()}" alt="${course.getTitle()}">
         <h4>${course.getTitle()}</h4>
+        <br/>
         <p>Duration: ${course.getDuration()} hours</p>
         <a href="${course.getLink()}">Get Started</a>
         <form action="${pageContext.request.contextPath}/enroll" onsubmit="return confirmEnrollment()">

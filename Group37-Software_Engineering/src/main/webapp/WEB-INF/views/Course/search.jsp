@@ -11,6 +11,7 @@
     <img src="${course.getImageUrl()}" alt="${course.getTitle()}">
     <h4>${course.getTitle()}</h4>
     <p>Duration: ${course.getDuration()} hours</p>
+    <br/>
     <a href="${course.getLink()}">Get Started</a>
     <form action="${pageContext.request.contextPath}/enroll" onsubmit="return confirmEnrollment()">
         <input type="hidden" name="course" value="${course.id}">

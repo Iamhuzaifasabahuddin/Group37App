@@ -10,8 +10,8 @@
 </head>
 <body>
 
-<header class="header">
-    <a href="/dashboard" class="IBM_SkillsBuild">IBM SkillsBuild</a>
+<div class="header">
+    <a href="/dashboard" class="IBM_SkillsBuild">IBM SkillsBuild Simulator</a>
     <nav class="navbar">
         <a href="/profile">Profile</a>
         <a href="/courses">Courses</a>
@@ -19,7 +19,7 @@
         <a href="#">Leaderboard</a>
         <a href="/logout">Logout</a>
     </nav>
-</header>
+</div>
 
 <h2 class="nav_h2">Welcome to Your Dashboard, ${user.username}!</h2>
 <c:if test="${not empty error}">
@@ -56,5 +56,16 @@
             }, 5000);
         }
     };
+
+    var prevScrollpos = window.pageYOffset;
+    window.onscroll = function() {
+        var currentScrollPos = window.pageYOffset;
+        if (prevScrollpos > currentScrollPos) {
+            document.getElementById("header").style.top = "0";
+        } else {
+            document.getElementById("header").style.top = "-50px";
+        }
+        prevScrollpos = currentScrollPos;
+    }
 </script>
 </html>

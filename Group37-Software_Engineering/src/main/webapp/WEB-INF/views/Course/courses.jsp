@@ -7,13 +7,15 @@
 </head>
 
 <header class="header">
-    <a href="${pageContext.request.contextPath}/dashboard" class="IBM_SkillsBuild">IBM SkillsBuild</a>
+    <a href="${pageContext.request.contextPath}/dashboard" class="IBM_SkillsBuild">IBM SkillsBuild Simulator</a>
     <nav class="navbar">
-        <a href="#">Profile</a>
-        <a href="/dashboard">Dashboard</a>
-        <a href="#">Friends</a>
-        <a href="#">Leaderboard</a>
-        <a href="/logout">Logout</a>
+        <ul>
+            <li> <a href="#">Profile</a> </li>
+            <li><a href="/dashboard">Dashboard</a></li>
+            <li><a href="#">Friends</a></li>
+            <li><a href="#">Leaderboard</a></li>
+            <li><a href="/logout">Logout</a></li>
+        </ul>
     </nav>
 </header>
 
@@ -59,6 +61,7 @@
                 <h3>${course.getCategory()}</h3>
                 <img src="${course.getImageUrl()}" alt="${course.getTitle()}">
                 <h4>${course.getTitle()}</h4>
+                <br/>
                 <p>Duration: ${course.getDuration()} hours</p>
                 <a href="${course.getLink()}">Get Started</a>
                 <form action="${pageContext.request.contextPath}/enroll" onsubmit="return confirmEnrollment()">
@@ -84,6 +87,17 @@
             }, 5000);
         }
     };
+
+    var prevScrollpos = window.pageYOffset;
+    window.onscroll = function() {
+        var currentScrollPos = window.pageYOffset;
+        if (prevScrollpos > currentScrollPos) {
+            document.getElementById("navbar").style.top = "0";
+        } else {
+            document.getElementById("navbar").style.top = "-50px";
+        }
+        prevScrollpos = currentScrollPos;
+    }
 </script>
 
 </html>

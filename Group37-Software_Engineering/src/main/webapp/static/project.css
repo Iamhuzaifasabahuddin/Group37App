@@ -125,53 +125,43 @@ p {
 .message{
     color: green;
 }
-
+li, a {
+    font-weight: 500;
+    font-size: 20px;
+    color: #edf0f1;
+    text-decoration: none;
+    font-style: italic;
+}
 /* Style for the navigation bar */
 .header{
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    padding: 20px 2%;
-    background: #d7d7d7;
+    background-color: #000000;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    z-index: 100;
+    padding: 10px 2%;
 }
 .nav_h2{
     padding-top: 80px;
 }
 .IBM_SkillsBuild{
-    font-size: 35px;
-    color: black;
-    text-decoration: none;
-    font-weight: 700;
+    cursor: pointer;
+    font-size: 25px;
+    color: #edf0f1;
+    font-style: italic;
+    font-family: "Open Sans", "Helvetica Neue";
 }
-.navbar a{
-    position: relative;
-    font-size: 20px;
-    font-family: "Helvetica Neue", sans-serif;
-    color: black;
-    font-weight: 500;
-    text-decoration: none;
-    margin-left: 40px;
+.navbar li {
+    display: inline-block;
+    margin-right: 20px;
 }
-.navbar a::before{
-    content: '';
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: black;
-    transition: .4s;
-}
-.navbar a:hover::before{
-    width: 100%;
+.navbar li a:hover {
+    text-decoration: underline;
+    color: #007bff;
 }
 
+.navbar li a {
+    transition: all 0.5s ease 0s;
+}
 /* Style for the course cards */
 .courses{
     display: flex;
