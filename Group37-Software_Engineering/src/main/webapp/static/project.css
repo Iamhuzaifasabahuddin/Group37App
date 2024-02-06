@@ -240,6 +240,7 @@ li a {
     background-color: #1593ed;
     display: block;
     text-align: center;
+    text-decoration: none;
 }
 
 .card a:hover {
