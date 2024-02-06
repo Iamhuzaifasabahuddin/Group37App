@@ -43,12 +43,12 @@
         <div class="courses">
             <c:forEach items="${courseList}" var="course">
                 <div class="card">
-                    <div>
+                    <div class="card-top">
                         <img src="${course.getImageUrl()}" alt="${course.getTitle()}">
                         <h4>${course.getTitle()}</h4>
                         <p class="category">${course.getCategory()}</p>
                     </div>
-                    <div>
+                    <div class="card-bottom">
                         <div class="course-details">
                             <p>${Math.round(course.getDuration())} hours</p>
                             <p class="divider">|</p>
