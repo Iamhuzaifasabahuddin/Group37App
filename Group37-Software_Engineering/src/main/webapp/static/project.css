@@ -110,7 +110,7 @@ p {
     cursor: pointer;
     font-size: 15px;
     font-style: italic;
-
+    border-radius: 10px;
 }
 
 .container input[type="submit"]:hover {
@@ -124,12 +124,11 @@ p {
 .message{
     color: green;
 }
-li, a {
+li a {
     font-weight: 500;
     font-size: 20px;
     color: #edf0f1;
     text-decoration: none;
-    font-style: italic;
 }
 /* Style for the navigation bar */
 .header{
@@ -253,4 +252,17 @@ li, a {
 }
 .message_container h2{
     text-align: center;
+}
+
+/* Course errors */
+.course-error-message {
+    color: red;
+    font-size: 40px;
+}
+
+.course-message-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top:10%;
 }
