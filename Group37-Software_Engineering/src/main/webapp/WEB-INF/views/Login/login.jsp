@@ -14,16 +14,14 @@
     <br/><br>
     <form action="/myLogin" method="post">
         <br/>
-        <br/>
         <label for="usernameOrEmail">Username/Email:</label>
-        <input type="text" id="usernameOrEmail" name="usernameOrEmail" placeholder="Username or Email" required>
+        <input type="text" id="usernameOrEmail" name="usernameOrEmail" placeholder="Username or Email" class="login-input" required>
         <br/>
         <br/>
         <label>
             Password:
             <input type="password" name="password" class="login-input" placeholder="Password" required/>
         </label>
-        <br/>
         <br/>
         <c:if test="${not empty error}">
             <h2 id="error-message" class="error-message">${error}</h2>

@@ -6,6 +6,8 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
+import java.util.Objects;
+
 /**
  * Validator for user registration data.
  */
@@ -59,6 +61,9 @@ public class RegistrationValidator implements Validator {
 
         if (user.getPassword().length() < 8 || user.getPassword().length() > 32) {
             errors.rejectValue("password", "", "Password must be between 8 and 32 characters");
+        }
+        if(!Objects.equals(user.getPassword(), user.getConfirmpassword())){
+            errors.rejectValue("confirmpassword", "", "Passwords do not match!");
         }
     }
 }

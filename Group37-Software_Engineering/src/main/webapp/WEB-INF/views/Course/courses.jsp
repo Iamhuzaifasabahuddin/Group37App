@@ -12,6 +12,7 @@
         <ul>
             <li> <a href="#">Profile</a> </li>
             <li><a href="/dashboard">Dashboard</a></li>
+            <li><a href="/courses">Courses</a></li>
             <li><a href="#">Friends</a></li>
             <li><a href="#">Leaderboard</a></li>
             <li><a href="/logout">Logout</a></li>
@@ -40,8 +41,9 @@
 <form action="/duration" method="get">
     <label for="duration">Select Duration:</label>
     <select name="duration" id="duration">
-        <option value="5.0">5 hours</option>
-        <option value="10.0">10 hours</option>
+        <option value="5.0 <">5 hours</option>
+        <option value="5.0 >">5 hours</option>
+        <option value="10.0 >">10 hours</option>
         <option value="20.0">20 hours</option>
     </select>
     <input type="submit" value="Sort By Duration">
@@ -53,6 +55,11 @@
 </c:if>
 
 <section>
+    <div class="course-message-container">
+        <c:if test="${not empty Courseerror}">
+            <h2 id="course-error-message" class="course-error-message">${Courseerror}</h2>
+        </c:if>
+    </div>
     <div class="courses">
         <c:forEach items="${courseList}" var="course">
             <div class="card">
@@ -74,6 +81,22 @@
                 </div>
             </div>
         </c:forEach>
+        <c:if test="${not empty course}">
+            <div class="card">
+                <h3>${course.getCategory()}</h3>
+                <img src="${course.getImageUrl()}" alt="${course.getTitle()}">
+                <h4>${course.getTitle()}</h4>
+                <br/>
+                <p>Duration: ${course.getDuration()} hours</p>
+                <br/>
+                <p>Points: ${course.getDuration() * 100} available</p>
+                <a href="${course.getLink()}">Get Started</a>
+                <form action="${pageContext.request.contextPath}/enroll" onsubmit="return confirmEnrollment()">
+                    <input type="hidden" name="course" value="${course.id}">
+                    <input type="submit" value="Enroll">
+                </form>
+            </div>
+        </c:if>
     </div>
 </section>
 <script>
