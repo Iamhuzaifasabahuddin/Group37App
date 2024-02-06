@@ -56,18 +56,22 @@
     <div class="courses">
         <c:forEach items="${courseList}" var="course">
             <div class="card">
-                <h3>${course.getCategory()}</h3>
-                <img src="${course.getImageUrl()}" alt="${course.getTitle()}">
-                <h4>${course.getTitle()}</h4>
-                <br/>
-                <p>Duration: ${course.getDuration()} hours</p>
-                <br/>
-                <p>Points: ${course.getDuration() * 100} available</p>
-                <a href="${course.getLink()}" target="_blank">Get Started</a>
-                <form action="${pageContext.request.contextPath}/enroll" onsubmit="return confirmEnrollment()">
-                    <input type="hidden" name="course" value="${course.id}">
-                    <input type="submit" value="Enroll">
-                </form>
+                <div>
+                    <img src="${course.getImageUrl()}" alt="${course.getTitle()}">
+                    <h4>${course.getTitle()}</h4>
+                    <p class="category">${course.getCategory()}</p>
+                </div>
+                <div>
+                    <div class="course-details">
+                        <p>${Math.round(course.getDuration())} hours</p>
+                        <p class="divider">|</p>
+                        <p>${Math.round(course.getDuration()) * 100} points</p>
+                    </div>
+                    <form action="${pageContext.request.contextPath}/enroll" onsubmit="return confirmEnrollment()">
+                        <input type="hidden" name="course" value="${course.id}">
+                        <input type="submit" value="Enroll">
+                    </form>
+                </div>
             </div>
         </c:forEach>
     </div>
