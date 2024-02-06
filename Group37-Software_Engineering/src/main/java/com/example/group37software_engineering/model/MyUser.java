@@ -19,6 +19,9 @@ public class MyUser {
     private String password;
     private String email;
 
+    @Transient
+    private String confirmpassword;
+
     @ManyToMany(mappedBy = "users", fetch = FetchType.EAGER)
     private List<Course> course = new ArrayList<>();
 
@@ -76,6 +79,14 @@ public class MyUser {
 
     public void setCourse(List<Course> course) {
         this.course = course;
+    }
+
+    public String getConfirmpassword() {
+        return confirmpassword;
+    }
+
+    public void setConfirmpassword(String confirmpassword) {
+        this.confirmpassword = confirmpassword;
     }
 
     @Override

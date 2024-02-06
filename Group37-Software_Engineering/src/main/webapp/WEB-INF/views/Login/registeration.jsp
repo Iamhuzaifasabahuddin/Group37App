@@ -47,6 +47,10 @@
         <form:errors path="password" cssClass="error"/>
         <br/>
         <br/>
+        <h2>Confirm Password:</h2>
+        <form:input path="confirmpassword" type="password" cssClass="form-input"/>
+        <form:errors path="confirmpassword" cssClass="error"/>
+        <br/>
 
 
 
