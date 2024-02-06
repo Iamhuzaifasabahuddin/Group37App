@@ -230,14 +230,11 @@ li, a {
     font-size: 20px;
     color: black;
     padding-bottom: 10px;
-    display: inline;
     background-color: #1593ed;
+    display: block;
 }
 .card a:hover {
     background-color: #028aeb;
-}
-.card form {
-    display: inline;
 }
 .card form input[type="submit"], .card a {
     color: white;
@@ -248,6 +245,7 @@ li, a {
     margin-top: 10px;
     flex: auto;
     width: 100%;
+    text-align: center;
 }
 .card form input[type="submit"] {
     background-color: #4CAF50;

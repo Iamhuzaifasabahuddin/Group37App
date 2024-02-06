@@ -40,18 +40,26 @@
     </c:if>
 </div>
     <section>
-    <div class="courses">
-        <c:forEach items="${courseList}" var="course">
-            <div class="card">
-                <h3>${course.category}</h3>
-                <img src="${course.imageUrl}" alt="${course.title}">
-                <h4>${course.title}</h4>
-                <p>Duration: ${course.duration} hours</p>
-                <a href="${course.link}">Get Started</a>
-            </div>
-        </c:forEach>
-    </div>
-</section>
+        <div class="courses">
+            <c:forEach items="${courseList}" var="course">
+                <div class="card">
+                    <div>
+                        <img src="${course.getImageUrl()}" alt="${course.getTitle()}">
+                        <h4>${course.getTitle()}</h4>
+                        <p class="category">${course.getCategory()}</p>
+                    </div>
+                    <div>
+                        <div class="course-details">
+                            <p>${Math.round(course.getDuration())} hours</p>
+                            <p class="divider">|</p>
+                            <p>${Math.round(course.getDuration()) * 100} points</p>
+                        </div>
+                        <a href="${course.link}" target="_blank">Get Started</a>
+                    </div>
+                </div>
+            </c:forEach>
+        </div>
+    </section>
 </body>
 <script>
     window.onload = function() {
