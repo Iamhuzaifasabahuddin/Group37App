@@ -63,7 +63,7 @@
                 <p>Duration: ${course.getDuration()} hours</p>
                 <br/>
                 <p>Points: ${course.getDuration() * 100} available</p>
-                <a href="${course.getLink()}">Get Started</a>
+                <a href="${course.getLink()}" target="_blank">Get Started</a>
                 <form action="${pageContext.request.contextPath}/enroll" onsubmit="return confirmEnrollment()">
                     <input type="hidden" name="course" value="${course.id}">
                     <input type="submit" value="Enroll">
