@@ -10,7 +10,7 @@
     <div class="IBM_SkillsBuild">IBM Skills Build</div>
     <nav class="navbar">
         <ul>
-            <li> <a href="#">Profile</a> </li>
+            <li><a href="/profile">Profile</a> </li>
             <li><a href="/dashboard">Dashboard</a></li>
             <li><a href="/courses">Courses</a></li>
             <li><a href="#">Friends</a></li>
