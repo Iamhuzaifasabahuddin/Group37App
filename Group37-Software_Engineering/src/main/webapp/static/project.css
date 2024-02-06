@@ -310,11 +310,3 @@ li a {
     font-size: 15px;
     font-style: italic;
 }
-
-.fullName {
-    width: 50%;
-    display: flex;
-    justify-content: left;
-    flex-wrap: wrap;
-    margin-top: 10px;
-}
