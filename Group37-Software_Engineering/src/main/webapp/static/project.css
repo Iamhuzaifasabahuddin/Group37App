@@ -22,6 +22,17 @@
     border-radius: 4px;
 }
 
+.logo {
+
+    float: right;
+    width: 80%;
+    max-width: 400px;
+    padding: 20px;
+    /*border: 1px solid #000;*/
+    /*border-radius: 8px;*/
+
+}
+
 .submit-button {
     background-color: #007bff;
     color: #fff;
@@ -53,21 +64,50 @@ p {
     color: black;
 }
 
-/* Style for the form */
-.container form {
-    width: 80%;
-    max-width: 400px;
-    padding: 20px;
-    border: 1px solid #000;
-    border-radius: 8px;
-    background-color: #f9f9f9;
+
+.login-background {
+
+    background-image: url("https://en.idei.club/uploads/posts/2023-06/thumbs/1687164636_en-idei-club-p-blue-technology-background-dizain-pinteres-53.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+
 }
 
 .container{
     display: flex;
+    flex: 1;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0 auto;
+    width: fit-content;
+    height: fit-content;
+    padding: 1px;
+    border: 1px solid #000;
+    border-radius: 20px;
+    border-color: #1593ed;
+    background-color: ghostwhite;
+    font-family: "DM Sans", sans-serif;
+
+}
+
+.login-oauth {
+
+    display: flex;
+    flex: 1;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    float: left;
+    width: fit-content;
+    height: fit-content;
+    padding: 20px;
+    max-width: 400px;
+
 }
 
 .container label {
@@ -265,6 +305,8 @@ li a {
     margin-right: 2%;
 
 }
+
+
 .filter_container label {
     font-size: 25px;
     color: black;
