@@ -29,9 +29,7 @@
         <input type="submit" value="Sign In" class="login-button" /> <br/>
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
     </form>
-
-    <a href="${pageContext.request.contextPath}/oauth2/authorization/google">Login with Google</a>
-    <p>New user? <a style="font-size: large" href="${pageContext.request.contextPath}/NewUser" class="link-style">Register here</a>.</p>
+<%--    <p>New user? <a style="font-size: large" href="${pageContext.request.contextPath}/NewUser" class="link-style">Register here</a>.</p>--%>
         </div>
 
     <img class="logo"  src ="https://img1.wsimg.com/isteam/ip/6f5993eb-07fd-4e54-a10f-d1d3850f5f51/ibmskillsbuild-gmen.png/:/">

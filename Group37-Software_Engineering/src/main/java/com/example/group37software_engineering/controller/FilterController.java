@@ -38,11 +38,17 @@ public class FilterController {
     public String getSearch(@RequestParam String searchTerm, Model model, Principal principal) {
         MyUser user = userRepository.findByUsername(principal.getName());
         model.addAttribute("user", user);
-        if(searchTerm != null && !searchTerm.isBlank()){
-            model.addAttribute("course", courseRepository.findCoursesByTitle(searchTerm));
-
+        if (searchTerm != null && !searchTerm.isBlank()) {
+            Course course = courseRepository.findCoursesByTitle(searchTerm);
+            if (!(course == null)) {
+                model.addAttribute("course", course);
+            } else {
+                model.addAttribute("Courseerror", "No such course found!");
+            }
+        } else {
+            model.addAttribute("Courseerror", "Please provide a search term.");
         }
-        model.addAttribute("Courseerror", "No such course found!");
+
         return "Course/courses";
     }
 
