@@ -55,6 +55,15 @@
                             <p class="divider">|</p>
                             <p>${Math.round(course.getDuration()) * 100} points</p>
                         </div>
+                        <div class="course-details">
+
+                            <p>Start Time:
+                                    ${course.startTime}</p>
+                            <p class="divider">|</p>
+
+                            <p>Start Date:
+                                    ${course.startDate}</p>
+                        </div>
                         <a href="${course.link}" target="_blank">Get Started</a>
                     </div>
                 </div>

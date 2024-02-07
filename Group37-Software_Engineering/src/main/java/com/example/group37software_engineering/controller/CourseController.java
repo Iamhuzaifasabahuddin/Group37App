@@ -34,6 +34,8 @@ public class CourseController {
         MyUser user = userRepository.findByUsername(principal.getName());
         Course c = courseRepository.findCourseById(course);
         if (c != null && !user.getCourse().contains(c)) {
+            c.setStartTime();
+            c.setStartDate();
             user.getCourse().add(c);
             userRepository.save(user);
             c.getUsers().add(user);

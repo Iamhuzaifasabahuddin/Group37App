@@ -36,6 +36,8 @@
 
     <img class="logo"  src ="https://img1.wsimg.com/isteam/ip/6f5993eb-07fd-4e54-a10f-d1d3850f5f51/ibmskillsbuild-gmen.png/:/">
 
+<%--    <a href="${pageContext.request.contextPath}/oauth2/authorization/google">Login with Google</a>--%>
+    <p>If you are a new user, <a href="${pageContext.request.contextPath}/NewUser" class="link-style">register here</a>.</p>
 </div>
 </body>
 <script>
