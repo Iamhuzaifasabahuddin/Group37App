@@ -135,6 +135,7 @@ li a {
     font-size: 25px;
     color: #edf0f1;
     font-family: "Tahoma", "Helvetica Neue", serif;
+    padding-right: 10px;
 }
 
 .navbar ul {

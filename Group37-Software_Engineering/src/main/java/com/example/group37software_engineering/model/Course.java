@@ -5,7 +5,9 @@ import jakarta.persistence.*;
 
 import java.sql.Time;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -21,9 +23,9 @@ public class Course {
     private LocalDate startDate;
     private LocalDate endDate;
 
-    private LocalTime startTime;
+    private String startTime;
 
-    private LocalTime endTime;
+    private String endTime;
 
     private boolean completed;
 
@@ -39,7 +41,6 @@ public class Course {
 
     @Column(length = 1000)
     private String link;
-
     @ManyToMany(fetch = FetchType.EAGER)
     List<MyUser> users = new ArrayList<>();
     public Integer getId() {
@@ -62,8 +63,8 @@ public class Course {
         return startDate;
     }
 
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
+    public void setStartDate() {
+        this.startDate = LocalDate.now();
     }
 
     public LocalDate getEndDate() {
@@ -74,19 +75,21 @@ public class Course {
         this.endDate = endDate;
     }
 
-    public LocalTime getStartTime() {
+    public String getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(LocalTime startTime) {
-        this.startTime = startTime;
+    public void setStartTime() {
+        LocalTime currentTime = LocalTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mm a");
+        this.startTime = currentTime.format(formatter);
     }
 
-    public LocalTime getEndTime() {
+    public String getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(LocalTime endTime) {
+    public void setEndTime(String endTime) {
         this.endTime = endTime;
     }
 

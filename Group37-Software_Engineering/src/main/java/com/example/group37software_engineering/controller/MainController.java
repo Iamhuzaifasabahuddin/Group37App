@@ -60,6 +60,17 @@ public class MainController {
         model.addAttribute("username", user.getUsername());
         model.addAttribute("firstName", user.getFirstname());
         model.addAttribute("lastName", user.getLastname());
+        model.addAttribute("AIU", courseRepository.findAllUsersByCourseCategory("Artificial Intelligence"));
+        model.addAttribute("CU", courseRepository.findAllUsersByCourseCategory("Cloud"));
+        model.addAttribute("DS", courseRepository.findAllUsersByCourseCategory("Data Science"));
+        model.addAttribute("CS", courseRepository.findAllUsersByCourseCategory("Cybersecurity"));
+        model.addAttribute("SU", courseRepository.findAllUsersByCourseCategory("Sustainability"));
+        model.addAttribute("AI", courseRepository.findAllUsersByCourseCategory("Artificial Intelligence").size());
+        model.addAttribute("Cloud", courseRepository.findAllUsersByCourseCategory("Cloud").size());
+        model.addAttribute("DataScience", courseRepository.findAllUsersByCourseCategory("Data Science").size());
+        model.addAttribute("CyberSecurity", courseRepository.findAllUsersByCourseCategory("Cybersecurity").size());
+        model.addAttribute("Sustainability", courseRepository.findAllUsersByCourseCategory("Sustainability").size());
+
         return "admin";
     }
 
