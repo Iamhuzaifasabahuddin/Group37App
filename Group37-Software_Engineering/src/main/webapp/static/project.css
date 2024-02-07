@@ -140,13 +140,18 @@ li a {
 .navbar ul {
     list-style: none;
 }
+.navbar li a{
+    color: white;
+}
 .navbar li {
     display: inline-block;
     margin-right: 20px;
 }
 .navbar li a:hover {
-    text-decoration: underline;
-    color: #007bff;
+    /*text-decoration: underline;*/
+    border-bottom: 1px solid #98a5b2;
+    padding-bottom: 5px;
+    color: #98a5b2;
 }
 
 .navbar li a {
@@ -261,18 +266,34 @@ li a {
 
 }
 .filter_container label {
-    font-size: 20px;
+    font-size: 25px;
     color: black;
-    font-weight: bold;
+    font-weight: normal;
+}
+.filter_container input{
+    font-size: 19px;
+    border-radius: 4px;
+}
+.filter_container select{
+    font-size: 17px;
+    font-family: "DM Sans", sans-serif;
+    border-radius: 4px;
 }
 .filter_container input[type="submit"] {
+    font-size: 17px;
     background-color: #007bff;
     color: #fff;
     cursor: pointer;
+    border-radius: 4px;
+    padding: 3px;
 }
 
 .filter_container input[type="submit"]:hover {
     background-color: darkblue;
+}
+
+.coursesBackground {
+    background-color: ghostwhite;
 }
 
 /*Welcome */
@@ -281,13 +302,18 @@ li a {
     padding-bottom:10px ;
     text-align: center;
     text-transform: capitalize;
-    font-size: 40px;
+    font-size: 60px;
+    font-family: "Rage Italic";
+
 }
 
 /* List Courses */
 .list_courses {
     padding-top: 20px ;
     padding-bottom: 10px ;
+    padding-left: 70px;
+    font-size: 35px;
+    font-weight: normal;
 }
 .message_container h2{
     text-align: center;
@@ -303,7 +329,7 @@ li a {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top:10%;
+    margin-top:2%;
 }
 
 

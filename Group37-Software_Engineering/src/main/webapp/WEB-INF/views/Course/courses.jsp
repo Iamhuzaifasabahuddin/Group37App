@@ -19,7 +19,11 @@
         </ul>
     </nav>
 </header>
+<body class="coursesBackground">
+<br/>
 <h1 class="Welcome">Welcome, ${user.username}!</h1>
+<br/>
+<br/>
 <div class="filter_container">
 <form action="${pageContext.request.contextPath}/filter" method="get" id="filterForm">
     <label for="category">Select Category:</label>
@@ -49,7 +53,9 @@
     <input type="submit" value="Sort By Duration">
 </form>
 </div>
-<h2 class="list_courses">Here is the list of all available courses: </h2>
+
+<br/>
+<h2 class="list_courses">Available courses: </h2>
 <c:if test="${not empty error}">
     <h2 id="error-message" class="error-message">${error}</h2>
 </c:if>
@@ -99,6 +105,7 @@
         </c:if>
     </div>
 </section>
+</body>
 <script>
     function confirmEnrollment() {
         var confirmation = confirm("Are you sure you want to enroll in this course?");
