@@ -523,11 +523,11 @@ li a {
 
 button.confirm {
     color: white;
-    background-color: #525252;
+    background-color: #007bff;
 }
 
 button.confirm:hover {
-    background-color: #454545;
+    background-color: darkblue;
 }
 
 button.cancel:hover {

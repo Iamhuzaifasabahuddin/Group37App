@@ -5,7 +5,6 @@ import com.example.group37software_engineering.repo.UserRepository;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
-
 import java.util.Objects;
 
 /**
