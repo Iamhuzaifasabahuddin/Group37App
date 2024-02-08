@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <title>Home</title>
     <link href="static/project.css" rel="stylesheet" type="text/css">
+    <script src="static/script.js" defer></script>
 </head>
 <body class="login-background">
 
@@ -38,14 +39,4 @@
 <%--    <p>If you are a new user, <a href="${pageContext.request.contextPath}/NewUser" class="link-style">register here</a>.</p>--%>
 </div>
 </body>
-<script>
-    window.onload = function() {
-        var errorElement = document.getElementById('error-message');
-        if (errorElement) {
-            setTimeout(function() {
-                errorElement.style.display = 'none';
-            }, 5000);
-        }
-    };
-</script>
 </html>

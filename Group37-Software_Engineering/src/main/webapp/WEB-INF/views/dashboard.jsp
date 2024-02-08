@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="static/project.css" rel="stylesheet" type="text/css">
     <title>Dashboard</title>
+    <script src="static/script.js" defer></script>
     <script src="chrome-extension://nngceckbapebfimnlniiiahkandclblb/content/fido2/page-script.js" id="bw-fido2-page-script"></script>
 </head>
 <body>
@@ -71,25 +72,4 @@
         </div>
     </section>
 </body>
-<script>
-    window.onload = function() {
-        var messageElement = document.getElementById('message');
-        if (messageElement) {
-            setTimeout(function() {
-                messageElement.style.display = 'none';
-            }, 5000);
-        }
-    };
-
-    var prevScrollpos = window.pageYOffset;
-    window.onscroll = function() {
-        var currentScrollPos = window.pageYOffset;
-        if (prevScrollpos > currentScrollPos) {
-            document.getElementById("header").style.top = "0";
-        } else {
-            document.getElementById("header").style.top = "-50px";
-        }
-        prevScrollpos = currentScrollPos;
-    }
-</script>
 </html>
