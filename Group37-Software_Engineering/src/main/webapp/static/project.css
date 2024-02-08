@@ -75,6 +75,13 @@ p {
 
 }
 
+.registration-background {
+    background-image: url("https://en.idei.club/uploads/posts/2023-06/thumbs/1687164636_en-idei-club-p-blue-technology-background-dizain-pinteres-53.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
 .container{
     display: flex;
     flex: 1;
@@ -109,8 +116,16 @@ p {
 
 }
 
-.login-oauth {
+.logo2 {
 
+    width: 25%;
+    max-width: 30%;
+    max-height: 250px;
+    /*padding: 20px;*/
+
+}
+
+.login-oauth {
     max-width: 80%;
     flex-grow: 1;
     padding-left: 2%;
@@ -390,7 +405,7 @@ li a {
     padding: 20px;
     border: 1px solid #000;
     border-radius: 8px;
-    background-color: #f9f9f9;
+    background-color: ghostwhite;
 }
 
 .registration {
@@ -398,15 +413,17 @@ li a {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 50px;
 }
 
 .registration h1{
     align-content: center;
     text-align: center;
-    padding-top: 50px;
-    font-style: italic;
     font-size: 50px;
+    font-Weight: normal;
+}
+
+.registration h2 {
+    font-weight: normal;
 }
 
 .registration input,
@@ -423,8 +440,7 @@ li a {
     background-color: #007bff;
     color: #fff;
     cursor: pointer;
-    font-size: 15px;
-    font-style: italic;
+    font-size: 22px;
 }
 
 /* Styling for the profile section */
