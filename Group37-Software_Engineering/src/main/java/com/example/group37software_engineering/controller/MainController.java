@@ -1,5 +1,4 @@
 package com.example.group37software_engineering.controller;
-
 import com.example.group37software_engineering.model.Course;
 import com.example.group37software_engineering.model.MyUser;
 import com.example.group37software_engineering.repo.CourseRepository;
@@ -9,10 +8,7 @@ import org.springframework.security.oauth2.client.authentication.OAuth2Authentic
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import com.example.group37software_engineering.CourseData;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import java.security.Principal;
 import java.util.List;
 

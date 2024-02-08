@@ -1,5 +1,4 @@
 package com.example.group37software_engineering.controller;
-
 import com.example.group37software_engineering.model.MyUser;
 import com.example.group37software_engineering.repo.CourseRepository;
 import com.example.group37software_engineering.repo.UserRepository;
@@ -7,13 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-
-import jakarta.validation.Valid;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import java.security.Principal;
 
 /**

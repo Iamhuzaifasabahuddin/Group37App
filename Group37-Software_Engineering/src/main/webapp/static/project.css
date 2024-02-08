@@ -271,7 +271,7 @@ li a {
     padding: 0 10px;
 }
 
-.card form input[type="submit"], .card a {
+.card a, .button-enroll {
     color: white;
     padding: 10px 15px;
     font-size: 16px;
@@ -282,11 +282,11 @@ li a {
     width: 100%;
 }
 
-.card form input[type="submit"] {
+.button-enroll {
     background-color: #4CAF50;
 }
 
-.card form input[type="submit"]:hover {
+.button-enroll:hover {
     background-color: #45a049; /* Change the background color on hover */
 }
 
@@ -472,4 +472,72 @@ li a {
 .container form.registration label {
     font-weight: normal;
     margin-bottom: 5px;
+}
+
+/* Style for confirmation box */
+.confirmation-background {
+    font-family: "DM Sans", sans-serif;
+    z-index: 1;
+    display: none;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    justify-content: center;
+    align-items: center;
+}
+
+.confirmation-box {
+    background-color: white;
+    width: 500px;
+    height: 200px;
+    font-size: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.confirmation-box h4 {
+    margin: 0;
+    height: 50px;
+    font-size: 24px;
+    padding: 12px 20px;
+    border-bottom: 2px solid #f0f0f0;
+    font-weight: normal;
+}
+
+.confirmation-box p {
+    padding: 6px 20px;
+}
+
+.confirmation-box form {
+    display: flex;
+    justify-content: flex-end;
+    padding: 8px 20px;
+    background-color: #f0f0f0;
+    border-radius: 0 0 10px 10px;
+}
+
+.confirmation-box button {
+    margin-left: 10px;
+    height: 35px;
+    width: 70px;
+    border-radius: 10px;
+}
+
+button.confirm {
+    color: white;
+    background-color: #007bff;
+}
+
+button.confirm:hover {
+    background-color: darkblue;
+}
+
+button.cancel:hover {
+    background-color: #c9c9c9;
 }
