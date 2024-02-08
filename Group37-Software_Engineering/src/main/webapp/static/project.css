@@ -315,6 +315,24 @@ li a {
 .card a:hover {
     background-color: #028aeb;
 }
+.card form button {
+    color: white;
+    padding: 10px 15px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+    flex: auto;
+    width: 100%;
+}
+
+.card form button {
+    background-color: #1593ed;
+}
+
+.card button:hover {
+    background-color: #028aeb;
+}
 
 .buttons {
     display: flex;

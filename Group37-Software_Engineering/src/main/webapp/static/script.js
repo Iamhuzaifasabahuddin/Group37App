@@ -39,3 +39,18 @@ window.onscroll = function() {
     }
     prevScrollpos = currentScrollPos;
 }
+
+var messageElement = document.getElementById("message");
+setTimeout(function() {
+    messageElement.style.display = "none";
+}, 5000);
+
+var errorMessageElement = document.getElementById("error-message");
+setTimeout(function() {
+    errorMessageElement.style.display = "none";
+}, 5000);
+function openLinkAndSubmit(courseLink) {
+    window.open(courseLink, '_blank');
+    document.getElementById('getStartedForm').submit();
+}
+

@@ -56,16 +56,21 @@
                             <p class="divider">|</p>
                             <p>${Math.round(course.getDuration()) * 100} points</p>
                         </div>
-                        <div class="course-details">
+                        <c:if test="${not empty course.startTime and not empty course.startDate}">
+                            <div class="course-details">
+                                <p>Start Time: ${course.startTime}</p>
+                                <p class="divider">|</p>
+                                <p>Start Date: ${course.startDate}</p>
+                            </div>
+                            <a href="${course.link}" target="_blank">Go</a>
+                        </c:if>
+                        <c:if test="${empty course.startTime and empty course.startDate}">
+                            <form id="getStartedForm" action="/starttime">
+                                <input type="hidden" name="courseId" value="${course.id}">
+                                <button type="submit" onclick="openLinkAndSubmit('${course.link}')">Get started</button>
+                            </form>
+                        </c:if>
 
-                            <p>Start Time:
-                                    ${course.startTime}</p>
-                            <p class="divider">|</p>
-
-                            <p>Start Date:
-                                    ${course.startDate}</p>
-                        </div>
-                        <a href="${course.link}" target="_blank">Get Started</a>
                     </div>
                 </div>
             </c:forEach>

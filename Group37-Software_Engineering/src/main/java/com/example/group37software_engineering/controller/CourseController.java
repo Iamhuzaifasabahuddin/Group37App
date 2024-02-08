@@ -3,14 +3,15 @@ import com.example.group37software_engineering.model.Course;
 import com.example.group37software_engineering.model.MyUser;
 import com.example.group37software_engineering.repo.CourseRepository;
 import com.example.group37software_engineering.repo.UserRepository;
+import org.springframework.beans.PropertyEditorRegistrar;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.Map;
 
 @Controller
 public class CourseController {
@@ -32,8 +33,6 @@ public class CourseController {
         MyUser user = userRepository.findByUsername(principal.getName());
         Course c = courseRepository.findCourseById(course);
         if (c != null && !user.getCourse().contains(c)) {
-            c.setStartTime();
-            c.setStartDate();
             user.getCourse().add(c);
             userRepository.save(user);
             c.getUsers().add(user);
@@ -45,4 +44,23 @@ public class CourseController {
         model.addAttribute("courseList", courseRepository.findAll());
         return "Course/courses";
     }
+
+    @RequestMapping("/starttime")
+    public String getStartTime(@RequestParam int courseId, Principal principal) {
+        MyUser user = userRepository.findByUsername(principal.getName());
+        Course course = courseRepository.findCourseById(courseId);
+        if (course != null && user != null && user.getCourse().contains(course)) {
+            for (Course userCourse : user.getCourse()) {
+                if (userCourse.getId().equals(course.getId())) {
+                    userCourse.setStartTime();
+                    userCourse.setStartDate();
+                    userRepository.save(user);
+                    courseRepository.save(userCourse);
+                }
+            }
+        }
+        return "redirect:/dashboard";
+    }
+
+
 }
