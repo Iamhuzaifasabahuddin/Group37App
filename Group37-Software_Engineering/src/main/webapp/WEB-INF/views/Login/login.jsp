@@ -13,7 +13,7 @@
 
         <div class="login-oauth">
     <form action="/myLogin" method="post">
-        <p style="font-weight: bolder">Welcome to Our Dashboard!</p>
+        <p style="font-weight: bolder">Welcome to Our Website!</p>
         <br/>
         <label for="usernameOrEmail" style="font-family: DM Sans, sans-serif">Username/Email:</label>
         <input type="text" id="usernameOrEmail" name="usernameOrEmail" placeholder="Username or Email" class="login-input" required>
