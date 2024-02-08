@@ -99,6 +99,17 @@
 </div>
 </body>
 <script>
+    function changeHues() {
+        const cards = document.querySelectorAll(".card");
+        const categories = ["ARTIFICIAL INTELLIGENCE", "CLOUD", "DATA SCIENCE", "CYBERSECURITY", "SUSTAINABILITY"];
+        const angles = [0, 45, 180, 270, 315];
+        cards.forEach(card => {
+            const category = card.querySelector(".category").textContent;
+            const angle = angles[categories.indexOf(category.toUpperCase())];
+            card.querySelector("img").style.filter = `hue-rotate(\${angle}deg)`;
+        });
+    }
+
     function showConfirmationBox(id, title) {
         document.querySelector(".confirmation-background").style.display = "flex";
         document.querySelector(".input-course-id").value = id;
@@ -116,6 +127,7 @@
                 errorElement.style.display = 'none';
             }, 5000);
         }
+        changeHues();
     };
 
     var prevScrollpos = window.pageYOffset;
