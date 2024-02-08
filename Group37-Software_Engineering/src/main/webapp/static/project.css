@@ -12,6 +12,7 @@
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
+
 }
 
 .login-input{
@@ -22,15 +23,15 @@
     border-radius: 4px;
 }
 
-.logo {
 
-    float: right;
-    width: 80%;
-    max-width: 400px;
-    padding: 20px;
-    /*border: 1px solid #000;*/
-    /*border-radius: 8px;*/
 
+
+.login-oauth form p {
+
+    font-family: "DM Sans", sans-serif;
+    font-weight: bolder;
+    font-size: 175%;
+    text-align: center;
 }
 
 .submit-button {
@@ -41,6 +42,7 @@
     border-radius: 4px;
     cursor: pointer;
 }
+
 
 .error {
     color: red;
@@ -84,29 +86,35 @@ p {
     left: 50%;
     transform: translate(-50%, -50%);
     margin: 0 auto;
-    width: fit-content;
-    height: fit-content;
-    padding: 1px;
+    /*width: fit-content;*/
+    /*height: fit-content;*/
+    padding: 2%;
+    padding-left: 40px;
+    padding-bottom: 20px;
     border: 1px solid #000;
     border-radius: 20px;
     border-color: #1593ed;
     background-color: ghostwhite;
     font-family: "DM Sans", sans-serif;
+    max-width: 700px;
+
+}
+
+.logo {
+
+    width: 100%;
+    max-width: 60%;
+    max-height: 400px;
+    padding: 20px;
 
 }
 
 .login-oauth {
 
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    float: left;
-    width: fit-content;
-    height: fit-content;
-    padding: 20px;
-    max-width: 400px;
+    max-width: 80%;
+    flex-grow: 1;
+    padding-left: 2%;
+    flex-wrap: wrap;
 
 }
 
