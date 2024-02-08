@@ -8,8 +8,29 @@
     <link href="static/project.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<div class="container">
-    <h1>My personal information</h1>
+
+<header class="header">
+    <div class="IBM_SkillsBuild">IBM Skills Build</div>
+    <nav class="navbar">
+        <ul>
+            <li><a href="/profile">Profile</a> </li>
+            <li><a href="/dashboard">Dashboard</a></li>
+            <li><a href="/courses">Courses</a></li>
+            <li><a href="#">Friends</a></li>
+            <li><a href="#">Leaderboard</a></li>
+            <li><a href="/logout">Logout</a></li>
+        </ul>
+    </nav>
+</header>
+
+<div class="container-profile">
+
+    <!-- The image is a random avatar i found on the web, currently working on the API -->
+
+    <img src="https://www.pngall.com/wp-content/uploads/12/Avatar-Profile-PNG-Image-File.png" alt="Personal Information Image" class="personal-info-image"/>
+
+    <h1>Personal Information</h1>
+
     <form class="registration">
         <label for="firstName">First name *</label>
         <input type="text" id="firstName" class="form-input" name="firstName" value="${user.firstname}" readonly>

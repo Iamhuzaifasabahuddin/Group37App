@@ -428,51 +428,112 @@ li a {
 }
 
 /* Styling for the profile section */
-.container h1 {
+.container-profile{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: calc(100px + 65px);
+    bottom: 65px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: fit-content;
+    height: fit-content;
+    padding: 2px;
+    border: 1px solid #000;
+    border-radius: 20px;
+    border-color: #1593ed;
+    background-color: ghostwhite;
+    font-family: "DM Sans", sans-serif;
+}
+
+
+.container-profile h1 {
     text-align: center;
     padding-top: 20px;
     font-size: 24px;
     font-weight: bold;
     margin-bottom: 30px;
+    font-family: 'DM Sans', sans-serif;
 }
 
-.container form.registration {
-    width: 80%;
-    max-width: 700px;
+.container-profile form.registration {
+    width: 100%;
     padding: 20px;
-    border: 1px solid #000;
-    border-radius: 8px;
-    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 18px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     display: flex;
     flex-direction: column;
 }
 
-.container form.registration h3 {
-    font-size: 16px;
-    margin-bottom: 10px;
+.container-profile form.registration h3 {
+    font-size: 18px;
+    margin-bottom: 15px;
+    font-family: 'DM Sans', sans-serif;
 }
 
-.container form.registration .submit-button {
-    padding: 12px;
-    margin-top: 10px;
+.container-profile form.registration .submit-button {
+    padding: 12px 20px;
+    margin-top: 20px;
     width: auto;
     align-self: center;
+    background-color: #0056b3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
 }
 
-.container form.registration .form-input {
-    width: calc(100% - 20px);
+.container-profile form.registration .submit-button:hover {
+    background-color: #004494;
 }
 
-.container form.registration input[readonly] {
+.container-profile form.registration .form-input {
+    width: auto;
+    margin-bottom: 15px;
+}
+
+.container-profile form.registration input[type=text],
+.container-profile form.registration input[type=email] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    transition: border-color 0.3s ease;
+    width: 100%;
+}
+
+.container-profile form.registration input[type=text]:focus,
+.container-profile form.registration input[type=email]:focus {
+    border-color: #0056b3;
+}
+
+.container-profile form.registration input[readonly] {
     background-color: #e9ecef;
     color: #495057;
     cursor: not-allowed;
 }
 
-.container form.registration label {
+.container-profile form.registration label {
     font-weight: normal;
     margin-bottom: 5px;
+    font-family: 'DM Sans', sans-serif;
 }
+
+.personal-info-image {
+    display: block;
+    width: 100px;
+    height: auto;
+    margin: 0 auto;
+    padding-bottom: 20px;
+}
+
 
 /* Style for confirmation box */
 .confirmation-background {
