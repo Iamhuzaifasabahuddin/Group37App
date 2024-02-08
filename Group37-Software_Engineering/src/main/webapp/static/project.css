@@ -441,9 +441,8 @@ li a {
     width: fit-content;
     height: fit-content;
     padding: 2px;
-    border: 1px solid #000;
+    border: 1px solid #1593ed;
     border-radius: 20px;
-    border-color: #1593ed;
     background-color: ghostwhite;
     font-family: "DM Sans", sans-serif;
 }
@@ -456,6 +455,7 @@ li a {
     font-weight: bold;
     margin-bottom: 30px;
     font-family: 'DM Sans', sans-serif;
+    margin-right: 20px;
 }
 
 .container-profile form.registration {
