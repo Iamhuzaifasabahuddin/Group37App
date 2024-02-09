@@ -50,6 +50,9 @@ public class SecurityConfig {
         http.authorizeHttpRequests(auth ->
                 auth.requestMatchers(mvc.pattern("/admin")).hasRole("ADMIN")
                         .requestMatchers(mvc.pattern("/dashboard")).hasAnyRole("NORMAL", "ADMIN")
+                        .requestMatchers(mvc.pattern("/courses")).hasAnyRole("NORMAL", "ADMIN")
+                        .requestMatchers(mvc.pattern("/profile")).hasAnyRole("NORMAL", "ADMIN")
+                        .requestMatchers(mvc.pattern("/starttime")).hasAnyRole("NORMAL", "ADMIN")
                         .requestMatchers(mvc.pattern("/NewUser")).permitAll()
                         .requestMatchers(mvc.pattern("/AddUser")).permitAll()
                         .requestMatchers(mvc.pattern(("/**"))).permitAll()

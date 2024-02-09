@@ -29,10 +29,9 @@
 <div class="message_container">
     <c:if test="${not empty error}">
         <div class="error-message">
-                ${error}
-            <h2>
-                <a href="/courses">Courses</a>
-            </h2>
+            <h2>${error}</h2>
+            <br />
+            <h2><a href="/courses">Courses</a></h2>
         </div>
     </c:if>
     <c:if test="${not empty message}">

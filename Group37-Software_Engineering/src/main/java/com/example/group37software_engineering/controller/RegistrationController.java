@@ -55,11 +55,10 @@ public class RegistrationController {
      *
      * @param user   The MyUser object representing the new user.
      * @param result The BindingResult for validation errors.
-     * @param model  The Model to be used in the view.
      * @return The view name to redirect to after processing the form submission.
      */
     @PostMapping("/AddUser")
-    public String addUser(@Valid @ModelAttribute("user") MyUser user, BindingResult result, Model model) {
+    public String addUser(@Valid @ModelAttribute("user") MyUser user, BindingResult result) {
         if (result.hasErrors()) {
             return "Login/registeration";
         }

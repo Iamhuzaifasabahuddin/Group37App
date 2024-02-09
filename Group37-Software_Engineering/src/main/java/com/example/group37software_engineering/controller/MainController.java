@@ -33,7 +33,7 @@ public class MainController {
         MyUser user = userRepository.findByUsername(principal.getName());
         model.addAttribute("user", user);
         if(user.getCourse().isEmpty()){
-            model.addAttribute("error", "Uhoh no course selected please select a course from courses");
+            model.addAttribute("error", "ERROR 404!");
         }else{
             model.addAttribute("courseList", user.getCourse());
         }

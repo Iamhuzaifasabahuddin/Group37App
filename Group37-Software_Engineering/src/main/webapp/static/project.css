@@ -173,6 +173,8 @@ p {
 
 .error-message {
     color: red;
+    justify-content: center;
+    margin-top: 10%;
 }
 
 .message{
