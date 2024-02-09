@@ -22,6 +22,8 @@ public class MyUser {
     @Transient
     private String confirmpassword;
 
+    private Integer points=0;
+
     @ManyToMany(mappedBy = "users", fetch = FetchType.EAGER)
     private List<Course> course = new ArrayList<>();
 
@@ -87,6 +89,14 @@ public class MyUser {
 
     public void setConfirmpassword(String confirmpassword) {
         this.confirmpassword = confirmpassword;
+    }
+
+    public Integer getPoints() {
+        return points;
+    }
+
+    public void setPoints(Integer points) {
+        this.points = points;
     }
 
     @Override

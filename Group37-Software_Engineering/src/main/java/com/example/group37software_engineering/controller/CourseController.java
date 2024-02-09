@@ -1,4 +1,5 @@
 package com.example.group37software_engineering.controller;
+
 import com.example.group37software_engineering.model.Course;
 import com.example.group37software_engineering.model.MyUser;
 import com.example.group37software_engineering.repo.CourseRepository;
@@ -11,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -21,13 +24,22 @@ public class CourseController {
 
     @Autowired
     private CourseRepository courseRepository;
+
     @GetMapping("/courses")
     public String getCourse(Model model, Principal principal) {
         MyUser user = userRepository.findByUsername(principal.getName());
         model.addAttribute("user", user);
-        model.addAttribute("courseList", courseRepository.findAll());
+        List<Course> allCourses = (List<Course>) courseRepository.findAll();
+        List<Course> coursesNotEnrolled = new ArrayList<>();
+        for (Course course : allCourses) {
+            if (!course.getUsers().contains(user)) {
+                coursesNotEnrolled.add(course);
+            }
+        }
+        model.addAttribute("courseList", coursesNotEnrolled);
         return "Course/courses";
     }
+
     @RequestMapping("/enroll")
     public String enroll(@RequestParam int course, Principal principal, Model model) {
         MyUser user = userRepository.findByUsername(principal.getName());

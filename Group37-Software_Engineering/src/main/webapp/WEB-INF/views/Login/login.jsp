@@ -24,9 +24,11 @@
             <input type="password" name="password" class="login-input" placeholder="Password" required/>
         </label>
         <br/>
+        <div class="error-message-login">
         <c:if test="${not empty error}">
-            <h2 id="error-message" class="error-message">${error}</h2>
+            <h3 id="error-message" >${error}</h3>
         </c:if>
+        </div>
         <input type="submit" value="Sign In" class="login-button" style="border-radius: 18px" /> <br/>
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
     </form>
