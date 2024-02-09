@@ -53,14 +53,12 @@ public class FilterController {
      */
     @RequestMapping(value = "/search")
     public String getSearch(@RequestParam String searchTerm, Model model, Principal principal) {
-        // Retrieve the currently logged-in user
         MyUser user = userRepository.findByUsername(principal.getName());
         model.addAttribute("user", user);
-        // Perform search and add results to model
         if (searchTerm != null && !searchTerm.isBlank()) {
-            Course course = courseRepository.findCoursesByTitle(searchTerm);
+            List <Course> course = courseRepository.findCoursesByTitleContaining(searchTerm);
             if (course != null) {
-                model.addAttribute("course", course);
+                model.addAttribute("courseList", course);
             } else {
                 model.addAttribute("Courseerror", "No such course found!");
             }
