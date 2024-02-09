@@ -1,7 +1,7 @@
 function changeHues() {
     const cards = document.querySelectorAll(".card");
     const categories = ["ARTIFICIAL INTELLIGENCE", "CLOUD", "DATA SCIENCE", "CYBERSECURITY", "SUSTAINABILITY"];
-    const angles = [0, 45, 180, 270, 315];
+    const angles = [145, 180, 215, 250,  285].reverse();
     cards.forEach(card => {
         const category = card.querySelector(".category").textContent;
         const angle = angles[categories.indexOf(category.toUpperCase())];
