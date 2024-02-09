@@ -5,15 +5,23 @@
     --complement: calc(var(--hue) + 180);
     --analogous-left: calc(var(--hue) - 30);
     --analogous-right: calc(var(--hue) + 30);
+
+    /*primary colours mainly for backgrounds*/
     --primary-lightest: hsl(var(--hue) 75% 92.5%);
     --primary-lighter: hsl(var(--hue) 75% 85%);
     --primary-light: hsl(var(--hue) 75% 77.5%);
     --primary-dark: hsl(var(--hue) 35% 20%);
+
+    /*secondary colours for text*/
     --secondary-dark: hsl(var(--complement) 15% 15%);
     --secondary-light: hsl(var(--complement) 30% 90%);
+
+    /*for links*/
     --accent-left: hsl(var(--analogous-left) 50% 35%);
     --accent-left-light: hsl(var(--analogous-left) 50% 85%);
     --accent-left-dark: hsl(var(--analogous-left) 50% 25%);
+
+    /*for buttons*/
     --accent-right: hsl(var(--analogous-right) 40% 40%);
     --accent-right-light: hsl(var(--analogous-right) 40% 85%);
     --accent-right-dark: hsl(var(--analogous-right) 40% 30%);
