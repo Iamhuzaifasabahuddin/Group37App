@@ -11,6 +11,7 @@ import java.util.List;
 public interface CourseRepository extends CrudRepository<Course, Integer> {
 
     public Course findCoursesByTitle(String title);
+    List<Course> findCoursesByTitleContaining(String title);
 
     List<Course> findAllByCategory(String category);
 
