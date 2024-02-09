@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
  * Implementation of the RegistrationService interface for user registration.
  */
 @Service
-public class MyRegisterationService implements RegistrationService {
+public class MyRegistrationService implements RegistrationService {
 
     @Autowired
     private UserRepository userRepository;

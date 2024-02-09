@@ -47,7 +47,7 @@ public class RegistrationController {
     @GetMapping("/NewUser")
     public String newUser(Model model) {
         model.addAttribute("user", new MyUser());
-        return "Login/registeration";
+        return "Login/registration";
     }
 
     /**
@@ -60,7 +60,7 @@ public class RegistrationController {
     @PostMapping("/AddUser")
     public String addUser(@Valid @ModelAttribute("user") MyUser user, BindingResult result) {
         if (result.hasErrors()) {
-            return "Login/registeration";
+            return "Login/registration";
         }
 
         registrationService.registerUser(user);
