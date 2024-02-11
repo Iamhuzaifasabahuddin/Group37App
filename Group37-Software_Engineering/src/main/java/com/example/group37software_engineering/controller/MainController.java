@@ -4,6 +4,7 @@ import com.example.group37software_engineering.model.MyUser;
 import com.example.group37software_engineering.repo.CourseRepository;
 import com.example.group37software_engineering.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

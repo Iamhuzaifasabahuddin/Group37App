@@ -9,10 +9,13 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Service class for loading user details for authentication.
@@ -33,32 +36,12 @@ public class MyUserDetailsService implements UserDetailsService {
      * @return UserDetails object representing the user.
      * @throws UsernameNotFoundException If the user is not found.
      */
-//    @Override
-//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-//        MyUser user = userRepository.findByUsername(username);
-//        if (user == null) {
-//            throw new UsernameNotFoundException("User not found with username: " + username);
-//        }
-//
-//        // Create a list of granted authorities based on user roles
-//        List<GrantedAuthority> authorities = new ArrayList<>();
-//        if (isAdmin(user.getUsername())) {
-//            authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
-//        } else {
-//            authorities.add(new SimpleGrantedAuthority("ROLE_NORMAL"));
-//        }
-//
-//        // Create UserDetails object with the user's details
-//        return new User(user.getUsername(), user.getPassword(), true, true, true, true, authorities);
-//    }
     @Override
     public UserDetails loadUserByUsername(String usernameorEmail) throws UsernameNotFoundException {
         MyUser user = userRepository.findByUsernameOrEmail(usernameorEmail, usernameorEmail);
         if (user == null) {
             throw new UsernameNotFoundException("User not found with username: " + usernameorEmail);
         }
-
-        // Create a list of granted authorities based on user roles
         List<GrantedAuthority> authorities = new ArrayList<>();
         if (isAdmin(user.getUsername())) {
             authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
@@ -66,7 +49,6 @@ public class MyUserDetailsService implements UserDetailsService {
             authorities.add(new SimpleGrantedAuthority("ROLE_NORMAL"));
         }
 
-        // Create UserDetails object with the user's details
         return new User(user.getUsername(), user.getPassword(), true, true, true, true, authorities);
     }
     /**

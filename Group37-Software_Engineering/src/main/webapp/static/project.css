@@ -201,18 +201,18 @@ p {
 .message{
     color: green;
 }
-/*.message {*/
-/*    position: fixed;*/
-/*    top: 0;*/
-/*    left: 50%; !* Adjust this value to center the message horizontally *!*/
-/*    transform: translateX(-50%);*/
-/*    background-color: rgba(248, 215, 218, 0.5); !* Adjust background color and opacity as needed *!*/
-/*    color: #721c24; !* Adjust text color as needed *!*/
-/*    padding: 10px 20px; !* Adjust padding as needed *!*/
-/*    border-bottom: 1px solid #e0a0a0; !* Adjust border as needed *!*/
-/*    width: 100%; !* Make it span the full width of the viewport *!*/
-/*    z-index: 1000;*/
-/*}*/
+
+.message {
+    position: fixed;
+    top: 4.5%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(255, 255, 255, 0);
+    color: antiquewhite;
+    padding: 10px 20px;
+    width: 100%;
+    z-index: 1000;
+}
 
 li a {
     font-weight: 500;
@@ -220,6 +220,7 @@ li a {
     color: var(--secondary-light);
     text-decoration: none;
 }
+
 /* Style for the navigation bar */
 .header{
     background-color: var(--primary-dark);
@@ -370,7 +371,7 @@ li a {
     display: flex;
 }
 
-/*Filter */
+/* Filter */
 .filter_container{
     display: flex;
     justify-content: space-between;
@@ -411,7 +412,7 @@ li a {
     background-color: var(--primary-lighter);
 }
 
-/*Welcome */
+/* Welcome */
 .Welcome{
     padding-top:10px ;
     padding-bottom:10px ;
@@ -445,7 +446,7 @@ li a {
     margin-top:2%;
 }
 
-
+/* Registrations */
 .registration form{
     width: 80%;
     max-width: 700px;

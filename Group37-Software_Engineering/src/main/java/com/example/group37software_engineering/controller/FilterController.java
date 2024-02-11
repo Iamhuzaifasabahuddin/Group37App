@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -35,11 +36,16 @@ public class FilterController {
      */
     @RequestMapping(value = "/filter")
     public String getFilter(@RequestParam String category, Model model, Principal principal) {
-        // Retrieve the currently logged-in user
         MyUser user = userRepository.findByUsername(principal.getName());
+        List<Course> filtered = courseRepository.findAllByCategory(category);
+        List<Course> coursesNotEnrolled = new ArrayList<>();
+        for (Course course : filtered) {
+            if (!course.getUsers().contains(user)) {
+                coursesNotEnrolled.add(course);
+            }
+        }
         model.addAttribute("user", user);
-        // Retrieve and add filtered courses to the model
-        model.addAttribute("courseList", courseRepository.findAllByCategory(category));
+        model.addAttribute("courseList", coursesNotEnrolled);
         return "Course/courses";
     }
 
@@ -56,9 +62,15 @@ public class FilterController {
         MyUser user = userRepository.findByUsername(principal.getName());
         model.addAttribute("user", user);
         if (searchTerm != null && !searchTerm.isBlank()) {
-            List <Course> course = courseRepository.findCoursesByTitleContaining(searchTerm);
-            if (course != null) {
-                model.addAttribute("courseList", course);
+            List <Course> searched = courseRepository.findCoursesByTitleContaining(searchTerm);
+            if (searched != null) {
+                List<Course> coursesNotEnrolled = new ArrayList<>();
+                for (Course course : searched) {
+                    if (!course.getUsers().contains(user)) {
+                        coursesNotEnrolled.add(course);
+                    }
+                }
+                model.addAttribute("courseList", coursesNotEnrolled);
             } else {
                 model.addAttribute("Courseerror", "No such course found!");
             }
@@ -78,16 +90,19 @@ public class FilterController {
      */
     @RequestMapping(value = "/duration")
     public String getDuration(@RequestParam double duration, Model model, Principal principal) {
-        // Retrieve courses with duration greater than or equal to the specified value
+        MyUser user = userRepository.findByUsername(principal.getName());
         List<Course> sortedCourses = courseRepository.findAllByDurationGreaterThanEqual(duration)
                 .stream()
                 .sorted(Comparator.comparingDouble(Course::getDuration))
                 .toList();
-        // Retrieve the currently logged-in user
-        MyUser user = userRepository.findByUsername(principal.getName());
+        List<Course> coursesNotEnrolled = new ArrayList<>();
+        for (Course course : sortedCourses) {
+            if (!course.getUsers().contains(user)) {
+                coursesNotEnrolled.add(course);
+            }
+        }
         model.addAttribute("user", user);
-        // Add filtered courses to the model
-        model.addAttribute("courseList", sortedCourses);
+        model.addAttribute("courseList", coursesNotEnrolled);
         return "Course/courses";
     }
 }

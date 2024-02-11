@@ -71,9 +71,7 @@ public class SecurityConfig {
                 .permitAll()
         ).exceptionHandling(exceptionHandler ->
                 exceptionHandler.accessDeniedPage("/access-denied")
-        )
-                .oauth2Client(Customizer.withDefaults())
-                .oauth2Login(Customizer.withDefaults());
+        );
         return http.build();
     }
 
@@ -98,4 +96,5 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
 }
