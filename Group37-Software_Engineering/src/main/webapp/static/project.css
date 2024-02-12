@@ -43,6 +43,12 @@ input {
     background-color: var(--primary-lighter);
 }
 
+/* Login */
+
+.ibm-logo {
+    display: flex;
+
+}
 .form-input {
     width: 40%;
     padding: 10px;
@@ -122,27 +128,25 @@ p {
     left: 50%;
     transform: translate(-50%, -50%);
     margin: 0 auto;
-    /*width: fit-content;*/
-    /*height: fit-content;*/
     padding: 2% 2% 20px 40px;
     border: 1px solid var(--primary-dark);
     border-radius: 20px;
     background-color: var(--primary-light);
     max-width: 700px;
+    min-width: 400px;
 }
 
 .logo {
     width: 100%;
     max-width: 60%;
-    max-height: 400px;
     padding: 20px;
+    height: auto;
 }
 
 .logo2 {
-    width: 25%;
-    max-width: 30%;
-    max-height: 250px;
-    /*padding: 20px;*/
+    width: 40%;
+    max-width: 250px;
+    height: auto;
 }
 
 .login-oauth {
@@ -461,6 +465,9 @@ li a {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    min-width: 400px;
+    max-width: 800px;
+    margin: 0 auto;
 }
 
 .registration h1{
