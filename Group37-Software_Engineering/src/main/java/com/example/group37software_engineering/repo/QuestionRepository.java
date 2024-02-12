@@ -4,4 +4,5 @@ import com.example.group37software_engineering.model.Question;
 import org.springframework.data.repository.CrudRepository;
 
 public interface QuestionRepository extends CrudRepository<Question, Integer> {
+    public Question findById(int id);
 }

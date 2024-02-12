@@ -12,6 +12,9 @@ public class Question {
 
     private String answer;
 
+    @ManyToMany(mappedBy = "questions", fetch = FetchType.EAGER)
+    private List<Course> courses;
+
     @ElementCollection
     private List<String> options;
 
@@ -37,5 +40,13 @@ public class Question {
 
     public void setOptions(List<String> options) {
         this.options = options;
+    }
+
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
     }
 }
