@@ -45,22 +45,23 @@ public class Group37SoftwareEngineeringApplication implements CommandLineRunner 
     @Override
     public void run(String... args) throws Exception {
 //        courseData.readDataAndSaveToRepo("courses_data.csv");
-        // Test data
-        Course c = courseRepository.findCourseById(1);
-        Question q1 = new Question();
-        q1.setPrompt("What is 1+1?");
-        q1.setOptions(Arrays.asList("1", "2", "3", "4"));
-        q1.setAnswer("2");
-        q1.setCourses(Arrays.asList(c));
-        Question q2 = new Question();
-        q2.setPrompt("What is the smallest multiple of 1, 2, 3, ..., 9, 10?");
-        q2.setOptions(Arrays.asList("2520", "3628800", "10", "idk"));
-        q2.setAnswer("2520");
-        q2.setCourses(Arrays.asList(c));
-        c.getQuestions().addAll(Arrays.asList(q1, q2));
-        questionRepository.save(q1);
-        questionRepository.save(q2);
-        courseRepository.save(c);
+
+//        Test data, to be removed after csv of questions are made
+//        Course c = courseRepository.findCourseById(1);
+//        Question q1 = new Question();
+//        q1.setPrompt("What is 1+1?");
+//        q1.setOptions(Arrays.asList("1", "2", "3", "4"));
+//        q1.setAnswer("2");
+//        q1.setCourses(Arrays.asList(c));
+//        Question q2 = new Question();
+//        q2.setPrompt("What is the smallest multiple of 1, 2, 3, ..., 9, 10?");
+//        q2.setOptions(Arrays.asList("2520", "3628800", "10", "idk"));
+//        q2.setAnswer("2520");
+//        q2.setCourses(Arrays.asList(c));
+//        c.getQuestions().addAll(Arrays.asList(q1, q2));
+//        questionRepository.save(q1);
+//        questionRepository.save(q2);
+//        courseRepository.save(c);
     }
     @Bean
     public ErrorPageRegistrar errorPageRegistrar() {
