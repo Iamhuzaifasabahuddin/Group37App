@@ -39,6 +39,9 @@ public class Course {
 
     private String imageUrl;
 
+    @ManyToOne
+    private Quiz quiz;
+
     @Column(length = 1000)
     private String link;
     @ManyToMany(fetch = FetchType.EAGER)
@@ -159,6 +162,22 @@ public class Course {
 
     public void setUsers(List<MyUser> users) {
         this.users = users;
+    }
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
+
+    public Quiz getQuiz() {
+        return quiz;
+    }
+
+    public void setQuiz(Quiz quiz) {
+        this.quiz = quiz;
     }
 }
 
