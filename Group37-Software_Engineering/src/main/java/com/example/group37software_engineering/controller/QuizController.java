@@ -32,6 +32,7 @@ public class QuizController {
     public String getQuiz(@RequestParam int courseId, Model model) {
         Course course = courseRepository.findCourseById(courseId);
         model.addAttribute("questions", course.getQuestions());
+        model.addAttribute("name", course.getTitle());
         return "quiz";
     }
 

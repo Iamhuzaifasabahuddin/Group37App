@@ -38,13 +38,18 @@ public class Group37SoftwareEngineeringApplication implements CommandLineRunner 
     @Autowired
     private CourseData courseData;
 
+    @Autowired
+    private QuestionsData questionsData;
+
     public static void main(String[] args) {
         SpringApplication.run(Group37SoftwareEngineeringApplication.class, args);
     }
 
     @Override
     public void run(String... args) throws Exception {
-//        courseData.readDataAndSaveToRepo("courses_data.csv");
+
+        courseData.readDataAndSaveToRepo("courses_data.csv");
+        questionsData.importQuestionsFromCSV("questions.csv");
 
 //        Test data, to be removed after csv of questions are made
 //        Course c = courseRepository.findCourseById(1);
