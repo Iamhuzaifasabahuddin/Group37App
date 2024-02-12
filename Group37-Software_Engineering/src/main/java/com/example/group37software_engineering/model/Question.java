@@ -10,6 +10,8 @@ public class Question {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
+    private String prompt;
+
     private String answer;
 
     @ManyToMany(mappedBy = "questions", fetch = FetchType.EAGER)
@@ -48,5 +50,13 @@ public class Question {
 
     public void setCourses(List<Course> courses) {
         this.courses = courses;
+    }
+
+    public String getPrompt() {
+        return prompt;
+    }
+
+    public void setPrompt(String prompt) {
+        this.prompt = prompt;
     }
 }
