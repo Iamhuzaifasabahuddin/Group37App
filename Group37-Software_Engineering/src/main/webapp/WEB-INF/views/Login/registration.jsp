@@ -7,8 +7,8 @@
 </head>
 <body class="registration-background">
         <div class="registration">
-                <img class="logo2"  src ="https://img1.wsimg.com/isteam/ip/6f5993eb-07fd-4e54-a10f-d1d3850f5f51/ibmskillsbuild-gmen.png/:/">
-        <h1 style="font-family: DM Sans, sans-serif">Registration Form</h1>
+                <img class="logo2"  src ="https://img1.wsimg.com/isteam/ip/6f5993eb-07fd-4e54-a10f-d1d3850f5f51/ibmskillsbuild-gmen.png/:/" alt="IBM logo">
+                <h1 style="font-family: DM Sans, sans-serif">Registration Form</h1>
         <br/> <br>
         <form:form modelAttribute="user" action="/AddUser" method="post">
 
