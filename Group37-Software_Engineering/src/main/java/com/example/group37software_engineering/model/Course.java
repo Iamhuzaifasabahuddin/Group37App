@@ -20,17 +20,6 @@ public class Course {
     private Integer id;
     private String title;
 
-    private LocalDate startDate;
-    private LocalDate endDate;
-
-    private String startTime;
-
-    private String endTime;
-
-    private boolean completed;
-
-    private double percentage;
-
     private double duration;
 
     private String category;
@@ -41,8 +30,12 @@ public class Course {
 
     @Column(length = 1000)
     private String link;
-    @ManyToMany(fetch = FetchType.EAGER)
-    List<MyUser> users = new ArrayList<>();
+
+    @OneToMany(mappedBy = "course")
+    private List<UserCourses> userCourses;
+
+    //    @ManyToMany(fetch = FetchType.EAGER)
+//    List<MyUser> users = new ArrayList<>();
     public Integer getId() {
         return id;
     }
@@ -58,59 +51,6 @@ public class Course {
     public void setTitle(String course_name) {
         this.title = course_name;
     }
-
-    public LocalDate getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate() {
-        this.startDate = LocalDate.now();
-    }
-
-    public LocalDate getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(LocalDate endDate) {
-        this.endDate = endDate;
-    }
-
-    public String getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime() {
-        LocalTime currentTime = LocalTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mm a");
-        this.startTime = currentTime.format(formatter);
-    }
-
-    public String getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(String endTime) {
-        this.endTime = endTime;
-    }
-
-
-
-    public boolean isCompleted() {
-        return completed;
-    }
-
-    public void setCompleted(boolean completed) {
-        this.completed = completed;
-    }
-
-    public double getPercentage() {
-        return percentage;
-    }
-
-    public void setPercentage(double percentage) {
-        this.percentage = percentage;
-    }
-
 
     public double getDuration() {
         return duration;
@@ -153,12 +93,13 @@ public class Course {
         this.link = link;
     }
 
-    public List<MyUser> getUsers() {
-        return users;
+
+    public List<UserCourses> getUserCourses() {
+        return userCourses;
     }
 
-    public void setUsers(List<MyUser> users) {
-        this.users = users;
+    public void setUserCourses(List<UserCourses> userCourses) {
+        this.userCourses = userCourses;
     }
 }
 

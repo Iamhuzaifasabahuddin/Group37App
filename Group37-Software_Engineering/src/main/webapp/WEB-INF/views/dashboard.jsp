@@ -42,18 +42,18 @@
 </div>
     <section>
         <div class="courses">
-            <c:forEach items="${courseList}" var="course">
+            <c:forEach items="${userCourses}" var="course">
                 <div class="card">
                     <div class="card-top">
-                        <img src="${course.getImageUrl()}" alt="${course.getTitle()}">
-                        <h4>${course.getTitle()}</h4>
-                        <p class="category">${course.getCategory()}</p>
+                        <img src="${course.getCourse().getImageUrl()}" alt="${course.getCourse().getTitle()}">
+                        <h4>${course.getCourse().getTitle()}</h4>
+                        <p class="category">${course.getCourse().getCategory()}</p>
                     </div>
                     <div class="card-bottom">
                         <div class="course-details">
-                            <p>${Math.round(course.getDuration())} hours</p>
+                            <p>${Math.round(course.getCourse().getDuration())} hours</p>
                             <p class="divider">|</p>
-                            <p>${Math.round(course.getDuration()) * 100} points</p>
+                            <p>${Math.round(course.getCourse().getDuration()) * 100} points</p>
                         </div>
                         <c:if test="${not empty course.startTime and not empty course.startDate}">
                             <div class="course-details">
@@ -61,12 +61,12 @@
                                 <p class="divider">|</p>
                                 <p>Start Date: ${course.startDate}</p>
                             </div>
-                            <a href="${course.link}" target="_blank">Go</a>
+                            <a href="${course.getCourse().link}" target="_blank">Continue</a>
                         </c:if>
                         <c:if test="${empty course.startTime and empty course.startDate}">
                             <form id="getStartedForm" action="/starttime">
-                                <input type="hidden" name="courseId" value="${course.id}">
-                                <button type="submit" onclick="openLinkAndSubmit('${course.link}')">Get started</button>
+                                <input type="hidden" name="courseId" value="${course.getCourse().id}">
+                                <button type="submit" onclick="openLinkAndSubmit('${course.getCourse().link}')">Get started</button>
                             </form>
                         </c:if>
 
