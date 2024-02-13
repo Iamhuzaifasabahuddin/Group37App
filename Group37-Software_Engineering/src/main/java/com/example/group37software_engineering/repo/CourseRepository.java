@@ -21,7 +21,5 @@ public interface CourseRepository extends CrudRepository<Course, Integer> {
 
     List<Course> findAllByDurationGreaterThanEqual(double duration);
 
-    @Query("SELECT u FROM MyUser u JOIN u.course c WHERE c.category = :category")
-    List<MyUser> findAllUsersByCourseCategory(@Param("category") String category);
 }
 

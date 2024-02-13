@@ -24,8 +24,8 @@ public class MyUser {
 
     private Integer points=0;
 
-    @ManyToMany(mappedBy = "users", fetch = FetchType.EAGER)
-    private List<Course> course = new ArrayList<>();
+    @OneToMany(mappedBy = "user")
+    private List<UserCourses> userCourses;
 
     public int getId() {
         return id;
@@ -75,14 +75,6 @@ public class MyUser {
         this.lastname = lastname;
     }
 
-    public List<Course> getCourse() {
-        return course;
-    }
-
-    public void setCourse(List<Course> course) {
-        this.course = course;
-    }
-
     public String getConfirmpassword() {
         return confirmpassword;
     }
@@ -99,16 +91,11 @@ public class MyUser {
         this.points = points;
     }
 
-    @Override
-    public String toString() {
-        return "MyUser{" +
-                "id=" + id +
-                ", firstname='" + firstname + '\'' +
-                ", lastname='" + lastname + '\'' +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", email='" + email + '\'' +
-                ", course=" + course +
-                '}';
+    public List<UserCourses> getUserCourses() {
+        return userCourses;
+    }
+
+    public void setUserCourses(List<UserCourses> userCourses) {
+        this.userCourses = userCourses;
     }
 }

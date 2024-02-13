@@ -1,7 +1,9 @@
 package com.example.group37software_engineering.controller;
-
+import com.example.group37software_engineering.model.Course;
 import com.example.group37software_engineering.model.MyUser;
+import com.example.group37software_engineering.model.UserCourses;
 import com.example.group37software_engineering.repo.CourseRepository;
+import com.example.group37software_engineering.repo.UserCourseRepository;
 import com.example.group37software_engineering.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -9,8 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import java.security.Principal;
+import java.util.List;
 
 /**
  * Controller class handling user login and related operations.
@@ -27,6 +29,8 @@ public class LoginController {
     @Autowired
     private CourseRepository courseRepository;
 
+    @Autowired
+    private UserCourseRepository userCourseRepository;
     /**
      * Display the login form.
      *
@@ -57,7 +61,6 @@ public class LoginController {
         model.addAttribute("error", "Invalid Credentials!");
         return "Login/login";
     }
-
     /**
      * Handle successful login and redirect to the dashboard.
      *
@@ -67,7 +70,11 @@ public class LoginController {
     @RequestMapping(value = "/success-login", method = RequestMethod.GET)
     public String successLogin(Principal principal, Model model, RedirectAttributes redirectAttributes) {
         MyUser user = userRepository.findByUsername(principal.getName());
-        if (user.getCourse().isEmpty()) {
+        List<UserCourses> userCourses = userCourseRepository.findByUser(user);
+        List<Course> courseList = userCourses.stream()
+                .map(UserCourses::getCourse)
+                .toList();
+        if (courseList.isEmpty()) {
             return "redirect:/courses";
         } else {
             redirectAttributes.addFlashAttribute("message", "Successfully logged in");

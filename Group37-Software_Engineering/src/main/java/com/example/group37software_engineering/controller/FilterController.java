@@ -1,13 +1,16 @@
 package com.example.group37software_engineering.controller;
+
 import com.example.group37software_engineering.model.Course;
 import com.example.group37software_engineering.model.MyUser;
 import com.example.group37software_engineering.repo.CourseRepository;
+import com.example.group37software_engineering.repo.UserCourseRepository;
 import com.example.group37software_engineering.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -26,6 +29,9 @@ public class FilterController {
     @Autowired
     private CourseRepository courseRepository;
 
+    @Autowired
+    private UserCourseRepository userCourseRepository;
+
     /**
      * Handle filtering of courses based on category.
      *
@@ -40,7 +46,7 @@ public class FilterController {
         List<Course> filtered = courseRepository.findAllByCategory(category);
         List<Course> coursesNotEnrolled = new ArrayList<>();
         for (Course course : filtered) {
-            if (!course.getUsers().contains(user)) {
+            if (!isUserEnrolledInCourse(user, course)) {
                 coursesNotEnrolled.add(course);
             }
         }
@@ -62,11 +68,11 @@ public class FilterController {
         MyUser user = userRepository.findByUsername(principal.getName());
         model.addAttribute("user", user);
         if (searchTerm != null && !searchTerm.isBlank()) {
-            List <Course> searched = courseRepository.findCoursesByTitleContaining(searchTerm);
+            List<Course> searched = courseRepository.findCoursesByTitleContaining(searchTerm);
             if (searched != null) {
                 List<Course> coursesNotEnrolled = new ArrayList<>();
                 for (Course course : searched) {
-                    if (!course.getUsers().contains(user)) {
+                    if (!isUserEnrolledInCourse(user, course)) {
                         coursesNotEnrolled.add(course);
                     }
                 }
@@ -83,9 +89,9 @@ public class FilterController {
     /**
      * Handle filtering courses by duration.
      *
-     * @param duration   The minimum duration to filter courses by.
-     * @param model      The model to add attributes to.
-     * @param principal  The currently logged-in user.
+     * @param duration  The minimum duration to filter courses by.
+     * @param model     The model to add attributes to.
+     * @param principal The currently logged-in user.
      * @return The view name for displaying filtered courses.
      */
     @RequestMapping(value = "/duration")
@@ -97,12 +103,17 @@ public class FilterController {
                 .toList();
         List<Course> coursesNotEnrolled = new ArrayList<>();
         for (Course course : sortedCourses) {
-            if (!course.getUsers().contains(user)) {
+            if (!isUserEnrolledInCourse(user, course)) {
                 coursesNotEnrolled.add(course);
             }
         }
         model.addAttribute("user", user);
         model.addAttribute("courseList", coursesNotEnrolled);
         return "Course/courses";
+    }
+
+    private boolean isUserEnrolledInCourse(MyUser user, Course course) {
+        return user.getUserCourses().stream()
+                .anyMatch(uc -> uc.getCourse().equals(course));
     }
 }
