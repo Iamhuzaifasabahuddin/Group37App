@@ -105,14 +105,6 @@ public class Course {
         this.userCourses = userCourses;
     }
 
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
-    }
-
-    public void setStartTime(String startTime) {
-        this.startTime = startTime;
-    }
-
     public Quiz getQuiz() {
         return quiz;
     }
