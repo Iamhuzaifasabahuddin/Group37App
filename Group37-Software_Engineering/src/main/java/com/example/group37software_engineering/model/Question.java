@@ -14,8 +14,8 @@ public class Question {
 
     private String answer;
 
-    @ManyToMany(mappedBy = "questions", fetch = FetchType.EAGER)
-    private List<Course> courses;
+    @ManyToOne
+    private Quiz quiz;
 
     @ElementCollection
     private List<String> options;
@@ -44,12 +44,12 @@ public class Question {
         this.options = options;
     }
 
-    public List<Course> getCourses() {
-        return courses;
+    public Quiz getQuiz() {
+        return quiz;
     }
 
-    public void setCourses(List<Course> courses) {
-        this.courses = courses;
+    public void setQuiz(Quiz quiz) {
+        this.quiz = quiz;
     }
 
     public String getPrompt() {

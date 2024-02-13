@@ -14,15 +14,11 @@
 <h1 style="text-align: center">Quiz for ${name}</h1>
 </br>
 <div class="quiz-container">
-    <form:form action="/completeQuiz" method="post" id="quizForm">
-        <c:forEach var="question" items="${questions}" varStatus="status">
+    <form:form action="/completeQuiz" modelAttribute="quiz" id="quizForm">
+        <form:hidden path="id" value="${courseQuiz.getId()}"></form:hidden>
+        <c:forEach var="question" items="${courseQuiz.getQuestions()}" varStatus="questionIndex">
             <p class="quiz-question">${question.getPrompt()}</p>
-            <c:forEach items="${question.getOptions()}" var="option">
-                <label>
-                    <p><input style="margin-right: 5px" type="radio" name="answers[${status.index}]" value="${option}">
-                        ${option} </p>
-                </label>
-            </c:forEach>
+            <form:radiobuttons path="questions[${questionIndex.index}].answer" items="${question.getOptions()}"></form:radiobuttons>
             <br>
         </c:forEach>
         <input style="border-radius: 20px" class="quiz-button" type="submit" value="Submit">
