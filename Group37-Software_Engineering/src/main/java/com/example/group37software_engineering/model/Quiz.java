@@ -6,11 +6,12 @@ import java.util.List;
 
 @Entity
 public class Quiz {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "quiz")
     private List<Question> questions;
 
     public int getId() {

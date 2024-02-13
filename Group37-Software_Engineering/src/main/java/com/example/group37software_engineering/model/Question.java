@@ -14,7 +14,7 @@ public class Question {
 
     private String answer;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Quiz quiz;
 
     @ElementCollection
