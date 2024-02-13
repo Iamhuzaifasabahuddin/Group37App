@@ -6,6 +6,8 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -33,6 +35,12 @@ public class QuizController {
     @Autowired
     private UserCourseRepository userCourseRepository;
 
+    @InitBinder
+    protected void initBinder(WebDataBinder binder) {
+        binder.addValidators(new QuizValidator(quizRepository));
+    }
+
+
     @GetMapping("/quiz")
     public String getQuiz(@RequestParam int courseId, Model model) {
         Course course = courseRepository.findCourseById(courseId);
@@ -44,9 +52,15 @@ public class QuizController {
     }
 
     @PostMapping("/completeQuiz")
-    public String completeQuiz(@Valid @ModelAttribute Quiz quiz, @RequestParam int courseId, Model model, Principal principal) {
-        MyUser user = userRepository.findByUsername(principal.getName());
+    public String completeQuiz(@Valid @ModelAttribute("quiz") Quiz quiz, BindingResult result, @RequestParam int courseId, Model model, Principal principal) {
         Course course = courseRepository.findCourseById(courseId);
+        if (result.hasErrors()) {
+            model.addAttribute("courseQuiz", course.getQuiz());
+            model.addAttribute("name", course.getTitle());
+            model.addAttribute("courseId", courseId);
+            return "quiz";
+        }
+        MyUser user = userRepository.findByUsername(principal.getName());
         UserCourses userCourse = userCourseRepository.findByUserAndCourse(user, course);
         Quiz courseQuiz = quizRepository.findById(quiz.getId());
         int correct = 0;
