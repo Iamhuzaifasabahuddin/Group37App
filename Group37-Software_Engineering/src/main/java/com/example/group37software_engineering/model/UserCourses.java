@@ -43,8 +43,8 @@ public class UserCourses {
         return endDate;
     }
 
-    public void setEndDate(LocalDate endDate) {
-        this.endDate = endDate;
+    public void setEndDate() {
+        this.endDate = LocalDate.now();
     }
 
     public String getStartTime() {
@@ -61,8 +61,10 @@ public class UserCourses {
         return endTime;
     }
 
-    public void setEndTime(String endTime) {
-        this.endTime = endTime;
+    public void setEndTime() {
+        LocalTime currentTime = LocalTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mm a");
+        this.endTime = currentTime.format(formatter);
     }
 
     public double getPercentage() {

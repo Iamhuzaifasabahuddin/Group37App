@@ -28,6 +28,8 @@
             <br>
         </c:forEach>
         </ol>
+        <input type="hidden" name="courseId" value="${courseId}">
+        <form:errors cssClass="error" path="questions"></form:errors>
         <input class="quiz-button" type="submit" value="Submit">
     </form:form>
     <br>
