@@ -28,6 +28,9 @@ public class Course {
 
     private String imageUrl;
 
+    @ManyToOne
+    private Quiz quiz;
+
     @Column(length = 1000)
     private String link;
 
@@ -100,6 +103,22 @@ public class Course {
 
     public void setUserCourses(List<UserCourses> userCourses) {
         this.userCourses = userCourses;
+    }
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
+
+    public Quiz getQuiz() {
+        return quiz;
+    }
+
+    public void setQuiz(Quiz quiz) {
+        this.quiz = quiz;
     }
 }
 
