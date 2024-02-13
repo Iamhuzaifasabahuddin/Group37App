@@ -64,5 +64,13 @@ public class RegistrationValidator implements Validator {
         if(!Objects.equals(user.getPassword(), user.getConfirmpassword())){
             errors.rejectValue("confirmpassword", "", "Passwords do not match!");
         }
+
+        if(!user.getEmail().matches("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\\\.[A-Z]{2,6}$")){
+            errors.rejectValue("email", "", "Invalid email pattern! e.g example@example.com");
+        }
+
+        if(user.getUsername().length() < 4 || user.getUsername().length() > 20){
+            errors.rejectValue("username", "", "Username should be in between 4 and 20");
+        }
     }
 }

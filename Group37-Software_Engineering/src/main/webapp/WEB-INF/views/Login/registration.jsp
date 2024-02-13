@@ -30,7 +30,7 @@
                 <br/>
 
                 <h2 style="font-family: DM Sans, sans-serif">Email:</h2>
-                <form:input path="email" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" cssClass="form-input"/>
+                <form:input path="email" cssClass="form-input"/>
                 <form:errors path="email" cssClass="error"/>
                 <br/>
 

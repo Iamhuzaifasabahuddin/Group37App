@@ -4,9 +4,7 @@ import com.example.group37software_engineering.model.Course;
 import com.example.group37software_engineering.model.MyUser;
 import com.example.group37software_engineering.repo.CourseRepository;
 import com.example.group37software_engineering.repo.UserRepository;
-import org.springframework.beans.PropertyEditorRegistrar;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 public class CourseController {
@@ -48,7 +45,6 @@ public class CourseController {
             user.getCourse().add(c);
             userRepository.save(user);
             c.getUsers().add(user);
-            courseRepository.save(c);
             return "redirect:/dashboard";
         }
         model.addAttribute("error", "You already have enrolled in this course!");
@@ -66,13 +62,10 @@ public class CourseController {
                 if (userCourse.getId().equals(course.getId())) {
                     userCourse.setStartTime();
                     userCourse.setStartDate();
-                    userRepository.save(user);
-                    courseRepository.save(userCourse);
                 }
             }
+            userRepository.save(user);
         }
         return "redirect:/dashboard";
     }
-
-
 }

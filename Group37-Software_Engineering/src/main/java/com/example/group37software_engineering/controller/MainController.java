@@ -1,15 +1,16 @@
 package com.example.group37software_engineering.controller;
+
 import com.example.group37software_engineering.model.Course;
 import com.example.group37software_engineering.model.MyUser;
 import com.example.group37software_engineering.repo.CourseRepository;
 import com.example.group37software_engineering.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import java.security.Principal;
 import java.util.List;
 
@@ -29,28 +30,18 @@ public class MainController {
         return "oauth";
 
     }
-    @GetMapping("/dashboard")
-    public String getDashboard(Model model, Principal principal) {
-        MyUser user = userRepository.findByUsername(principal.getName());
-        model.addAttribute("user", user);
-        if(user.getCourse().isEmpty()){
-            model.addAttribute("error", "ERROR 404!");
-        }else{
-            model.addAttribute("courseList", user.getCourse());
-        }
-        return "dashboard";
-    }
 
     @GetMapping("/profile")
-    public String getProfile(Model model, Principal principal){
+    public String getProfile(Model model, Principal principal) {
         MyUser user = userRepository.findByUsername(principal.getName());
         model.addAttribute("user", user);
-        model.addAttribute("Courses_taken",user.getCourse().size());
+        model.addAttribute("Courses_taken", user.getCourse().size());
         model.addAttribute("Completed", countCompleted(principal.getName()));
         model.addAttribute("Percentage", hoursCompleted(principal.getName()));
         model.addAttribute("Hours", hoursLeft(principal.getName()));
         return "profile";
     }
+
     @GetMapping("/admin")
     public String getadmin(Model model, Principal principal) {
         MyUser user = userRepository.findByUsername(principal.getName());
@@ -105,7 +96,7 @@ public class MainController {
                 double percent = 0;
 
                 for (Course c : courses) {
-                        percent += c.getPercentage();
+                    percent += c.getPercentage();
                 }
                 return percent;
             }
