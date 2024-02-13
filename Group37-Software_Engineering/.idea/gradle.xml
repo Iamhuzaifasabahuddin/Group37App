@@ -8,7 +8,7 @@
         <option name="gradleHome" value="/usr/local/gradle/gradle-current" />
         <option name="modules">
           <set>
-            <option value="$PROJECT_DIR$" />
+            <option value="/var/autofs/home/s_home/atkm1/group-37/Group37-Software_Engineering" />
           </set>
         </option>
       </GradleProjectSettings>
