@@ -119,7 +119,7 @@ public class CourseController {
             userCourse.setStartTime();
             userCourse.setStartDate();
             userCourseRepository.save(userCourse);
-    }
+        }
         return "redirect:/dashboard";
     }
 

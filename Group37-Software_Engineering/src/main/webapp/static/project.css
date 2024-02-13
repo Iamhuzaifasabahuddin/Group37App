@@ -326,13 +326,12 @@ li a {
     padding: 0 10px;
 }
 
-.card a, .button-enroll, .quiz-button {
+.card a, .button-enroll, .quiz-button, .button-completed {
     color: var(--accent-right-light);
     padding: 10px 15px;
     font-size: 16px;
     border: none;
     cursor: pointer;
-    margin-top: 10px;
     flex: auto;
     width: 100%;
 }
@@ -373,6 +372,19 @@ li a {
 
 .buttons {
     display: flex;
+}
+
+.course-buttons {
+    display: flex;
+}
+
+.button-divider {
+    border: 1px solid var(--accent-right-dark);
+}
+
+.button-completed {
+    background-color: var(--accent-right-dark);
+    cursor: default;
 }
 
 /* Filter */

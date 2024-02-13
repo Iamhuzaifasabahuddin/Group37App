@@ -61,7 +61,21 @@
                                 <p class="divider">|</p>
                                 <p>Start Date: ${course.startDate}</p>
                             </div>
-                            <a href="${course.getCourse().link}" target="_blank">Continue</a>
+                            <c:if test="${empty course.endTime and empty course.endDate}">
+                                <div class="course-buttons">
+                                    <a href="${course.getCourse().link}" target="_blank">Continue</a>
+                                    <div class="button-divider"></div>
+                                    <a href="/quiz?courseId=${course.getCourse().getId()}" target="_blank">Quiz</a>
+                                </div>
+                            </c:if>
+                        </c:if>
+                        <c:if test="${not empty course.endTime and not empty course.endDate}">
+                            <div class="course-details">
+                                <p>End Time: ${course.endTime}</p>
+                                <p class="divider">|</p>
+                                <p>End Date: ${course.endDate}</p>
+                            </div>
+                            <button class="button-completed" disabled>Completed</button>
                         </c:if>
                         <c:if test="${empty course.startTime and empty course.startDate}">
                             <form id="getStartedForm" action="/starttime">

@@ -28,6 +28,7 @@
             <br>
         </c:forEach>
         </ol>
+        <input type="hidden" name="courseId" value="${courseId}">
         <input class="quiz-button" type="submit" value="Submit">
     </form:form>
     <br>
