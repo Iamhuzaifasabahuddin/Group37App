@@ -669,19 +669,57 @@ button.cancel:hover {
 
 .quiz-container {
 
+    padding: 30px 40px 30px 40px;
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    width: 80%;
-    max-width: 600px;
+    width: 50%;
     margin: auto;
+    font-size: 18px;
 }
 
 .quiz-question {
 
-    font-size: 16px;
+    font-size: 21px;
     margin-bottom: 10px;
 
 }
 
+.quiz-button {
+
+    border-radius: 20px;
+
+}
+
+.quiz-option {
+
+    border: 1px solid var(--primary-dark);
+    display: flex;
+    align-items: center; /* Align items vertically in the center */
+    margin-bottom: 10px;
+}
+
+.quiz-option label {
+
+    width: 100%;
+    display: block;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.quiz-option input[type="radio"]:checked + label {
+
+    width: 100%;
+    color: var(--secondary-light);
+    background-color: var(--primary-dark); /* Change the background color when the radio button is selected */
+}
+
+.quiz-option:hover {
+    background-color: #f0f0f0; /* Add hover effect */
+}
+
+.buttons-option {
+
+    display: none;
+
+}

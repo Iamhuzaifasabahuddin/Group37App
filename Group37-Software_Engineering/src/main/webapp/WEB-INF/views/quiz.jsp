@@ -16,12 +16,19 @@
 <div class="quiz-container">
     <form:form action="/completeQuiz" modelAttribute="quiz" id="quizForm">
         <form:hidden path="id" value="${courseQuiz.getId()}"></form:hidden>
-        <c:forEach var="question" items="${courseQuiz.getQuestions()}" varStatus="questionIndex">
-            <p class="quiz-question">${question.getPrompt()}</p>
-            <form:radiobuttons path="questions[${questionIndex.index}].answer" items="${question.getOptions()}"></form:radiobuttons>
+        <ol> <c:forEach var="question" items="${courseQuiz.getQuestions()}" varStatus="questionIndex">
+             <li class="quiz-question">${question.getPrompt()}</li>
+                <c:forEach var="option" items="${question.getOptions()}">
+                    <div class="quiz-option">
+                        <form:radiobutton class="buttons-option" path="questions[${questionIndex.index}].answer" value="${option}" id="${questionIndex.index}${option}" />
+                        <label for="${questionIndex.index}${option}">${option}</label>
+                    </div>
+                </c:forEach>
+
             <br>
         </c:forEach>
-        <input style="border-radius: 20px" class="quiz-button" type="submit" value="Submit">
+        </ol>
+        <input class="quiz-button" type="submit" value="Submit">
     </form:form>
     <br>
 
