@@ -30,6 +30,7 @@ public class QuizController {
 
     @GetMapping("/quiz")
     public String getQuiz(@RequestParam int courseId, Model model) {
+//        Question question = questionRepository.findbyCourseId(courseId)
         Course course = courseRepository.findCourseById(courseId);
         model.addAttribute("questions", course.getQuestions());
         model.addAttribute("name", course.getTitle());
