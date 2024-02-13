@@ -60,6 +60,7 @@ public class RegistrationValidator implements Validator {
                 - Range between 3 - 15 characters
                 - Must not contain any numbers
                 - Must not contain any spaces
+                - Must not contain any special character
         */
 
 
@@ -92,6 +93,7 @@ public class RegistrationValidator implements Validator {
                 - Range between 3 - 20 characters
                 - Must not contain any numbers
                 - Must not contain any spaces
+                - Must not contain any special character
         */
 
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "lastname", "", "Last Name cannot be empty!");
@@ -121,15 +123,15 @@ public class RegistrationValidator implements Validator {
             The validation rules for it are as followed:
                 - Input can't be empty
                 - Range between 3 - 20 characters
-                -Must not contain any spaces
+                - Must not contain any spaces
         */
 
         if (userRepository.findByUsername(user.getUsername()) != null) {
             errors.rejectValue("username", "", "Username already taken!");
         }
 
-        if (user.getUsername().length() < 3 || user.getUsername().length() > 15) {
-            errors.rejectValue("username", "", "Username must be between 3 to 15 characters");
+        if(user.getUsername().length() < 4 || user.getUsername().length() > 20){
+            errors.rejectValue("username", "", "Username should be in between 4 and 20");
         }
 
         String un = user.getUsername();
@@ -142,12 +144,19 @@ public class RegistrationValidator implements Validator {
 
         /*
             Email validations:
-
+            The code above represents the validation check up when users enter a username.
+            The validation rules for it are as followed:
+                - Email must follow the rule 'example@example.com'
+                - Must not contain any spacing
         */
 
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "", "Email cannot be empty!");
         if (userRepository.findByEmail(user.getEmail()) != null) {
             errors.rejectValue("email", "", "Email already taken!");
+        }
+
+        if(!user.getEmail().matches("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\\\.[A-Z]{2,6}$")){
+            errors.rejectValue("email", "", "Invalid email pattern! e.g example@example.com");
         }
 
         String email = user.getEmail();
@@ -165,6 +174,8 @@ public class RegistrationValidator implements Validator {
                 - Input can't be empty
                 - Range between 8 - 32 characters
                 - Must contain 6 characters
+                - Must contain at least 1 number
+                - must contain at least 1 special character
 
         */
 
@@ -204,14 +215,6 @@ public class RegistrationValidator implements Validator {
 
         if(!Objects.equals(user.getPassword(), user.getConfirmpassword())){
             errors.rejectValue("confirmpassword", "", "Passwords do not match!");
-        }
-
-        if(!user.getEmail().matches("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\\\.[A-Z]{2,6}$")){
-            errors.rejectValue("email", "", "Invalid email pattern! e.g example@example.com");
-        }
-
-        if(user.getUsername().length() < 4 || user.getUsername().length() > 20){
-            errors.rejectValue("username", "", "Username should be in between 4 and 20");
         }
 
 
