@@ -139,9 +139,10 @@ public class RegistrationValidator implements Validator {
             errors.rejectValue("username", "", "Username should be in between 4 and 20");
         }
 
-        if(!user.getEmail().matches("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\\\.[A-Z]{2,6}$")){
+        if(!user.getEmail().matches("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$")){
             errors.rejectValue("email", "", "Invalid email pattern! e.g example@example.com");
         }
+
 
     }
 
