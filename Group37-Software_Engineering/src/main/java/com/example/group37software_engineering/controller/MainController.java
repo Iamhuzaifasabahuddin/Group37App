@@ -13,8 +13,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import java.security.Principal;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 /**
  * Controller class for managing main application functionality, including user dashboard and profile.
@@ -88,6 +90,7 @@ public class MainController {
         model.addAttribute("Completed", countCompleted(principal.getName()));
         model.addAttribute("Percentage", hoursCompleted(principal.getName()));
         model.addAttribute("Hours", hoursLeft(principal.getName()));
+        model.addAttribute("Rank", getRank(principal.getName()));
         return "profile";
     }
 //    @GetMapping("/admin")
@@ -201,6 +204,20 @@ public class MainController {
         return remainingHours;
     }
 
+    private Integer getRank(String username){
+        List<MyUser> myUsers = StreamSupport.stream(userRepository.findAll().spliterator(), false)
+                .sorted(Comparator.comparingDouble(MyUser::getPoints).reversed())
+                .toList();
+
+        int rank = 0;
+        for(MyUser myUser : myUsers){
+            rank ++;
+            if(myUser.getUsername().equals(username)){
+                return rank;
+            }
+        }
+        return null;
+    }
 
 
 }
