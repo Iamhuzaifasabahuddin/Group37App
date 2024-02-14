@@ -27,6 +27,7 @@ window.onload = function() {
         }, 5000);
     }
     changeHues();
+    displayQuizScore();
 };
 
 var prevScrollpos = window.pageYOffset;
@@ -52,5 +53,27 @@ setTimeout(function() {
 function openLinkAndSubmit(courseLink) {
     window.open(courseLink, '_blank');
     document.getElementById('getStartedForm').submit();
+}
+
+function displayQuizScore() {
+    const scoreText = document.querySelector(".quiz-score p");
+    const score = parseInt(scoreText.innerText.substring(0, scoreText.innerText.length - 1));
+    const quizScore = document.querySelector(".quiz-score");
+    let i = 0;
+    scoreText.innerText = `${i}%`;
+    scoreText.style.opacity = 100;
+    let animateScore = setInterval(() => {
+        scoreText.innerText = `${i}%`;
+        quizScore.style.cssText = `background: radial-gradient(closest-side, var(--primary-light) 93%, transparent 94% 100%),
+            conic-gradient(green ${i}%, var(--secondary-light) 0);`;
+        if (i >= score) {
+            clearInterval(animateScore);
+            document.querySelector(".quiz-result").style.opacity = 100;
+            if (score < 80) {
+                document.querySelector(".quiz-result").innerText = "Sorry, you need at least 80% to pass this course.";
+            }
+        }
+        i++;
+    }, 25);
 }
 
