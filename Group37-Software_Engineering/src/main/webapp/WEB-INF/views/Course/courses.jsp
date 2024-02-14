@@ -46,8 +46,8 @@
     <form action="/duration" method="get">
         <label for="duration">Select Duration:</label>
         <select name="duration" id="duration">
-            <option value="5.0">5 hours</option>
-            <option value="10.0">10 hours</option>
+            <option value="5.0">5+ hours</option>
+            <option value="10.0">10+ hours</option>
             <option value="20.0">20 hours</option>
         </select>
         <input type="submit" value="Sort By Duration">
