@@ -23,11 +23,12 @@ public class QuizValidator implements Validator {
     @Override
     public void validate(Object target, Errors errors) {
         Quiz quizAnswers = (Quiz) target;
-        if (quizAnswers.getQuestions() == null) {
+        Quiz quiz = quizRepository.findById(quizAnswers.getId());
+        if (quizAnswers.getQuestions() == null || quizAnswers.getQuestions().size() != quiz.getQuestions().size()) {
             errors.rejectValue("questions", "", "Answer the questions");
             return;
         }
-        Quiz quiz = quizRepository.findById(quizAnswers.getId());
+
         for (int i = 0; i < quiz.getQuestions().size(); i++) {
             if (quizAnswers.getQuestions().get(i).getAnswer() == null) {
                 errors.rejectValue("questions", "", "Answer all questions");
