@@ -102,9 +102,6 @@ public class RegistrationValidator implements Validator {
             errors.rejectValue("username", "", "Username already taken!");
         }
 
-        if (user.getUsername().length() < 3 || user.getUsername().length() > 15) {
-            errors.rejectValue("username", "", "Username must be between 3 to 15 characters");
-        }
 
         /*
             Email validations:
