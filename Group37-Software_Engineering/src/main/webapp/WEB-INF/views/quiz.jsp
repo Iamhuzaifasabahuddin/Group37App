@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="static/project.css" rel="stylesheet" type="text/css">
     <title>Quiz</title>
+    <script src="static/script.js" defer></script>
 </head>
 <body>
 </br>
@@ -33,9 +34,18 @@
         <input class="quiz-button" type="submit" value="Submit">
     </form:form>
     <br>
-
-        ${score}
-
+    <c:if test="${not empty score}">
+        <div class="quiz-popup-background">
+            <div class="quiz-popup-box">
+                <h4>Quiz Score</h4>
+                <div class="quiz-score" role="progressbar">
+                    <p>${Math.round(score)}%</p>
+                </div>
+                <p class="quiz-result">Congratulations, you pass this course!</p>
+                <a class="return-dashboard" href="/dashboard">Return to Dashboard</a>
+            </div>
+        </div>
+    </c:if>
 </div>
 </body>
 </html>

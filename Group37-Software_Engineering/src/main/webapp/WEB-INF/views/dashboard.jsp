@@ -66,7 +66,7 @@
                                 <div class="course-buttons">
                                     <a href="${course.getCourse().link}" target="_blank">Continue</a>
                                     <div class="button-divider"></div>
-                                    <a href="/quiz?courseId=${course.getCourse().getId()}" target="_blank">Quiz</a>
+                                    <a href="/quiz?courseId=${course.getCourse().getId()}">Quiz</a>
                                 </div>
                             </c:if>
                         </c:if>

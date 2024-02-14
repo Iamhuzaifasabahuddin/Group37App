@@ -73,10 +73,10 @@ public class QuizController {
     @PostMapping("/completeQuiz")
     public String completeQuiz(@Valid @ModelAttribute("quiz") Quiz quiz, BindingResult result, @RequestParam int courseId, Model model, Principal principal) {
         Course course = courseRepository.findCourseById(courseId);
+        model.addAttribute("courseQuiz", course.getQuiz());
+        model.addAttribute("name", course.getTitle());
+        model.addAttribute("courseId", courseId);
         if (result.hasErrors()) {
-            model.addAttribute("courseQuiz", course.getQuiz());
-            model.addAttribute("name", course.getTitle());
-            model.addAttribute("courseId", courseId);
             return "quiz";
         }
         MyUser user = userRepository.findByUsername(principal.getName());
