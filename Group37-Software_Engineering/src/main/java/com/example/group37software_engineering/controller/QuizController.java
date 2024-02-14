@@ -73,6 +73,7 @@ public class QuizController {
         if (score >= 80) {
             userCourse.setEndDate();
             userCourse.setEndTime();
+            user.setPoints(user.getPoints() + (int) course.getDuration() * 100);
         }
         userCourse.setPercentage(max(score, userCourse.getPercentage()));
         userCourseRepository.save(userCourse);
