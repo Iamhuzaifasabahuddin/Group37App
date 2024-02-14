@@ -32,17 +32,17 @@
     <h1>Personal Information</h1>
 
     <form class="registration">
-        <label for="firstName">First name *</label>
+        <label for="firstName">First name</label>
         <input type="text" id="firstName" class="form-input" name="firstName" value="${user.firstname}" readonly>
 
-        <label for="lastName">Last name *</label>
+        <label for="lastName">Last name</label>
         <input type="text" id="lastName" class="form-input" name="lastName" value="${user.lastname}" readonly>
 
-        <label for="email">Email address *</label>
+        <label for="email">Email address</label>
         <input type="email" id="email" class="form-input" name="email" value="${user.email}" readonly>
 
-        <label for="confirmEmail">Confirm email address *</label>
-        <input type="email" id="confirmEmail" class="form-input" name="confirmEmail" value="${user.email}" readonly>
+<%--        <label for="confirmEmail">Confirm email address *</label>--%>
+<%--        <input type="email" id="confirmEmail" class="form-input" name="confirmEmail" value="${user.email}" readonly>--%>
 
         <div class="form-input">
             <strong>Username:</strong> ${user.username}
