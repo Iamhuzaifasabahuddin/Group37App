@@ -54,7 +54,7 @@
             <strong>Courses Completed:</strong> ${Completed}
         </div>
         <div class="form-input">
-            <strong>Percentage Completed:</strong> ${Percentage} %
+            <strong>Percentage Completed:</strong> ${Math.round(Percentage)} %
         </div>
         <div class="form-input">
             <strong>Hours Left:</strong> ${Hours}
