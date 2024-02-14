@@ -290,6 +290,7 @@ li a {
 
 .course-details p {
     flex: 1 1 49.5%;
+    padding: 0 5px 0 5px;
 }
 
 .course-details p.divider {

@@ -57,7 +57,8 @@
                         </div>
                         <c:if test="${not empty course.startTime and not empty course.startDate}">
                             <div class="course-details">
-                                <p>Start Time: ${course.startTime}</p>
+                                <p>Start Time:
+                                        ${course.startTime}</p>
                                 <p class="divider">|</p>
                                 <p>Start Date: ${course.startDate}</p>
                             </div>

@@ -69,6 +69,7 @@ public class FilterController {
         model.addAttribute("user", user);
         if (searchTerm != null && !searchTerm.isBlank()) {
             List<Course> searched = courseRepository.findCoursesByTitleContaining(searchTerm);
+            System.out.println(searched);
             if (searched != null) {
                 List<Course> coursesNotEnrolled = new ArrayList<>();
                 for (Course course : searched) {
@@ -77,7 +78,8 @@ public class FilterController {
                     }
                 }
                 model.addAttribute("courseList", coursesNotEnrolled);
-            } else {
+            }
+            else {
                 model.addAttribute("Courseerror", "No such course found!");
             }
         } else {

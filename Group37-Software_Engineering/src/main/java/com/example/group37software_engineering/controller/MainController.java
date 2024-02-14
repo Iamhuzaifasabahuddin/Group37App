@@ -52,16 +52,17 @@ public class MainController {
         return "dashboard";
     }
 
-//    @GetMapping("/profile")
-//    public String getProfile(Model model, Principal principal){
-//        MyUser user = userRepository.findByUsername(principal.getName());
-//        model.addAttribute("user", user);
-//        model.addAttribute("Courses_taken",user.getCourse().size());
-//        model.addAttribute("Completed", countCompleted(principal.getName()));
-//        model.addAttribute("Percentage", hoursCompleted(principal.getName()));
-//        model.addAttribute("Hours", hoursLeft(principal.getName()));
-//        return "profile";
-//    }
+    @GetMapping("/profile")
+    public String getProfile(Model model, Principal principal){
+        MyUser user = userRepository.findByUsername(principal.getName());
+        List<UserCourses> userCourses = userCourseRepository.findByUser(user);
+        model.addAttribute("user", user);
+        model.addAttribute("Courses_taken",userCourses.size());
+        model.addAttribute("Completed", countCompleted(principal.getName()));
+        model.addAttribute("Percentage", hoursCompleted(principal.getName()));
+        model.addAttribute("Hours", hoursLeft(principal.getName()));
+        return "profile";
+    }
 //    @GetMapping("/admin")
 //    public String getadmin(Model model, Principal principal) {
 //        MyUser user = userRepository.findByUsername(principal.getName());
@@ -82,65 +83,75 @@ public class MainController {
 //        return "admin";
 //    }
 //
-//    @RequestMapping("/404")
-//    public String handle404() {
-//        return "redirect:/dashboard";
-//    }
-//
-//    private Integer countCompleted(String username) {
-//        MyUser user = userRepository.findByUsername(username);
-//        if (user != null) {
-//            List<Course> courses = user.getCourse();
-//
-//            if (courses != null) {
-//                int total = 0;
-//
-//                for (Course c : courses) {
-//                    if (c != null && c.isCompleted()) {
-//                        total += 1;
-//                    }
-//                }
-//
-//                return total;
-//            }
-//        }
-//        return 0;
-//    }
-//
-//    private Double hoursCompleted(String username) {
-//        MyUser user = userRepository.findByUsername(username);
-//        if (user != null) {
-//            List<Course> courses = user.getCourse();
-//
-//            if (courses != null) {
-//                double percent = 0;
-//
-//                for (Course c : courses) {
-//                        percent += c.getPercentage();
-//                }
-//                return percent;
-//            }
-//        }
-//        return 0.0;
-//    }
-//
-//    private Double hoursLeft(String username) {
-//        MyUser user = userRepository.findByUsername(username);
-//        if (user != null) {
-//            List<Course> courses = user.getCourse();
-//
-//            if (courses != null) {
-//                double hours = 0;
-//
-//                for (Course c : courses) {
-//                    hours += c.getDuration();
-//
-//                }
-//                return hours;
-//            }
-//        }
-//        return 0.0;
-//    }
+    @RequestMapping("/404")
+    public String handle404() {
+        return "redirect:/dashboard";
+    }
+
+    private Integer countCompleted(String username) {
+        MyUser user = userRepository.findByUsername(username);
+        List<UserCourses> userCourses = userCourseRepository.findByUser(user);
+        if (user != null) {
+            List<UserCourses> userCourses1 = userCourses;
+
+            if (userCourses1 != null) {
+                int total = 0;
+
+                for (UserCourses c : userCourses1) {
+                    if (c.getPercentage() >= 80) {
+                        total += 1;
+                    }
+                }
+                return total;
+            }
+        }
+        return 0;
+    }
+
+
+    private Double hoursCompleted(String username) {
+            MyUser user = userRepository.findByUsername(username);
+            List<UserCourses> userCourses = userCourseRepository.findByUser(user);
+
+            if (user != null && !userCourses.isEmpty()) {
+                int completedCoursesCount =  0;
+                for (UserCourses uc : userCourses) {
+                    if (uc.getPercentage() >=  80) {
+                        completedCoursesCount++;
+                    }
+                }
+
+                double completionPercentage = (completedCoursesCount *  100.0) / userCourses.size();
+                return completionPercentage;
+            }
+            return  0.0;
+
+    }
+
+    private Double hoursLeft(String username) {
+        MyUser user = userRepository.findByUsername(username);
+        if (user == null) {
+            return  0.0;
+        }
+
+        List<UserCourses> userCourses = userCourseRepository.findByUser(user);
+        double totalHours =  0.0;
+        double completedHours =  0.0;
+
+        for (UserCourses uc : userCourses) {
+            Course course = uc.getCourse();
+            totalHours += course.getDuration();
+
+            if (uc.getPercentage() >=  80) {
+                completedHours += course.getDuration();
+            }
+        }
+
+
+        double remainingHours = totalHours - completedHours;
+        return remainingHours;
+    }
+
 
 
 }

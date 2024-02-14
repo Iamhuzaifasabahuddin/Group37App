@@ -49,6 +49,7 @@
 
 
             <input type="submit" value="Submit" class="submit-button" style="border-radius: 18px"/>
+                <p style="text-align: center">Already have an account? <a style="font-size: large" href="${pageContext.request.contextPath}/login-form" class="link-style">Login here</a>.</p>
         </form:form>
 </div>
 <br/>

@@ -26,55 +26,6 @@ public class CourseController {
     @Autowired
     private UserCourseRepository userCourseRepository;
 
-//    @GetMapping("/courses")
-//    public String getCourse(Model model, Principal principal) {
-//        MyUser user = userRepository.findByUsername(principal.getName());
-//        model.addAttribute("user", user);
-//        List<Course> allCourses = (List<Course>) courseRepository.findAll();
-//        List<Course> coursesNotEnrolled = new ArrayList<>();
-//        for (Course course : allCourses) {
-//            if (!course.getUserCourses().contains(user)) {
-//                coursesNotEnrolled.add(course);
-//            }
-//        }
-//        model.addAttribute("courseList", coursesNotEnrolled);
-//        return "Course/courses";
-//    }
-
-//    @RequestMapping("/enroll")
-//    public String enroll(@RequestParam int course, Principal principal, Model model) {
-//        MyUser user = userRepository.findByUsername(principal.getName());
-//        Course c = courseRepository.findCourseById(course);
-//        if (c != null && !user.getCourse().contains(c)) {
-//            user.getCourse().add(c);
-//            userRepository.save(user);
-//            c.getUsers().add(user);
-//            return "redirect:/dashboard";
-//        }
-//        model.addAttribute("error", "You already have enrolled in this course!");
-//        model.addAttribute("user", user);
-//        model.addAttribute("courseList", courseRepository.findAll());
-//        return "Course/courses";
-//    }
-
-    //    @RequestMapping("/starttime")
-//    public String getStartTime(@RequestParam int courseId, Principal principal) {
-//        MyUser user = userRepository.findByUsername(principal.getName());
-//        Course course = courseRepository.findCourseById(courseId);
-//        if (course != null && user != null && user.getCourse().contains(course)) {
-//            for (Course userCourse : user.getCourse()) {
-//                if (userCourse.getId().equals(course.getId())) {
-//                    userCourse.setStartTime();
-//                    userCourse.setStartDate();
-//                }
-//            }
-//            userRepository.save(user);
-//        }
-//        return "redirect:/dashboard";
-//    }
-
-
-
     @GetMapping("/courses")
     public String getCourse(Model model, Principal principal) {
         MyUser user = userRepository.findByUsername(principal.getName());
@@ -102,7 +53,6 @@ public class CourseController {
             userCourseRepository.save(userCourse);
             return "redirect:/dashboard";
         }
-        model.addAttribute("error", "You already have enrolled in this course!");
         model.addAttribute("user", user);
         model.addAttribute("courseList", courseRepository.findAll());
         return "Course/courses";

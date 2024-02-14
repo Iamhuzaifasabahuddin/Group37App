@@ -44,33 +44,108 @@ public class RegistrationValidator implements Validator {
     public void validate(Object target, Errors errors) {
         MyUser user = (MyUser) target;
 
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "", "Username cannot be empty!");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "firstname", "", "First Name cannot be empty!");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "lastname", "", "Last Name cannot be empty!");
+        /*
+            First name validations:
+
+            The code above represents the validation check up when users enter their first name.
+            The validation rules for it are as followed:
+                - Input can't be empty
+                - Must start with a capital
+                - Range between 3 - 15 characters
+                - Must not contain any numbers
+                - Must not contain any spaces
+        */
+
+        Object firstname = user.getFirstname();
+        Object lastname = user.getLastname();
+        if (!(firstname instanceof String)) {
+            errors.rejectValue("firstname","", "First name should be a string!");
+        }
+
+        if (!(lastname instanceof String)) {
+            errors.rejectValue("lastname","", "First name should be a string!");
+        }
+
+        if (user.getFirstname().length() < 3 || user.getFirstname().length() > 15) {
+            errors.rejectValue("firstname", "", "First name must be between 3 to 15 characters");
+        }
+
+
+        /*
+            Last name validations:
+
+            The code above represents the validation check up when users enter their last name.
+            The validation rules for it are as followed:
+                - Input can't be empty
+                - Must start with a capital
+                - Range between 3 - 20 characters
+                - Must not contain any numbers
+                - Must not contain any spaces
+        */
+
+
+        if (user.getLastname().length() < 3 || user.getLastname().length() > 20) {
+            errors.rejectValue("lastname", "", "Last name must be between 3 to 20 characters");
+        }
+
+        /*
+            Username validations:
+
+            The code above represents the validation check up when users enter a username.
+            The validation rules for it are as followed:
+                - Input can't be empty
+                - Range between 3 - 20 characters
+                -Must not contain any spaces
+        */
+
         if (userRepository.findByUsername(user.getUsername()) != null) {
             errors.rejectValue("username", "", "Username already taken!");
         }
 
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "", "Email cannot be empty!");
+        if (user.getUsername().length() < 3 || user.getUsername().length() > 15) {
+            errors.rejectValue("username", "", "Username must be between 3 to 15 characters");
+        }
+
+        /*
+            Email validations:
+
+        */
+
         if (userRepository.findByEmail(user.getEmail()) != null) {
             errors.rejectValue("email", "", "Email already taken!");
         }
 
+
+        /*
+            Password validations:
+            The code above represents the validation check up when users enter a username.
+            The validation rules for it are as followed:
+                - Input can't be empty
+                - Range between 8 - 32 characters
+                - Must contain 6 characters
+
+        */
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "", "Email cannot be empty!");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "lastname", "", "Last Name cannot be empty!");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "firstname", "", "First Name cannot be empty!");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "", "Password cannot be empty!");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "confirmpassword", "", "Password cannot be empty!");
 
         if (user.getPassword().length() < 8 || user.getPassword().length() > 32) {
             errors.rejectValue("password", "", "Password must be between 8 and 32 characters");
         }
+
         if(!Objects.equals(user.getPassword(), user.getConfirmpassword())){
             errors.rejectValue("confirmpassword", "", "Passwords do not match!");
         }
-//
-//        if(!user.getEmail().matches("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\\\.[A-Z]{2,6}$")){
-//            errors.rejectValue("email", "", "Invalid email pattern! e.g example@example.com");
-//        }
-
         if(user.getUsername().length() < 4 || user.getUsername().length() > 20){
             errors.rejectValue("username", "", "Username should be in between 4 and 20");
         }
+
+        if(!user.getEmail().matches("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\\\.[A-Z]{2,6}$")){
+            errors.rejectValue("email", "", "Invalid email pattern! e.g example@example.com");
+        }
+
     }
+
 }

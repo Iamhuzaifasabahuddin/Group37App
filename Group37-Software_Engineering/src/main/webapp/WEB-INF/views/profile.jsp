@@ -60,7 +60,7 @@
             <strong>Hours Left:</strong> ${Hours}
         </div>
 
-        <input type="submit" class="submit-button" value="Save My Information">
+<%--        <input type="submit" class="submit-button" value="Save My Information">--%>
     </form>
 </div>
 </body>
