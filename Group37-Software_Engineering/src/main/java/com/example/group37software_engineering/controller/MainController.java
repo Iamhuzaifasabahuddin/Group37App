@@ -16,6 +16,9 @@ import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Controller class for managing main application functionality, including user dashboard and profile.
+ */
 @Controller
 public class MainController {
 
@@ -28,6 +31,13 @@ public class MainController {
     @Autowired
     private UserCourseRepository userCourseRepository;
 
+    /**
+     * Handles the home page, displaying user information from OAuth2 authentication.
+     *
+     * @param oAuth2AuthenticationToken The OAuth2 authentication token.
+     * @param model     The model to add attributes to.
+     * @return The view name for the OAuth2 home page.
+     */
     @GetMapping("/")
     public String homePage(OAuth2AuthenticationToken oAuth2AuthenticationToken, Model model) {
         model.addAttribute("user", oAuth2AuthenticationToken.getPrincipal().getName());
@@ -35,6 +45,15 @@ public class MainController {
         return "oauth";
 
     }
+
+    /**
+     * Handles displaying the user dashboard.
+     * Retrieves user information, user courses, and displays relevant information.
+     *
+     * @param model     The model to add attributes to.
+     * @param principal The currently logged-in user.
+     * @return The view name for the user dashboard.
+     */
     @GetMapping("/dashboard")
     public String getDashboard(Model model, Principal principal) {
         MyUser user = userRepository.findByUsername(principal.getName());
@@ -52,6 +71,14 @@ public class MainController {
         return "dashboard";
     }
 
+    /**
+     * Handles displaying the user profile.
+     * Retrieves user information, user courses, and calculates profile statistics.
+     *
+     * @param model     The model to add attributes to.
+     * @param principal The currently logged-in user.
+     * @return The view name for the user profile.
+     */
     @GetMapping("/profile")
     public String getProfile(Model model, Principal principal){
         MyUser user = userRepository.findByUsername(principal.getName());
@@ -83,11 +110,22 @@ public class MainController {
 //        return "admin";
 //    }
 //
+    /**
+     * Handles the custom 404 error redirection.
+     *
+     * @return The redirection URL to the user dashboard.
+     */
     @RequestMapping("/404")
     public String handle404() {
         return "redirect:/dashboard";
     }
 
+    /**
+     * Counts the number of completed courses for a given user.
+     *
+     * @param username The username of the user.
+     * @return The count of completed courses.
+     */
     private Integer countCompleted(String username) {
         MyUser user = userRepository.findByUsername(username);
         List<UserCourses> userCourses = userCourseRepository.findByUser(user);
@@ -108,7 +146,12 @@ public class MainController {
         return 0;
     }
 
-
+    /**
+     * Calculates the completion percentage of courses for a given user.
+     *
+     * @param username The username of the user.
+     * @return The completion percentage of courses.
+     */
     private Double hoursCompleted(String username) {
             MyUser user = userRepository.findByUsername(username);
             List<UserCourses> userCourses = userCourseRepository.findByUser(user);
@@ -128,6 +171,12 @@ public class MainController {
 
     }
 
+    /**
+     * Calculates the remaining hours for courses not yet completed by a given user.
+     *
+     * @param username The username of the user.
+     * @return The remaining hours for courses.
+     */
     private Double hoursLeft(String username) {
         MyUser user = userRepository.findByUsername(username);
         if (user == null) {

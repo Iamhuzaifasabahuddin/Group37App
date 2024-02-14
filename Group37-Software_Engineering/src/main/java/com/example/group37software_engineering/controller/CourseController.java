@@ -14,6 +14,9 @@ import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Controller class for managing operations related to courses and user enrollment.
+ */
 @Controller
 public class CourseController {
 
@@ -26,6 +29,14 @@ public class CourseController {
     @Autowired
     private UserCourseRepository userCourseRepository;
 
+    /**
+     * Handles displaying available courses to the user.
+     * Retrieves the user's information and the list of courses they are not enrolled in.
+     *
+     * @param model     The model to add attributes to.
+     * @param principal The currently logged-in user.
+     * @return The view name for displaying the list of available courses.
+     */
     @GetMapping("/courses")
     public String getCourse(Model model, Principal principal) {
         MyUser user = userRepository.findByUsername(principal.getName());
@@ -41,7 +52,15 @@ public class CourseController {
         return "Course/courses";
     }
 
-
+    /**
+     * Handles enrolling a user in a specific course.
+     * Checks if the user is not already enrolled and then performs the enrollment.
+     *
+     * @param course    The ID of the course to enroll the user in.
+     * @param model     The model to add attributes to.
+     * @param principal The currently logged-in user.
+     * @return The view name for user dashboard or the courses view if enrollment fails.
+     */
     @RequestMapping("/enroll")
     public String enroll(@RequestParam int course, Principal principal, Model model) {
         MyUser user = userRepository.findByUsername(principal.getName());
@@ -59,7 +78,14 @@ public class CourseController {
     }
 
 
-
+    /**
+     * Handles setting the start time of a user's enrolled course.
+     * Retrieves the user's information, the course, and updates the start time and date.
+     *
+     * @param courseId  The ID of the course for which to set the start time.
+     * @param principal The currently logged-in user.
+     * @return The view name of the user dashboard.
+     */
     @RequestMapping("/starttime")
     public String getStartTime(@RequestParam int courseId, Principal principal) {
         MyUser user = userRepository.findByUsername(principal.getName());
@@ -73,6 +99,13 @@ public class CourseController {
         return "redirect:/dashboard";
     }
 
+    /**
+     * Checks if a user is enrolled in a specific course.
+     *
+     * @param user   The user to check enrollment for.
+     * @param course The course to check enrollment in.
+     * @return True if the user is not enrolled in the course, false otherwise.
+     */
     private boolean isUserEnrolledInCourse(MyUser user, Course course) {
         return user.getUserCourses().stream()
                 .noneMatch(uc -> uc.getCourse().equals(course));

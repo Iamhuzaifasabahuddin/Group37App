@@ -36,6 +36,11 @@ public class QuestionsData {
 
     }
 
+    /**
+     * Imports questions from a CSV file and associates them with quizzes and courses.
+     *
+     * @param csvFilePath The path to the CSV file containing question data.
+     */
     public void importQuestionsFromCSV(String csvFilePath) {
 
         List<Question> questions = new ArrayList<>();
@@ -169,6 +174,12 @@ public class QuestionsData {
 
     }
 
+    /**
+     * Parses options from a delimited string and returns a list.
+     *
+     * @param options The delimited string containing options.
+     * @return The list of options.
+     */
     private List<String> parseOptions(String options) {
         return Arrays.asList(options.split(";"));
     }

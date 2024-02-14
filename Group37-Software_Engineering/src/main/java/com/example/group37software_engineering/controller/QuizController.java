@@ -18,6 +18,9 @@ import java.util.Objects;
 
 import static java.lang.Math.max;
 
+/**
+ * Controller class for handling quiz-related operations.
+ */
 @Controller
 public class QuizController {
     @Autowired
@@ -40,7 +43,13 @@ public class QuizController {
         binder.addValidators(new QuizValidator(quizRepository));
     }
 
-
+    /**
+     * Handles displaying the quiz for a specific course.
+     *
+     * @param courseId The ID of the course for which the quiz is requested.
+     * @param model    The model to add attributes to.
+     * @return The view name for displaying the quiz.
+     */
     @GetMapping("/quiz")
     public String getQuiz(@RequestParam int courseId, Model model) {
         Course course = courseRepository.findCourseById(courseId);
@@ -51,6 +60,16 @@ public class QuizController {
         return "quiz";
     }
 
+    /**
+     * Handles completing and scoring a quiz.
+     *
+     * @param quiz       The submitted Quiz object containing user answers.
+     * @param result     The BindingResult to check for validation errors.
+     * @param courseId   The ID of the course for which the quiz is completed.
+     * @param model      The model to add attributes to.
+     * @param principal  The currently logged-in user.
+     * @return The view name for displaying the quiz results.
+     */
     @PostMapping("/completeQuiz")
     public String completeQuiz(@Valid @ModelAttribute("quiz") Quiz quiz, BindingResult result, @RequestParam int courseId, Model model, Principal principal) {
         Course course = courseRepository.findCourseById(courseId);

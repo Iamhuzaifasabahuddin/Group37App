@@ -19,10 +19,20 @@ public class CourseData {
     private final CourseRepository courseRepository;
     private UserRepository userRepository;
 
+    /**
+     * Constructor for CourseData.
+     *
+     * @param courseRepository The repository for managing Course entities.
+     */
     public CourseData(CourseRepository courseRepository) {
         this.courseRepository = courseRepository;
     }
 
+    /**
+     * Read data from a CSV file and save it to the CourseRepository.
+     *
+     * @param csvFilePath The path to the CSV file containing course data.
+     */
     public void readDataAndSaveToRepo(String csvFilePath) {
         try (BufferedReader br = new BufferedReader(new InputStreamReader(
                 new ClassPathResource(csvFilePath).getInputStream()))) {
