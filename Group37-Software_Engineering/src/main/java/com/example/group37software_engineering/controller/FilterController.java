@@ -79,10 +79,10 @@ public class FilterController {
                 model.addAttribute("courseList", coursesNotEnrolled);
             }
             else {
-                model.addAttribute("Courseerror", "No such course found!");
+                model.addAttribute("CourseError", "No such course found!");
             }
         } else {
-            model.addAttribute("Courseerror", "Please provide a search term.");
+            model.addAttribute("CourseError", "Please provide a search term.");
         }
         return "Course/courses";
     }

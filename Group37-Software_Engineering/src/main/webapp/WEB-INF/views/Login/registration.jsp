@@ -41,8 +41,8 @@
                 <br/>
 
                 <h2 style="font-family: DM Sans, sans-serif">Confirm Password:</h2>
-                <form:input path="confirmpassword" type="password" cssClass="form-input"/>
-                <form:errors path="confirmpassword" cssClass="error"/>
+                <form:input path="confirmPassword" type="password" cssClass="form-input"/>
+                <form:errors path="confirmPassword" cssClass="error"/>
                 <br/>
                 <br/>
 

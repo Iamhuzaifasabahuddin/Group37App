@@ -86,7 +86,7 @@ public class CourseController {
      * @param principal The currently logged-in user.
      * @return The view name of the user dashboard.
      */
-    @RequestMapping("/starttime")
+    @RequestMapping("/startTime")
     public String getStartTime(@RequestParam int courseId, Principal principal) {
         MyUser user = userRepository.findByUsername(principal.getName());
         Course course = courseRepository.findCourseById(courseId);

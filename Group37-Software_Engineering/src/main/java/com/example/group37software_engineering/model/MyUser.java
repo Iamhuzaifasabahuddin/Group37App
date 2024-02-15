@@ -3,7 +3,6 @@ package com.example.group37software_engineering.model;
 
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -20,7 +19,7 @@ public class MyUser {
     private String email;
 
     @Transient
-    private String confirmpassword;
+    private String confirmPassword;
 
     private Integer points=0;
 
@@ -75,12 +74,12 @@ public class MyUser {
         this.lastname = lastname;
     }
 
-    public String getConfirmpassword() {
-        return confirmpassword;
+    public String getConfirmPassword() {
+        return confirmPassword;
     }
 
-    public void setConfirmpassword(String confirmpassword) {
-        this.confirmpassword = confirmpassword;
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
 
     public Integer getPoints() {

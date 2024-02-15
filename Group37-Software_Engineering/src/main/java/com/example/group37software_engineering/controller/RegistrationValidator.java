@@ -126,14 +126,14 @@ public class RegistrationValidator implements Validator {
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "lastname", "", "Last Name cannot be empty!");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "firstname", "", "First Name cannot be empty!");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "", "Password cannot be empty!");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "confirmpassword", "", "Password cannot be empty!");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "confirmPassword", "", "Password cannot be empty!");
 
         if (user.getPassword().length() < 8 || user.getPassword().length() > 32) {
             errors.rejectValue("password", "", "Password must be between 8 and 32 characters");
         }
 
-        if(!Objects.equals(user.getPassword(), user.getConfirmpassword())){
-            errors.rejectValue("confirmpassword", "", "Passwords do not match!");
+        if(!Objects.equals(user.getPassword(), user.getConfirmPassword())){
+            errors.rejectValue("confirmPassword", "", "Passwords do not match!");
         }
         if(user.getUsername().length() < 4 || user.getUsername().length() > 20){
             errors.rejectValue("username", "", "Username should be in between 4 and 20");

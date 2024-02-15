@@ -79,7 +79,7 @@
                             <button class="button-completed" disabled>Completed</button>
                         </c:if>
                         <c:if test="${empty course.startTime and empty course.startDate}">
-                            <form id="getStartedForm" action="/starttime">
+                            <form id="getStartedForm" action="/startTime">
                                 <input type="hidden" name="courseId" value="${course.getCourse().id}">
                                 <button type="submit" onclick="openLinkAndSubmit('${course.getCourse().link}')">Get started</button>
                             </form>

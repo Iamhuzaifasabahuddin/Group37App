@@ -62,8 +62,8 @@
 
 <section>
     <div class="course-message-container">
-        <c:if test="${not empty Courseerror}">
-            <h2 id="course-error-message" class="course-error-message">${Courseerror}</h2>
+        <c:if test="${not empty CourseError}">
+            <h2 id="course-error-message" class="course-error-message">${CourseError}</h2>
         </c:if>
     </div>
     <div class="courses">
