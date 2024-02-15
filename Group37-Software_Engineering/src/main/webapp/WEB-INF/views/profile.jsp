@@ -17,7 +17,7 @@
             <li><a href="/dashboard">Dashboard</a></li>
             <li><a href="/courses">Courses</a></li>
             <li><a href="#">Friends</a></li>
-            <li><a href="#">Leaderboard</a></li>
+            <li><a href="/leaderboard">Leaderboard</a></li>
             <li><a href="/logout">Logout</a></li>
         </ul>
     </nav>
@@ -27,7 +27,7 @@
 
     <!-- The image is a random avatar i found on the web, currently working on the API -->
 
-    <img src="https://www.pngall.com/wp-content/uploads/12/Avatar-Profile-PNG-Image-File.png" alt="Personal Information Image" class="personal-info-image"/>
+    <img src="https://png2.cleanpng.com/sh/3a912fcfc1f3f232ef993c93a9ac6e0b/L0KzQYq3UcI2N6JtfZH0aYP2gLBuTgZma6V0ip9wcnHzeLrqk71kd551jeZucj3sc7F1k71kdJp1RdN7dD3sfbLuhb1xd6N5RadsNHK7dYK9UcJla2o7RqYBNki8QYi8UcU1QGU6TaY9NkC6R4S1kP5o/kisspng-vector-graphics-computer-icons-clip-art-image-port-5c4b8e1612dc96.4668917515484554460773.png" alt="Personal Information Image" class="personal-info-image"/>
 
     <h1>Personal Information</h1>
 
