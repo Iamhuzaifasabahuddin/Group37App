@@ -63,11 +63,11 @@ public class QuizController {
     /**
      * Handles completing and scoring a quiz.
      *
-     * @param quiz       The submitted Quiz object containing user answers.
-     * @param result     The BindingResult to check for validation errors.
-     * @param courseId   The ID of the course for which the quiz is completed.
-     * @param model      The model to add attributes to.
-     * @param principal  The currently logged-in user.
+     * @param quiz      The submitted Quiz object containing user answers.
+     * @param result    The BindingResult to check for validation errors.
+     * @param courseId  The ID of the course for which the quiz is completed.
+     * @param model     The model to add attributes to.
+     * @param principal The currently logged-in user.
      * @return The view name for displaying the quiz results.
      */
     @PostMapping("/completeQuiz")

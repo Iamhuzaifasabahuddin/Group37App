@@ -1,4 +1,5 @@
 package com.example.group37software_engineering.controller;
+
 import com.example.group37software_engineering.model.Course;
 import com.example.group37software_engineering.model.MyUser;
 import com.example.group37software_engineering.model.UserCourses;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import java.security.Principal;
 import java.util.List;
 
@@ -31,6 +33,7 @@ public class LoginController {
 
     @Autowired
     private UserCourseRepository userCourseRepository;
+
     /**
      * Display the login form.
      *
@@ -61,6 +64,7 @@ public class LoginController {
         model.addAttribute("error", "Invalid Credentials!");
         return "Login/login";
     }
+
     /**
      * Handle successful login and redirect to the dashboard.
      *

@@ -77,8 +77,7 @@ public class FilterController {
                     }
                 }
                 model.addAttribute("courseList", coursesNotEnrolled);
-            }
-            else {
+            } else {
                 model.addAttribute("CourseError", "No such course found!");
             }
         } else {

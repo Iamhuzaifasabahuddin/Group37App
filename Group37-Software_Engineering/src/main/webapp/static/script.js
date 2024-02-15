@@ -1,7 +1,8 @@
+/* Colour change listener */
 function changeHues() {
     const cards = document.querySelectorAll(".card");
     const categories = ["ARTIFICIAL INTELLIGENCE", "CLOUD", "DATA SCIENCE", "CYBERSECURITY", "SUSTAINABILITY"];
-    const angles = [145, 180, 215, 250,  285].reverse();
+    const angles = [145, 180, 215, 250, 285].reverse();
     cards.forEach(card => {
         const category = card.querySelector(".category").textContent;
         const angle = angles[categories.indexOf(category.toUpperCase())];
@@ -9,6 +10,7 @@ function changeHues() {
     });
 }
 
+/* Pop up box for enrolment */
 function showConfirmationBox(id, title) {
     document.querySelector(".confirmation-background").style.display = "flex";
     document.querySelector(".input-course-id").value = id;
@@ -19,10 +21,10 @@ function closeConfirmationBox() {
     document.querySelector(".confirmation-background").style.display = "none";
 }
 
-window.onload = function() {
+window.onload = function () {
     var errorElement = document.getElementById('error-message');
     if (errorElement) {
-        setTimeout(function() {
+        setTimeout(function () {
             errorElement.style.display = 'none';
         }, 5000);
     }
@@ -31,7 +33,7 @@ window.onload = function() {
 };
 
 var prevScrollpos = window.pageYOffset;
-window.onscroll = function() {
+window.onscroll = function () {
     var currentScrollPos = window.pageYOffset;
     if (prevScrollpos > currentScrollPos) {
         document.getElementById("navbar").style.top = "0";
@@ -41,15 +43,18 @@ window.onscroll = function() {
     prevScrollpos = currentScrollPos;
 }
 
+/* message display */
 var messageElement = document.getElementById("message");
-setTimeout(function() {
+setTimeout(function () {
     messageElement.style.display = "none";
 }, 5000);
 
 var errorMessageElement = document.getElementById("error-message");
-setTimeout(function() {
+setTimeout(function () {
     errorMessageElement.style.display = "none";
 }, 5000);
+
+/* Course Quiz and Start and End Time */
 function openLinkAndSubmit(courseLink) {
     window.open(courseLink, '_blank');
     document.getElementById('getStartedForm').submit();
@@ -77,3 +82,14 @@ function displayQuizScore() {
     }, 25);
 }
 
+
+/* loading */
+
+document.addEventListener("DOMContentLoaded", function () {
+    var loadingOverlay = document.querySelector('.loading-overlay');
+    loadingOverlay.style.display = 'flex';
+
+    setTimeout(function () {
+        loadingOverlay.style.display = 'none';
+    }, 1000);
+});

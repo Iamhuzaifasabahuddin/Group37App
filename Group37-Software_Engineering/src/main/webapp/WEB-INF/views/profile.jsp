@@ -13,7 +13,7 @@
     <div class="IBM_SkillsBuild">IBM Skills Build</div>
     <nav class="navbar">
         <ul>
-            <li><a href="/profile">Profile</a> </li>
+            <li><a href="/profile">Profile</a></li>
             <li><a href="/dashboard">Dashboard</a></li>
             <li><a href="/courses">Courses</a></li>
             <li><a href="#">Friends</a></li>
@@ -27,8 +27,8 @@
 
     <!-- The image is a random avatar i found on the web, currently working on the API -->
 
-    <img src="https://png2.cleanpng.com/sh/3a912fcfc1f3f232ef993c93a9ac6e0b/L0KzQYq3UcI2N6JtfZH0aYP2gLBuTgZma6V0ip9wcnHzeLrqk71kd551jeZucj3sc7F1k71kdJp1RdN7dD3sfbLuhb1xd6N5RadsNHK7dYK9UcJla2o7RqYBNki8QYi8UcU1QGU6TaY9NkC6R4S1kP5o/kisspng-vector-graphics-computer-icons-clip-art-image-port-5c4b8e1612dc96.4668917515484554460773.png" alt="Personal Information Image" class="personal-info-image"/>
-
+    <img src="https://png2.cleanpng.com/sh/3a912fcfc1f3f232ef993c93a9ac6e0b/L0KzQYq3UcI2N6JtfZH0aYP2gLBuTgZma6V0ip9wcnHzeLrqk71kd551jeZucj3sc7F1k71kdJp1RdN7dD3sfbLuhb1xd6N5RadsNHK7dYK9UcJla2o7RqYBNki8QYi8UcU1QGU6TaY9NkC6R4S1kP5o/kisspng-vector-graphics-computer-icons-clip-art-image-port-5c4b8e1612dc96.4668917515484554460773.png"
+         alt="Personal Information Image" class="personal-info-image"/>
     <h1>Personal Information</h1>
 
     <form class="registration">
@@ -41,8 +41,8 @@
         <label for="email">Email address</label>
         <input type="email" id="email" class="form-input" name="email" value="${user.email}" readonly>
 
-<%--        <label for="confirmEmail">Confirm email address *</label>--%>
-<%--        <input type="email" id="confirmEmail" class="form-input" name="confirmEmail" value="${user.email}" readonly>--%>
+        <%--        <label for="confirmEmail">Confirm email address *</label>--%>
+        <%--        <input type="email" id="confirmEmail" class="form-input" name="confirmEmail" value="${user.email}" readonly>--%>
 
         <div class="form-input">
             <strong>Username:</strong> ${user.username}
@@ -63,7 +63,7 @@
             <strong>Hours Left:</strong> ${Hours}
         </div>
 
-<%--        <input type="submit" class="submit-button" value="Save My Information">--%>
+        <%--        <input type="submit" class="submit-button" value="Save My Information">--%>
     </form>
 </div>
 </body>

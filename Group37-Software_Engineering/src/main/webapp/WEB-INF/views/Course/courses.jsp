@@ -11,7 +11,7 @@
     <div class="IBM_SkillsBuild">IBM Skills Build</div>
     <nav class="navbar">
         <ul>
-            <li><a href="/profile">Profile</a> </li>
+            <li><a href="/profile">Profile</a></li>
             <li><a href="/dashboard">Dashboard</a></li>
             <li><a href="/courses">Courses</a></li>
             <li><a href="#">Friends</a></li>
@@ -21,6 +21,9 @@
     </nav>
 </header>
 <body class="coursesBackground">
+<div class="loading-overlay">
+    <div class="loading-spinner"></div>
+</div>
 <br/>
 <h1 class="Welcome">Welcome, ${user.username}!</h1>
 <br/>
@@ -80,7 +83,9 @@
                         <p class="divider">|</p>
                         <p>${Math.round(course.getDuration()) * 100} points</p>
                     </div>
-                    <button class="button-enroll" onclick="showConfirmationBox(${course.id}, `${course.getTitle()}`)">Enroll</button>
+                    <button class="button-enroll" onclick="showConfirmationBox(${course.id}, `${course.getTitle()}`)">
+                        Enroll
+                    </button>
                 </div>
             </div>
         </c:forEach>

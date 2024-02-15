@@ -55,6 +55,7 @@ public class Group37SoftwareEngineeringApplication implements CommandLineRunner 
 //        courseData.readDataAndSaveToRepo("courses_data.csv");
 //        questionsData.importQuestionsFromCSV("questions.csv");
     }
+
     @Bean
     public ErrorPageRegistrar errorPageRegistrar() {
         return registry -> {

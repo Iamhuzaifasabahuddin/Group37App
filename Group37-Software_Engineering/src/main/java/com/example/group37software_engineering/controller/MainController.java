@@ -204,6 +204,12 @@ public class MainController {
         return remainingHours;
     }
 
+    /**
+     * Retrieves the rank of a user based on their username.
+     *
+     * @param username The username of the user whose rank is to be retrieved.
+     * @return The rank of the user if found, or null if the user is not found in the leaderboard.
+     */
     private Integer getRank(String username){
         List<MyUser> myUsers = StreamSupport.stream(userRepository.findAll().spliterator(), false)
                 .sorted(Comparator.comparingDouble(MyUser::getPoints).reversed())

@@ -26,6 +26,7 @@ public class SecurityConfig {
 
     @Autowired
     private UserDetailsService userDetailsService;
+
     /**
      * Create a builder for MvcRequestMatcher.
      *
@@ -55,6 +56,11 @@ public class SecurityConfig {
                         .requestMatchers(mvc.pattern("/filter")).hasAnyRole("NORMAL", "ADMIN")
                         .requestMatchers(mvc.pattern("/search")).hasAnyRole("NORMAL", "ADMIN")
                         .requestMatchers(mvc.pattern("/duration")).hasAnyRole("NORMAL", "ADMIN")
+                        .requestMatchers(mvc.pattern("/quiz")).hasAnyRole("NORMAL", "ADMIN")
+                        .requestMatchers(mvc.pattern("/leaderboard")).hasAnyRole("NORMAL", "ADMIN")
+                        .requestMatchers(mvc.pattern("/startTime")).hasAnyRole("NORMAL", "ADMIN")
+                        .requestMatchers(mvc.pattern("/enroll")).hasAnyRole("NORMAL", "ADMIN")
+                        .requestMatchers(mvc.pattern("/completeQuiz")).hasAnyRole("NORMAL", "ADMIN")
                         .requestMatchers(mvc.pattern("/NewUser")).permitAll()
                         .requestMatchers(mvc.pattern("/AddUser")).permitAll()
                         .requestMatchers(mvc.pattern(("/**"))).permitAll()
