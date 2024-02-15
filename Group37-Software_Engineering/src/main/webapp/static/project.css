@@ -11,6 +11,7 @@
     --primary-lighter: hsl(var(--hue) 75% 85%);
     --primary-light: hsl(var(--hue) 75% 77.5%);
     --primary-dark: hsl(var(--hue) 35% 20%);
+    --primary-darker: hsl(var(--hue) 35% 10%);
 
     /*secondary colours for text*/
     --secondary-dark: hsl(var(--complement) 15% 15%);
@@ -45,30 +46,33 @@ input {
 
 /* Login */
 
-.ibm-logo {
-    display: flex;
-
-}
 .form-input {
     width: 40%;
     padding: 10px;
     margin-bottom: 10px;
-    border-radius: 4px;
+    /*border-radius: 4px;*/
 }
 
 .login-input{
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
-    border: 1px solid var(--primary-dark);
-    border-radius: 4px;
-    background-color: var(--primary-lighter);
+    /*border: 1px solid var(--primary-dark);*/
+    /*border-radius: 4px;*/
+    background-color: var(--primary-lightest);
 }
 
-.login-oauth form p {
+.container form p {
     font-weight: bolder;
     font-size: 175%;
     text-align: center;
+}
+
+.page {
+
+    display: flex;
+    flex-flow: row;
+
 }
 
 .submit-button {
@@ -116,6 +120,11 @@ p {
     /*background-size: cover;*/
 }
 
+.ibm-text {
+
+    width: 100%;
+
+}
 
 .container{
     display: flex;
@@ -125,23 +134,60 @@ p {
     justify-content: center;
     position: absolute;
     top: 50%;
-    left: 50%;
+    left: 73%;
     transform: translate(-50%, -50%);
     margin: 0 auto;
-    padding: 2% 2% 20px 40px;
-    border: 1px solid var(--primary-dark);
-    border-radius: 20px;
-    background-color: var(--primary-light);
+    padding: 2%;
     max-width: 700px;
     min-width: 400px;
 }
 
-.logo {
-    width: 100%;
-    max-width: 60%;
-    padding: 20px;
-    height: auto;
+.slant {
+    position: relative;
+    display: contents;
+    padding: 1em 5em 1em 1em;
+    overflow: hidden;
+    color: #fff;
 }
+
+.slant:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    background-color: var(--primary-darker);
+    -webkit-transform-origin: 100% 0;
+    -ms-transform-origin: 100% 0;
+    transform-origin: 100% 0;
+    -webkit-transform: skew(-45deg);
+    -ms-transform: skew(-45deg);
+    transform: skew(-10deg);
+    z-index: -1;
+}
+
+.ibm-logo {
+
+    margin: 20px;
+    display: flex;
+    flex-flow: column;
+    color: var(--secondary-light);
+    font-weight: bold;
+    font-family: "DM Sans", sans-serif;
+    max-width: 40px;
+    max-height: 40px;
+
+}
+
+.ibm {
+
+    height: 50%;
+    width: 250%;
+
+}
+
+
 
 .logo2 {
     width: 40%;
@@ -457,6 +503,8 @@ li a {
 
 .course-message-container {
     display: flex;
+    flex-flow: column;
+    left: 73%;
     justify-content: center;
     align-items: center;
     margin-top:2%;
@@ -464,12 +512,20 @@ li a {
 
 /* Registrations */
 .registration form{
-    width: 80%;
+
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: left;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    left: 73%;
+    transform: translate(-50%, -50%);
+    margin: 0 auto;
+    padding: 2%;
     max-width: 700px;
-    padding: 20px;
-    border: 1px solid var(--primary-dark);
-    border-radius: 8px;
-    background-color: var(--primary-light);
+    min-width: 400px;
 }
 
 .registration {
@@ -490,7 +546,17 @@ li a {
 }
 
 .registration h2 {
-    font-weight: normal;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.registration p {
+
+    left:73%;
+    font-weight: bolder;
+    font-size: 175%;
+    text-align: center;
+
 }
 
 .registration input,
@@ -499,7 +565,6 @@ li a {
     padding: 8px;
     margin-bottom: 10px;
     box-sizing: border-box;
-    border: 2px solid var(--primary-dark);
 }
 
 /* Style for the Submit button */
@@ -740,5 +805,60 @@ button.cancel:hover {
 .buttons-option {
 
     display: none;
+
+}
+@media screen and (max-width: 768px) {
+
+    .slant {
+        display: none;
+    }
+
+    .login-small {
+
+        display: flex;
+        flex-flow: row;
+        padding: 20px;
+        width: 100%;
+        background-color: var(--primary-darker);
+        color: var(--secondary-light);
+
+    }
+
+    .login-small h1 {
+
+        padding-left: 12%;
+        padding-top: 2%;
+        font-size: 244%;
+
+    }
+
+    .container {
+
+        left: 50%;
+
+    }
+
+    .ibm {
+
+        height: 100%;
+
+    }
+
+    .registration form {
+
+        top: 70%;
+        left: 50%;
+
+    }
+
+}
+
+@media screen and (min-width: 768px) {
+
+    .login-small {
+
+        display: none;
+
+    }
 
 }

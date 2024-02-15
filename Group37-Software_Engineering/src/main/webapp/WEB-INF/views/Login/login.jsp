@@ -9,6 +9,29 @@
     <script src="static/script.js" defer></script>
 </head>
 <body class="login-background">
+<header class="login-small">
+    <div class="ibm-logo">
+        <img class="ibm" src="https://www.pngall.com/wp-content/uploads/2016/03/IBM-White-Logo-PNG.png" alt="IBM Logo">
+        <p>SkillsBuild</p>
+    </div>
+    <h1>Start learning with IBM.</h1>
+</header>
+<div class="page">
+<div class="slant">
+
+   <div class="ibm-logo">
+        <div class="ibm-sb">
+       <img class="ibm" src="https://www.pngall.com/wp-content/uploads/2016/03/IBM-White-Logo-PNG.png">
+            <p>SkillsBuild </p> </div>
+       </br> </br> </br> </br> </br> </br>
+       <div class="ibm-text">
+       <p style="font-size: 60px">Start</p>
+       <p style="font-size: 60px">Learning With</p>
+       <p style="font-size: 60px">IBM.</p>
+       </div></div>
+   </div>
+    
+
 
 <div class="container">
 
@@ -29,13 +52,13 @@
             <h3 id="error-message" >${error}</h3>
         </c:if>
         </div>
-        <input type="submit" value="Sign In" class="login-button" style="border-radius: 18px" /> <br/>
+        <input type="submit" value="Sign In" class="login-button"/> <br/>
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
     </form>
     <p style="text-align: center">New user? <a style="font-size: large" href="${pageContext.request.contextPath}/NewUser" class="link-style">Register here</a>.</p>
         </div>
 
-    <img class="logo"  src ="https://img1.wsimg.com/isteam/ip/6f5993eb-07fd-4e54-a10f-d1d3850f5f51/ibmskillsbuild-gmen.png/:/" alt="skills build logo">
+</div>
 </div>
 </body>
 </html>

@@ -6,12 +6,31 @@
         <link href="static/project.css" rel="stylesheet" type="text/css">
 </head>
 <body class="registration-background">
+<header class="login-small">
+        <div class="ibm-logo">
+                <img class="ibm" src="https://www.pngall.com/wp-content/uploads/2016/03/IBM-White-Logo-PNG.png" alt="IBM Logo">
+                <p>SkillsBuild</p>
+        </div>
+        <h1>Start learning with IBM.</h1>
+</header>
+<div class="page">
+        <div class="slant">
+
+                <div class="ibm-logo">
+                        <div class="ibm-sb">
+                                <img class="ibm" src="https://www.pngall.com/wp-content/uploads/2016/03/IBM-White-Logo-PNG.png">
+                                <p>SkillsBuild </p> </div>
+                        </br> </br> </br> </br> </br> </br>
+                        <div class="ibm-text">
+                                <p style="font-size: 60px">Start</p>
+                                <p style="font-size: 60px">Learning With</p>
+                                <p style="font-size: 60px">IBM.</p>
+                        </div></div>
+        </div>
         <div class="registration">
-                <img class="logo2"  src ="https://img1.wsimg.com/isteam/ip/6f5993eb-07fd-4e54-a10f-d1d3850f5f51/ibmskillsbuild-gmen.png/:/" alt="IBM logo">
-                <h1 style="font-family: DM Sans, sans-serif">Registration Form</h1>
-        <br/> <br>
         <form:form modelAttribute="user" action="/AddUser" method="post">
 
+                <p style="font-family: DM Sans, sans-serif">Register</p>
 
                 <h2 style="font-family: DM Sans, sans-serif">First Name: </h2>
                 <form:input path="firstname" cssClass="form-input"/>
@@ -50,6 +69,7 @@
 
             <input type="submit" value="Submit" class="submit-button" style="border-radius: 18px"/>
         </form:form>
+</div>
 </div>
 <br/>
 <br/>
