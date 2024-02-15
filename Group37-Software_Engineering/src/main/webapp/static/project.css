@@ -1007,6 +1007,12 @@ button.cancel:hover {
     border: 2px solid var(--primary-dark);
 }
 
+.leaderboard ol li:nth-child(1) mark::before,
+.leaderboard ol li:nth-child(1) mark::after {
+    border-top: 8px solid var(--primary-dark);
+    bottom: -9px;
+}
+
 .leaderboard ol li:nth-child(2) {
     background: #A8A9AD;
     /*background: var(--primary-lighter);*/
