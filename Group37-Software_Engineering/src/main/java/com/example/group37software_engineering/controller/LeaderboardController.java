@@ -23,7 +23,10 @@ public class LeaderboardController {
     public String getLeaderboard(Model model) {
         List<MyUser> myUsers = StreamSupport.stream(userRepository.findAll().spliterator(), false)
                 .sorted(Comparator.comparingDouble(MyUser::getPoints).reversed())
-                .toList().subList(0, 5);
+                .toList();
+        if (myUsers.size() > 5) {
+            myUsers = myUsers.subList(0, 5);
+        }
         model.addAttribute("Users", myUsers);
         return "leaderboard";
     }
