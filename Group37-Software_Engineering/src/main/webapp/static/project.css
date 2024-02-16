@@ -685,10 +685,13 @@ li a {
 .personal-info-image {
     display: block;
     width: 100px;
-    height: auto;
+    height: 100px;
     margin: 0 auto;
-    padding-bottom: 20px;
+    padding-bottom: 5px;
+    background-color: #ADD8E6;
+    border-radius: 50%;
 }
+
 
 
 /* Style for confirmation box */
