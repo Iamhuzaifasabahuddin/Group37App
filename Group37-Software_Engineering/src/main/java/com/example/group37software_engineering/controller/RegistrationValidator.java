@@ -57,17 +57,12 @@ public class RegistrationValidator implements Validator {
                 - Must not contain any spaces
         */
 
-        Object firstname = user.getFirstname();
-        Object lastname = user.getLastname();
-        if (!(firstname instanceof String)) {
-            errors.rejectValue("firstname", "", "First name should be a string!");
+        String firstname = user.getFirstname();
+        if (!firstname.matches("[A-Za-z]*")) {
+            errors.rejectValue("firstname", "", "First name should contain letters only!");
         }
 
-        if (!(lastname instanceof String)) {
-            errors.rejectValue("lastname", "", "First name should be a string!");
-        }
-
-        if (user.getFirstname().length() < 3 || user.getFirstname().length() > 15) {
+        if (firstname.length() < 3 || firstname.length() > 15) {
             errors.rejectValue("firstname", "", "First name must be between 3 to 15 characters");
         }
 
@@ -84,8 +79,12 @@ public class RegistrationValidator implements Validator {
                 - Must not contain any spaces
         */
 
+        String lastname = user.getLastname();
+        if (!lastname.matches("[A-Za-z]*")) {
+            errors.rejectValue("lastname", "", "Last name should contain letters only!");
+        }
 
-        if (user.getLastname().length() < 3 || user.getLastname().length() > 20) {
+        if (lastname.length() < 3 || lastname.length() > 20) {
             errors.rejectValue("lastname", "", "Last name must be between 3 to 20 characters");
         }
 
@@ -124,8 +123,8 @@ public class RegistrationValidator implements Validator {
 
         */
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "", "Email cannot be empty!");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "lastname", "", "Last Name cannot be empty!");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "firstname", "", "First Name cannot be empty!");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "lastname", "", "Last name cannot be empty!");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "firstname", "", "First name cannot be empty!");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "", "Password cannot be empty!");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "confirmPassword", "", "Password cannot be empty!");
 
@@ -137,11 +136,11 @@ public class RegistrationValidator implements Validator {
             errors.rejectValue("confirmPassword", "", "Passwords do not match!");
         }
         if (user.getUsername().length() < 4 || user.getUsername().length() > 20) {
-            errors.rejectValue("username", "", "Username should be in between 4 and 20");
+            errors.rejectValue("username", "", "Username must be between 4 and 20 characters");
         }
 
         if (!user.getEmail().matches("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$")) {
-            errors.rejectValue("email", "", "Invalid email pattern! e.g example@example.com");
+            errors.rejectValue("email", "", "Invalid email pattern! e.g. example@example.com");
         }
 
 

@@ -11,9 +11,9 @@
     <script src="static/script.js" defer></script>
 </head>
 <body>
-</br>
+<br>
 <h1 style="text-align: center">Quiz for ${name}</h1>
-</br>
+<br>
 <div class="quiz-container">
     <form:form action="/completeQuiz" modelAttribute="quiz" id="quizForm">
         <form:hidden path="id" value="${courseQuiz.getId()}"></form:hidden>

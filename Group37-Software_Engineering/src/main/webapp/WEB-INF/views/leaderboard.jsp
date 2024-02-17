@@ -18,30 +18,32 @@
             <li><a href="/profile">Profile</a></li>
             <li><a href="/dashboard">Dashboard</a></li>
             <li><a href="/courses">Courses</a></li>
-<%--            <li><a href="#">Friends</a></li>--%>
+            <%--            <li><a href="#">Friends</a></li>--%>
             <li><a href="/leaderboard">Leaderboard</a></li>
             <li><a href="/logout">Logout</a></li>
         </ul>
     </nav>
 </header>
 <body>
-<div class="leaderboard">
-    <h1>
-        <svg class="ico-cup">
-            <use xlink:href="#cup"></use>
-        </svg>
-        Leaderboard
-    </h1>
-    <ol>
-        <c:forEach items="${Users}" var="user" varStatus="status">
-            <li>
-                <mark>${fn:toUpperCase(user.username)}</mark>
-                <small>${user.points}</small>
-            </li>
+<div class="container-center">
+    <div class="leaderboard">
+        <h1>
+            <svg class="ico-cup">
+                <use xlink:href="#cup"></use>
+            </svg>
+            Leaderboard
+        </h1>
+        <ol>
+            <c:forEach items="${Users}" var="user" varStatus="status">
+                <li>
+                    <mark>${fn:toUpperCase(user.username)}</mark>
+                    <small>${user.points}</small>
+                </li>
 
-        </c:forEach>
+            </c:forEach>
 
-    </ol>
+        </ol>
+    </div>
 </div>
 <svg style="display: none;">
     <symbol id="cup" x="0px" y="0px" width="50px" height="50px" viewBox="0 0 25 26" enable-background="new 0 0 25 26"

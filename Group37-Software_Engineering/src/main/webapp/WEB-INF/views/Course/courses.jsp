@@ -14,7 +14,7 @@
             <li><a href="/profile">Profile</a></li>
             <li><a href="/dashboard">Dashboard</a></li>
             <li><a href="/courses">Courses</a></li>
-<%--            <li><a href="#">Friends</a></li>--%>
+            <%--<li><a href="#">Friends</a></li>--%>
             <li><a href="/leaderboard">Leaderboard</a></li>
             <li><a href="/logout">Logout</a></li>
         </ul>
@@ -24,9 +24,7 @@
 <div class="loading-overlay">
     <div class="loading-spinner"></div>
 </div>
-<br/>
 <h1 class="Welcome">Welcome, ${user.username}!</h1>
-<br/>
 <br/>
 <div class="filter_container">
     <form action="${pageContext.request.contextPath}/filter" method="get" id="filterForm">
