@@ -25,6 +25,7 @@
     </nav>
 </header>
 <body>
+<div class="container-center">
 <div class="leaderboard">
     <h1>
         <svg class="ico-cup">
@@ -42,6 +43,7 @@
         </c:forEach>
 
     </ol>
+</div>
 </div>
 <svg style="display: none;">
     <symbol id="cup" x="0px" y="0px" width="50px" height="50px" viewBox="0 0 25 26" enable-background="new 0 0 25 26"

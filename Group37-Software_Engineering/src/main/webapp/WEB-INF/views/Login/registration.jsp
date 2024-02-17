@@ -6,6 +6,7 @@
         <link href="static/project.css" rel="stylesheet" type="text/css">
 </head>
 <body class="registration-background">
+<div class="slant"></div>
 <div class="page">
 <header class="login-small">
         <div class="ibm-logo">
@@ -15,23 +16,21 @@
         <h1>Start learning with IBM.</h1>
 </header>
 
-        <div class="slant">
-
+        <div class="ibm-sb">
                 <div class="ibm-logo">
-                        <div class="ibm-sb">
-                                <img class="ibm" src="https://www.pngall.com/wp-content/uploads/2016/03/IBM-White-Logo-PNG.png">
-                                <p>SkillsBuild </p> </div>
-                        <div class="ibm-text">
-                                <p style="font-size: 60px">Start</p>
-                                <p style="font-size: 60px">Learning</p>
-                                <p style="font-size: 60px">With</p>
-                                <p style="font-size: 60px">IBM.</p>
-                        </div></div>
+                        <img class="ibm" src="https://www.pngall.com/wp-content/uploads/2016/03/IBM-White-Logo-PNG.png">
+                        <p>SkillsBuild </p> </div>
+                <div class="ibm-text">
+                        <p style="font-size: 60px">Start</p>
+                        <p style="font-size: 60px">Learning</p>
+                        <p style="font-size: 60px">With</p>
+                        <p style="font-size: 60px">IBM.</p>
+                </div>
         </div>
+
         <div class="registration">
         <form:form modelAttribute="user" action="/AddUser" method="post">
 
-            </br>
 
                 <p style="font-family: DM Sans, sans-serif">Register</p>
 
@@ -69,8 +68,5 @@
         </form:form>
 </div>
 </div>
-<br/>
-<br/>
-<br/>
 </body>
 </html>

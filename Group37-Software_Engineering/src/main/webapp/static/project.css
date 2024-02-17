@@ -29,7 +29,7 @@
 }
 
 * {
-    box-sizing: secondary-light-box;
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
     font-family: "DM Sans", sans-serif;
@@ -44,12 +44,18 @@ input {
     background-color: var(--primary-lighter);
 }
 
+.container-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 /* Login */
 
 .form-input {
     width: 40%;
     padding: 10px;
-    margin-bottom: 10px;
+    /*margin-bottom: 10px;*/
     /*border-radius: 4px;*/
 }
 
@@ -113,22 +119,33 @@ p {
     /*background-size: cover;*/
 }
 
-.ibm-text {
+.page {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    min-height: 100vh;
+    height: 100%;
+    width: 100%;
+    /*background: linear-gradient(to bottom right, var(--primary-darker) 50%, var(--primary-lighter) 50%)*/
+}
 
+.ibm-text {
+    color: var(--secondary-light);
     display: flex;
     flex: 1;
     flex-direction: column;
-    align-items: left;
     justify-content: center;
-    position: absolute;
-    left: 0;
-    top: 48%;
-    transform: translate(-50%, -50%);
-    margin: 0 auto;
-    padding: 2%;
+    /*position: absolute;*/
+    /*left: 0;*/
+    /*top: 48%;*/
+    /*transform: translate(-50%, -50%);*/
+    /*margin: 0 auto;*/
+    margin-top: 30px;
+    padding: 20px;
     max-width: 700px;
     min-width: 400px;
-    padding-left: 300px;
+    /*padding-left: 300px;*/
+    font-weight: bold;
 
 }
 
@@ -138,25 +155,25 @@ p {
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    position: absolute;
-    top: 50%;
-    left: 73%;
-    transform: translate(-50%, -50%);
-    margin: 0 auto;
+    /*position: absolute;*/
+    /*top: 50%;*/
+    /*left: 73%;*/
+    /*transform: translate(-50%, -50%);*/
+    /*margin: 0 auto;*/
     padding: 2%;
-    max-width: 700px;
+    max-width: 50%;
     min-width: 400px;
 }
 
-.slant {
-    position: relative;
-    display: contents;
-    padding: 1em 5em 1em 1em;
-    overflow: hidden;
-    color: #fff;
-}
+/*.slant {*/
+/*    !*position: relative;*!*/
+/*    display: contents;*/
+/*    padding: 1em 5em 1em 1em;*/
+/*    overflow: hidden;*/
+/*    color: #fff;*/
+/*}*/
 
-.slant:after {
+.slant:before {
     content: '';
     position: fixed;
     top: 0;
@@ -175,22 +192,29 @@ p {
 
 .ibm-logo {
 
-    margin: 20px;
+    padding: 20px;
     display: flex;
+    width: 50%;
     flex-flow: column;
     color: var(--secondary-light);
     font-weight: bold;
     font-family: "DM Sans", sans-serif;
-    max-width: 40px;
-    max-height: 40px;
+    text-align: left;
+    /*max-width: 40px;*/
+    /*max-height: 40px;*/
 
 }
 
-.ibm {
+/*.ibm {*/
 
-    height: 50%;
-    width: 250%;
+/*    height: 50%;*/
+/*    width: 250%;*/
 
+/*}*/
+
+img.ibm {
+    width: 100px;
+    height: auto;
 }
 
 
@@ -202,10 +226,33 @@ p {
 }
 
 .login-oauth {
-    max-width: 80%;
-    flex-grow: 1;
-    padding-left: 2%;
-    flex-wrap: wrap;
+    /*max-width: 80%;*/
+    /*flex-grow: 1;*/
+    /*padding-left: 2%;*/
+    /*flex-wrap: wrap;*/
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 400px;
+    width: 50%;
+    padding: 2%;
+    /*max-width: 800px;*/
+    /*margin: 0 auto;*/
+}
+
+.login-oauth form {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    /*position: absolute;*/
+    /*top: 50%;*/
+    /*left: 73%;*/
+    /*transform: translate(-50%, -50%);*/
+    /*margin: 0 auto;*/
+    min-width: 300px;
 }
 
 .container label {
@@ -229,7 +276,6 @@ p {
     width: 100%;
     padding: 8px;
     margin-bottom: 10px;
-    box-sizing: border-box;
 }
 
 /* Style for the Submit button */
@@ -285,6 +331,7 @@ li a {
     justify-content: space-between;
     align-items: center;
     padding: 20px 2%;
+    margin-bottom: 20px;
 }
 
 .IBM_SkillsBuild {
@@ -491,8 +538,8 @@ li a {
 
 /* Welcome */
 .Welcome {
-    padding-top: 10px;
-    padding-bottom: 10px;
+    /*padding-top: 10px;*/
+    /*padding-bottom: 10px;*/
     text-align: center;
     text-transform: capitalize;
     font-size: 60px;
@@ -532,16 +579,13 @@ li a {
     display: flex;
     flex: 1;
     flex-direction: column;
-    align-items: left;
     justify-content: center;
-    position: absolute;
-    top: 50%;
-    left: 73%;
-    transform: translate(-50%, -50%);
-    margin: 0 auto;
-    padding: 2%;
-    max-width: 700px;
-    min-width: 400px;
+    /*position: absolute;*/
+    /*top: 50%;*/
+    /*left: 73%;*/
+    /*transform: translate(-50%, -50%);*/
+    /*margin: 0 auto;*/
+    min-width: 300px;
 }
 
 .registration {
@@ -550,8 +594,10 @@ li a {
     align-items: center;
     justify-content: center;
     min-width: 400px;
-    max-width: 800px;
-    margin: 0 auto;
+    width: 50%;
+    padding: 2%;
+    /*max-width: 800px;*/
+    /*margin: 0 auto;*/
 }
 
 .registration h1 {
@@ -580,7 +626,6 @@ li a {
     width: 100%;
     padding: 8px;
     margin-bottom: 10px;
-    box-sizing: border-box;
     background-color: var(--primary-lightest);
 }
 
@@ -598,13 +643,13 @@ li a {
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    position: absolute;
-    top: 55%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    /*position: absolute;*/
+    /*top: 55%;*/
+    /*left: 50%;*/
+    /*transform: translate(-50%, -50%);*/
     width: fit-content;
     height: fit-content;
-    padding: 5px;
+    /*padding: 5px;*/
     border: 2px solid var(--primary-dark);
     border-radius: 20px;
     background-color: var(--primary-light);
@@ -617,18 +662,18 @@ li a {
 
 .container-profile h1 {
     text-align: center;
-    padding-top: 20px;
+    padding: 20px;
     font-size: 24px;
     font-weight: bold;
-    margin-bottom: 30px;
-    margin-right: 20px;
+    /*margin-bottom: 30px;*/
+    /*margin-right: 20px;*/
 }
 
 .container-profile form.registration {
     width: 100%;
     padding: 15px;
-    border: 2px solid var(--primary-dark);
-    border-radius: 18px;
+    border-left: 2px solid var(--primary-dark);
+    border-radius: 0 20px 20px 0;
     background-color: var(--primary-light);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     display: flex;
@@ -659,7 +704,7 @@ li a {
 
 .container-profile form.registration .form-input {
     width: auto;
-    margin-bottom: 15px;
+    /*margin-bottom: 15px;*/
 }
 
 .container-profile form.registration input[type=text],
@@ -694,7 +739,7 @@ li a {
     height: 100px;
     margin: 0 auto;
     padding-bottom: 5px;
-    background-color: #ADD8E6;
+    /*background-color: #ADD8E6;*/
     border-radius: 50%;
 }
 
@@ -891,19 +936,12 @@ button.cancel:hover {
 
 
 /* Leaderboard */
-
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
-}
-
-
 .leaderboard {
-    position: absolute;
-    top: 55%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    /*position: absolute;*/
+    /*top: 55%;*/
+    /*left: 50%;*/
+    /*transform: translate(-50%, -50%);*/
+    margin-top: 30px;
     width: 500px;
     height: 400px;
     background: var(--primary-dark);
@@ -1172,15 +1210,31 @@ button.cancel:hover {
 
 @media screen and (max-width: 800px) {
 
-    .slant {
+    .ibm-sb {
         display: none;
+    }
+
+    .registration {
+        width: 100%;
+    }
+
+    .ibm-logo {
+        height: 40px;
+        width: auto;
+        padding: 0;
+    }
+
+    .page {
+        background: var(--primary-lighter);
+        flex-direction: column;
+        justify-content: flex-start;
     }
 
     .login-small {
 
         display: flex;
         flex-flow: row;
-        position: fixed;
+        /*position: fixed;*/
         top: 0;
         z-index: 1000;
         padding: 20px;
@@ -1188,12 +1242,13 @@ button.cancel:hover {
         background-color: var(--primary-darker);
         color: var(--secondary-light);
         text-align: center;
-
+        justify-content: flex-start;
     }
+
 
     .login-small h1 {
 
-        padding-left: 12%;
+        padding-left: 6%;
         align-self: center;
         font-size: 244%;
 
@@ -1201,94 +1256,90 @@ button.cancel:hover {
 
     .container {
 
-        left: 50%;
         display: flex;
+        max-width: 100%;
 
     }
 
     .ibm {
-
         height: 100%;
-
     }
 
     .registration form {
-
-        top: 70%;
-        left: 50%;
-
-    }
-
-}
-
-@media screen and (max-height: 600px) {
-
-    .slant {
-        display: none;
-    }
-
-    .login-small {
-
-        display: flex;
-        flex-flow: row;
-        position: fixed;
-        top: 0;
-        z-index: 1000;
-        padding: 20px;
-        width: 100%;
-        background-color: var(--primary-darker);
-        color: var(--secondary-light);
-        text-align: center;
-
-    }
-
-    .login-small h1 {
-
-        padding-left: 12%;
-        align-self: center;
-        font-size: 244%;
-
-    }
-
-    .container {
-
-        left: 50%;
-        flex: 1 1 auto;
-        overflow-y: scroll;
-
-    }
-
-    .ibm {
-
-        height: 100%;
-
-    }
-
-    .registration form {
-
         top: 70%;
         left: 50%;
         flex: 1 1 auto;
-        overflow-y: scroll;
-
     }
-
 }
 
-@media screen and (min-width: 800px) and (min-height: 600px) {
+/*@media screen and (max-height: 600px) {*/
+
+/*    .ibm-sb {*/
+/*        display: none;*/
+/*    }*/
+
+/*    .registration {*/
+/*        width: 100%;*/
+/*    }*/
+
+/*    .page {*/
+/*        background: var(--primary-lighter);*/
+/*        flex-direction: column;*/
+/*    }*/
+
+/*    .login-small {*/
+
+/*        display: flex;*/
+/*        flex-flow: row;*/
+/*        !*position: fixed;*!*/
+/*        top: 0;*/
+/*        z-index: 1000;*/
+/*        padding: 20px;*/
+/*        width: 100%;*/
+/*        background-color: var(--primary-darker);*/
+/*        color: var(--secondary-light);*/
+/*        text-align: center;*/
+/*        justify-content: flex-start;*/
+/*    }*/
+
+/*    .login-small h1 {*/
+
+/*        padding-left: 12%;*/
+/*        align-self: center;*/
+/*        font-size: 244%;*/
+
+/*    }*/
+
+/*    .container {*/
+
+/*        left: 50%;*/
+/*        flex: 1 1 auto;*/
+/*        overflow-y: scroll;*/
+
+/*    }*/
+
+/*    .ibm {*/
+
+/*        height: 100%;*/
+
+/*    }*/
+
+/*    .registration form {*/
+
+/*        top: 70%;*/
+/*        left: 50%;*/
+/*        flex: 1 1 auto;*/
+
+/*    }*/
+
+/*}*/
+
+@media screen and (min-width: 801px) {
 
     .login-small {
 
         display: none;
 
     }
-
-}
-
-.page {
-
-    display: flex;
-    flex-flow: column;
-    height: 100%;
 
 }

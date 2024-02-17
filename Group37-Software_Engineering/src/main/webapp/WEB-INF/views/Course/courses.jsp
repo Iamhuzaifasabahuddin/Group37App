@@ -24,9 +24,7 @@
 <div class="loading-overlay">
     <div class="loading-spinner"></div>
 </div>
-<br/>
 <h1 class="Welcome">Welcome, ${user.username}!</h1>
-<br/>
 <br/>
 <div class="filter_container">
     <form action="${pageContext.request.contextPath}/filter" method="get" id="filterForm">

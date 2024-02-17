@@ -8,7 +8,6 @@
     <link href="static/project.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-
 <header class="header">
     <div class="IBM_SkillsBuild">IBM Skills Build</div>
     <nav class="navbar">
@@ -22,14 +21,15 @@
         </ul>
     </nav>
 </header>
-
+<div class="container-center">
 <div class="container-profile">
 
+    <div>
+        <img src="https://eu.ui-avatars.com/api/?name=${(user.firstname)}+${(user.lastname)}&size=250"
+             alt="User Initials Image" class="personal-info-image"/>
 
-    <img src="https://eu.ui-avatars.com/api/?name=${(user.firstname)}+${(user.lastname)}&size=250"
-         alt="User Initials Image" class="personal-info-image"/>
-
-    <h1>Personal Information</h1>
+        <h1>Personal Information</h1>
+    </div>
 
     <form class="registration">
         <label for="firstName">First name</label>
@@ -65,6 +65,7 @@
 
         <%--        <input type="submit" class="submit-button" value="Save My Information">--%>
     </form>
+</div>
 </div>
 </body>
 </html>
