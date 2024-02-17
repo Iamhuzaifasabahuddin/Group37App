@@ -51,21 +51,20 @@ input {
 }
 
 /* Login */
-
 .form-input {
     width: 40%;
     padding: 10px;
-    /*margin-bottom: 10px;*/
-    /*border-radius: 4px;*/
 }
 
 .login-input {
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
-    /*border: 1px solid var(--primary-dark);*/
-    /*border-radius: 4px;*/
     background-color: var(--primary-lightest);
+}
+
+.login-small {
+    display: none;
 }
 
 .container form p {
@@ -82,7 +81,6 @@ input {
     border-radius: 4px;
     cursor: pointer;
 }
-
 
 .error {
     color: red;
@@ -105,20 +103,6 @@ p {
     font-size: 18px;
 }
 
-
-.login-background {
-    /*background-image: url("https://en.idei.club/uploads/posts/2023-06/thumbs/1687164636_en-idei-club-p-blue-technology-background-dizain-pinteres-53.jpg");*/
-    /*background-repeat: no-repeat;*/
-    /*background-size: cover;*/
-    background-color: var(--primary-lighter);
-}
-
-.registration-background {
-    /*background-image: url("https://en.idei.club/uploads/posts/2023-06/thumbs/1687164636_en-idei-club-p-blue-technology-background-dizain-pinteres-53.jpg");*/
-    /*background-repeat: no-repeat;*/
-    /*background-size: cover;*/
-}
-
 .page {
     display: flex;
     flex-flow: row;
@@ -126,7 +110,6 @@ p {
     min-height: 100vh;
     height: 100%;
     width: 100%;
-    /*background: linear-gradient(to bottom right, var(--primary-darker) 50%, var(--primary-lighter) 50%)*/
 }
 
 .ibm-text {
@@ -135,16 +118,10 @@ p {
     flex: 1;
     flex-direction: column;
     justify-content: center;
-    /*position: absolute;*/
-    /*left: 0;*/
-    /*top: 48%;*/
-    /*transform: translate(-50%, -50%);*/
-    /*margin: 0 auto;*/
     margin-top: 30px;
     padding: 20px;
     max-width: 700px;
     min-width: 400px;
-    /*padding-left: 300px;*/
     font-weight: bold;
 
 }
@@ -155,23 +132,10 @@ p {
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    /*position: absolute;*/
-    /*top: 50%;*/
-    /*left: 73%;*/
-    /*transform: translate(-50%, -50%);*/
-    /*margin: 0 auto;*/
     padding: 2%;
     max-width: 50%;
     min-width: 400px;
 }
-
-/*.slant {*/
-/*    !*position: relative;*!*/
-/*    display: contents;*/
-/*    padding: 1em 5em 1em 1em;*/
-/*    overflow: hidden;*/
-/*    color: #fff;*/
-/*}*/
 
 .slant:before {
     content: '';
@@ -191,7 +155,6 @@ p {
 }
 
 .ibm-logo {
-
     padding: 20px;
     display: flex;
     width: 50%;
@@ -200,24 +163,12 @@ p {
     font-weight: bold;
     font-family: "DM Sans", sans-serif;
     text-align: left;
-    /*max-width: 40px;*/
-    /*max-height: 40px;*/
-
 }
-
-/*.ibm {*/
-
-/*    height: 50%;*/
-/*    width: 250%;*/
-
-/*}*/
 
 img.ibm {
     width: 100px;
     height: auto;
 }
-
-
 
 .logo2 {
     width: 40%;
@@ -226,11 +177,6 @@ img.ibm {
 }
 
 .login-oauth {
-    /*max-width: 80%;*/
-    /*flex-grow: 1;*/
-    /*padding-left: 2%;*/
-    /*flex-wrap: wrap;*/
-
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -238,8 +184,6 @@ img.ibm {
     min-width: 400px;
     width: 50%;
     padding: 2%;
-    /*max-width: 800px;*/
-    /*margin: 0 auto;*/
 }
 
 .login-oauth form {
@@ -247,11 +191,6 @@ img.ibm {
     flex: 1;
     flex-direction: column;
     justify-content: center;
-    /*position: absolute;*/
-    /*top: 50%;*/
-    /*left: 73%;*/
-    /*transform: translate(-50%, -50%);*/
-    /*margin: 0 auto;*/
     min-width: 300px;
 }
 
@@ -355,7 +294,6 @@ li a {
 }
 
 .navbar li a:hover {
-    /*text-decoration: underline;*/
     border-bottom: 1px solid var(--accent-left-light);
     padding-bottom: 5px;
     color: var(--accent-left-light);
@@ -379,7 +317,7 @@ li a {
     background-color: var(--primary-light);
     border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.5);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -538,8 +476,6 @@ li a {
 
 /* Welcome */
 .Welcome {
-    /*padding-top: 10px;*/
-    /*padding-bottom: 10px;*/
     text-align: center;
     text-transform: capitalize;
     font-size: 60px;
@@ -575,16 +511,10 @@ li a {
 
 /* Registrations */
 .registration form{
-
     display: flex;
     flex: 1;
     flex-direction: column;
     justify-content: center;
-    /*position: absolute;*/
-    /*top: 50%;*/
-    /*left: 73%;*/
-    /*transform: translate(-50%, -50%);*/
-    /*margin: 0 auto;*/
     min-width: 300px;
 }
 
@@ -596,8 +526,6 @@ li a {
     min-width: 400px;
     width: 50%;
     padding: 2%;
-    /*max-width: 800px;*/
-    /*margin: 0 auto;*/
 }
 
 .registration h1 {
@@ -643,13 +571,8 @@ li a {
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    /*position: absolute;*/
-    /*top: 55%;*/
-    /*left: 50%;*/
-    /*transform: translate(-50%, -50%);*/
     width: fit-content;
     height: fit-content;
-    /*padding: 5px;*/
     border: 2px solid var(--primary-dark);
     border-radius: 20px;
     background-color: var(--primary-light);
@@ -665,8 +588,6 @@ li a {
     padding: 20px;
     font-size: 24px;
     font-weight: bold;
-    /*margin-bottom: 30px;*/
-    /*margin-right: 20px;*/
 }
 
 .container-profile form.registration {
@@ -704,7 +625,6 @@ li a {
 
 .container-profile form.registration .form-input {
     width: auto;
-    /*margin-bottom: 15px;*/
 }
 
 .container-profile form.registration input[type=text],
@@ -717,10 +637,10 @@ li a {
     width: 100%;
 }
 
-/*.container-profile form.registration input[type=text]:focus,*/
-/*.container-profile form.registration input[type=email]:focus {*/
-/*    border-color: var(--accent-left-dark);*/
-/*}*/
+.container-profile form.registration input[type=text]:focus,
+.container-profile form.registration input[type=email]:focus {
+    border-color: var(--accent-left-dark);
+}
 
 .container-profile form.registration input[readonly] {
     background-color: var(--primary-lighter);
@@ -739,11 +659,8 @@ li a {
     height: 100px;
     margin: 0 auto;
     padding-bottom: 5px;
-    /*background-color: #ADD8E6;*/
     border-radius: 50%;
 }
-
-
 
 /* Style for confirmation box */
 .confirmation-background, .quiz-popup-background {
@@ -820,7 +737,6 @@ button.cancel:hover {
 }
 
 .quiz-container {
-
     padding: 30px 40px 30px 40px;
     background-color: #fff;
     border-radius: 8px;
@@ -831,20 +747,15 @@ button.cancel:hover {
 }
 
 .quiz-question {
-
     font-size: 21px;
     margin-bottom: 10px;
-
 }
 
 .quiz-button {
-
     border-radius: 20px;
-
 }
 
 .quiz-option {
-
     border: 1px solid var(--primary-dark);
     display: flex;
     align-items: center; /* Align items vertically in the center */
@@ -852,7 +763,6 @@ button.cancel:hover {
 }
 
 .quiz-option label {
-
     width: 100%;
     display: block;
     padding: 10px;
@@ -860,7 +770,6 @@ button.cancel:hover {
 }
 
 .quiz-option input[type="radio"]:checked + label {
-
     width: 100%;
     color: var(--secondary-light);
     background-color: var(--primary-dark); /* Change the background color when the radio button is selected */
@@ -937,10 +846,6 @@ button.cancel:hover {
 
 /* Leaderboard */
 .leaderboard {
-    /*position: absolute;*/
-    /*top: 55%;*/
-    /*left: 50%;*/
-    /*transform: translate(-50%, -50%);*/
     margin-top: 30px;
     width: 500px;
     height: 400px;
@@ -1056,12 +961,10 @@ button.cancel:hover {
 }
 
 .leaderboard ol li:nth-child(1) {
-    /*background: var(--primary-light);*/
     background: #fcc200;
 }
 
 .leaderboard ol li:nth-child(1)::after {
-    /*background: var(--primary-lighter);*/
     background: #fcc200;
     border: 2px solid var(--primary-dark);
 }
@@ -1074,11 +977,9 @@ button.cancel:hover {
 
 .leaderboard ol li:nth-child(2) {
     background: #A8A9AD;
-    /*background: var(--primary-lighter);*/
 }
 
 .leaderboard ol li:nth-child(2)::after {
-    /*background: var(--primary-light);*/
     background: #A8A9AD;
     box-shadow: 0 2px 0 rgba(0, 0, 0, 0.08);
     border: 2px solid var(--primary-dark);
@@ -1092,11 +993,9 @@ button.cancel:hover {
 
 .leaderboard ol li:nth-child(3) {
     background: #A97142;
-    /*background: var(--primary-light)*/
 }
 
 .leaderboard ol li:nth-child(3)::after {
-    /*background: var(--primary-lighter);*/
     background: #A97142;
     box-shadow: 0 1px 0 rgba(0, 0, 0, 0.11);
     border: 2px solid var(--primary-dark);
@@ -1209,7 +1108,6 @@ button.cancel:hover {
 }
 
 @media screen and (max-width: 800px) {
-
     .ibm-sb {
         display: none;
     }
@@ -1231,10 +1129,8 @@ button.cancel:hover {
     }
 
     .login-small {
-
         display: flex;
         flex-flow: row;
-        /*position: fixed;*/
         top: 0;
         z-index: 1000;
         padding: 20px;
@@ -1245,20 +1141,15 @@ button.cancel:hover {
         justify-content: flex-start;
     }
 
-
     .login-small h1 {
-
         padding-left: 6%;
         align-self: center;
         font-size: 244%;
-
     }
 
     .container {
-
         display: flex;
         max-width: 100%;
-
     }
 
     .ibm {
@@ -1270,76 +1161,4 @@ button.cancel:hover {
         left: 50%;
         flex: 1 1 auto;
     }
-}
-
-/*@media screen and (max-height: 600px) {*/
-
-/*    .ibm-sb {*/
-/*        display: none;*/
-/*    }*/
-
-/*    .registration {*/
-/*        width: 100%;*/
-/*    }*/
-
-/*    .page {*/
-/*        background: var(--primary-lighter);*/
-/*        flex-direction: column;*/
-/*    }*/
-
-/*    .login-small {*/
-
-/*        display: flex;*/
-/*        flex-flow: row;*/
-/*        !*position: fixed;*!*/
-/*        top: 0;*/
-/*        z-index: 1000;*/
-/*        padding: 20px;*/
-/*        width: 100%;*/
-/*        background-color: var(--primary-darker);*/
-/*        color: var(--secondary-light);*/
-/*        text-align: center;*/
-/*        justify-content: flex-start;*/
-/*    }*/
-
-/*    .login-small h1 {*/
-
-/*        padding-left: 12%;*/
-/*        align-self: center;*/
-/*        font-size: 244%;*/
-
-/*    }*/
-
-/*    .container {*/
-
-/*        left: 50%;*/
-/*        flex: 1 1 auto;*/
-/*        overflow-y: scroll;*/
-
-/*    }*/
-
-/*    .ibm {*/
-
-/*        height: 100%;*/
-
-/*    }*/
-
-/*    .registration form {*/
-
-/*        top: 70%;*/
-/*        left: 50%;*/
-/*        flex: 1 1 auto;*/
-
-/*    }*/
-
-/*}*/
-
-@media screen and (min-width: 801px) {
-
-    .login-small {
-
-        display: none;
-
-    }
-
 }
