@@ -7,8 +7,12 @@
     <title>Home</title>
     <link href="static/project.css" rel="stylesheet" type="text/css">
     <script src="static/script.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 </head>
+
 <body class="login-background">
+<div class="page">
 <header class="login-small">
     <div class="ibm-logo">
         <img class="ibm" src="https://www.pngall.com/wp-content/uploads/2016/03/IBM-White-Logo-PNG.png" alt="IBM Logo">
@@ -16,17 +20,17 @@
     </div>
     <h1>Start learning with IBM.</h1>
 </header>
-<div class="page">
+
 <div class="slant">
 
    <div class="ibm-logo">
         <div class="ibm-sb">
        <img class="ibm" src="https://www.pngall.com/wp-content/uploads/2016/03/IBM-White-Logo-PNG.png">
             <p>SkillsBuild </p> </div>
-       </br> </br> </br> </br> </br> </br>
        <div class="ibm-text">
        <p style="font-size: 60px">Start</p>
-       <p style="font-size: 60px">Learning With</p>
+       <p style="font-size: 60px">Learning</p>
+       <p style="font-size: 60px">With</p>
        <p style="font-size: 60px">IBM.</p>
        </div></div>
    </div>

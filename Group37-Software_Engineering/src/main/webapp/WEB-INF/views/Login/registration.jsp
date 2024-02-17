@@ -6,6 +6,7 @@
         <link href="static/project.css" rel="stylesheet" type="text/css">
 </head>
 <body class="registration-background">
+<div class="page">
 <header class="login-small">
         <div class="ibm-logo">
                 <img class="ibm" src="https://www.pngall.com/wp-content/uploads/2016/03/IBM-White-Logo-PNG.png" alt="IBM Logo">
@@ -13,17 +14,17 @@
         </div>
         <h1>Start learning with IBM.</h1>
 </header>
-<div class="page">
+
         <div class="slant">
 
                 <div class="ibm-logo">
                         <div class="ibm-sb">
                                 <img class="ibm" src="https://www.pngall.com/wp-content/uploads/2016/03/IBM-White-Logo-PNG.png">
                                 <p>SkillsBuild </p> </div>
-                        </br> </br> </br> </br> </br> </br>
                         <div class="ibm-text">
                                 <p style="font-size: 60px">Start</p>
-                                <p style="font-size: 60px">Learning With</p>
+                                <p style="font-size: 60px">Learning</p>
+                                <p style="font-size: 60px">With</p>
                                 <p style="font-size: 60px">IBM.</p>
                         </div></div>
         </div>
@@ -63,7 +64,7 @@
             </br>
 
             <input type="submit" value="Submit" class="submit-button"/>
-                <p class="new" style="font-size: 100%">Already have an account? <a style="font-size: large" href="${pageContext.request.contextPath}/login-form" class="link-style">Login here</a>.</p>
+                <p class="new" style="font-weight: normal; font-size: 18px">Already have an account? <a style="font-size: large" href="${pageContext.request.contextPath}/login-form" class="link-style">Login here</a>.</p>
 
         </form:form>
 </div>

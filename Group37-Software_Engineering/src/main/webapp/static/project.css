@@ -68,13 +68,6 @@ input {
     text-align: center;
 }
 
-.page {
-
-    display: flex;
-    flex-flow: row;
-
-}
-
 .submit-button {
     background-color: var(--accent-right);
     color: var(--accent-right-light);
@@ -122,7 +115,20 @@ p {
 
 .ibm-text {
 
-    width: 100%;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: left;
+    justify-content: center;
+    position: absolute;
+    left: 0;
+    top: 48%;
+    transform: translate(-50%, -50%);
+    margin: 0 auto;
+    padding: 2%;
+    max-width: 700px;
+    min-width: 400px;
+    padding-left: 300px;
 
 }
 
@@ -152,7 +158,7 @@ p {
 
 .slant:after {
     content: '';
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 50%;
@@ -1164,8 +1170,7 @@ button.cancel:hover {
     }
 }
 
-
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 800px) {
 
     .slant {
         display: none;
@@ -1175,17 +1180,21 @@ button.cancel:hover {
 
         display: flex;
         flex-flow: row;
+        position: fixed;
+        top: 0;
+        z-index: 1000;
         padding: 20px;
         width: 100%;
         background-color: var(--primary-darker);
         color: var(--secondary-light);
+        text-align: center;
 
     }
 
     .login-small h1 {
 
         padding-left: 12%;
-        padding-top: 2%;
+        align-self: center;
         font-size: 244%;
 
     }
@@ -1193,6 +1202,7 @@ button.cancel:hover {
     .container {
 
         left: 50%;
+        display: flex;
 
     }
 
@@ -1211,7 +1221,61 @@ button.cancel:hover {
 
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (max-height: 600px) {
+
+    .slant {
+        display: none;
+    }
+
+    .login-small {
+
+        display: flex;
+        flex-flow: row;
+        position: fixed;
+        top: 0;
+        z-index: 1000;
+        padding: 20px;
+        width: 100%;
+        background-color: var(--primary-darker);
+        color: var(--secondary-light);
+        text-align: center;
+
+    }
+
+    .login-small h1 {
+
+        padding-left: 12%;
+        align-self: center;
+        font-size: 244%;
+
+    }
+
+    .container {
+
+        left: 50%;
+        flex: 1 1 auto;
+        overflow-y: scroll;
+
+    }
+
+    .ibm {
+
+        height: 100%;
+
+    }
+
+    .registration form {
+
+        top: 70%;
+        left: 50%;
+        flex: 1 1 auto;
+        overflow-y: scroll;
+
+    }
+
+}
+
+@media screen and (min-width: 800px) and (min-height: 600px) {
 
     .login-small {
 
@@ -1221,3 +1285,10 @@ button.cancel:hover {
 
 }
 
+.page {
+
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+
+}
