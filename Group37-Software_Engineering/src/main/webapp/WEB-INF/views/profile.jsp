@@ -57,6 +57,9 @@
                 <strong>Percentage Completed:</strong> ${Math.round(Percentage)} %
             </div>
             <div class="form-input">
+                <strong>Points:</strong> ${Points}
+            </div>
+            <div class="form-input">
                 <strong>Rank:</strong> ${Rank}
             </div>
             <div class="form-input">

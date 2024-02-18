@@ -91,6 +91,7 @@ public class MainController {
         model.addAttribute("Percentage", hoursCompleted(principal.getName()));
         model.addAttribute("Hours", hoursLeft(principal.getName()));
         model.addAttribute("Rank", addRankSuffix(getRank(principal.getName())));
+        model.addAttribute("Points", user.getPoints());
         return "profile";
     }
 //    @GetMapping("/admin")
