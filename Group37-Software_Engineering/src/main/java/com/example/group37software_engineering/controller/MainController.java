@@ -90,7 +90,7 @@ public class MainController {
         model.addAttribute("Completed", countCompleted(principal.getName()));
         model.addAttribute("Percentage", hoursCompleted(principal.getName()));
         model.addAttribute("Hours", hoursLeft(principal.getName()));
-        model.addAttribute("Rank", getRank(principal.getName()));
+        model.addAttribute("Rank", addRankSuffix(getRank(principal.getName())));
         return "profile";
     }
 //    @GetMapping("/admin")
@@ -120,6 +120,14 @@ public class MainController {
      */
     @RequestMapping("/404")
     public String handle404() {
+        return "redirect:/dashboard";
+    }
+    @RequestMapping("/400")
+    public String handle400() {
+        return "redirect:/dashboard";
+    }
+    @RequestMapping("/500")
+    public String handle500() {
         return "redirect:/dashboard";
     }
 
@@ -225,5 +233,23 @@ public class MainController {
         return null;
     }
 
+    public String addRankSuffix(int rank) {
+        String suffix;
+        int lastDigit = rank % 10;
+        int lastTwoDigits = rank % 100;
+
+        if (lastTwoDigits >= 11 && lastTwoDigits <= 13) {
+            suffix = "th";
+        } else {
+            suffix = switch (lastDigit) {
+                case 1 -> "st";
+                case 2 -> "nd";
+                case 3 -> "rd";
+                default -> "th";
+            };
+        }
+
+        return rank + suffix;
+    }
 
 }
