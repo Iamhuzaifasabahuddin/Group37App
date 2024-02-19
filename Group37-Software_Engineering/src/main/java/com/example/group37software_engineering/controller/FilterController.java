@@ -68,7 +68,7 @@ public class FilterController {
         MyUser user = userRepository.findByUsername(principal.getName());
         model.addAttribute("user", user);
         if (searchTerm != null && !searchTerm.isBlank()) {
-            List<Course> searched = courseRepository.findCoursesByTitleContaining(searchTerm);
+            List<Course> searched = courseRepository.findCoursesByTitleContaining(searchTerm.trim());
             if (!searched.isEmpty()) {
                 List<Course> coursesNotEnrolled = new ArrayList<>();
                 for (Course course : searched) {

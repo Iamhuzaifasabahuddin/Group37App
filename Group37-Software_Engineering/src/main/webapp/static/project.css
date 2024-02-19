@@ -274,7 +274,7 @@ li a {
 }
 
 .IBM_SkillsBuild {
-    cursor: pointer;
+    /*cursor: pointer;*/
     font-size: 25px;
     color: var(--secondary-light);
     padding-right: 10px;

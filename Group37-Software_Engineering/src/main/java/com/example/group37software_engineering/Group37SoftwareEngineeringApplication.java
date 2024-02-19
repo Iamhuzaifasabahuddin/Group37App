@@ -61,7 +61,8 @@ public class Group37SoftwareEngineeringApplication implements CommandLineRunner 
         return registry -> {
             registry.addErrorPages(new ErrorPage(HttpStatus.NOT_FOUND, "/404"),
                     new ErrorPage(HttpStatus.BAD_REQUEST, "/400"),
-                    new ErrorPage(HttpStatus.INTERNAL_SERVER_ERROR, "/500"));
+                    new ErrorPage(HttpStatus.INTERNAL_SERVER_ERROR, "/500"),
+                    new ErrorPage(HttpStatus.METHOD_NOT_ALLOWED, "/405"));
         };
     }
 

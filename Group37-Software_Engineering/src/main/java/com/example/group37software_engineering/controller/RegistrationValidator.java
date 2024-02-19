@@ -62,10 +62,6 @@ public class RegistrationValidator implements Validator {
             errors.rejectValue("firstname", "", "First name should contain letters only!");
         }
 
-        if (firstname.length() < 3 || firstname.length() > 15) {
-            errors.rejectValue("firstname", "", "First name must be between 3 to 15 characters");
-        }
-
 
         /*
             Last name validations:
@@ -84,9 +80,6 @@ public class RegistrationValidator implements Validator {
             errors.rejectValue("lastname", "", "Last name should contain letters only!");
         }
 
-        if (lastname.length() < 3 || lastname.length() > 20) {
-            errors.rejectValue("lastname", "", "Last name must be between 3 to 20 characters");
-        }
 
         /*
             Username validations:
@@ -122,12 +115,19 @@ public class RegistrationValidator implements Validator {
                 - Must contain 6 characters
 
         */
+
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "", "Email cannot be empty!");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "", "Username cannot be empty!");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "lastname", "", "Last name cannot be empty!");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "firstname", "", "First name cannot be empty!");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "", "Password cannot be empty!");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "confirmPassword", "", "Password cannot be empty!");
 
+        if(!errors.hasFieldErrors("username")){
+            if (user.getUsername().length() < 4 || user.getUsername().length() > 20) {
+                errors.rejectValue("username", "", "Username must be between 4 and 20 characters");
+            }
+        }
         if (!errors.hasFieldErrors("password")) {
             if (user.getPassword().length() < 8 || user.getPassword().length() > 32) {
                 errors.rejectValue("password", "", "Password must be between 8 and 32 characters");
@@ -136,14 +136,24 @@ public class RegistrationValidator implements Validator {
         if (!Objects.equals(user.getPassword(), user.getConfirmPassword())) {
             errors.rejectValue("confirmPassword", "", "Passwords do not match!");
         }
-        if (user.getUsername().length() < 4 || user.getUsername().length() > 20) {
-            errors.rejectValue("username", "", "Username must be between 4 and 20 characters");
+
+        if(!errors.hasFieldErrors("email")){
+            if (!user.getEmail().matches("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$")) {
+                errors.rejectValue("email", "", "Invalid email pattern! e.g. example@example.com");
+            }
         }
 
-        if (!user.getEmail().matches("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$")) {
-            errors.rejectValue("email", "", "Invalid email pattern! e.g. example@example.com");
+        if(!errors.hasFieldErrors("lastname")){
+            if (lastname.length() < 3 || lastname.length() > 20) {
+                errors.rejectValue("lastname", "", "Last name must be between 3 to 20 characters");
+            }
         }
 
+        if(!errors.hasFieldErrors("firstname")){
+            if (firstname.length() < 3 || firstname.length() > 15) {
+                errors.rejectValue("firstname", "", "First name must be between 3 to 15 characters");
+            }
+        }
 
     }
 

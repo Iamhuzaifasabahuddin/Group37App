@@ -44,12 +44,21 @@ public class CourseController {
         model.addAttribute("user", user);
         List<Course> allCourses = (List<Course>) courseRepository.findAll();
         List<Course> coursesNotEnrolled = new ArrayList<>();
+
+        boolean anyCourseEnrolled = false;
         for (Course course : allCourses) {
             if (isUserEnrolledInCourse(user, course)) {
+                anyCourseEnrolled = true;
                 coursesNotEnrolled.add(course);
             }
         }
-        model.addAttribute("courseList", coursesNotEnrolled);
+
+        if (!anyCourseEnrolled) {
+            model.addAttribute("CourseError", "No courses left, check back another time!");
+        } else {
+            model.addAttribute("courseList", coursesNotEnrolled);
+        }
+
         return "Course/courses";
     }
 

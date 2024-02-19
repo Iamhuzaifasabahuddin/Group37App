@@ -131,6 +131,10 @@ public class MainController {
     public String handle500() {
         return "redirect:/dashboard";
     }
+    @RequestMapping("/405")
+    public String handle405() {
+        return "redirect:/dashboard";
+    }
 
     /**
      * Counts the number of completed courses for a given user.
