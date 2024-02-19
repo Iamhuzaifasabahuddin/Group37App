@@ -52,8 +52,8 @@ public class Group37SoftwareEngineeringApplication implements CommandLineRunner 
 
     @Override
     public void run(String... args) throws Exception {
-//        courseData.readDataAndSaveToRepo("courses_data.csv");
-//        questionsData.importQuestionsFromCSV("questions.csv");
+        courseData.readDataAndSaveToRepo("courses_data.csv");
+        questionsData.importQuestionsFromCSV("questions.csv");
     }
 
     @Bean

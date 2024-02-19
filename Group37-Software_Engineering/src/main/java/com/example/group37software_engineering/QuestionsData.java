@@ -149,7 +149,7 @@ public class QuestionsData {
                             }
                             quiz4.setQuestions(questions);
                             quizRepository.save(quiz4);
-                            for (int j = 18; j<=18; j++) {
+                            for (int j = 17; j<=17; j++) {
 
                                 Course course = courseRepository.findCourseById(j);
                                 course.setQuiz(quiz4);
