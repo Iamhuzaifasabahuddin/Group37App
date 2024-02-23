@@ -3,6 +3,7 @@ package com.example.group37software_engineering.model;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -25,6 +26,9 @@ public class MyUser {
 
     @OneToMany(mappedBy = "user")
     private List<UserCourses> userCourses;
+
+    private String passwordResetToken;
+    private LocalDateTime passwordResetTokenExpiry;
 
     public int getId() {
         return id;
@@ -96,5 +100,21 @@ public class MyUser {
 
     public void setUserCourses(List<UserCourses> userCourses) {
         this.userCourses = userCourses;
+    }
+
+    public String getPasswordResetToken() {
+        return passwordResetToken;
+    }
+
+    public void setPasswordResetToken(String passwordResetToken) {
+        this.passwordResetToken = passwordResetToken;
+    }
+
+    public LocalDateTime getPasswordResetTokenExpiry() {
+        return passwordResetTokenExpiry;
+    }
+
+    public void setPasswordResetTokenExpiry(LocalDateTime passwordResetTokenExpiry) {
+        this.passwordResetTokenExpiry = passwordResetTokenExpiry;
     }
 }
