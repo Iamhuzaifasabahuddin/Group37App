@@ -29,11 +29,11 @@ public class PasswordController {
         MyUser user = userRepository.findByEmail(email);
         if (user == null) {
             redirectAttributes.addFlashAttribute("EmailError", "User not found");
-            return "redirect:/login-form";
+            return "redirect:/login";
         }
         passwordResetService.initiatePasswordReset(user);
         redirectAttributes.addFlashAttribute("Message", "Email sent");
-        return "redirect:/login-form";
+        return "redirect:/login";
     }
 
     @GetMapping("/reset-password-form")
@@ -41,7 +41,7 @@ public class PasswordController {
         MyUser user = passwordResetService.findByPasswordResetToken(token);
         if (user == null || user.getPasswordResetTokenExpiry().isBefore(LocalDateTime.now())) {
             redirectAttributes.addFlashAttribute("EmailError", "Invalid token");
-            return "redirect:/login-form";
+            return "redirect:/login";
         }
         return "PasswordReset/PasswordResetForm";
     }
@@ -52,10 +52,10 @@ public class PasswordController {
         MyUser user = passwordResetService.findByPasswordResetToken(token);
         if (user == null || user.getPasswordResetTokenExpiry().isBefore(LocalDateTime.now())) {
             redirectAttributes.addFlashAttribute("EmailError", "Invalid token");
-            return "redirect:/login-form";
+            return "redirect:/login";
         }
         passwordResetService.resetPassword(user, password);
         redirectAttributes.addFlashAttribute("Message", "Password reset successful!");
-        return "redirect:/login-form";
+        return "redirect:/login";
     }
 }
