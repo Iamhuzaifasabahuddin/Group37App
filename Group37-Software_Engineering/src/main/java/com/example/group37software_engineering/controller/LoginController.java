@@ -39,7 +39,7 @@ public class LoginController {
      *
      * @return The view name for the login form.
      */
-    @GetMapping("/login-form")
+    @GetMapping("/login")
     public String loginForm() {
         return "Login/login";
     }
@@ -94,6 +94,6 @@ public class LoginController {
      */
     @GetMapping("/logout")
     public String logout() {
-        return "redirect:/login-form?logout";
+        return "redirect:/login?logout";
     }
 }

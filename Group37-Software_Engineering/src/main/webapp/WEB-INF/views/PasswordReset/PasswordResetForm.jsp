@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>Reset Password</h1>
-<form action="/reset">
+<form action="/reset" method="get">
     <input type="hidden" name="token" value="${param.token}">
     <label for="password">New Password:</label>
     <input type="password" id="password" name="password" required minlength="8">

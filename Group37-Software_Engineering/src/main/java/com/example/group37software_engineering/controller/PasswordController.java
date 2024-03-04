@@ -21,10 +21,10 @@ public class PasswordController {
 
     @RequestMapping("/reset-email")
     public String showPasswordResetRequestForm() {
-        return "Reset/ResetEmailForm";
+        return "PasswordReset/ResetEmailForm";
     }
 
-    @RequestMapping("/request")
+    @GetMapping("/request")
     public String requestPasswordReset(@RequestParam("email") String email, RedirectAttributes redirectAttributes) {
         MyUser user = userRepository.findByEmail(email);
         if (user == null) {
@@ -36,17 +36,17 @@ public class PasswordController {
         return "redirect:/login-form";
     }
 
-    @RequestMapping("/reset-password-form")
+    @GetMapping("/reset-password-form")
     public String showPasswordResetForm(@RequestParam("token") String token, RedirectAttributes redirectAttributes) {
         MyUser user = passwordResetService.findByPasswordResetToken(token);
         if (user == null || user.getPasswordResetTokenExpiry().isBefore(LocalDateTime.now())) {
             redirectAttributes.addFlashAttribute("EmailError", "Invalid token");
             return "redirect:/login-form";
         }
-        return "Reset/PasswordResetForm";
+        return "PasswordReset/PasswordResetForm";
     }
 
-    @RequestMapping("/reset")
+    @GetMapping("/reset")
     public String resetPassword(@RequestParam("token") String token,
                                 @RequestParam("password") String password, RedirectAttributes redirectAttributes) {
         MyUser user = passwordResetService.findByPasswordResetToken(token);
@@ -57,25 +57,5 @@ public class PasswordController {
         passwordResetService.resetPassword(user, password);
         redirectAttributes.addFlashAttribute("Message", "Password reset successful!");
         return "redirect:/login-form";
-    }
-
-    @GetMapping("/success")
-    public String showSuccessPage() {
-        return "Reset/success";
-    }
-
-    @GetMapping("/email-sent")
-    public String showEmailSentPage() {
-        return "Reset/EmailSent";
-    }
-
-    @GetMapping("/not-found")
-    public String showNotFoundPage() {
-        return "Reset/NotFound";
-    }
-
-    @GetMapping("/invalid-token")
-    public String showInvalidTokenPage() {
-        return "Reset/InvalidToken";
     }
 }

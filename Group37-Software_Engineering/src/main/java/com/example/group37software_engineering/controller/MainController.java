@@ -1,4 +1,5 @@
 package com.example.group37software_engineering.controller;
+
 import com.example.group37software_engineering.model.Course;
 import com.example.group37software_engineering.model.MyUser;
 import com.example.group37software_engineering.model.UserCourses;
@@ -12,9 +13,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import java.security.Principal;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -37,7 +40,7 @@ public class MainController {
      * Handles the home page, displaying user information from OAuth2 authentication.
      *
      * @param oAuth2AuthenticationToken The OAuth2 authentication token.
-     * @param model     The model to add attributes to.
+     * @param model                     The model to add attributes to.
      * @return The view name for the OAuth2 home page.
      */
     @GetMapping("/")
@@ -64,9 +67,9 @@ public class MainController {
         List<Course> courseList = userCourses.stream()
                 .map(UserCourses::getCourse)
                 .toList();
-        if(courseList.isEmpty()){
+        if (courseList.isEmpty()) {
             model.addAttribute("error", "ERROR 404!");
-        }else{
+        } else {
             model.addAttribute("courseList", courseList);
             model.addAttribute("userCourses", userCourses);
         }
@@ -82,11 +85,11 @@ public class MainController {
      * @return The view name for the user profile.
      */
     @GetMapping("/profile")
-    public String getProfile(Model model, Principal principal){
+    public String getProfile(Model model, Principal principal) {
         MyUser user = userRepository.findByUsername(principal.getName());
         List<UserCourses> userCourses = userCourseRepository.findByUser(user);
         model.addAttribute("user", user);
-        model.addAttribute("Courses_taken",userCourses.size());
+        model.addAttribute("Courses_taken", userCourses.size());
         model.addAttribute("Completed", countCompleted(principal.getName()));
         model.addAttribute("Percentage", hoursCompleted(principal.getName()));
         model.addAttribute("Hours", hoursLeft(principal.getName()));
@@ -94,26 +97,7 @@ public class MainController {
         model.addAttribute("Points", user.getPoints());
         return "profile";
     }
-//    @GetMapping("/admin")
-//    public String getadmin(Model model, Principal principal) {
-//        MyUser user = userRepository.findByUsername(principal.getName());
-//        model.addAttribute("username", user.getUsername());
-//        model.addAttribute("firstName", user.getFirstname());
-//        model.addAttribute("lastName", user.getLastname());
-//        model.addAttribute("AIU", courseRepository.findAllUsersByCourseCategory("Artificial Intelligence"));
-//        model.addAttribute("CU", courseRepository.findAllUsersByCourseCategory("Cloud"));
-//        model.addAttribute("DS", courseRepository.findAllUsersByCourseCategory("Data Science"));
-//        model.addAttribute("CS", courseRepository.findAllUsersByCourseCategory("Cybersecurity"));
-//        model.addAttribute("SU", courseRepository.findAllUsersByCourseCategory("Sustainability"));
-//        model.addAttribute("AI", courseRepository.findAllUsersByCourseCategory("Artificial Intelligence").size());
-//        model.addAttribute("Cloud", courseRepository.findAllUsersByCourseCategory("Cloud").size());
-//        model.addAttribute("DataScience", courseRepository.findAllUsersByCourseCategory("Data Science").size());
-//        model.addAttribute("CyberSecurity", courseRepository.findAllUsersByCourseCategory("Cybersecurity").size());
-//        model.addAttribute("Sustainability", courseRepository.findAllUsersByCourseCategory("Sustainability").size());
-//
-//        return "admin";
-//    }
-//
+
     /**
      * Handles the custom 404 error redirection.
      *
@@ -123,14 +107,17 @@ public class MainController {
     public String handle404() {
         return "redirect:/dashboard";
     }
+
     @RequestMapping("/400")
     public String handle400() {
         return "redirect:/dashboard";
     }
+
     @RequestMapping("/500")
     public String handle500() {
         return "redirect:/dashboard";
     }
+
     @RequestMapping("/405")
     public String handle405() {
         return "redirect:/dashboard";
@@ -169,21 +156,21 @@ public class MainController {
      * @return The completion percentage of courses.
      */
     private Double hoursCompleted(String username) {
-            MyUser user = userRepository.findByUsername(username);
-            List<UserCourses> userCourses = userCourseRepository.findByUser(user);
+        MyUser user = userRepository.findByUsername(username);
+        List<UserCourses> userCourses = userCourseRepository.findByUser(user);
 
-            if (user != null && !userCourses.isEmpty()) {
-                int completedCoursesCount =  0;
-                for (UserCourses uc : userCourses) {
-                    if (uc.getPercentage() >=  80) {
-                        completedCoursesCount++;
-                    }
+        if (user != null && !userCourses.isEmpty()) {
+            int completedCoursesCount = 0;
+            for (UserCourses uc : userCourses) {
+                if (uc.getPercentage() >= 80) {
+                    completedCoursesCount++;
                 }
-
-                double completionPercentage = (completedCoursesCount *  100.0) / userCourses.size();
-                return completionPercentage;
             }
-            return  0.0;
+
+            double completionPercentage = (completedCoursesCount * 100.0) / userCourses.size();
+            return completionPercentage;
+        }
+        return 0.0;
 
     }
 
@@ -196,18 +183,18 @@ public class MainController {
     private Double hoursLeft(String username) {
         MyUser user = userRepository.findByUsername(username);
         if (user == null) {
-            return  0.0;
+            return 0.0;
         }
 
         List<UserCourses> userCourses = userCourseRepository.findByUser(user);
-        double totalHours =  0.0;
-        double completedHours =  0.0;
+        double totalHours = 0.0;
+        double completedHours = 0.0;
 
         for (UserCourses uc : userCourses) {
             Course course = uc.getCourse();
             totalHours += course.getDuration();
 
-            if (uc.getPercentage() >=  80) {
+            if (uc.getPercentage() >= 80) {
                 completedHours += course.getDuration();
             }
         }
@@ -223,22 +210,22 @@ public class MainController {
      * @param username The username of the user whose rank is to be retrieved.
      * @return The rank of the user if found, or null if the user is not found in the leaderboard.
      */
-    private Integer getRank(String username){
+    private Integer getRank(String username) {
         List<MyUser> myUsers = StreamSupport.stream(userRepository.findAll().spliterator(), false)
                 .sorted(Comparator.comparingDouble(MyUser::getPoints).reversed())
                 .toList();
 
         int rank = 0;
-        for(MyUser myUser : myUsers){
-            rank ++;
-            if(myUser.getUsername().equals(username)){
+        for (MyUser myUser : myUsers) {
+            rank++;
+            if (myUser.getUsername().equals(username)) {
                 return rank;
             }
         }
         return null;
     }
 
-    public String addRankSuffix(int rank) {
+    private String addRankSuffix(int rank) {
         String suffix;
         int lastDigit = rank % 10;
         int lastTwoDigits = rank % 100;
@@ -257,4 +244,13 @@ public class MainController {
         return rank + suffix;
     }
 
+    private Integer userCountByCourseCategory(String category) {
+        List<Course> courses = courseRepository.findAllByCategory(category);
+        Set<Integer> userIds = courses.stream()
+                .flatMap(course -> course.getUserCourses().stream())
+                .map(userCourse -> userCourse.getUser().getId())
+                .collect(Collectors.toSet());
+
+        return userIds.size();
+    }
 }

@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -66,14 +65,11 @@ public class SecurityConfig {
                         .requestMatchers(mvc.pattern("/reset-email")).permitAll()
                         .requestMatchers(mvc.pattern("/reset-password-form")).permitAll()
                         .requestMatchers(mvc.pattern("/reset")).permitAll()
-                        .requestMatchers(mvc.pattern("/success")).permitAll()
-                        .requestMatchers(mvc.pattern("/email-sent")).permitAll()
                         .requestMatchers(mvc.pattern("/request")).permitAll()
-                        .requestMatchers(mvc.pattern("/not-found")).permitAll()
                         .requestMatchers(mvc.pattern(("/**"))).permitAll()
                         .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
                         .anyRequest().authenticated()
-        ).formLogin(login -> login.loginPage("/login-form")
+        ).formLogin(login -> login.loginPage("/login")
                 .loginProcessingUrl("/myLogin")
                 .usernameParameter("usernameOrEmail")
                 .passwordParameter("password")
@@ -81,7 +77,7 @@ public class SecurityConfig {
                 .failureUrl("/error-login")
                 .permitAll()
         ).logout(logout -> logout.invalidateHttpSession(true)
-                .logoutSuccessUrl("/login-form")
+                .logoutSuccessUrl("/login")
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .permitAll()
         ).exceptionHandling(exceptionHandler ->

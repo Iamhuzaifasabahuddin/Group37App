@@ -57,7 +57,7 @@
                     <c:if test="${not empty error}">
                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                            <h3><strong>${error}</strong></h3>
+                            <strong>${error}</strong>
                         </div>
                     </c:if>
                 </div>
@@ -66,14 +66,14 @@
                 <c:if test="${not empty Message}">
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        <h2><strong>${Message}</strong></h2>
+                        <strong>${Message}</strong>
                     </div>
                 </c:if>
 
                 <c:if test="${not empty EmailError}">
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        <h2><strong>${EmailError}</strong></h2>
+                        <strong>${EmailError}</strong>
                     </div>
                 </c:if>
 
