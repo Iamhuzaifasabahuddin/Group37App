@@ -4,26 +4,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <link href="static/project.css" rel="stylesheet" type="text/css">
-    <title>
-        Leaderboard
-    </title>
+    <title>Leaderboard</title>
+    <%@include file="includes/head.jsp"%>
 </head>
-<header class="header">
-    <div class="IBM_SkillsBuild">IBM Skills Build</div>
-    <nav class="navbar">
-        <ul>
-            <li><a href="/profile">Profile</a></li>
-            <li><a href="/dashboard">Dashboard</a></li>
-            <li><a href="/courses">Courses</a></li>
-            <%--            <li><a href="#">Friends</a></li>--%>
-            <li><a href="/leaderboard">Leaderboard</a></li>
-            <li><a href="/logout">Logout</a></li>
-        </ul>
-    </nav>
-</header>
+<%@include file="includes/navbar.jsp"%>
 <body>
 <div class="container-center">
     <div class="leaderboard">
@@ -33,7 +17,7 @@
             </svg>
             Leaderboard
         </h1>
-        <ol>
+        <ol class="p-0">
             <c:forEach items="${Users}" var="user" varStatus="status">
                 <li>
                     <mark>${fn:toUpperCase(user.username)}</mark>

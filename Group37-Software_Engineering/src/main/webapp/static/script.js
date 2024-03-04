@@ -12,13 +12,8 @@ function changeHues() {
 
 /* Pop up box for enrolment */
 function showConfirmationBox(id, title) {
-    document.querySelector(".confirmation-background").style.display = "flex";
     document.querySelector(".input-course-id").value = id;
-    document.querySelector(".confirmation-box p").innerHTML = `Are you sure you want to enroll in <b>${title}</b>?`;
-}
-
-function closeConfirmationBox() {
-    document.querySelector(".confirmation-background").style.display = "none";
+    document.querySelector(".modal-body").innerHTML = `Are you sure you want to enroll in <b>${title}</b>?`;
 }
 
 window.onload = function () {
@@ -69,7 +64,7 @@ function displayQuizScore() {
     scoreText.style.opacity = 100;
     let animateScore = setInterval(() => {
         scoreText.innerText = `${i}%`;
-        quizScore.style.cssText = `background: radial-gradient(closest-side, var(--primary-light) 93%, transparent 94% 100%),
+        quizScore.style.cssText = `background: radial-gradient(closest-side, white 93%, transparent 94% 100%),
             conic-gradient(green ${i}%, var(--secondary-light) 0);`;
         if (i >= score) {
             clearInterval(animateScore);
@@ -82,14 +77,17 @@ function displayQuizScore() {
     }, 25);
 }
 
-
-/* loading */
-
-document.addEventListener("DOMContentLoaded", function () {
-    var loadingOverlay = document.querySelector('.loading-overlay');
-    loadingOverlay.style.display = 'flex';
-
-    setTimeout(function () {
-        loadingOverlay.style.display = 'none';
-    }, 1000);
-});
+/* Login inline validation */
+(() => {
+    'use strict'
+    const forms = document.querySelectorAll('.needs-validation')
+    Array.from(forms).forEach(form => {
+        form.addEventListener('submit', event => {
+            if (!form.checkValidity()) {
+                event.preventDefault()
+                event.stopPropagation()
+            }
+            form.classList.add('was-validated')
+        }, false)
+    })
+})()

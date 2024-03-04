@@ -4,25 +4,12 @@
 <html lang="en">
 <head>
     <title>Profile Information</title>
-
-    <link href="static/project.css" rel="stylesheet" type="text/css">
+    <%@include file="includes/head.jsp"%>
 </head>
 <body>
-<header class="header">
-    <div class="IBM_SkillsBuild">IBM Skills Build</div>
-    <nav class="navbar">
-        <ul>
-            <li><a href="/profile">Profile</a></li>
-            <li><a href="/dashboard">Dashboard</a></li>
-            <li><a href="/courses">Courses</a></li>
-            <%--<li><a href="#">Friends</a></li>--%>
-            <li><a href="/leaderboard">Leaderboard</a></li>
-            <li><a href="/logout">Logout</a></li>
-        </ul>
-    </nav>
-</header>
+<%@include file="includes/navbar.jsp"%>
 <div class="container-center">
-    <div class="container-profile">
+    <div class="container-profile mt-3">
 
         <div>
             <img src="https://eu.ui-avatars.com/api/?name=${(user.firstname)}+${(user.lastname)}&size=250"

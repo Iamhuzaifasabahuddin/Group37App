@@ -4,11 +4,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="static/project.css" rel="stylesheet" type="text/css">
     <title>Quiz</title>
-    <script src="static/script.js" defer></script>
+    <%@include file="includes/head.jsp"%>
 </head>
 <body>
 <br>
@@ -32,18 +29,27 @@
         </ol>
         <input type="hidden" name="courseId" value="${courseId}">
         <form:errors cssClass="error" path="questions"></form:errors>
-        <input class="quiz-button" type="submit" value="Submit">
+        <input class="btn btn-primary d-block" type="submit" value="Submit" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
     </form:form>
     <br>
     <c:if test="${not empty score}">
-        <div class="quiz-popup-background">
-            <div class="quiz-popup-box">
-                <h4>Quiz Score</h4>
-                <div class="quiz-score" role="progressbar">
-                    <p>${Math.round(score)}%</p>
+        <div class="quiz-popup-background"></div>
+        <div class="modal quiz-popup-background" tabindex="-1">
+            <div class="modal-dialog quiz-popup-box">
+                <div class="modal-content">
+                    <div class="modal-header d-flex justify-content-center">
+                        <h5 class="modal-title">Quiz Score</h5>
+                    </div>
+                    <div class="modal-body d-flex justify-content-center align-items-center flex-column">
+                        <div class="quiz-score d-flex justify-content-center" role="progressbar">
+                            <p>${Math.round(score)}%</p>
+                        </div>
+                        <p class="quiz-result">Congratulations, you pass this course!</p>
+                    </div>
+                    <div class="modal-footer">
+                        <a class="return-dashboard" href="/dashboard">Return to Dashboard</a>
+                    </div>
                 </div>
-                <p class="quiz-result">Congratulations, you pass this course!</p>
-                <a class="return-dashboard" href="/dashboard">Return to Dashboard</a>
             </div>
         </div>
     </c:if>
