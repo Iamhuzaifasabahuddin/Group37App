@@ -1,92 +1,66 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
 <html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="static/project.css" rel="stylesheet" type="text/css">
     <title>Dashboard</title>
-    <script src="static/script.js" defer></script>
-    <script src="chrome-extension://nngceckbapebfimnlniiiahkandclblb/content/fido2/page-script.js"
-            id="bw-fido2-page-script"></script>
+    <%@include file="includes/head.jsp"%>
 </head>
 <body>
-<header class="header">
-    <div class="IBM_SkillsBuild">IBM Skills Build</div>
-    <nav class="navbar">
-        <ul>
-            <li><a href="/profile">Profile</a></li>
-            <li><a href="/dashboard">Dashboard</a></li>
-            <li><a href="/courses">Courses</a></li>
-            <%--            <li><a href="#">Friends</a></li>--%>
-            <li><a href="/leaderboard">Leaderboard</a></li>
-            <li><a href="/logout">Logout</a></li>
-        </ul>
-    </nav>
-</header>
-
-<h1 class="Welcome">Welcome to Your Dashboard, ${user.username}!</h1>
-<div class="message_container">
-    <c:if test="${not empty error}">
-        <div class="error-message">
-            <h2>${error}</h2>
-            <br/>
-            <h2><a href="/courses">Courses</a></h2>
-        </div>
-    </c:if>
-    <%--    <c:if test="${not empty message}">--%>
-    <%--        <h2 id="message" class="message">--%>
-    <%--                ${message}--%>
-    <%--        </h2>--%>
-    <%--    </c:if>--%>
-</div>
+<%@include file="includes/navbar.jsp"%>
+<h1 class="text-center my-3">Welcome to Your Dashboard, ${user.username}!</h1>
+<c:if test="${not empty error}">
+    <div class="alert alert-info alert-dismissible fade show" role="alert">
+        <strong>${error} <a href="/courses">Find courses here</a></strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+</c:if>
 <section>
-    <div class="courses">
+    <div class="dashboard d-flex flex-column align-items-center p-4">
         <c:forEach items="${userCourses}" var="course">
-            <div class="card">
-                <div class="card-top">
-                    <img src="${course.getCourse().getImageUrl()}" alt="${course.getCourse().getTitle()}">
-                    <h4>${course.getCourse().getTitle()}</h4>
-                    <p class="category">${course.getCourse().getCategory()}</p>
-                </div>
-                <div class="card-bottom">
-                    <div class="course-details">
-                        <p>${Math.round(course.getCourse().getDuration())} hours</p>
-                        <p class="divider">|</p>
-                        <p>${Math.round(course.getCourse().getDuration()) * 100} points</p>
+            <div class="card mb-3" style="max-width: 48rem;">
+                <div class="row g-0">
+                    <div class="col-sm-4">
+                        <img src="${course.getCourse().getImageUrl()}" class="img-fluid rounded-start" alt="${course.getCourse().getTitle()}">
                     </div>
-                    <c:if test="${not empty course.startTime and not empty course.startDate}">
-                        <div class="course-details">
-                            <p>Start Time:
-                                    ${course.startTime}</p>
-                            <p class="divider">|</p>
-                            <p>Start Date: ${course.startDate}</p>
-                        </div>
-                        <c:if test="${empty course.endTime and empty course.endDate}">
-                            <div class="course-buttons">
-                                <a href="${course.getCourse().link}" target="_blank">Continue</a>
-                                <div class="button-divider"></div>
-                                <a href="/quiz?courseId=${course.getCourse().getId()}">Quiz</a>
+                    <div class="col-sm-8">
+                        <div class="card-body h-100 d-flex flex-column justify-content-between p-lighter">
+                            <div>
+                                <h4 class="card-title">${course.getCourse().getTitle()}</h4>
+                                <p class="card-subtitle s-light p-darker rounded-pill d-inline px-2 text-uppercase category">${course.getCourse().getCategory()}</p>
                             </div>
-                        </c:if>
-                    </c:if>
-                    <c:if test="${not empty course.endTime and not empty course.endDate}">
-                        <div class="course-details">
-                            <p>End Time: ${course.endTime}</p>
-                            <p class="divider">|</p>
-                            <p>End Date: ${course.endDate}</p>
+                            <div class="d-flex">
+                                <p class="card-subtitle text-body-secondary col-5"><i class="bi bi-hourglass-split"></i> ${Math.round(course.getCourse().getDuration())} hours</p>
+                                <c:if test="${not empty course.startTime and not empty course.startDate}">
+                                    <p class="card-subtitle text-body-secondary">Started at ${course.startTime}, ${course.startDate}</p>
+                                </c:if>
+                            </div>
+                            <div class="d-flex">
+                                <p class="card-subtitle text-body-secondary col-5"><i class="bi bi-award"></i> ${Math.round(course.getCourse().getDuration()) * 100} points</p>
+                                <c:if test="${not empty course.endTime and not empty course.endDate}">
+                                    <p class="card-subtitle text-body-secondary">Ended at ${course.endTime}, ${course.endDate}</p>
+                                </c:if>
+                            </div>
+                            <c:if test="${not empty course.startTime and not empty course.startDate}">
+                                <c:if test="${empty course.endTime and empty course.endDate}">
+                                    <div class="d-flex gap-3">
+                                        <a class="btn btn-primary container-fluid" href="${course.getCourse().link}" target="_blank">Continue</a>
+                                        <a class="btn btn-primary container-fluid" href="/quiz?courseId=${course.getCourse().getId()}">Quiz</a>
+                                    </div>
+                                </c:if>
+                            </c:if>
+                            <c:if test="${not empty course.endTime and not empty course.endDate}">
+                                <button class="btn btn-primary container-fluid" disabled>Completed</button>
+                            </c:if>
+                            <c:if test="${empty course.startTime and empty course.startDate}">
+                                <form id="getStartedForm" class="mb-0" action="/startTime">
+                                    <input type="hidden" name="courseId" value="${course.getCourse().id}">
+                                    <button class="btn btn-primary container-fluid" type="submit" onclick="openLinkAndSubmit('${course.getCourse().link}')">Get
+                                        started
+                                    </button>
+                                </form>
+                            </c:if>
                         </div>
-                        <button class="button-completed" disabled>Completed</button>
-                    </c:if>
-                    <c:if test="${empty course.startTime and empty course.startDate}">
-                        <form id="getStartedForm" action="/startTime">
-                            <input type="hidden" name="courseId" value="${course.getCourse().id}">
-                            <button type="submit" onclick="openLinkAndSubmit('${course.getCourse().link}')">Get
-                                started
-                            </button>
-                        </form>
-                    </c:if>
-
+                    </div>
                 </div>
             </div>
         </c:forEach>

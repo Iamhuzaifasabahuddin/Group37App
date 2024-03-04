@@ -65,6 +65,6 @@ public class RegistrationController {
 
         registrationService.registerUser(user);
 
-        return "redirect:/login-form";
+        return "redirect:/login";
     }
 }
