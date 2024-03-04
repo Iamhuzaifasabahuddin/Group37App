@@ -1,13 +1,17 @@
 package com.example.group37software_engineering.controller;
 
+
 import com.example.group37software_engineering.model.Course;
 import com.example.group37software_engineering.model.MyUser;
 import com.example.group37software_engineering.model.UserCourses;
 import com.example.group37software_engineering.repo.CourseRepository;
 import com.example.group37software_engineering.repo.UserCourseRepository;
 import com.example.group37software_engineering.repo.UserRepository;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.WebAttributes;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -60,8 +64,13 @@ public class LoginController {
      * @return The view name for the login form.
      */
     @RequestMapping(value = "/error-login")
-    public String errorLogin(Model model) {
-        model.addAttribute("error", "Invalid Credentials!");
+    public String errorLogin(Model model, HttpServletRequest request) {
+        Exception exception = (Exception) request.getSession().getAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
+        if (exception instanceof InternalAuthenticationServiceException && exception.getMessage().equals("User email not verified")) {
+            model.addAttribute("error", "Your email is not verified. Please verify your email before logging in.");
+        } else {
+            model.addAttribute("error", "Invalid Credentials!");
+        }
         return "Login/login";
     }
 
@@ -72,7 +81,7 @@ public class LoginController {
      * @return The redirection URL to the dashboard.
      */
     @RequestMapping(value = "/success-login", method = RequestMethod.GET)
-    public String successLogin(Principal principal, Model model, RedirectAttributes redirectAttributes) {
+    public String successLogin(Principal principal, RedirectAttributes redirectAttributes) {
         MyUser user = userRepository.findByUsername(principal.getName());
         List<UserCourses> userCourses = userCourseRepository.findByUser(user);
         List<Course> courseList = userCourses.stream()
@@ -96,4 +105,5 @@ public class LoginController {
     public String logout() {
         return "redirect:/login?logout";
     }
+
 }

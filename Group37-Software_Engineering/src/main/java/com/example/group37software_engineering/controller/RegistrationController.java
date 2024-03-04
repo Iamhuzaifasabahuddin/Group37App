@@ -3,6 +3,7 @@ package com.example.group37software_engineering.controller;
 import com.example.group37software_engineering.RegistrationService;
 import com.example.group37software_engineering.model.MyUser;
 import com.example.group37software_engineering.repo.UserRepository;
+import com.example.group37software_engineering.service.VerificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.Valid;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  * Controller class handling user registration operations.
@@ -27,6 +29,9 @@ public class RegistrationController {
 
     @Autowired
     private RegistrationService registrationService;
+
+    @Autowired
+    private VerificationService verificationService;
 
     /**
      * Initialize the WebDataBinder with a custom validator.
@@ -58,13 +63,13 @@ public class RegistrationController {
      * @return The view name to redirect to after processing the form submission.
      */
     @PostMapping("/AddUser")
-    public String addUser(@Valid @ModelAttribute("user") MyUser user, BindingResult result) {
+    public String addUser(@Valid @ModelAttribute("user") MyUser user, BindingResult result, RedirectAttributes redirectAttributes){
         if (result.hasErrors()) {
             return "Login/registration";
         }
-
         registrationService.registerUser(user);
-
+        verificationService.initiateEmailVerification(user);
+        redirectAttributes.addFlashAttribute("Message", "Verification link sent to your email!");
         return "redirect:/login";
     }
 }

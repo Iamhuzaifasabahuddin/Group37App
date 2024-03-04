@@ -1,5 +1,6 @@
 package com.example.group37software_engineering.service;
 
+import com.example.group37software_engineering.Exceptions.EmailNotVerifiedException;
 import com.example.group37software_engineering.model.MyUser;
 import com.example.group37software_engineering.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,13 +10,9 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Service class for loading user details for authentication.
@@ -42,6 +39,10 @@ public class MyUserDetailsService implements UserDetailsService {
         if (user == null) {
             throw new UsernameNotFoundException("User not found with username: " + usernameorEmail);
         }
+        if (!user.getEmailVerificationStatus()) {
+            throw new EmailNotVerifiedException("User email not verified");
+        }
+
         List<GrantedAuthority> authorities = new ArrayList<>();
         if (isAdmin(user.getUsername())) {
             authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
@@ -51,6 +52,7 @@ public class MyUserDetailsService implements UserDetailsService {
 
         return new User(user.getUsername(), user.getPassword(), true, true, true, true, authorities);
     }
+
     /**
      * Check if a username is considered as an admin user.
      *

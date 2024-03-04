@@ -13,4 +13,6 @@ public interface UserRepository extends CrudRepository<MyUser, Integer> {
 
 
     MyUser findByPasswordResetToken(String token);
+
+    MyUser findByEmailVerificationToken(String token);
 }

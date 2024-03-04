@@ -1,6 +1,9 @@
 package com.example.group37software_engineering;
 
+import com.example.group37software_engineering.model.MyUser;
 import jakarta.servlet.DispatcherType;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,6 +11,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -15,6 +19,8 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
+
+import java.io.IOException;
 
 /**
  * Configuration class for Spring Security settings.
@@ -66,6 +72,7 @@ public class SecurityConfig {
                         .requestMatchers(mvc.pattern("/reset-password-form")).permitAll()
                         .requestMatchers(mvc.pattern("/reset")).permitAll()
                         .requestMatchers(mvc.pattern("/request")).permitAll()
+                        .requestMatchers(mvc.pattern("/verifyEmail")).permitAll()
                         .requestMatchers(mvc.pattern(("/**"))).permitAll()
                         .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
                         .anyRequest().authenticated()

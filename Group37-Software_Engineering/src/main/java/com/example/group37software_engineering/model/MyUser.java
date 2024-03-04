@@ -22,13 +22,16 @@ public class MyUser {
     @Transient
     private String confirmPassword;
 
-    private Integer points=0;
+    private Integer points = 0;
 
     @OneToMany(mappedBy = "user")
     private List<UserCourses> userCourses;
 
     private String passwordResetToken;
     private LocalDateTime passwordResetTokenExpiry;
+    private String emailVerificationToken;
+    private Boolean emailVerificationStatus = false;
+    private LocalDateTime emailVerificationTokenExpiry;
 
     public int getId() {
         return id;
@@ -116,5 +119,29 @@ public class MyUser {
 
     public void setPasswordResetTokenExpiry(LocalDateTime passwordResetTokenExpiry) {
         this.passwordResetTokenExpiry = passwordResetTokenExpiry;
+    }
+
+    public String getEmailVerificationToken() {
+        return emailVerificationToken;
+    }
+
+    public void setEmailVerificationToken(String emailVerificationToken) {
+        this.emailVerificationToken = emailVerificationToken;
+    }
+
+    public Boolean getEmailVerificationStatus() {
+        return emailVerificationStatus;
+    }
+
+    public void setEmailVerificationStatus(Boolean emailVerificationStatus) {
+        this.emailVerificationStatus = emailVerificationStatus;
+    }
+
+    public LocalDateTime getEmailVerificationTokenExpiry() {
+        return emailVerificationTokenExpiry;
+    }
+
+    public void setEmailVerificationTokenExpiry(LocalDateTime emailVerificationTokenExpiry) {
+        this.emailVerificationTokenExpiry = emailVerificationTokenExpiry;
     }
 }
