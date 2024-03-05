@@ -1,6 +1,7 @@
 package com.example.group37software_engineering;
 
 import com.example.group37software_engineering.model.MyUser;
+import com.example.group37software_engineering.service.RefreshingRememberMeServices;
 import jakarta.servlet.DispatcherType;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -16,6 +17,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.RememberMeServices;
 import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
@@ -89,6 +91,8 @@ public class SecurityConfig {
                 .permitAll()
         ).exceptionHandling(exceptionHandler ->
                 exceptionHandler.accessDeniedPage("/access-denied")
+        ).rememberMe(
+                rememberMe -> rememberMe.rememberMeServices(rememberMeServices(userDetailsService))
         );
         return http.build();
     }
@@ -115,4 +119,12 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
+    @Bean
+    public RememberMeServices rememberMeServices(UserDetailsService userDetailsService) {
+        RefreshingRememberMeServices rememberMeServices =
+                new RefreshingRememberMeServices("unique", userDetailsService);
+        rememberMeServices.setCookieName("remember-me");
+        rememberMeServices.setTokenValiditySeconds(60 * 60 * 24 * 7);
+        return rememberMeServices;
+    }
 }

@@ -7,6 +7,7 @@ import com.example.group37software_engineering.model.UserCourses;
 import com.example.group37software_engineering.repo.CourseRepository;
 import com.example.group37software_engineering.repo.UserCourseRepository;
 import com.example.group37software_engineering.repo.UserRepository;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
@@ -44,7 +45,15 @@ public class LoginController {
      * @return The view name for the login form.
      */
     @GetMapping("/login")
-    public String loginForm() {
+    public String loginForm(HttpServletRequest request) {
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if ("remember-me".equals(cookie.getName())) {
+                    return "redirect:/success-login";
+                }
+            }
+        }
         return "Login/login";
     }
 

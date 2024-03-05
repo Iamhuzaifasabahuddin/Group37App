@@ -117,26 +117,31 @@
                     </div>
                 </div>
                 <c:if test="${not empty error}">
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <div class="alert alert-danger alert-dismissible fade show mb-3" role="alert">
                         <strong>${error}</strong>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 </c:if>
                 <c:if test="${not empty Message}">
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <div class="alert alert-success alert-dismissible fade show mb-3" role="alert">
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         <strong>${Message}</strong>
                     </div>
                 </c:if>
 
                 <c:if test="${not empty EmailError}">
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <div class="alert alert-danger alert-dismissible fade show mb-3" role="alert">
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         <strong>${EmailError}</strong>
                     </div>
                 </c:if>
-
-        <button type="submit" class="btn btn-primary">
+                <div class="form-check mb-3">
+                    <input class="form-check-input" type="checkbox" name="remember-me" id="remember-me">
+                    <label class="form-check-label" for="remember-me">
+                        Remember Me
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-primary">
                     <i class="bi bi-box-arrow-in-right"></i>
                     Log In
                 </button>
