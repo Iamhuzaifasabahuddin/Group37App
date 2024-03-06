@@ -4,10 +4,7 @@ import com.example.group37software_engineering.model.Course;
 import com.example.group37software_engineering.model.MyUser;
 import com.example.group37software_engineering.model.Question;
 import com.example.group37software_engineering.model.Quiz;
-import com.example.group37software_engineering.repo.CourseRepository;
-import com.example.group37software_engineering.repo.QuestionRepository;
-import com.example.group37software_engineering.repo.QuizRepository;
-import com.example.group37software_engineering.repo.UserRepository;
+import com.example.group37software_engineering.repo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -41,10 +38,15 @@ public class Group37SoftwareEngineeringApplication implements CommandLineRunner 
     private QuizRepository quizRepository;
 
     @Autowired
+    private LeagueRepository leagueRepository;
+
+    @Autowired
     private CourseData courseData;
 
     @Autowired
     private QuestionsData questionsData;
+
+    @Autowired LeagueData leagueData;
 
     public static void main(String[] args) {
         SpringApplication.run(Group37SoftwareEngineeringApplication.class, args);
@@ -57,6 +59,9 @@ public class Group37SoftwareEngineeringApplication implements CommandLineRunner 
         }
         if(quizRepository.count() == 0){
             questionsData.importQuestionsFromCSV("questions.csv");
+        }
+        if(leagueRepository.count() == 0){
+            leagueData.readCSVAndSaveToRepo("leagues.csv");
         }
     }
 
