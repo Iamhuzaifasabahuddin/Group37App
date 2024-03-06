@@ -21,15 +21,21 @@ public class VerificationService {
     public void sendEmailVerification(MyUser user, String token) {
         String subject = "Email Verification";
         String verificationLink = "https://localhost:8443/verifyEmail?token=" + token;
-        String text = "Dear " + user.getFirstname() + ",\n\nThank you for signing up. Please click on the following link to verify your email address" +
-                "This link will expire in 24 hours:\n"
-                + verificationLink + "\n\nIf you didn't sign up for our service, please ignore this email.\n\nThanks,\nThe Team";
+        String text = "<p>Dear " + user.getFirstname() + ",</p>" +
+                "<p>Thank you for signing up. Please click on the following <a href='" + verificationLink + "'>link</a> to verify your email address. This link will expire in <strong>48 hours</strong>:</p>" +
+                "<p>If you didn't sign up for our service, you can safely ignore this email.</p>" +
+                "<p>Thanks,</p>" +
+                "<p>The Team</p>";
         emailService.sendSimpleMessage(user.getEmail(), subject, text);
     }
 
     public void successfulEmailVerification(MyUser user){
         String subject = "Email Successfully Verified";
-        String text = "Dear User,\n\nYour email has been successfully verified.\n\nIf you didn't request this, please contact us immediately.\n\nThanks,\nThe Team";
+        String text = "<p>Dear User,</p>" +
+                "<p>Your email has been successfully verified.</p>" +
+                "<p>If you didn't request this, please contact us immediately.</p>" +
+                "<p>Thanks,</p>" +
+                "<p>The Team</p>";
         emailService.sendSimpleMessage(user.getEmail(), subject, text);
     }
 
@@ -37,7 +43,7 @@ public class VerificationService {
     public void initiateEmailVerification(MyUser user) {
         String token = generateToken();
         user.setEmailVerificationToken(token);
-        user.setEmailVerificationTokenExpiry(LocalDateTime.now().plusHours(24));
+        user.setEmailVerificationTokenExpiry(LocalDateTime.now().plusHours(48));
         userRepository.save(user);
         sendEmailVerification(user, token);
     }

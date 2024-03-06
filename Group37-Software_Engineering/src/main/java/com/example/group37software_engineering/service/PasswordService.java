@@ -25,15 +25,21 @@ public class PasswordService {
     public void sendPasswordResetEmail(String to, String token) {
         String subject = "Password Reset Request";
         String resetLink = "https://localhost:8443/reset-password-form?token=" + token;
-        String text = "Dear User,\n\nYou requested a password reset. Please click on the following link to reset your password" +
-                "This link will expire in an hour:\n"
-                + resetLink + "\n\nIf you didn't request this, you can safely ignore this email.\n\nThanks,\nThe Team";
+        String text = "<p>Dear User,</p>" +
+                "<p>You requested a password reset. Please click on the following <a href='" + resetLink + "'>link</a> to reset your password. This link will expire in <strong>1 hour</strong>:</p>" +
+                "<p>If you didn't request this, you can safely ignore this email.</p>" +
+                "<p>Thanks,</p>" +
+                "<p>The Team</p>";
         emailService.sendSimpleMessage(to, subject, text);
     }
 
     public void successfulPasswordResetEmail(String to) {
         String subject = "Password Reset Successful";
-        String text = "Dear User,\n\nYour password has been successfully reset.\n\nIf you didn't request this, please contact us immediately.\n\nThanks,\nThe Team";
+        String text = "<p>Dear User,</p>" +
+                "<p>Your password has been successfully reset.</p>" +
+                "<p>If you didn't request this, please contact us immediately.</p>" +
+                "<p>Thanks,</p>" +
+                "<p>The Team</p>";
         emailService.sendSimpleMessage(to, subject, text);
     }
 

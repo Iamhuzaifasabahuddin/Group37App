@@ -68,6 +68,7 @@ public class SecurityConfig {
                         .requestMatchers(mvc.pattern("/startTime")).hasAnyRole("NORMAL", "ADMIN")
                         .requestMatchers(mvc.pattern("/enroll")).hasAnyRole("NORMAL", "ADMIN")
                         .requestMatchers(mvc.pattern("/completeQuiz")).hasAnyRole("NORMAL", "ADMIN")
+                        .requestMatchers(mvc.pattern("/top3")).hasAnyRole("NORMAL", "ADMIN")
                         .requestMatchers(mvc.pattern("/NewUser")).permitAll()
                         .requestMatchers(mvc.pattern("/AddUser")).permitAll()
                         .requestMatchers(mvc.pattern("/reset-email")).permitAll()
@@ -124,7 +125,7 @@ public class SecurityConfig {
         RefreshingRememberMeServices rememberMeServices =
                 new RefreshingRememberMeServices("unique", userDetailsService);
         rememberMeServices.setCookieName("remember-me");
-        rememberMeServices.setTokenValiditySeconds(60 * 60 * 24 * 7);
+        rememberMeServices.setTokenValiditySeconds(60 * 60 * 24);
         return rememberMeServices;
     }
 }
