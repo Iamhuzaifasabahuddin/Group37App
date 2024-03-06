@@ -22,25 +22,166 @@ public class PasswordService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public void sendPasswordResetEmail(String to, String token) {
+    public void sendPasswordResetEmail(MyUser user, String token) {
         String subject = "Password Reset Request";
         String resetLink = "https://localhost:8443/reset-password-form?token=" + token;
-        String text = "<p>Dear User,</p>" +
-                "<p>You requested a password reset. Please click on the following <a href='" + resetLink + "'>link</a> to reset your password. This link will expire in <strong>1 hour</strong>:</p>" +
-                "<p>If you didn't request this, you can safely ignore this email.</p>" +
-                "<p>Thanks,</p>" +
-                "<p>The Team</p>";
-        emailService.sendSimpleMessage(to, subject, text);
+        String text = "<!DOCTYPE html>\n" +
+                "<html lang=\"en\">\n" +
+                "<head>\n" +
+                "    <meta charset=\"UTF-8\">\n" +
+                "    <title>Password Reset</title>\n" +
+                "    <style>\n" +
+                "        body {\n" +
+                "            font-family: Arial, sans-serif;\n" +
+                "            line-height: 1.6;\n" +
+                "            color: black;\n" +
+                "        }\n" +
+                "\n" +
+                "        .container {\n" +
+                "            max-width: 400px;\n" +
+                "            margin: 0 auto;\n" +
+                "            padding: 20px;\n" +
+                "        }\n" +
+                "\n" +
+                "        .header {\n" +
+                "            background-color: #007bff;\n" +
+                "            color: #fff;\n" +
+                "            padding: 10px;\n" +
+                "            text-align: center;\n" +
+                "        }\n" +
+                "\n" +
+                "        .content {\n" +
+                "            padding: 20px;\n" +
+                "            background-color: #f4f4f4;\n" +
+                "            border-radius: 5px;\n" +
+                "        }\n" +
+                "\n" +
+                "        .footer {\n" +
+                "            text-align: center;\n" +
+                "            margin-top: 20px;\n" +
+                "            color: #777;\n" +
+                "        }\n" +
+                "\n" +
+                "        .button {\n" +
+                "            background-color: #007bff;\n" +
+                "            border: none;\n" +
+                "            color: white;\n" +
+                "            padding: 10px 20px;\n" +
+                "            text-align: center;\n" +
+                "            text-decoration: none;\n" +
+                "            display: inline-block;\n" +
+                "            font-size: 16px;\n" +
+                "            border-radius: 5px;\n" +
+                "            cursor: pointer;\n" +
+                "            transition: background-color 0.3s;\n" +
+                "            align-items: center;\n" +
+                "            justify-content: center;\n" +
+                "        }\n" +
+                "\n" +
+                "        .button:hover {\n" +
+                "            background-color: #0056b3;\n" +
+                "        }\n" +
+                "\n" +
+                "        .button_container {\n" +
+                "            justify-content: center;\n" +
+                "            display: flex;\n" +
+                "        }\n" +
+                "\n" +
+                "        .button_link {\n" +
+                "            text-decoration: none;\n" +
+                "        }\n" +
+                "    </style>\n" +
+                "</head>\n" +
+                "<body>\n" +
+                "<div class=\"container\">\n" +
+                "    <div class=\"header\">\n" +
+                "        <h2>Password Reset</h2>\n" +
+                "    </div>\n" +
+                "    <div class=\"content\">\n" +
+                "        <p>Dear " + user.getFirstname() + ",</p>\n" +
+                "        <p>We've received a request to reset your password.</p>\n" +
+                "        <p>Please click the button below to reset your password. This link will expire in <strong>1 hour</strong> ⏳:</p>\n" +
+                "        <div class=\"button_container\">\n" +
+                "           <a href=\"" + resetLink + "\" class=\"button button_link\">Reset Password</a>\n" +
+                "        </div>\n" +
+                "        <p>If you didn't request this, you can safely ignore this email. ❌</p>\n" +
+                "    </div>\n" +
+                "    <div class=\"footer\">\n" +
+                "        <p>Thanks, </p>\n" +
+                "        <p>Group-37</p>\n" +
+                "    </div>\n" +
+                "</div>\n" +
+                "</body>\n" +
+                "</html>";
+
+
+        emailService.sendSimpleMessage(user.getEmail(), subject, text);
     }
 
-    public void successfulPasswordResetEmail(String to) {
+    public void successfulPasswordResetEmail(MyUser user) {
         String subject = "Password Reset Successful";
-        String text = "<p>Dear User,</p>" +
-                "<p>Your password has been successfully reset.</p>" +
-                "<p>If you didn't request this, please contact us immediately.</p>" +
-                "<p>Thanks,</p>" +
-                "<p>The Team</p>";
-        emailService.sendSimpleMessage(to, subject, text);
+        String text = "<!DOCTYPE html>\n" +
+                "<html lang=\"en\">\n" +
+                "<head>\n" +
+                "    <meta charset=\"UTF-8\">\n" +
+                "    <title>Password Changed</title>\n" +
+                "    <style>\n" +
+                "        body {\n" +
+                "            font-family: Arial, sans-serif;\n" +
+                "            line-height: 1.6;\n" +
+                "            color: black;\n" +
+                "        }\n" +
+                "\n" +
+                "        .container {\n" +
+                "            max-width: 400px;\n" +
+                "            margin: 0 auto;\n" +
+                "            padding: 20px;\n" +
+                "        }\n" +
+                "\n" +
+                "        .header {\n" +
+                "            background-color: #007bff;\n" +
+                "            color: #fff;\n" +
+                "            padding: 10px;\n" +
+                "            text-align: center;\n" +
+                "        }\n" +
+                "\n" +
+                "        .content {\n" +
+                "            padding: 20px;\n" +
+                "            background-color: #f4f4f4;\n" +
+                "            border-radius: 5px;\n" +
+                "        }\n" +
+                "\n" +
+                "        .content h1{\n" +
+                "            text-align: center;\n" +
+                "        }\n" +
+                "\n" +
+                "        .footer {\n" +
+                "            text-align: center;\n" +
+                "            margin-top: 20px;\n" +
+                "            color: #777;\n" +
+                "        }\n" +
+                "    </style>\n" +
+                "</head>\n" +
+                "<body>\n" +
+                "<div class=\"container\">\n" +
+                "    <div class=\"header\">\n" +
+                "        <h2>Password Changed Successfully</h2>\n" +
+                "    </div>\n" +
+                "    <div class=\"content\">\n" +
+                "        <p>Dear " + user.getFirstname() + ",</p>\n" +
+                "        <p>You're back to learning spartan.\uD83D\uDE4C\uD83C\uDFFC</p>\n" +
+                "        <p>Your password has been successfully reset.</p>\n" +
+                "        <p>If you didn't request this, please contact us immediately.</p>\n" +
+                "    </div>\n" +
+                "    <div class=\"footer\">\n" +
+                "        <p>Thanks,</p>\n" +
+                "        <p>The Team</p>\n" +
+                "    </div>\n" +
+                "</div>\n" +
+                "</body>\n" +
+                "</html>";
+
+        emailService.sendSimpleMessage(user.getEmail(), subject, text);
     }
 
     public void initiatePasswordReset(MyUser user) {
@@ -48,7 +189,7 @@ public class PasswordService {
         user.setPasswordResetToken(token);
         user.setPasswordResetTokenExpiry(LocalDateTime.now().plusHours(1));
         userRepository.save(user);
-        sendPasswordResetEmail(user.getEmail(), token);
+        sendPasswordResetEmail(user, token);
     }
 
     public MyUser findByPasswordResetToken(String token) {
@@ -60,7 +201,7 @@ public class PasswordService {
         user.setPasswordResetToken(null);
         user.setPasswordResetTokenExpiry(null);
         userRepository.save(user);
-        successfulPasswordResetEmail(user.getEmail());
+        successfulPasswordResetEmail(user);
     }
 
     private String generateToken() {
