@@ -33,6 +33,9 @@ public class MyUser {
     private Boolean emailVerificationStatus = false;
     private LocalDateTime emailVerificationTokenExpiry;
 
+    @ManyToMany
+    private List<MyUser> friends;
+
     public int getId() {
         return id;
     }
@@ -143,5 +146,13 @@ public class MyUser {
 
     public void setEmailVerificationTokenExpiry(LocalDateTime emailVerificationTokenExpiry) {
         this.emailVerificationTokenExpiry = emailVerificationTokenExpiry;
+    }
+
+    public List<MyUser> getFriends() {
+        return friends;
+    }
+
+    public void setFriends(List<MyUser> friends) {
+        this.friends = friends;
     }
 }
