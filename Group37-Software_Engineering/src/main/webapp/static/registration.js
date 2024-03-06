@@ -150,6 +150,11 @@ function validateAll() {
     }
 }
 
+document.getElementById('backButton').addEventListener('click', function() {
+    window.location.href = "${pageContext.request.contextPath}/login";
+});
+
+
 (() => {
     'use strict'
     const forms = document.querySelectorAll('form')

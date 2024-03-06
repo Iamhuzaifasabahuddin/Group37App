@@ -20,37 +20,14 @@ function validateNotEmpty(id) {
     return true;
 }
 
-function validateLength(id, min, max) {
-    const input = document.querySelector(`#${id}`);
-    const feedback = document.querySelector(`.invalid-feedback.${id}`);
-    if (input.value.length < min || input.value.length > max) {
-        feedback.textContent = `Must be ${min}-${max} long!`;
-        return false;
-    }
-    return true;
-}
-
-function validatePassword() {
-    const id = 'password';
+function validateEmail() {
+    const id = 'resetEmail';
     const input = document.querySelector(`#${id}`);
     const feedback = document.querySelector(`.invalid-feedback.${id}`);
     changeValidity(input, feedback, false);
-    if (validateNotEmpty(id) && validateLength(id, 8, 32)) {
-        changeValidity(input, feedback, true);
-        feedback.textContent = '';
-        return true;
-    }
-    return false;
-}
-
-function validateConfirmPassword() {
-    const id = 'confirmPassword';
-    const input = document.querySelector(`#${id}`);
-    const feedback = document.querySelector(`.invalid-feedback.${id}`);
-    changeValidity(input, feedback, false);
-    if (validateNotEmpty(id) && validateLength(id, 8, 32)) {
-        if (document.querySelector('#password').value !== input.value) {
-            feedback.textContent = 'Passwords must be the same!'
+    if (validateNotEmpty(id)) {
+        if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(input.value)) {
+            feedback.textContent = 'Must be a valid email address!'
         } else {
             changeValidity(input, feedback, true);
             feedback.textContent = '';
@@ -60,15 +37,19 @@ function validateConfirmPassword() {
     return false;
 }
 
+
 function validateAll() {
-    if ([validatePassword(), validateConfirmPassword()].every(f => f)) {
-        document.querySelector('button[type="submit"]').disabled = false;
+    const modalSubmitButton = document.querySelector('#exampleModal button[type="submit"]');
+    if (validateEmail()) {
+        modalSubmitButton.disabled = false;
         return true;
     } else {
-        document.querySelector('button[type="submit"]').disabled = true;
+        modalSubmitButton.disabled = true;
         return false;
     }
 }
+
+
 
 (() => {
     'use strict'

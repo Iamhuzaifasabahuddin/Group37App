@@ -1,80 +1,10 @@
-<%--<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>--%>
-
-<%--<!DOCTYPE html>--%>
-<%--<html lang="en">--%>
-<%--<head>--%>
-<%--    <meta charset="UTF-8">--%>
-<%--    <title>Home</title>--%>
-<%--    <link href="static/project.css" rel="stylesheet" type="text/css">--%>
-<%--    <script src="static/script.js" defer></script>--%>
-<%--    <meta name="viewport" content="width=device-width, initial-scale=1.0">--%>
-
-<%--</head>--%>
-
-<%--<body class="login-background">--%>
-<%--<div class="slant"></div>--%>
-<%--<div class="page">--%>
-<%--    <header class="login-small">--%>
-<%--        <div class="ibm-logo">--%>
-<%--            <img class="ibm" src="https://www.pngall.com/wp-content/uploads/2016/03/IBM-White-Logo-PNG.png"--%>
-<%--                 alt="IBM Logo">--%>
-<%--            <p>SkillsBuild</p>--%>
-<%--        </div>--%>
-<%--        <h1>Start learning with IBM.</h1>--%>
-<%--    </header>--%>
-
-
-<%--    <div class="ibm-sb">--%>
-<%--        <div class="ibm-logo">--%>
-<%--            <img class="ibm" src="https://www.pngall.com/wp-content/uploads/2016/03/IBM-White-Logo-PNG.png">--%>
-<%--            <p>SkillsBuild </p></div>--%>
-<%--        <div class="ibm-text">--%>
-<%--            <p style="font-size: 60px">Start</p>--%>
-<%--            <p style="font-size: 60px">Learning</p>--%>
-<%--            <p style="font-size: 60px">With</p>--%>
-<%--            <p style="font-size: 60px">IBM.</p>--%>
-<%--        </div>--%>
-<%--    </div>--%>
-
-
-<%--    <div class="container">--%>
-
-<%--        <div class="login-oauth">--%>
-<%--            <form action="/myLogin" method="post">--%>
-<%--                <p style="font-weight: bolder">Welcome to Our Website!</p>--%>
-<%--                <br/>--%>
-<%--                <label for="usernameOrEmail" style="font-family: DM Sans, sans-serif">Username/Email:</label>--%>
-<%--                <input type="text" id="usernameOrEmail" name="usernameOrEmail" placeholder="Username or Email"--%>
-<%--                       class="login-input" required>--%>
-<%--                <br/>--%>
-<%--                <label style="font-family: DM Sans, sans-serif">--%>
-<%--                    Password:--%>
-<%--                    <input type="password" name="password" class="login-input" placeholder="Password" required/>--%>
-<%--                </label>--%>
-<%--                <br/>--%>
-<%--                <div class="error-message-login">--%>
-<%--                    <c:if test="${not empty error}">--%>
-<%--                        <h3 id="error-message">${error}</h3>--%>
-<%--                    </c:if>--%>
-<%--                </div>--%>
-<%--                <input type="submit" value="Sign In" class="login-button"/> <br/>--%>
-<%--                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">--%>
-<%--            </form>--%>
-<%--            <p style="text-align: center">New user? <a style="font-size: large"--%>
-<%--                                                       href="${pageContext.request.contextPath}/NewUser"--%>
-<%--                                                       class="link-style">Register here</a>.</p>--%>
-<%--        </div>--%>
-
-<%--    </div>--%>
-<%--</div>--%>
-<%--</body>--%>
-<%--</html>--%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <title>Login</title>
+    <script src="static/modal.js" defer></script>
     <%@include file="../includes/head.jsp"%>
 </head>
 <body>
@@ -148,9 +78,34 @@
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
             </form>
             <p>New user? <a href="${pageContext.request.contextPath}/NewUser">Register Here</a></p>
-            <p>Forgot your password? <a href="${pageContext.request.contextPath}/reset-email">Reset it here</a>.</p>
+<%--            <p>Forgot your password? <a href="${pageContext.request.contextPath}/reset-email">Reset it here</a>.</p>--%>
+            <p>Forgot your password? <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">Reset it here</a>.</p>
+
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <form id="modalForm" class="needs-validation modal-content" action="/request" method="GET" novalidate> <!-- Updated opening tag with action and method attributes -->
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Enter your email:</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-floating mb-3">
+                    <input type="email" id="resetEmail" name="email" placeholder="Email" required class="form-control">
+                    <label for="resetEmail" class="form-label">Email:</label>
+                    <div class="invalid-feedback resetEmail"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+
 </body>
 </html>
