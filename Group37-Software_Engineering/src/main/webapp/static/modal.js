@@ -20,51 +20,51 @@ function validateNotEmpty(id) {
     return true;
 }
 
-function validateEmail() {
+function validateResetEmail() {
     const id = 'resetEmail';
     const input = document.querySelector(`#${id}`);
     const feedback = document.querySelector(`.invalid-feedback.${id}`);
     changeValidity(input, feedback, false);
-
-    if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(input.value)) {
-        feedback.textContent = 'Must be a valid email address!';
-        return Promise.resolve(false);
-    }
-
     if (validateNotEmpty(id)) {
-        return new Promise((resolve, reject) => {
-            $.ajax({
-                url: '/checkResetEmail',
-                type: 'get',
-                data: { resetEmail: input.value },
-                success: function(data) {
-                    const parsedData = JSON.parse(data);
-                    if (!parsedData.emailExists) {
-                        feedback.textContent = 'Email is not registered!';
-                        changeValidity(input, feedback, false);
-                        resolve(false);
-                    } else {
-                        changeValidity(input, feedback, true);
-                        feedback.textContent = '';
-                        resolve(true);
-                    }
-                },
-                error: function() {
-                    reject(false);
-                }
-            });
-        });
+        const emailExists = checkResetEmail(input.value);
+        if (!emailExists) {
+            feedback.textContent = 'Email is not registered!';
+            return false;
+        } else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(input.value)) {
+            feedback.textContent = 'Must be a valid email address!';
+            return false;
+        } else {
+            changeValidity(input, feedback, true);
+            feedback.textContent = '';
+            return true;
+        }
     }
-    return Promise.resolve(false);
+    return false;
 }
 
+function checkResetEmail(resetEmail) {
+    let emailExists;
+    $.ajax({
+        url: '/checkResetEmail',
+        type: 'GET',
+        async: false,
+        data: {resetEmail: resetEmail},
+        success: function (data) {
+            const parsedData = JSON.parse(data);
+            emailExists = parsedData.emailExists;
+        },
+        error: function () {
+            emailExists = false;
+        }
+    });
+    return emailExists;
+}
 
 function validateAll() {
     const modalSubmitButton = document.querySelector('#exampleModal button[type="submit"]');
-    return validateEmail().then(result => {
-        modalSubmitButton.disabled = !result;
-        return result;
-    });
+    const result = validateResetEmail();
+    modalSubmitButton.disabled = !result;
+    return result;
 }
 
 (() => {

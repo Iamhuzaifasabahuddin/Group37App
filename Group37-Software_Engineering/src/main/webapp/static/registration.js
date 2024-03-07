@@ -77,6 +77,23 @@ function validateLastname() {
     }
     return false;
 }
+function checkUsername(username) {
+    let usernameExists;
+    $.ajax({
+        url: '/checkUsername',
+        type: 'GET',
+        async: false,
+        data: { username: username },
+        success: function(data) {
+            const parsedData = JSON.parse(data);
+            usernameExists = parsedData.usernameExists;
+        },
+        error: function() {
+            usernameExists = false;
+        }
+    });
+    return usernameExists;
+}
 
 function validateUsername() {
     const id = 'username';
@@ -84,35 +101,28 @@ function validateUsername() {
     const feedback = document.querySelector(`.invalid-feedback.${id}`);
     changeValidity(input, feedback, false);
     if (validateNotEmpty(id) && validateNoSpaces(id) && validateLength(id, 4, 20)) {
-        return new Promise((resolve, reject) => {
-            $.ajax({
-                url: '/checkUsername',
-                type: 'GET',
-                data: { username: input.value },
-                success: function(data) {
-                    const parsedData = JSON.parse(data);
-                    if (parsedData.usernameExists) {
-                        const suggestions = generateUsernameSuggestions(input.value);
-                        feedback.textContent = 'Username is already taken! Suggestions: ' + suggestions.join(', ');
-                        resolve(false);
-                    } else {
-                        changeValidity(input, feedback, true);
-                        feedback.textContent = '';
-                        resolve(true);
-                    }
-                },
-                error: function() {
-                    reject(false);
-                }
-            });
-        });
+        const usernameExists = checkUsername(input.value);
+        if (usernameExists) {
+            const suggestions = generateUsernameSuggestions(input.value);
+            feedback.textContent = 'Username is already taken! Suggestions: ' + suggestions.join(', ');
+            return false;
+        } else {
+            changeValidity(input, feedback, true);
+            feedback.textContent = '';
+            return true;
+        }
     }
-    return Promise.resolve(false);
+    return false;
 }
 
 
+let usernameSuggestions = [];
+
 function generateUsernameSuggestions(username) {
-    const suggestions = [];
+    if (usernameSuggestions.length > 0) {
+        return usernameSuggestions;
+    }
+
     let count = 0;
     while (count < 5) {
         let suggestedUsername = username + Math.floor(Math.random() * 100);
@@ -124,47 +134,53 @@ function generateUsernameSuggestions(username) {
             success: function (data) {
                 const parsedData = JSON.parse(data);
                 if (!parsedData.usernameExists) {
-                    suggestions.push(suggestedUsername);
+                    usernameSuggestions.push(suggestedUsername);
                     count++;
                 }
             }
         });
     }
-    return suggestions;
+    return usernameSuggestions;
 }
 
+function checkEmail(email) {
+    let emailExists;
+    $.ajax({
+        url: '/checkEmail',
+        type: 'GET',
+        async: false,
+        data: { email: email },
+        success: function(data) {
+            const parsedData = JSON.parse(data);
+            emailExists = parsedData.emailExists;
+        },
+        error: function() {
+            emailExists = false;
+        }
+    });
+    return emailExists;
+}
 function validateEmail() {
     const id = 'email';
     const input = document.querySelector(`#${id}`);
     const feedback = document.querySelector(`.invalid-feedback.${id}`);
     changeValidity(input, feedback, false);
     if (validateNotEmpty(id)) {
-        return new Promise((resolve, reject) => {
-            $.ajax({
-                url: '/checkEmail',
-                type: 'get',
-                data: { email: input.value },
-                success: function(data) {
-                    const parsedData = JSON.parse(data);
-                    if (parsedData.emailExists) {
-                        feedback.textContent = 'Email is already taken!';
-                        resolve(false);
-                    } else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(input.value)) {
-                        feedback.textContent = 'Must be a valid email address!';
-                        resolve(false);
-                    } else {
-                        changeValidity(input, feedback, true);
-                        feedback.textContent = '';
-                        resolve(true);
-                    }
-                },
-                error: function() {
-                    reject(false);
-                }
-            });
-        });
+        const emailExists = checkEmail(input.value);
+        if (emailExists) {
+            feedback.textContent = 'Email is already registered!';
+            return false;
+        }
+        else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(input.value)) {
+            feedback.textContent = 'Must be a valid email address!';
+            return false;
+        } else {
+            changeValidity(input, feedback, true);
+            feedback.textContent = '';
+            return true;
+        }
     }
-    return Promise.resolve(false);
+    return false;
 }
 
 function validatePassword() {
