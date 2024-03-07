@@ -4,6 +4,7 @@ package com.example.group37software_engineering.model;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -34,7 +35,7 @@ public class MyUser {
     private LocalDateTime emailVerificationTokenExpiry;
 
     @ManyToMany
-    private List<MyUser> friends;
+    private List<MyUser> friends = new ArrayList<>();
 
     public int getId() {
         return id;
