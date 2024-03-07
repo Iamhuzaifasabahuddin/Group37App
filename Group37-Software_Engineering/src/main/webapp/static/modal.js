@@ -24,6 +24,7 @@ function validateEmail() {
     const id = 'resetEmail';
     const input = document.querySelector(`#${id}`);
     const feedback = document.querySelector(`.invalid-feedback.${id}`);
+    changeValidity(input, feedback, false);
     if (validateNotEmpty(id)) {
         $.ajax({
             url: '/checkResetEmail',
@@ -31,14 +32,13 @@ function validateEmail() {
             data: {resetEmail: input.value},
             success: function (data) {
                 const parsedData = JSON.parse(data);
-                if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
-                    .test(input.value)) {
+                if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(input.value)) {
                     feedback.textContent = 'Must be a valid email address!';
-                } else if (!parsedData.emailExists) {
-                    feedback.textContent = 'Email not found!';
-                } else {
+                } else if (parsedData.emailExists) {
                     changeValidity(input, feedback, true);
                     feedback.textContent = '';
+                } else {
+                    feedback.textContent = 'Email not found!';
                 }
             }
         });
