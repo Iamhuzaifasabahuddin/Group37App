@@ -84,24 +84,32 @@ function validateUsername() {
     const feedback = document.querySelector(`.invalid-feedback.${id}`);
     changeValidity(input, feedback, false);
     if (validateNotEmpty(id) && validateNoSpaces(id) && validateLength(id, 4, 20)) {
-        $.ajax({
-            url: '/checkUsername',
-            type: 'GET',
-            data: {username: input.value},
-            success: function (data) {
-                const parsedData = JSON.parse(data);
-                if (parsedData.usernameExists) {
-                    const suggestions = generateUsernameSuggestions(input.value);
-                    feedback.textContent = 'Username is already taken! Suggestions: ' + suggestions.join(', ');
-                } else {
-                    changeValidity(input, feedback, true);
-                    feedback.textContent = '';
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                url: '/checkUsername',
+                type: 'GET',
+                data: { username: input.value },
+                success: function(data) {
+                    const parsedData = JSON.parse(data);
+                    if (parsedData.usernameExists) {
+                        const suggestions = generateUsernameSuggestions(input.value);
+                        feedback.textContent = 'Username is already taken! Suggestions: ' + suggestions.join(', ');
+                        resolve(false);
+                    } else {
+                        changeValidity(input, feedback, true);
+                        feedback.textContent = '';
+                        resolve(true);
+                    }
+                },
+                error: function() {
+                    reject(false);
                 }
-            }
+            });
         });
     }
-    return false;
+    return Promise.resolve(false);
 }
+
 
 function generateUsernameSuggestions(username) {
     const suggestions = [];
@@ -131,24 +139,32 @@ function validateEmail() {
     const feedback = document.querySelector(`.invalid-feedback.${id}`);
     changeValidity(input, feedback, false);
     if (validateNotEmpty(id)) {
-        $.ajax({
-            url: '/checkEmail',
-            type: 'get',
-            data: {email: input.value},
-            success: function (data) {
-                const parsedData = JSON.parse(data);
-                if (parsedData.emailExists) {
-                    feedback.textContent = 'Email is already taken!';
-                } else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(input.value)) {
-                    feedback.textContent = 'Must be a valid email address!'
-                } else {
-                    changeValidity(input, feedback, true);
-                    feedback.textContent = '';
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                url: '/checkEmail',
+                type: 'get',
+                data: { email: input.value },
+                success: function(data) {
+                    const parsedData = JSON.parse(data);
+                    if (parsedData.emailExists) {
+                        feedback.textContent = 'Email is already taken!';
+                        resolve(false);
+                    } else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(input.value)) {
+                        feedback.textContent = 'Must be a valid email address!';
+                        resolve(false);
+                    } else {
+                        changeValidity(input, feedback, true);
+                        feedback.textContent = '';
+                        resolve(true);
+                    }
+                },
+                error: function() {
+                    reject(false);
                 }
-            }
+            });
         });
     }
-    return false;
+    return Promise.resolve(false);
 }
 
 function validatePassword() {

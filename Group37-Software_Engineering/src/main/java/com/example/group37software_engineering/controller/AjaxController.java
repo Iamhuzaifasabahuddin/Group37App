@@ -29,9 +29,9 @@ public class AjaxController {
     }
 
     @GetMapping("/checkResetEmail")
-    public ResponseEntity<?> checkresetEmail(@RequestParam String resetEmail) {
+    public ResponseEntity<?> checkResetEmail(@RequestParam String resetEmail) {
         MyUser user = userRepository.findByEmail(resetEmail);
-        boolean emailExists = user != null;
+        boolean emailExists = user != null && user.getEmailVerificationStatus();
         return ResponseEntity.ok().body("{\"emailExists\":" + emailExists + "}");
     }
 }

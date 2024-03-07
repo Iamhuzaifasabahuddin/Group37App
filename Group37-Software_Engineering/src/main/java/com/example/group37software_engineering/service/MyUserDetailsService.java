@@ -23,6 +23,9 @@ public class MyUserDetailsService implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private VerificationService verificationService;
+
     // List of usernames considered as admin users
     private final List<String> adminUsernames = List.of("hs540", "amjo1", "atkm1", "st546", "gc272", "as1473", "ka381");
 
@@ -40,6 +43,7 @@ public class MyUserDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException("User not found with username: " + usernameorEmail);
         }
         if (!user.getEmailVerificationStatus()) {
+            verificationService.initiateEmailVerification(user);
             throw new EmailNotVerifiedException("User email not verified");
         }
 

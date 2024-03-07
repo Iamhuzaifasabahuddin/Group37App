@@ -25,40 +25,47 @@ function validateEmail() {
     const input = document.querySelector(`#${id}`);
     const feedback = document.querySelector(`.invalid-feedback.${id}`);
     changeValidity(input, feedback, false);
+
+    if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(input.value)) {
+        feedback.textContent = 'Must be a valid email address!';
+        return Promise.resolve(false);
+    }
+
     if (validateNotEmpty(id)) {
-        $.ajax({
-            url: '/checkResetEmail',
-            type: 'get',
-            data: {resetEmail: input.value},
-            success: function (data) {
-                const parsedData = JSON.parse(data);
-                if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(input.value)) {
-                    feedback.textContent = 'Must be a valid email address!';
-                } else if (parsedData.emailExists) {
-                    changeValidity(input, feedback, true);
-                    feedback.textContent = '';
-                } else {
-                    feedback.textContent = 'Email not found!';
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                url: '/checkResetEmail',
+                type: 'get',
+                data: { resetEmail: input.value },
+                success: function(data) {
+                    const parsedData = JSON.parse(data);
+                    if (!parsedData.emailExists) {
+                        feedback.textContent = 'Email is not registered!';
+                        changeValidity(input, feedback, false);
+                        resolve(false);
+                    } else {
+                        changeValidity(input, feedback, true);
+                        feedback.textContent = '';
+                        resolve(true);
+                    }
+                },
+                error: function() {
+                    reject(false);
                 }
-            }
+            });
         });
     }
-    return false;
+    return Promise.resolve(false);
 }
 
 
 function validateAll() {
     const modalSubmitButton = document.querySelector('#exampleModal button[type="submit"]');
-    if (validateEmail()) {
-        modalSubmitButton.disabled = false;
-        return true;
-    } else {
-        modalSubmitButton.disabled = true;
-        return false;
-    }
+    return validateEmail().then(result => {
+        modalSubmitButton.disabled = !result;
+        return result;
+    });
 }
-
-
 
 (() => {
     'use strict'
@@ -66,6 +73,7 @@ function validateAll() {
     Array.from(forms).forEach(form => {
         form.addEventListener('submit', event => {
             if (!validateAll()) { //change valid method
+
                 event.preventDefault()
                 event.stopPropagation()
             }
