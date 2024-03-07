@@ -1,14 +1,15 @@
 package com.example.group37software_engineering.model;
 
 
+import com.example.group37software_engineering.repo.LeagueRepository;
 import jakarta.persistence.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
 public class MyUser {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
@@ -33,6 +34,11 @@ public class MyUser {
     private Boolean emailVerificationStatus = false;
     private LocalDateTime emailVerificationTokenExpiry;
 
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Achievement> achievements;
+
+    @ManyToOne
+    private League league;
     public int getId() {
         return id;
     }
@@ -143,5 +149,21 @@ public class MyUser {
 
     public void setEmailVerificationTokenExpiry(LocalDateTime emailVerificationTokenExpiry) {
         this.emailVerificationTokenExpiry = emailVerificationTokenExpiry;
+    }
+
+    public List<Achievement> getAchievements() {
+        return achievements;
+    }
+
+    public void setAchievements(List<Achievement> achievements) {
+        this.achievements = achievements;
+    }
+
+    public League getLeague() {
+        return league;
+    }
+
+    public void setLeague(League league) {
+        this.league = league;
     }
 }

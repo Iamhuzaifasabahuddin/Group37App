@@ -94,7 +94,7 @@ public class VerificationService {
                 "        <p>Welcome to our platform! 🚀</p>\n" +
                 "        <p>Thank you for signing up. Please click the button below to verify your email address. This link will expire in 48 hours:</p>\n" +
                 "        <div class=\"button_container\">\n" +
-                "           <a href=\"" + verificationLink + "\" class=\"button button_link\">Reset Password</a>\n" +
+                "           <a href=\"" + verificationLink + "\" class=\"button button_link\">Verify Here</a>\n" +
                 "        </div>\n" +
                 "        <p>If you didn't sign up for our service, you can safely ignore this email.</p>\n" +
                 "    </div>\n" +

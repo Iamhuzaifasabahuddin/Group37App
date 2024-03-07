@@ -2,6 +2,7 @@ package com.example.group37software_engineering.service;
 
 import com.example.group37software_engineering.RegistrationService;
 import com.example.group37software_engineering.model.MyUser;
+import com.example.group37software_engineering.repo.LeagueRepository;
 import com.example.group37software_engineering.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -20,6 +21,9 @@ public class MyRegistrationService implements RegistrationService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private LeagueRepository leagueRepository;
+
     /**
      * Register a new user by encoding the password and saving the user in the repository.
      *
@@ -29,6 +33,7 @@ public class MyRegistrationService implements RegistrationService {
     @Transactional
     public void registerUser(MyUser user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setLeague(leagueRepository.findLeagueByTitle("Unranked"));
         userRepository.save(user);
     }
 }

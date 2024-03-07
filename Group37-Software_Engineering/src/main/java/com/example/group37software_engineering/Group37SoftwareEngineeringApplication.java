@@ -48,6 +48,12 @@ public class Group37SoftwareEngineeringApplication implements CommandLineRunner 
 
     @Autowired LeagueData leagueData;
 
+    @Autowired
+    private AchievementsData achievementsData;
+
+    @Autowired
+    private AchievementRepository AchievementRepository;
+
     public static void main(String[] args) {
         SpringApplication.run(Group37SoftwareEngineeringApplication.class, args);
     }
@@ -62,6 +68,10 @@ public class Group37SoftwareEngineeringApplication implements CommandLineRunner 
         }
         if(leagueRepository.count() == 0){
             leagueData.readCSVAndSaveToRepo("leagues.csv");
+        }
+
+        if(AchievementRepository.count() == 0){
+            achievementsData.readCSVAndSaveToRepo("achievements.csv");
         }
     }
 

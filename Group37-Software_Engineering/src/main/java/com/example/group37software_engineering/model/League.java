@@ -1,9 +1,9 @@
 package com.example.group37software_engineering.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class League {
@@ -14,6 +14,11 @@ public class League {
     private String title;
 
     private String imageUrl;
+
+    private Integer threshold;
+
+    @OneToMany(mappedBy = "league")
+    private List<MyUser> user= new ArrayList<MyUser>();
 
     public Integer getId() {
         return id;
@@ -37,5 +42,13 @@ public class League {
 
     public void setImageUrl(String imageURL) {
         this.imageUrl = imageURL;
+    }
+
+    public Integer getThreshold() {
+        return threshold;
+    }
+
+    public void setThreshold(Integer threshold) {
+        this.threshold = threshold;
     }
 }

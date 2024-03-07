@@ -53,14 +53,14 @@ function validateAll() {
 
 (() => {
     'use strict'
-    const forms = document.querySelectorAll('form')
+    const forms = document.querySelectorAll('#modalForm')
     Array.from(forms).forEach(form => {
         form.addEventListener('submit', event => {
             if (!validateAll()) { //change valid method
                 event.preventDefault()
                 event.stopPropagation()
             }
-            document.querySelectorAll('input.form-control').forEach(element => element.addEventListener('keyup', () => {
+            document.querySelectorAll('input.form-control#resetEmail').forEach(element => element.addEventListener('keyup', () => {
                 validateAll();
             }));
         }, false)

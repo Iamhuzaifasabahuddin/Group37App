@@ -1,5 +1,6 @@
-Bronze Scholar,Group37-Software_Engineering/src/main/resources/Achievements/Bronze.png
-Silver Sage,Group37-Software_Engineering/src/main/resources/Achievements/Silver.png
-Gold Guru,Group37-Software_Engineering/src/main/resources/Achievements/Gold.png
-Platinum Prodigy,Group37-Software_Engineering/src/main/resources/Achievements/Platinum.png
-Titanium Titan,Group37-Software_Engineering/src/main/resources/Achievements/Titanium.png
+Bronze Scholar,Group37-Software_Engineering/src/main/resources/Achievements/Bronze.png,1000
+Silver Sage,Group37-Software_Engineering/src/main/resources/Achievements/Silver.png,2500
+Gold Guru,Group37-Software_Engineering/src/main/resources/Achievements/Gold.png,4000
+Platinum Prodigy,Group37-Software_Engineering/src/main/resources/Achievements/Platinum.png,7000
+Titanium Titan,Group37-Software_Engineering/src/main/resources/Achievements/Titanium.png,12000
+Unranked,Group37-Software_Engineering/src/main/resources/Achievements/Unranked.png,0
