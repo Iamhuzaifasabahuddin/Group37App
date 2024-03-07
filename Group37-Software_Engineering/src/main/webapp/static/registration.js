@@ -83,13 +83,46 @@ function validateUsername() {
     const input = document.querySelector(`#${id}`);
     const feedback = document.querySelector(`.invalid-feedback.${id}`);
     changeValidity(input, feedback, false);
-    if (validateNotEmpty(id) && validateNoSpaces(id) &&
-        validateLength(id, 4, 20)) {
-        changeValidity(input, feedback, true);
-        feedback.textContent = '';
-        return true;
+    if (validateNotEmpty(id) && validateNoSpaces(id) && validateLength(id, 4, 20)) {
+        $.ajax({
+            url: '/checkUsername',
+            type: 'GET',
+            data: {username: input.value},
+            success: function (data) {
+                const parsedData = JSON.parse(data);
+                if (parsedData.usernameExists) {
+                    const suggestions = generateUsernameSuggestions(input.value);
+                    feedback.textContent = 'Username is already taken! Suggestions: ' + suggestions.join(', ');
+                } else {
+                    changeValidity(input, feedback, true);
+                    feedback.textContent = '';
+                }
+            }
+        });
     }
     return false;
+}
+
+function generateUsernameSuggestions(username) {
+    const suggestions = [];
+    let count = 0;
+    while (count < 5) {
+        let suggestedUsername = username + Math.floor(Math.random() * 100);
+        $.ajax({
+            url: '/checkUsername',
+            type: 'GET',
+            async: false,
+            data: {username: suggestedUsername},
+            success: function (data) {
+                const parsedData = JSON.parse(data);
+                if (!parsedData.usernameExists) {
+                    suggestions.push(suggestedUsername);
+                    count++;
+                }
+            }
+        });
+    }
+    return suggestions;
 }
 
 function validateEmail() {
@@ -98,13 +131,22 @@ function validateEmail() {
     const feedback = document.querySelector(`.invalid-feedback.${id}`);
     changeValidity(input, feedback, false);
     if (validateNotEmpty(id)) {
-        if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(input.value)) {
-            feedback.textContent = 'Must be a valid email address!'
-        } else {
-            changeValidity(input, feedback, true);
-            feedback.textContent = '';
-            return true;
-        }
+        $.ajax({
+            url: '/checkEmail',
+            type: 'get',
+            data: {email: input.value},
+            success: function (data) {
+                const parsedData = JSON.parse(data);
+                if (parsedData.emailExists) {
+                    feedback.textContent = 'Email is already taken!';
+                } else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(input.value)) {
+                    feedback.textContent = 'Must be a valid email address!'
+                } else {
+                    changeValidity(input, feedback, true);
+                    feedback.textContent = '';
+                }
+            }
+        });
     }
     return false;
 }
@@ -150,7 +192,7 @@ function validateAll() {
     }
 }
 
-document.getElementById('backButton').addEventListener('click', function() {
+document.getElementById('backButton').addEventListener('click', function () {
     window.location.href = "${pageContext.request.contextPath}/login";
 });
 

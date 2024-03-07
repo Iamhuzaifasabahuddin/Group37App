@@ -24,15 +24,24 @@ function validateEmail() {
     const id = 'resetEmail';
     const input = document.querySelector(`#${id}`);
     const feedback = document.querySelector(`.invalid-feedback.${id}`);
-    changeValidity(input, feedback, false);
     if (validateNotEmpty(id)) {
-        if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(input.value)) {
-            feedback.textContent = 'Must be a valid email address!'
-        } else {
-            changeValidity(input, feedback, true);
-            feedback.textContent = '';
-            return true;
-        }
+        $.ajax({
+            url: '/checkResetEmail',
+            type: 'get',
+            data: {resetEmail: input.value},
+            success: function (data) {
+                const parsedData = JSON.parse(data);
+                if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+                    .test(input.value)) {
+                    feedback.textContent = 'Must be a valid email address!';
+                } else if (!parsedData.emailExists) {
+                    feedback.textContent = 'Email not found!';
+                } else {
+                    changeValidity(input, feedback, true);
+                    feedback.textContent = '';
+                }
+            }
+        });
     }
     return false;
 }
