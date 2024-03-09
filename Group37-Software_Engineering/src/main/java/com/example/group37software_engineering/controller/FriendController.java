@@ -33,7 +33,8 @@ public class FriendController {
         users.removeAll(senderRequests.stream().map(FriendRequest::getReceiver).toList());
         users.removeAll(receiverRequests.stream().map(FriendRequest::getSender).toList());
         model.addAttribute("users", users);
-        model.addAttribute("requests", receiverRequests);
+        model.addAttribute("senderRequests", senderRequests);
+        model.addAttribute("receiverRequests", receiverRequests);
         model.addAttribute("friends", friends);
         return "friends";
     }

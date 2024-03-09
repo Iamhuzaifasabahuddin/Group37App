@@ -14,6 +14,9 @@
     <p>${friend.getUsername()}</p>
 </c:forEach>
 <h1>Search Friends</h1>
+<c:forEach items="${senderRequests}" var="request">
+    <p>${request.getReceiver().getUsername()} | Request sent</p>
+</c:forEach>
 <c:forEach items="${users}" var="user">
     <form action="/addFriend">
         <p>${user.getUsername()}</p>
@@ -23,7 +26,7 @@
 
 </c:forEach>
 <h1>Requests</h1>
-<c:forEach items="${requests}" var="request">
+<c:forEach items="${receiverRequests}" var="request">
     <form action="/acceptRequest">
         <p>Request from ${request.getSender().getUsername()}</p>
         <input type="hidden" name="senderUsername" value="${request.getSender().getUsername()}">
