@@ -34,8 +34,8 @@ public class MyUser {
     private Boolean emailVerificationStatus = false;
     private LocalDateTime emailVerificationTokenExpiry;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<Achievement> achievements;
+    @OneToMany(mappedBy = "user")
+    private List<UserAchievement> userAchievements;
 
     @ManyToOne
     private League league;
@@ -151,12 +151,12 @@ public class MyUser {
         this.emailVerificationTokenExpiry = emailVerificationTokenExpiry;
     }
 
-    public List<Achievement> getAchievements() {
-        return achievements;
+    public List<UserAchievement> getUserAchievements() {
+        return userAchievements;
     }
 
-    public void setAchievements(List<Achievement> achievements) {
-        this.achievements = achievements;
+    public void setUserAchievements(List<UserAchievement> userAchievements) {
+        this.userAchievements = userAchievements;
     }
 
     public League getLeague() {

@@ -13,9 +13,8 @@ public class Achievement {
     private String title;
     private String description;
     private String imageUrl;
-    @ManyToMany(mappedBy = "achievements", fetch = FetchType.EAGER)
-    private List<MyUser> users = new ArrayList<MyUser>();
-
+    @OneToMany(mappedBy = "achievement")
+    private List<UserAchievement> userAchievements;
     private Integer points;
 
     public Integer getId() {
@@ -50,12 +49,12 @@ public class Achievement {
         this.description = description;
     }
 
-    public List<MyUser> getUsers() {
-        return users;
+    public List<UserAchievement> getUserAchievements() {
+        return userAchievements;
     }
 
-    public void setUsers(List<MyUser> users) {
-        this.users = users;
+    public void setUserAchievements(List<UserAchievement> userAchievements) {
+        this.userAchievements = userAchievements;
     }
 
     public Integer getPoints() {
