@@ -78,7 +78,6 @@
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
             </form>
             <p>New user? <a href="${pageContext.request.contextPath}/NewUser">Register Here</a></p>
-<%--            <p>Forgot your password? <a href="${pageContext.request.contextPath}/reset-email">Reset it here</a>.</p>--%>
             <p>Forgot your password? <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">Reset it here</a>.</p>
 
         </div>

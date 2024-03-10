@@ -1,3 +1,6 @@
+/**
+ * Controller class handling password reset functionality.
+ */
 package com.example.group37software_engineering.controller;
 
 import com.example.group37software_engineering.model.MyUser;
@@ -19,11 +22,21 @@ public class PasswordController {
     @Autowired
     private UserRepository userRepository;
 
+    /**
+     * Display the password reset request form.
+     * @return The view for the password reset request form.
+     */
     @RequestMapping("/reset-email")
     public String showPasswordResetRequestForm() {
         return "PasswordReset/ResetEmailForm";
     }
 
+    /**
+     * Handle the password reset request.
+     * @param email The email of the user requesting password reset.
+     * @param redirectAttributes Redirect attributes to add flash messages.
+     * @return Redirect to the login page with appropriate flash message.
+     */
     @GetMapping("/request")
     public String requestPasswordReset(@RequestParam("email") String email, RedirectAttributes redirectAttributes) {
         MyUser user = userRepository.findByEmail(email);
@@ -36,6 +49,12 @@ public class PasswordController {
         return "redirect:/login";
     }
 
+    /**
+     * Display the password reset form.
+     * @param token The token for password reset.
+     * @param redirectAttributes Redirect attributes to add flash messages.
+     * @return Redirect to the login page if token is invalid, else display password reset form.
+     */
     @GetMapping("/reset-password-form")
     public String showPasswordResetForm(@RequestParam("token") String token, RedirectAttributes redirectAttributes) {
         MyUser user = passwordResetService.findByPasswordResetToken(token);
@@ -46,6 +65,13 @@ public class PasswordController {
         return "PasswordReset/PasswordResetForm";
     }
 
+    /**
+     * Reset the user's password.
+     * @param token The token for password reset.
+     * @param password The new password.
+     * @param redirectAttributes Redirect attributes to add flash messages.
+     * @return Redirect to the login page with appropriate flash message.
+     */
     @GetMapping("/reset")
     public String resetPassword(@RequestParam("token") String token,
                                 @RequestParam("password") String password, RedirectAttributes redirectAttributes) {

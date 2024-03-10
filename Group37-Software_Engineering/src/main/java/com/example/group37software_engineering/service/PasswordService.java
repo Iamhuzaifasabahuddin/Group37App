@@ -1,3 +1,6 @@
+/**
+ * Service class responsible for handling password reset functionality.
+ */
 package com.example.group37software_engineering.service;
 
 import com.example.group37software_engineering.model.MyUser;
@@ -22,6 +25,12 @@ public class PasswordService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    /**
+     * Sends a password reset email to the user containing a unique token.
+     *
+     * @param user  The user for whom the password reset email is sent.
+     * @param token The unique token for password reset.
+     */
     public void sendPasswordResetEmail(MyUser user, String token) {
         String subject = "Password Reset Request";
         String resetLink = "https://localhost:8443/reset-password-form?token=" + token;
@@ -118,6 +127,11 @@ public class PasswordService {
         emailService.sendSimpleMessage(user.getEmail(), subject, text);
     }
 
+    /**
+     * Sends an email notification to the user upon successful password reset.
+     *
+     * @param user The user for whom the password has been reset.
+     */
     public void successfulPasswordResetEmail(MyUser user) {
         String subject = "Password Reset Successful";
         String text = "<!DOCTYPE html>\n" +
@@ -184,6 +198,11 @@ public class PasswordService {
         emailService.sendSimpleMessage(user.getEmail(), subject, text);
     }
 
+    /**
+     * Initiates the password reset process for the user.
+     *
+     * @param user The user requesting the password reset.
+     */
     public void initiatePasswordReset(MyUser user) {
         String token = generateToken();
         user.setPasswordResetToken(token);
@@ -192,10 +211,22 @@ public class PasswordService {
         sendPasswordResetEmail(user, token);
     }
 
+    /**
+     * Finds a user by their password reset token.
+     *
+     * @param token The password reset token.
+     * @return The user associated with the token.
+     */
     public MyUser findByPasswordResetToken(String token) {
         return userRepository.findByPasswordResetToken(token);
     }
 
+    /**
+     * Resets the user's password.
+     *
+     * @param user        The user whose password is being reset.
+     * @param newPassword The new password.
+     */
     public void resetPassword(MyUser user, String newPassword) {
         user.setPassword(passwordEncoder.encode(newPassword));
         user.setPasswordResetToken(null);
@@ -204,6 +235,11 @@ public class PasswordService {
         successfulPasswordResetEmail(user);
     }
 
+    /**
+     * Generates a secure random token for password reset.
+     *
+     * @return The generated token.
+     */
     private String generateToken() {
         SecureRandom secureRandom = new SecureRandom();
         byte[] tokenBytes = new byte[32];

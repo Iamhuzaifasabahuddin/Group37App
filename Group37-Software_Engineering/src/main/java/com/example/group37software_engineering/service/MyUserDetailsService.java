@@ -1,3 +1,6 @@
+/**
+ * Service class for loading user details for authentication.
+ */
 package com.example.group37software_engineering.service;
 
 import com.example.group37software_engineering.Exceptions.EmailNotVerifiedException;
@@ -14,9 +17,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Service class for loading user details for authentication.
- */
 @Service
 public class MyUserDetailsService implements UserDetailsService {
 
@@ -32,15 +32,16 @@ public class MyUserDetailsService implements UserDetailsService {
     /**
      * Load user details by username for authentication.
      *
-     * @param usernameorEmail The username of the user to load.
+     * @param usernameorEmail The username or email of the user to load.
      * @return UserDetails object representing the user.
      * @throws UsernameNotFoundException If the user is not found.
+     * @throws EmailNotVerifiedException If the user's email is not verified.
      */
     @Override
-    public UserDetails loadUserByUsername(String usernameorEmail) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String usernameorEmail) throws UsernameNotFoundException, EmailNotVerifiedException {
         MyUser user = userRepository.findByUsernameOrEmail(usernameorEmail, usernameorEmail);
         if (user == null) {
-            throw new UsernameNotFoundException("User not found with username: " + usernameorEmail);
+            throw new UsernameNotFoundException("User not found with username or email: " + usernameorEmail);
         }
         if (!user.getEmailVerificationStatus()) {
             verificationService.initiateEmailVerification(user);

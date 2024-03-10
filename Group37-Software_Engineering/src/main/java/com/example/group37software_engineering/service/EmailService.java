@@ -1,3 +1,6 @@
+/**
+ * Service class responsible for sending email messages.
+ */
 package com.example.group37software_engineering.service;
 
 import jakarta.mail.MessagingException;
@@ -13,6 +16,12 @@ public class EmailService {
     @Autowired
     private JavaMailSender emailSender;
 
+    /**
+     * Sends a simple email message.
+     * @param to The recipient's email address.
+     * @param subject The subject of the email.
+     * @param text The body/content of the email.
+     */
     public void sendSimpleMessage(String to, String subject, String text) {
         try {
             MimeMessage message = emailSender.createMimeMessage();

@@ -1,9 +1,7 @@
 package com.example.group37software_engineering;
 
 import com.example.group37software_engineering.model.Achievement;
-import com.example.group37software_engineering.model.League;
 import com.example.group37software_engineering.repo.AchievementRepository;
-import com.example.group37software_engineering.repo.LeagueRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
@@ -12,7 +10,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-
+/**
+ * Service class for reading data from a CSV file and saving it to the AchievementRepository.
+ */
 @Service
 public class AchievementsData {
 
@@ -20,14 +20,9 @@ public class AchievementsData {
     private AchievementRepository achievementRepository;
 
     /**
-     * Constructor for LeagueData.
+     * Read data from a CSV file and save it to the AchievementRepository.
      *
-     * @param leagueRepository The repository for managing League entities.
-     */
-    /**
-     * Read data from a CSV file and save it to the LeagueRepository.
-     *
-     * @param csvFilePath The path to the CSV file containing league data.
+     * @param csvFilePath The path to the CSV file containing achievement data.
      */
     public void readCSVAndSaveToRepo(String csvFilePath) {
         try (BufferedReader br = new BufferedReader(new InputStreamReader(

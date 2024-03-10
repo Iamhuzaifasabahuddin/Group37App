@@ -77,18 +77,19 @@ function validateLastname() {
     }
     return false;
 }
+
 function checkUsername(username) {
     let usernameExists;
     $.ajax({
         url: '/checkUsername',
         type: 'GET',
         async: false,
-        data: { username: username },
-        success: function(data) {
+        data: {username: username},
+        success: function (data) {
             const parsedData = JSON.parse(data);
             usernameExists = parsedData.usernameExists;
         },
-        error: function() {
+        error: function () {
             usernameExists = false;
         }
     });
@@ -149,17 +150,18 @@ function checkEmail(email) {
         url: '/checkEmail',
         type: 'GET',
         async: false,
-        data: { email: email },
-        success: function(data) {
+        data: {email: email},
+        success: function (data) {
             const parsedData = JSON.parse(data);
             emailExists = parsedData.emailExists;
         },
-        error: function() {
+        error: function () {
             emailExists = false;
         }
     });
     return emailExists;
 }
+
 function validateEmail() {
     const id = 'email';
     const input = document.querySelector(`#${id}`);
@@ -170,8 +172,7 @@ function validateEmail() {
         if (emailExists) {
             feedback.textContent = 'Email is already registered!';
             return false;
-        }
-        else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(input.value)) {
+        } else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(input.value)) {
             feedback.textContent = 'Must be a valid email address!';
             return false;
         } else {
@@ -183,15 +184,47 @@ function validateEmail() {
     return false;
 }
 
+function checkPasswordStrength() {
+    var password = document.getElementById('password').value;
+    var strength = 'Weak';
+    var missing = [];
+
+    var hasUpperCase = /[A-Z]/.test(password);
+    var hasLowerCase = /[a-z]/.test(password);
+    var hasDigit = /\d/.test(password);
+    var hasSpecialChar = /[!@#$%^&*]/.test(password);
+
+    if (password.length >= 8) {
+        if (hasUpperCase && hasLowerCase && hasDigit && hasSpecialChar) {
+            strength = 'Strong';
+        } else {
+            strength = 'Medium';
+            if (!hasUpperCase) missing.push('an uppercase letter');
+            if (!hasLowerCase) missing.push('a lowercase letter');
+            if (!hasDigit) missing.push('a digit');
+            if (!hasSpecialChar) missing.push('a special character');
+        }
+    } else {
+        missing.push('at least 8 characters');
+    }
+
+    return {strength: strength, missing: missing};
+}
+
 function validatePassword() {
     const id = 'password';
     const input = document.querySelector(`#${id}`);
     const feedback = document.querySelector(`.invalid-feedback.${id}`);
     changeValidity(input, feedback, false);
     if (validateNotEmpty(id) && validateLength(id, 8, 32)) {
-        changeValidity(input, feedback, true);
-        feedback.textContent = '';
-        return true;
+        var result = checkPasswordStrength();
+        if (result.strength === 'Strong') {
+            changeValidity(input, feedback, true);
+            feedback.textContent = '';
+        } else {
+            feedback.textContent = 'Password is missing: ' + result.missing.join(', ');
+        }
+        return result.strength === 'Strong';
     }
     return false;
 }

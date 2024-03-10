@@ -10,12 +10,22 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDateTime;
 
+/**
+ * Controller class for handling email verification requests.
+ */
 @Controller
 public class VerificationController {
 
     @Autowired
     private VerificationService verificationService;
 
+    /**
+     * Endpoint for verifying user email.
+     *
+     * @param token The verification token sent via email.
+     * @param redirectAttributes Redirect attributes to add flash messages.
+     * @return The redirection URL to the login page.
+     */
     @GetMapping("/verifyEmail")
     public String verifyEmail(@RequestParam("token") String token, RedirectAttributes redirectAttributes) {
         MyUser user = verificationService.findByEmailVerificationToken(token);

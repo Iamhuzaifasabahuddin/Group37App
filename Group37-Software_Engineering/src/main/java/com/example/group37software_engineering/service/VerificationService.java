@@ -1,3 +1,6 @@
+/**
+ * Service class responsible for handling email verification functionality.
+ */
 package com.example.group37software_engineering.service;
 
 import com.example.group37software_engineering.model.MyUser;
@@ -18,6 +21,12 @@ public class VerificationService {
     @Autowired
     private EmailService emailService;
 
+    /**
+     * Sends an email verification link to the user.
+     *
+     * @param user  The user to whom the verification link is sent.
+     * @param token The verification token.
+     */
     public void sendEmailVerification(MyUser user, String token) {
         String subject = "Email Verification";
         String verificationLink = "https://localhost:8443/verifyEmail?token=" + token;
@@ -92,7 +101,7 @@ public class VerificationService {
                 "    <div class=\"content\">\n" +
                 "        <p>Dear " + user.getFirstname() + ",</p>\n" +
                 "        <p>Welcome to our platform! 🚀</p>\n" +
-                "        <p>Thank you for signing up. Please click the button below to verify your email address. This link will expire in 48 hours:</p>\n" +
+                "        <p>Thank you for signing up. Please click the button below to verify your email address. This link will expire in <strong> 48 hours</strong>⏳:</p>\n" +
                 "        <div class=\"button_container\">\n" +
                 "           <a href=\"" + verificationLink + "\" class=\"button button_link\">Verify Here</a>\n" +
                 "        </div>\n" +
@@ -109,7 +118,13 @@ public class VerificationService {
         emailService.sendSimpleMessage(user.getEmail(), subject, text);
     }
 
-    public void successfulEmailVerification(MyUser user){
+    /**
+     * Sends an email notification upon successful email verification.
+     *
+     * @param user The user whose email has been verified.
+     */
+
+    public void successfulEmailVerification(MyUser user) {
         String subject = "Email Successfully Verified";
         String text = "<!DOCTYPE html>" +
                 "<html lang=\"en\">" +
@@ -172,7 +187,11 @@ public class VerificationService {
         emailService.sendSimpleMessage(user.getEmail(), subject, text);
     }
 
-
+    /**
+     * Initiates the email verification process for the user.
+     *
+     * @param user The user requesting email verification.
+     */
     public void initiateEmailVerification(MyUser user) {
         String token = generateToken();
         user.setEmailVerificationToken(token);
@@ -181,10 +200,21 @@ public class VerificationService {
         sendEmailVerification(user, token);
     }
 
+    /**
+     * Finds a user by their email verification token.
+     *
+     * @param token The email verification token.
+     * @return The user associated with the token.
+     */
     public MyUser findByEmailVerificationToken(String token) {
         return userRepository.findByEmailVerificationToken(token);
     }
 
+    /**
+     * Marks the user's email as verified.
+     *
+     * @param user The user whose email is being verified.
+     */
     public void verifyEmail(MyUser user) {
         user.setEmailVerificationStatus(true);
         user.setEmailVerificationToken(null);
@@ -192,7 +222,11 @@ public class VerificationService {
         userRepository.save(user);
     }
 
-
+    /**
+     * Generates a secure random token for email verification.
+     *
+     * @return The generated token.
+     */
     private String generateToken() {
         SecureRandom secureRandom = new SecureRandom();
         byte[] tokenBytes = new byte[32];
