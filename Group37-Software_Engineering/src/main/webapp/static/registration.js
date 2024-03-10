@@ -1,3 +1,4 @@
+// Function to change the validity of an input field based on a boolean flag
 function changeValidity(input, feedback, validity) {
     if (validity) {
         input.classList.add('is-valid');
@@ -10,6 +11,7 @@ function changeValidity(input, feedback, validity) {
     }
 }
 
+// Function to validate if an input field is not empty
 function validateNotEmpty(id) {
     const input = document.querySelector(`#${id}`);
     const feedback = document.querySelector(`.invalid-feedback.${id}`);
@@ -20,6 +22,7 @@ function validateNotEmpty(id) {
     return true;
 }
 
+// Function to validate if an input field does not contain spaces
 function validateNoSpaces(id) {
     const input = document.querySelector(`#${id}`);
     const feedback = document.querySelector(`.invalid-feedback.${id}`);
@@ -30,6 +33,7 @@ function validateNoSpaces(id) {
     return true;
 }
 
+// Function to validate the length of an input field
 function validateLength(id, min, max) {
     const input = document.querySelector(`#${id}`);
     const feedback = document.querySelector(`.invalid-feedback.${id}`);
@@ -40,6 +44,8 @@ function validateLength(id, min, max) {
     return true;
 }
 
+
+// Function to validate if an input field contains only alphabetic characters
 function validateAlphabetic(id) {
     const input = document.querySelector(`#${id}`);
     const feedback = document.querySelector(`.invalid-feedback.${id}`);
@@ -50,6 +56,13 @@ function validateAlphabetic(id) {
     return true;
 }
 
+/*
+Function to validate the first name
+    - Must not be empty
+    - Must have 3-15 characters
+    - Must not have any spaces
+    - Must only contain alphabetic characters
+*/
 function validateFirstname() {
     const id = 'firstname';
     const input = document.querySelector(`#${id}`);
@@ -64,6 +77,13 @@ function validateFirstname() {
     return false;
 }
 
+/*
+Function to validate the last name
+    - Must not be empty
+    - Must have 3-20 characters
+    - Must not have any spaces
+    - Must only contain alphabetic characters
+*/
 function validateLastname() {
     const id = 'lastname';
     const input = document.querySelector(`#${id}`);
@@ -78,6 +98,7 @@ function validateLastname() {
     return false;
 }
 
+// Function to validate if username already exists
 function checkUsername(username) {
     let usernameExists;
     $.ajax({
@@ -96,6 +117,13 @@ function checkUsername(username) {
     return usernameExists;
 }
 
+/*
+Function to validate the username
+    - Must not be empty
+    - Must have 4-20 characters
+    - Must not have any spaces
+    - Must not already be taken
+*/
 function validateUsername() {
     const id = 'username';
     const input = document.querySelector(`#${id}`);
@@ -119,6 +147,7 @@ function validateUsername() {
 
 let usernameSuggestions = [];
 
+// Function to generate username suggestions
 function generateUsernameSuggestions(username) {
     if (usernameSuggestions.length > 0) {
         return usernameSuggestions;
@@ -144,6 +173,7 @@ function generateUsernameSuggestions(username) {
     return usernameSuggestions;
 }
 
+// Function to check if email already exists
 function checkEmail(email) {
     let emailExists;
     $.ajax({
@@ -162,6 +192,11 @@ function checkEmail(email) {
     return emailExists;
 }
 
+/*
+Function to validate email
+    - Must follow valid format
+    - Must not already be registered
+ */
 function validateEmail() {
     const id = 'email';
     const input = document.querySelector(`#${id}`);
@@ -184,6 +219,14 @@ function validateEmail() {
     return false;
 }
 
+/*
+Function to check the strength of the password
+    - Must be between 8-32 characters
+    - Must have uppercase
+    - Must have lowercase
+    - Must have a digit
+    - Must have a special character
+ */
 function checkPasswordStrength() {
     var password = document.getElementById('password').value;
     var strength = 'Weak';
@@ -192,7 +235,7 @@ function checkPasswordStrength() {
     var hasUpperCase = /[A-Z]/.test(password);
     var hasLowerCase = /[a-z]/.test(password);
     var hasDigit = /\d/.test(password);
-    var hasSpecialChar = /[!@#$%^&*]/.test(password);
+    var hasSpecialChar = /[!@#£$%^&*()_+{}:;<>,.?~='/-]/.test(password);
 
     if (password.length >= 8) {
         if (hasUpperCase && hasLowerCase && hasDigit && hasSpecialChar) {
@@ -211,6 +254,7 @@ function checkPasswordStrength() {
     return {strength: strength, missing: missing};
 }
 
+// Function to validate the password
 function validatePassword() {
     const id = 'password';
     const input = document.querySelector(`#${id}`);
@@ -229,6 +273,7 @@ function validatePassword() {
     return false;
 }
 
+// Function to validate that both of the passwords match
 function validateConfirmPassword() {
     const id = 'confirmPassword';
     const input = document.querySelector(`#${id}`);
@@ -246,6 +291,7 @@ function validateConfirmPassword() {
     return false;
 }
 
+// Function to disable submit button if any input fields are invalid
 function validateAll() {
     if ([validateFirstname(), validateLastname(), validateUsername(),
         validateEmail(), validatePassword(), validateConfirmPassword()].every(f => f)) {
