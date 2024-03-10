@@ -9,9 +9,9 @@ public class FriendRequest {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @OneToOne
+    @ManyToOne
     private MyUser sender;
-    @OneToOne
+    @ManyToOne
     private MyUser receiver;
 
     public int getId() {
