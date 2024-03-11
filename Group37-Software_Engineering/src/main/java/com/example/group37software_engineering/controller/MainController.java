@@ -93,9 +93,15 @@ public class MainController {
         model.addAttribute("Completed", countCompleted(principal.getName()));
         model.addAttribute("Percentage", hoursCompleted(principal.getName()));
         model.addAttribute("Hours", hoursLeft(principal.getName()));
-        model.addAttribute("Rank", addRankSuffix(getRank(principal.getName())));
+        if(user.getPoints() == 0){
+            model.addAttribute("Rank", "Unranked");
+        }
+        else{
+            model.addAttribute("Rank", addRankSuffix(getRank(principal.getName())));
+        }
         model.addAttribute("Points", user.getPoints());
-        return "profile";
+        model.addAttribute("league", user.getLeague().getImageUrl());
+        return "profile2";
     }
 
     /**

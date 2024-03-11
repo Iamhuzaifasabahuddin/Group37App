@@ -86,7 +86,8 @@ public class SecurityConfig {
                 .defaultSuccessUrl("/success-login", true)
                 .failureUrl("/error-login")
                 .permitAll()
-        ).logout(logout -> logout.invalidateHttpSession(true)
+        ).logout(logout -> logout.deleteCookies("JSESSIONID", "remember-me")
+                .invalidateHttpSession(true)
                 .logoutSuccessUrl("/login")
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .permitAll()
@@ -125,7 +126,7 @@ public class SecurityConfig {
         RefreshingRememberMeServices rememberMeServices =
                 new RefreshingRememberMeServices("unique", userDetailsService);
         rememberMeServices.setCookieName("remember-me");
-        rememberMeServices.setTokenValiditySeconds(60 * 60 * 24);
+        rememberMeServices.setTokenValiditySeconds(60 * 60 * 24 * 7);
         return rememberMeServices;
     }
 }

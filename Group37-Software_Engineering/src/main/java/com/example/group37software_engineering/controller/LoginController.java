@@ -45,15 +45,7 @@ public class LoginController {
      * @return The view name for the login form.
      */
     @GetMapping("/login")
-    public String loginForm(HttpServletRequest request) {
-        Cookie[] cookies = request.getCookies();
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if ("remember-me".equals(cookie.getName())) {
-                    return "redirect:/success-login";
-                }
-            }
-        }
+    public String loginForm() {
         return "Login/login";
     }
 
@@ -90,7 +82,7 @@ public class LoginController {
      * @return The redirection URL to the dashboard.
      */
     @RequestMapping(value = "/success-login", method = RequestMethod.GET)
-    public String successLogin(Principal principal, RedirectAttributes redirectAttributes) {
+    public String successLogin(Principal principal) {
         MyUser user = userRepository.findByUsername(principal.getName());
         List<UserCourses> userCourses = userCourseRepository.findByUser(user);
         List<Course> courseList = userCourses.stream()
@@ -99,7 +91,6 @@ public class LoginController {
         if (courseList.isEmpty()) {
             return "redirect:/courses";
         } else {
-            redirectAttributes.addFlashAttribute("message", "Successfully logged in");
             return "redirect:/dashboard";
         }
     }
