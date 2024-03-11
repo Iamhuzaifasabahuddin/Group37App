@@ -18,6 +18,9 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.StreamSupport;
 
+/**
+ * Controller for handling achievements related operations.
+ */
 @Controller
 public class AchievementController {
 
@@ -39,6 +42,13 @@ public class AchievementController {
     @Autowired
     private LeagueRepository leagueRepository;
 
+    /**
+     * Endpoint for showing achievements.
+     *
+     * @param model     the model to add attributes to for rendering in the view
+     * @param principal the currently authenticated user
+     * @return the name of the view to render
+     */
     @GetMapping("/achievements")
     public String showAchievements(Model model, Principal principal) {
         MyUser user = userRepository.findByUsername(principal.getName());
@@ -49,11 +59,24 @@ public class AchievementController {
         return "achievements";
     }
 
+    /**
+     * Checks if a user has achieved a specific achievement.
+     *
+     * @param user        the user to check
+     * @param achievement the achievement to check
+     * @return true if the user has not achieved the achievement, false otherwise
+     */
     private boolean IsUserAchievement(MyUser user, Achievement achievement) {
         return user.getUserAchievements().stream()
                 .noneMatch(userAchievement -> userAchievement.getAchievement().equals(achievement));
     }
 
+    /**
+     * Gets a list of achievements not achieved by a user.
+     *
+     * @param user the user to get not achieved achievements for
+     * @return a list of achievements not achieved by the user
+     */
     public List<Achievement> NotAchieved(MyUser user) {
         List<Achievement> allAchievements = (List<Achievement>) achievementRepository.findAll();
         List<Achievement> notachieved = new ArrayList<Achievement>();
@@ -65,6 +88,12 @@ public class AchievementController {
         return notachieved;
     }
 
+
+    /**
+     * Gets the count of distinct course categories.
+     *
+     * @return the count of distinct course categories
+     */
     private Integer getDistinctCategoryCount() {
         List<Course> courses = (List<Course>) courseRepository.findAll();
         return Math.toIntExact(courses.stream()
@@ -73,7 +102,11 @@ public class AchievementController {
                 .count());
     }
 
-
+    /**
+     * Checks and updates the "Fantastic 4" achievement for a user.
+     *
+     * @param user the user to check and update the achievement for
+     */
     public void Fantastic4(MyUser user) {
         Achievement achievement = achievementRepository.findAchievementByTitle("Fantastic 4");
         UserAchievement userAchievement = userAchievementRepository.findUserAchievementByUserAndAchievement(user, achievement);
@@ -103,6 +136,13 @@ public class AchievementController {
         }
     }
 
+    /**
+     * This method checks if the user has verified their email. If they have and they haven't already achieved the "Crypto" achievement,
+     * it creates a new UserAchievement for the user, sets the achievement to "Crypto", marks it as achieved, sets the date and time of achievement,
+     * adds the achievement points to the user's total points, and saves the user and the UserAchievement in their respective repositories.
+     *
+     * @param user The user to check for the achievement.
+     */
     public void Crypto(MyUser user) {
         Achievement achievement = achievementRepository.findAchievementByTitle("Crypto");
         UserAchievement userAchievement = userAchievementRepository.findUserAchievementByUserAndAchievement(user, achievement);
@@ -119,6 +159,13 @@ public class AchievementController {
         }
     }
 
+    /**
+     * This method checks if the user has completed a course in the "Cybersecurity" category. If they have and they haven't already achieved the "Daredevil" achievement,
+     * it creates a new UserAchievement for the user, sets the achievement to "Daredevil", marks it as achieved, sets the date and time of achievement,
+     * adds the achievement points to the user's total points, and saves the user and the UserAchievement in their respective repositories.
+     *
+     * @param user The user to check for the achievement.
+     */
     public void Daredevil(MyUser user) {
         Achievement achievement = achievementRepository.findAchievementByTitle("Daredevil");
         UserAchievement userAchievement = userAchievementRepository.findUserAchievementByUserAndAchievement(user, achievement);
@@ -142,6 +189,13 @@ public class AchievementController {
         }
     }
 
+    /**
+     * This method checks if the user has completed a course in the "Cybersecurity" category. If they have and they haven't already achieved the "The Dark Knight" achievement,
+     * it creates a new UserAchievement for the user, sets the achievement to "The Dark Knight", marks it as achieved, sets the date and time of achievement,
+     * adds the achievement points to the user's total points, and saves the user and the UserAchievement in their respective repositories.
+     *
+     * @param user The user to check for the achievement.
+     */
     public void TheDarkKnight(MyUser user) {
         Achievement achievement = achievementRepository.findAchievementByTitle("The Dark Knight");
         UserAchievement userAchievement = userAchievementRepository.findUserAchievementByUserAndAchievement(user, achievement);
@@ -165,6 +219,13 @@ public class AchievementController {
         }
     }
 
+    /**
+     * This method checks if the user has completed a course in the "Artificial Intelligence" category. If they have and they haven't already achieved the "Cyber Guardian" achievement,
+     * it creates a new UserAchievement for the user, sets the achievement to "Cyber Guardian", marks it as achieved, sets the date and time of achievement,
+     * adds the achievement points to the user's total points, and saves the user and the UserAchievement in their respective repositories.
+     *
+     * @param user The user to check for the achievement.
+     */
     public void CyberGuardian(MyUser user) {
         Achievement achievement = achievementRepository.findAchievementByTitle("Cyber Guardian");
         UserAchievement userAchievement = userAchievementRepository.findUserAchievementByUserAndAchievement(user, achievement);
@@ -188,7 +249,13 @@ public class AchievementController {
         }
     }
 
-
+    /**
+     * This method checks if the user has completed a course in the "Artificial Intelligence" category. If they have and they haven't already achieved the "Cortana" achievement,
+     * it creates a new UserAchievement for the user, sets the achievement to "Cortana", marks it as achieved, sets the date and time of achievement,
+     * adds the achievement points to the user's total points, and saves the user and the UserAchievement in their respective repositories.
+     *
+     * @param user The user to check for the achievement.
+     */
     public void Cortana(MyUser user) {
         Achievement achievement = achievementRepository.findAchievementByTitle("Cortana");
         UserAchievement userAchievement = userAchievementRepository.findUserAchievementByUserAndAchievement(user, achievement);
@@ -212,6 +279,13 @@ public class AchievementController {
         }
     }
 
+    /**
+     * This method checks if the user has completed a course in the "Data Science" category. If they have and they haven't already achieved the "Data Wizard" achievement,
+     * it creates a new UserAchievement for the user, sets the achievement to "Data Wizard", marks it as achieved, sets the date and time of achievement,
+     * adds the achievement points to the user's total points, and saves the user and the UserAchievement in their respective repositories.
+     *
+     * @param user The user to check for the achievement.
+     */
     public void Noble6(MyUser user) {
         Achievement achievement = achievementRepository.findAchievementByTitle("Noble 6");
         UserAchievement userAchievement = userAchievementRepository.findUserAchievementByUserAndAchievement(user, achievement);
@@ -234,6 +308,13 @@ public class AchievementController {
         }
     }
 
+    /**
+     * This method checks if the user has completed a course in the "Data Science" category. If they have and they haven't already achieved the "Data Wizard" achievement,
+     * it creates a new UserAchievement for the user, sets the achievement to "Data Wizard", marks it as achieved, sets the date and time of achievement,
+     * adds the achievement points to the user's total points, and saves the user and the UserAchievement in their respective repositories.
+     *
+     * @param user The user to check for the achievement.
+     */
     public void TheFlash(MyUser user) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mm a");
 
@@ -269,6 +350,13 @@ public class AchievementController {
         }
     }
 
+    /**
+     * This method checks if the user has completed a course in the "Data Science" category. If they have and they haven't already achieved the "Data Wizard" achievement,
+     * it creates a new UserAchievement for the user, sets the achievement to "Data Wizard", marks it as achieved, sets the date and time of achievement,
+     * adds the achievement points to the user's total points, and saves the user and the UserAchievement in their respective repositories.
+     *
+     * @param user The user to check for the achievement.
+     */
     public void DataSorcerer(MyUser user) {
         Achievement achievement = achievementRepository.findAchievementByTitle("Data sorcerer");
         UserAchievement userAchievement = userAchievementRepository.findUserAchievementByUserAndAchievement(user, achievement);
@@ -292,6 +380,13 @@ public class AchievementController {
         }
     }
 
+    /**
+     * This method checks if the user has completed a course in the "Data Science" category. If they have and they haven't already achieved the "Data Wizard" achievement,
+     * it creates a new UserAchievement for the user, sets the achievement to "Data Wizard", marks it as achieved, sets the date and time of achievement,
+     * adds the achievement points to the user's total points, and saves the user and the UserAchievement in their respective repositories.
+     *
+     * @param user The user to check for the achievement.
+     */
     public void IronLegion(MyUser user) {
         Achievement achievement = achievementRepository.findAchievementByTitle("Iron Legion");
         UserAchievement userAchievement = userAchievementRepository.findUserAchievementByUserAndAchievement(user, achievement);
@@ -315,6 +410,13 @@ public class AchievementController {
         }
     }
 
+    /**
+     * This method checks if the user has completed a course in the "Data Science" category. If they have and they haven't already achieved the "Data Wizard" achievement,
+     * it creates a new UserAchievement for the user, sets the achievement to "Data Wizard", marks it as achieved, sets the date and time of achievement,
+     * adds the achievement points to the user's total points, and saves the user and the UserAchievement in their respective repositories.
+     *
+     * @param user The user to check for the achievement.
+     */
     public void Mirage(MyUser user) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mm a");
         Achievement achievement = achievementRepository.findAchievementByTitle("Mirage");
@@ -350,6 +452,13 @@ public class AchievementController {
         }
     }
 
+    /**
+     * This method checks if the user has completed a course in the "Data Science" category. If they have and they haven't already achieved the "Data Wizard" achievement,
+     * it creates a new UserAchievement for the user, sets the achievement to "Data Wizard", marks it as achieved, sets the date and time of achievement,
+     * adds the achievement points to the user's total points, and saves the user and the UserAchievement in their respective repositories.
+     *
+     * @param user The user to check for the achievement.
+     */
     public void Octane(MyUser user) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mm a");
         Achievement achievement = achievementRepository.findAchievementByTitle("Octane");
@@ -385,6 +494,13 @@ public class AchievementController {
         }
     }
 
+    /**
+     * This method checks if the user has completed a course in the "Data Science" category. If they have and they haven't already achieved the "Data Wizard" achievement,
+     * it creates a new UserAchievement for the user, sets the achievement to "Data Wizard", marks it as achieved, sets the date and time of achievement,
+     * adds the achievement points to the user's total points, and saves the user and the UserAchievement in their respective repositories.
+     *
+     * @param user The user to check for the achievement.
+     */
     public void MrFantastic(MyUser user) {
         Achievement achievement = achievementRepository.findAchievementByTitle("MrFantastic");
         UserAchievement userAchievement = userAchievementRepository.findUserAchievementByUserAndAchievement(user, achievement);
@@ -404,10 +520,17 @@ public class AchievementController {
 
     }
 
+    /**
+     * This method checks if the user has completed a course in the "Data Science" category. If they have and they haven't already achieved the "Data Wizard" achievement,
+     * it creates a new UserAchievement for the user, sets the achievement to "Data Wizard", marks it as achieved, sets the date and time of achievement,
+     * adds the achievement points to the user's total points, and saves the user and the UserAchievement in their respective repositories.
+     *
+     * @param user The user to check for the achievement.
+     */
     public void HyperLethal(MyUser user) {
         Achievement achievement = achievementRepository.findAchievementByTitle("HyperLethal");
         UserAchievement userAchievement = userAchievementRepository.findUserAchievementByUserAndAchievement(user, achievement);
-        League league = leagueRepository.findLeagueByTitle("Platinum Prodigy");
+        League league = leagueRepository.findLeagueByTitle("Elysium");
         if (user.getPoints() >= league.getThreshold() && userAchievement == null) {
             userAchievement = new UserAchievement();
             userAchievement.setUser(user);
@@ -422,7 +545,13 @@ public class AchievementController {
         }
     }
 
-
+    /**
+     * This method checks if the user has completed a course in the "Data Science" category. If they have and they haven't already achieved the "Data Wizard" achievement,
+     * it creates a new UserAchievement for the user, sets the achievement to "Data Wizard", marks it as achieved, sets the date and time of achievement,
+     * adds the achievement points to the user's total points, and saves the user and the UserAchievement in their respective repositories.
+     *
+     * @param user The user to check for the achievement.
+     */
     public void TheChosenOne(MyUser user) {
         Achievement achievement = achievementRepository.findAchievementByTitle("The Chosen One");
         UserAchievement userAchievement = userAchievementRepository.findUserAchievementByUserAndAchievement(user, achievement);

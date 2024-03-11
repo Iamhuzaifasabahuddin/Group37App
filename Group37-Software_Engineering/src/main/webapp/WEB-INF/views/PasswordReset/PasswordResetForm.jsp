@@ -31,7 +31,7 @@
         </div>
         <div class="col">
             <h1 class="text-center mb-3">Reset Password</h1>
-            <form action="/reset" method="get" class="needs-validation mb-2" novalidate>
+            <form action="/reset" method="get" class="mb-2" novalidate>
                 <input type="hidden" name="token" value="${param.token}">
                 <div class="form-floating mb-3">
                     <input type="password" id="password" name="password" placeholder="password" required class="form-control">

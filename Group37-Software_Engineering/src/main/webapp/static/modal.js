@@ -73,7 +73,6 @@ function validateAll() {
     Array.from(forms).forEach(form => {
         form.addEventListener('submit', event => {
             if (!validateAll()) { //change valid method
-
                 event.preventDefault()
                 event.stopPropagation()
             }
