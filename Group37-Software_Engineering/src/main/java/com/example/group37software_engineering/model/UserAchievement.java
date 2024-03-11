@@ -3,6 +3,11 @@ package com.example.group37software_engineering.model;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 @Entity
 public class UserAchievement {
 
@@ -13,6 +18,10 @@ public class UserAchievement {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private MyUser user;
+
+    private LocalDate dateAchieved;
+
+    private String timeAchieved;
 
     @ManyToOne
     @JoinColumn(name = "achievement_id")
@@ -50,6 +59,24 @@ public class UserAchievement {
 
     public void setAchieved(boolean achieved) {
         isAchieved = achieved;
+    }
+
+    public LocalDate getDateAchieved() {
+        return dateAchieved;
+    }
+
+    public void setDateAchieved() {
+        this.dateAchieved = LocalDate.now();
+    }
+
+    public String getTimeAchieved() {
+        return timeAchieved;
+    }
+
+    public void setTimeAchieved() {
+        LocalTime currentTime = LocalTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mm a");
+        this.timeAchieved = currentTime.format(formatter);
     }
 
 }

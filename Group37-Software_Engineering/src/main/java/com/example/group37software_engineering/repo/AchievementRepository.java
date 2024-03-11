@@ -11,4 +11,5 @@ public interface AchievementRepository extends CrudRepository<Achievement, Integ
     public Achievement findAchievementById(Integer Id);
 
     public Achievement findAchievementByTitle(String title);
+
 }

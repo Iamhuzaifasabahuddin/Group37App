@@ -19,6 +19,9 @@ public class VerificationController {
     @Autowired
     private VerificationService verificationService;
 
+    @Autowired
+    private AchievementController achievementController;
+
     /**
      * Endpoint for verifying user email.
      *
@@ -35,6 +38,7 @@ public class VerificationController {
             verificationService.verifyEmail(user);
             redirectAttributes.addFlashAttribute("Message", "Email verified successfully!");
             verificationService.successfulEmailVerification(user);
+            achievementController.Crypto(user);
         }
         return "redirect:/login";
     }

@@ -38,6 +38,12 @@ public class QuizController {
     @Autowired
     private UserCourseRepository userCourseRepository;
 
+    @Autowired
+    private AchievementController achievementController;
+
+    @Autowired
+    private LeagueRepository leagueRepository;
+
     @InitBinder
     protected void initBinder(WebDataBinder binder) {
         binder.addValidators(new QuizValidator(quizRepository));
@@ -95,7 +101,27 @@ public class QuizController {
             user.setPoints(user.getPoints() + (int) course.getDuration() * 100);
         }
         userCourse.setPercentage(max(score, userCourse.getPercentage()));
+        List<League> leagues = (List<League>) leagueRepository.findAll();
+        for(League league : leagues) {
+            if(league.getThreshold() <= user.getPoints()) {
+                user.setLeague(league);
+            }
+        }
+        userRepository.save(user);
         userCourseRepository.save(userCourse);
+        achievementController.Fantastic4(user);
+        achievementController.Daredevil(user);
+        achievementController.TheDarkKnight(user);
+        achievementController.CyberGuardian(user);
+        achievementController.Cortana(user);
+        achievementController.Noble6(user);
+        achievementController.TheFlash(user);
+        achievementController.DataSorcerer(user);
+        achievementController.IronLegion(user);
+        achievementController.Octane(user);
+        achievementController.MrFantastic(user);
+        achievementController.HyperLethal(user);
+        achievementController.TheChosenOne(user);
         model.addAttribute("score", score);
         return "quiz";
     }

@@ -36,6 +36,8 @@ public class MainController {
     @Autowired
     private UserCourseRepository userCourseRepository;
 
+    @Autowired
+    private AchievementController achievementController;
     /**
      * Handles the home page, displaying user information from OAuth2 authentication.
      *
@@ -67,6 +69,7 @@ public class MainController {
         List<Course> courseList = userCourses.stream()
                 .map(UserCourses::getCourse)
                 .toList();
+        achievementController.Mirage(user);
         if (courseList.isEmpty()) {
             model.addAttribute("error", "ERROR 404!");
         } else {
@@ -93,15 +96,14 @@ public class MainController {
         model.addAttribute("Completed", countCompleted(principal.getName()));
         model.addAttribute("Percentage", hoursCompleted(principal.getName()));
         model.addAttribute("Hours", hoursLeft(principal.getName()));
-        if(user.getPoints() == 0){
+        if (user.getPoints() == 0) {
             model.addAttribute("Rank", "Unranked");
-        }
-        else{
+        } else {
             model.addAttribute("Rank", addRankSuffix(getRank(principal.getName())));
         }
         model.addAttribute("Points", user.getPoints());
         model.addAttribute("league", user.getLeague().getImageUrl());
-        return "profile2";
+        return "profile";
     }
 
     /**
