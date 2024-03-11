@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.sound.midi.SysexMessage;
 import java.security.Principal;
 import java.util.List;
+import java.util.Objects;
 
 @Controller
 public class FriendController {
@@ -40,7 +41,7 @@ public class FriendController {
     }
 
     @RequestMapping ("/addFriend")
-    public String addFriends(@RequestParam String receiver, Principal principal) {
+    public String addFriend(@RequestParam String receiver, Principal principal) {
         String sender = principal.getName();
         FriendRequest request = new FriendRequest();
         request.setSender(userRepository.findByUsername(sender));
@@ -49,18 +50,29 @@ public class FriendController {
         return "redirect:/friends";
     }
 
-    @RequestMapping("/acceptRequest")
-    public String acceptRequest(@RequestParam String senderUsername, Principal principal) {
-        System.out.println(1);
-        String receiverUsername = principal.getName();
-        FriendRequest request = requestRepository.findBySenderUsernameAndReceiverUsername(senderUsername, receiverUsername);
-        System.out.println(request);
-        requestRepository.delete(request);
+    @RequestMapping ("/removeFriend")
+    public String removeFriend(@RequestParam String receiverUsername, Principal principal) {
+        String senderUsername = principal.getName();
         MyUser sender = userRepository.findByUsername(senderUsername);
         MyUser receiver = userRepository.findByUsername(receiverUsername);
-        sender.getFriends().add(receiver);
-        receiver.getFriends().add(sender);
+        sender.getFriends().remove(receiver);
+        receiver.getFriends().remove(sender);
         userRepository.saveAll(List.of(sender, receiver));
+        return "redirect:/friends";
+    }
+
+    @RequestMapping("/handleRequest")
+    public String handleRequest(@RequestParam String senderUsername, @RequestParam String decision, Principal principal) {
+        String receiverUsername = principal.getName();
+        FriendRequest request = requestRepository.findBySenderUsernameAndReceiverUsername(senderUsername, receiverUsername);
+        requestRepository.delete(request);
+        if (Objects.equals(decision, "accept")) {
+            MyUser sender = userRepository.findByUsername(senderUsername);
+            MyUser receiver = userRepository.findByUsername(receiverUsername);
+            sender.getFriends().add(receiver);
+            receiver.getFriends().add(sender);
+            userRepository.saveAll(List.of(sender, receiver));
+        }
         return "redirect:/friends";
     }
 

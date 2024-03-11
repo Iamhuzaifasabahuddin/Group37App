@@ -40,26 +40,26 @@
     <div class="nav-wrapper d-flex align-items-center justify-content-between">
         <ul class="nav nav-pills d-none d-md-flex" id="pills-tab" role="tablist">
             <li class="nav-item" role="presentation">
-                <a class="nav-link active" id="pills-company-tab" data-toggle="pill" href="#pills-company" role="tab" aria-controls="pills-company" aria-selected="true">Friends</a>
+                <a class="nav-link active" id="pills-company-tab" data-toggle="pill" href="#friends" role="tab" aria-controls="pills-company" aria-selected="true">Friends</a>
             </li>
             <li class="nav-item" role="presentation">
-                <a class="nav-link" id="pills-product-tab" data-toggle="pill" href="#pills-product" role="tab" aria-controls="pills-product" aria-selected="false">Search Friends</a>
+                <a class="nav-link" id="pills-product-tab" data-toggle="pill" href="#search-friends" role="tab" aria-controls="pills-product" aria-selected="false">Search Friends</a>
             </li>
             <li class="nav-item" role="presentation">
-                <a class="nav-link" id="pills-news-tab" data-toggle="pill" href="#pills-news" role="tab" aria-controls="pills-news" aria-selected="false">Requests</a>
+                <a class="nav-link" id="pills-news-tab" data-toggle="pill" href="#requests" role="tab" aria-controls="pills-news" aria-selected="false">Requests</a>
             </li>
         </ul>
     </div>
 
     <div class="tab-content" id="pills-tabContent">
-        <div class="tab-pane fade show active" id="pills-company" role="tabpanel" aria-labelledby="pills-company-tab">
+        <div class="tab-pane fade show active" id="friends" role="tabpanel" aria-labelledby="pills-company-tab">
             <div class="container-fluid">
                 <h2 class="mb-3 font-weight-bold">Friends</h2>
                 <div class="container">
                     <div class="row">
                         <div class="col-md-8">
                             <c:forEach items="${friends}" var="friend">
-<%--                                <form action="/addFriend">--%>
+                                <form action="/removeFriend">
                                     <div class="people-nearby">
                                         <div class="nearby-user">
                                             <div class="row">
@@ -73,13 +73,13 @@
                                                     <p class="text-muted">${friend.getPoints()} points</p>
                                                 </div>
                                                 <div class="col-md-3 col-sm-3">
-                                                    <input type="hidden" name="receiver" value="${friend.getUsername()}">
+                                                    <input type="hidden" name="receiverUsername" value="${friend.getUsername()}">
                                                     <button class="btn btn-primary pull-right">Remove Friend</button>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-<%--                                </form>--%>
+                                </form>
                             </c:forEach>
                         </div>
                     </div>
@@ -87,12 +87,15 @@
             </div>
         </div>
 
-        <div class="tab-pane fade" id="pills-product" role="tabpanel" aria-labelledby="pills-product-tab">
+        <div class="tab-pane fade" id="search-friends" role="tabpanel" aria-labelledby="pills-product-tab">
             <div class="container-fluid">
                 <h2 class="mb-3 font-weight-bold">Search Friends</h2>
                 <div class="container">
                     <div class="row">
                         <div class="col-md-8">
+                            <c:forEach items="${senderRequests}" var="request">
+                                <p>${request.getReceiver().getUsername()} | Request sent</p>
+                            </c:forEach>
                             <c:forEach items="${users}" var="user">
                                 <form action="/addFriend">
                                     <div class="people-nearby">
@@ -122,14 +125,14 @@
             </div>
         </div>
 
-        <div class="tab-pane fade" id="pills-news" role="tabpanel" aria-labelledby="pills-news-tab">
+        <div class="tab-pane fade" id="requests" role="tabpanel" aria-labelledby="pills-news-tab">
             <div class="container-fluid">
                 <h2 class="mb-3 font-weight-bold">Requests</h2>
                 <div class="container">
                     <div class="row">
                         <div class="col-md-8">
                             <c:forEach items="${receiverRequests}" var="request">
-                                <form action="/acceptRequest">
+                                <form action="/handleRequest">
                                     <div class="people-nearby">
                                         <div class="nearby-user">
                                             <div class="row">
@@ -144,10 +147,9 @@
                                                 </div>
                                                 <div class="col-md-3 col-sm-3">
                                                     <input type="hidden" name="senderUsername" value="${request.getSender().getUsername()}">
-                                                    <button class="btn btn-primary pull-right">Accept Request</button>
+                                                    <button class="btn btn-primary pull-right" name="decision" value="accept">Accept Request</button>
                                                     <br/> <br/>
-                                                    <input type="hidden" name="senderUsername" value="${request.getSender().getUsername()}">
-                                                    <button class="btn btn-primary pull-right">Decline Request</button>
+                                                    <button class="btn btn-primary pull-right" name="decision" value="decline">Decline Request</button>
                                                 </div>
                                             </div>
                                         </div>
