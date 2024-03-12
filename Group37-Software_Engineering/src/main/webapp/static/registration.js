@@ -98,25 +98,6 @@ function validateLastname() {
     return false;
 }
 
-// Function to validate if username already exists
-function checkUsername(username) {
-    let usernameExists;
-    $.ajax({
-        url: '/checkUsername',
-        type: 'GET',
-        async: false,
-        data: {username: username},
-        success: function (data) {
-            const parsedData = JSON.parse(data);
-            usernameExists = parsedData.usernameExists;
-        },
-        error: function () {
-            usernameExists = false;
-        }
-    });
-    return usernameExists;
-}
-
 /*
 Function to validate the username
     - Must not be empty
@@ -124,72 +105,62 @@ Function to validate the username
     - Must not have any spaces
     - Must not already be taken
 */
-function validateUsername() {
+function validateUsername(submit=false) {
     const id = 'username';
     const input = document.querySelector(`#${id}`);
     const feedback = document.querySelector(`.invalid-feedback.${id}`);
-    changeValidity(input, feedback, false);
-    if (validateNotEmpty(id) && validateNoSpaces(id) && validateLength(id, 4, 20)) {
-        const usernameExists = checkUsername(input.value);
-        if (usernameExists) {
-            const suggestions = generateUsernameSuggestions(input.value);
-            feedback.textContent = 'Username is already taken! Suggestions: ' + suggestions.join(', ');
-            return false;
-        } else {
-            changeValidity(input, feedback, true);
-            feedback.textContent = '';
-            return true;
+    $.ajax({
+        url: '/checkUsername',
+        type: 'GET',
+        data: {username: input.value},
+        success: function (data) {
+            const parsedData = JSON.parse(data);
+            let usernameValid = false;
+            changeValidity(input, feedback, false);
+            if (validateNotEmpty(id) && validateNoSpaces(id) && validateLength(id, 4, 20)) {
+                if (parsedData.usernameExists) {
+                    generateUsernameSuggestions(input.value, feedback);
+                } else {
+                    changeValidity(input, feedback, true);
+                    feedback.textContent = '';
+                    usernameValid = true;
+                }
+            }
+            validateEmail(submit, usernameValid);
         }
-    }
-    return false;
+    });
 }
 
 
 let usernameSuggestions = [];
+let originalName = "";
 
 // Function to generate username suggestions
-function generateUsernameSuggestions(username) {
-    if (usernameSuggestions.length > 0) {
-        return usernameSuggestions;
+function generateUsernameSuggestions(username, feedback, count=0) {
+    if (originalName !== username) {
+        usernameSuggestions = [];
     }
-
-    let count = 0;
-    while (count < 5) {
+    if (usernameSuggestions.length >= 5 && originalName === username) {
+        feedback.textContent = 'Username is already taken! Suggestions: ' + usernameSuggestions.join(', ');
+    } else {
         let suggestedUsername = username + Math.floor(Math.random() * 100);
         $.ajax({
             url: '/checkUsername',
             type: 'GET',
-            async: false,
             data: {username: suggestedUsername},
             success: function (data) {
                 const parsedData = JSON.parse(data);
                 if (!parsedData.usernameExists) {
+                    originalName = username;
                     usernameSuggestions.push(suggestedUsername);
                     count++;
                 }
+                if (count <= 5) {
+                    generateUsernameSuggestions(username, feedback, count)
+                }
             }
-        });
+        })
     }
-    return usernameSuggestions;
-}
-
-// Function to check if email already exists
-function checkEmail(email) {
-    let emailExists;
-    $.ajax({
-        url: '/checkEmail',
-        type: 'GET',
-        async: false,
-        data: {email: email},
-        success: function (data) {
-            const parsedData = JSON.parse(data);
-            emailExists = parsedData.emailExists;
-        },
-        error: function () {
-            emailExists = false;
-        }
-    });
-    return emailExists;
 }
 
 /*
@@ -197,26 +168,32 @@ Function to validate email
     - Must follow valid format
     - Must not already be registered
  */
-function validateEmail() {
+function validateEmail(submit=false, usernameValid=false) {
     const id = 'email';
     const input = document.querySelector(`#${id}`);
     const feedback = document.querySelector(`.invalid-feedback.${id}`);
-    changeValidity(input, feedback, false);
-    if (validateNotEmpty(id)) {
-        const emailExists = checkEmail(input.value);
-        if (emailExists) {
-            feedback.textContent = 'Email is already registered!';
-            return false;
-        } else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(input.value)) {
-            feedback.textContent = 'Must be a valid email address!';
-            return false;
-        } else {
-            changeValidity(input, feedback, true);
-            feedback.textContent = '';
-            return true;
+    $.ajax({
+        url: '/checkEmail',
+        type: 'get',
+        data: {email: input.value},
+        success: function (data) {
+            const parsedData = JSON.parse(data);
+            let emailValid = false;
+            changeValidity(input, feedback, false);
+            if (validateNotEmpty(id)) {
+                if (parsedData.emailExists) {
+                    feedback.textContent = 'Email is already registered!';
+                } else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(input.value)) {
+                    feedback.textContent = 'Must be a valid email address!'
+                } else {
+                    changeValidity(input, feedback, true);
+                    feedback.textContent = '';
+                    emailValid = true;
+                }
+            }
+            asyncValidate(submit, usernameValid, emailValid)
         }
-    }
-    return false;
+    });
 }
 
 /*
@@ -261,7 +238,7 @@ function validatePassword() {
     const feedback = document.querySelector(`.invalid-feedback.${id}`);
     changeValidity(input, feedback, false);
     if (validateNotEmpty(id) && validateLength(id, 8, 32)) {
-        var result = checkPasswordStrength();
+        const result = checkPasswordStrength();
         if (result.strength === 'Strong') {
             changeValidity(input, feedback, true);
             feedback.textContent = '';
@@ -291,15 +268,21 @@ function validateConfirmPassword() {
     return false;
 }
 
+// Function to call all synchronous validation for input fields
+function syncValidate() {
+    return !![validateFirstname(), validateLastname(), validatePassword(), validateConfirmPassword()].every(f => f);
+}
+
 // Function to disable submit button if any input fields are invalid
-function validateAll() {
-    if ([validateFirstname(), validateLastname(), validateUsername(),
-        validateEmail(), validatePassword(), validateConfirmPassword()].every(f => f)) {
-        document.querySelector('button[type="submit"]').disabled = false;
-        return true;
+function asyncValidate(submit=false, usernameValid=false, emailValid=false) {
+    if (syncValidate() && usernameValid && emailValid) {
+        if (submit) {
+            document.querySelector('form').submit();
+        } else {
+            document.querySelector('button[type="submit"]').disabled = false;
+        }
     } else {
         document.querySelector('button[type="submit"]').disabled = true;
-        return false;
     }
 }
 
@@ -310,16 +293,13 @@ document.getElementById('backButton').addEventListener('click', function () {
 
 (() => {
     'use strict'
-    const forms = document.querySelectorAll('form')
-    Array.from(forms).forEach(form => {
-        form.addEventListener('submit', event => {
-            if (!validateAll()) { //change valid method
-                event.preventDefault()
-                event.stopPropagation()
-            }
-            document.querySelectorAll('input.form-control').forEach(element => element.addEventListener('keyup', () => {
-                validateAll();
-            }));
-        }, false)
+    const button = document.querySelector("button[type='submit']");
+    button.addEventListener('click', event => {
+        event.preventDefault();
+        event.stopPropagation();
+        validateUsername(true);
+        document.querySelectorAll('input.form-control').forEach(element => element.addEventListener('keyup', () => {
+            validateUsername(false);
+        }));
     })
 })()

@@ -20,65 +20,58 @@ function validateNotEmpty(id) {
     return true;
 }
 
-function validateResetEmail() {
+function validateResetEmail(submit=false) {
     const id = 'resetEmail';
     const input = document.querySelector(`#${id}`);
     const feedback = document.querySelector(`.invalid-feedback.${id}`);
-    changeValidity(input, feedback, false);
-    if (validateNotEmpty(id)) {
-        const emailExists = checkResetEmail(input.value);
-        if (!emailExists) {
-            feedback.textContent = 'Email is not registered!';
-            return false;
-        } else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(input.value)) {
-            feedback.textContent = 'Must be a valid email address!';
-            return false;
-        } else {
-            changeValidity(input, feedback, true);
-            feedback.textContent = '';
-            return true;
-        }
-    }
-    return false;
-}
-
-function checkResetEmail(resetEmail) {
-    let emailExists;
     $.ajax({
         url: '/checkResetEmail',
         type: 'GET',
         async: false,
-        data: {resetEmail: resetEmail},
+        data: {resetEmail: input.value},
         success: function (data) {
             const parsedData = JSON.parse(data);
-            emailExists = parsedData.emailExists;
+            let validEmail = false;
+            changeValidity(input, feedback, false);
+            if (validateNotEmpty(id)) {
+                if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+                    .test(input.value)) {
+                    feedback.textContent = 'Must be a valid email address!';
+                } else if (!parsedData.emailExists) {
+                    feedback.textContent = 'Email is not registered!';
+                } else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(input.value)) {
+                    feedback.textContent = 'Must be a valid email address!';
+                } else {
+                    changeValidity(input, feedback, true);
+                    feedback.textContent = '';
+                    validEmail = true;
+                }
+            }
+            if (validEmail) {
+                if (submit) {
+                    document.querySelector("#modalForm").submit();
+                } else {
+                    document.querySelector(".modal-footer button[type='submit']").disabled = false;
+                }
+            } else {
+                document.querySelector(".modal-footer button[type='submit']").disabled = true;
+            }
         },
         error: function () {
-            emailExists = false;
+            feedback.textContent = 'Server Error!';
         }
     });
-    return emailExists;
-}
-
-function validateAll() {
-    const modalSubmitButton = document.querySelector('#exampleModal button[type="submit"]');
-    const result = validateResetEmail();
-    modalSubmitButton.disabled = !result;
-    return result;
 }
 
 (() => {
     'use strict'
-    const forms = document.querySelectorAll('#modalForm')
-    Array.from(forms).forEach(form => {
-        form.addEventListener('submit', event => {
-            if (!validateAll()) { //change valid method
-                event.preventDefault()
-                event.stopPropagation()
-            }
-            document.querySelectorAll('input.form-control#resetEmail').forEach(element => element.addEventListener('keyup', () => {
-                validateAll();
-            }));
-        }, false)
-    })
+    const button = document.querySelector(".modal-footer button[type='submit']");
+    button.addEventListener('click', event => {
+        event.preventDefault()
+        event.stopPropagation()
+        validateResetEmail(true);
+        document.querySelectorAll('input.form-control#resetEmail').forEach(element => element.addEventListener('keyup', () => {
+            validateResetEmail(false);
+        }));
+    }, false)
 })()
