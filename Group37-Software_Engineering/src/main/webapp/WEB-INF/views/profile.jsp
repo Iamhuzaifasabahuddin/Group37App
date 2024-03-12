@@ -1,61 +1,68 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <title>Profile Information</title>
+    <title>Profile</title>
     <%@include file="includes/head.jsp"%>
 </head>
-<body>
 <%@include file="includes/navbar.jsp"%>
-<div class="container-center">
-    <div class="container-profile mt-3">
+<body>
 
-        <div>
-            <img src="https://eu.ui-avatars.com/api/?name=${(user.firstname)}+${(user.lastname)}&size=250"
-                 alt="User Initials Image" class="personal-info-image"/>
-
-            <h1>Personal Information</h1>
+<div class="container-fluid">
+ <%--   <h1 class="text-center my-3">Welcome to your profile, ${user.username}!</h1>--%>
+    <div class="row mb-5 mt-5">
+        <div class="col-md-4 d-flex justify-content-center">
+            <img src="https://eu.ui-avatars.com/api/?name=${(user.firstname)}+${(user.lastname)}&size=200"
+                 alt="User Initials Image" class="img-thumbnail"/>
+        </div>
+        <div class="col-md-6">
+            <h1>Profile</h1>
+            <h5><strong>Full Name:</strong> ${user.firstname} ${user.lastname}</h5>
+            <h5><strong>Username:</strong> ${user.username}</h5>
+            <h5><strong>Email:</strong> ${user.email}</h5>
+            <h5><strong>League:</strong> ${user.league.title}</h5>
+            <h5><strong>Rank:</strong> ${Rank}</h5>
+            <h5><strong>Points:</strong> ${user.points}</h5>
         </div>
 
-        <form class="registration">
-            <label for="firstName">First name</label>
-            <input type="text" id="firstName" class="form-input" name="firstName" value="${user.firstname}" readonly>
+        <div class="col-md-2 d-flex justify-content-center">
+            <img src="${league}" alt="League" style="width: 200px; height: 200px;" title="${user.getLeague().title}">
+        </div>
 
-            <label for="lastName">Last name</label>
-            <input type="text" id="lastName" class="form-input" name="lastName" value="${user.lastname}" readonly>
 
-            <label for="email">Email address</label>
-            <input type="email" id="email" class="form-input" name="email" value="${user.email}" readonly>
+    <div class="row mb-5">
+        <div class="col-md-12">
+            <h1>Achievements</h1>
+            <p>This is all the achievements you have gained until now, <c:out value="${user.username}"/>!</p>
 
-            <%--        <label for="confirmEmail">Confirm email address *</label>--%>
-            <%--        <input type="email" id="confirmEmail" class="form-input" name="confirmEmail" value="${user.email}" readonly>--%>
-
-            <div class="form-input">
-                <strong>Username:</strong> ${user.username}
-            </div>
-            <div class="form-input">
-                <strong>Courses Taken:</strong> ${Courses_taken}
-            </div>
-            <div class="form-input">
-                <strong>Courses Completed:</strong> ${Completed}
-            </div>
-            <div class="form-input">
-                <strong>Percentage Completed:</strong> ${Math.round(Percentage)} %
-            </div>
-            <div class="form-input">
-                <strong>Points:</strong> ${Points}
-            </div>
-            <div class="form-input">
-                <strong>Rank:</strong> ${Rank}
-            </div>
-            <div class="form-input">
-                <strong>Hours Left:</strong> ${Hours}
+            <div class="row mb-5 achievements">
+                <c:forEach items="${achievements}" var="achievement">
+                    <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                        <div class="achievement-card ${notachieved.contains(achievement) ? 'locked' : ''}">
+                            <img src="${achievement.imageUrl}" alt="${achievement.title}" class="achievement-image ${notachieved.contains(achievement) ? 'locked-img' : ''}">
+                            <div class="achievement-info">
+                                <h5 class="achievement-title">${achievement.title}</h5>
+                                <p class="achievement-desc">${achievement.description}</p>
+                                <div class="achievement-meta">
+                                    <span class="achievement-time">${achievement.points} points</span>
+                                </div>
+                                <button class="achievement-btn">${notachieved.contains(achievement) ? 'Locked' : 'View'}</button>
+                            </div>
+                        </div>
+                    </div>
+                </c:forEach>
             </div>
 
-            <%--        <input type="submit" class="submit-button" value="Save My Information">--%>
-        </form>
+    <div class="row mb-5">
+        <div class="col-md-12">
+            <h1>The inspirational quote of the day</h1>
+            <p>Delete system32, <c:out value="${user.username}"/>!</p>
+        </div>
+    </div>
+        </div>
+    </div>
     </div>
 </div>
+
+
 </body>
 </html>

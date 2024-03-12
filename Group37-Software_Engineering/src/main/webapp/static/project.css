@@ -164,103 +164,6 @@ body {
     align-items: center;
 }
 
-/* Styling for the profile section */
-.container-profile {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    width: fit-content;
-    height: fit-content;
-    border: 2px solid var(--primary-dark);
-    border-radius: 20px;
-    background-color: var(--primary-light);
-}
-
-.container-profile img {
-    height: auto;
-    max-width: 200px;
-}
-
-.container-profile h1 {
-    text-align: center;
-    padding: 20px;
-    font-size: 24px;
-    font-weight: bold;
-}
-
-.container-profile form.registration {
-    width: 100%;
-    padding: 15px;
-    border-left: 2px solid var(--primary-dark);
-    border-radius: 0 20px 20px 0;
-    background-color: var(--primary-light);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-}
-
-.container-profile form.registration h3 {
-    font-size: 18px;
-    margin-bottom: 15px;
-}
-
-.container-profile form.registration .submit-button {
-    padding: 12px 20px;
-    margin-top: 20px;
-    width: auto;
-    align-self: center;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-}
-
-.container-profile form.registration .submit-button:hover {
-    background-color: var(--accent-right-dark);
-}
-
-.container-profile form.registration .form-input {
-    width: auto;
-}
-
-.container-profile form.registration input[type=text],
-.container-profile form.registration input[type=email] {
-    padding: 10px;
-    border: 1px solid var(--primary-dark);
-    border-radius: 5px;
-    margin-bottom: 15px;
-    transition: border-color 0.3s ease;
-    width: 100%;
-}
-
-.container-profile form.registration input[type=text]:focus,
-.container-profile form.registration input[type=email]:focus {
-    border-color: var(--accent-left-dark);
-}
-
-.container-profile form.registration input[readonly] {
-    background-color: var(--primary-lighter);
-    color: var(--secondary-dark);
-    cursor: not-allowed;
-}
-
-.container-profile form.registration label {
-    font-weight: normal;
-    margin-bottom: 5px;
-}
-
-.personal-info-image {
-    display: block;
-    width: 100px;
-    height: 100px;
-    margin: 0 auto;
-    padding-bottom: 5px;
-    border-radius: 50%;
-}
-
 /* Style for confirmation box */
 .confirmation-background, .quiz-popup-background {
     z-index: 1;
@@ -611,4 +514,204 @@ body {
 
 .the-most img {
     max-width: 100%;
+}
+
+
+/* Styling for the profile section */
+/*
+.container-profile {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    height: fit-content;
+    border: 2px solid var(--primary-dark);
+    border-radius: 20px;
+    background-color: var(--primary-light);
+}
+
+.container-profile img {
+    height: auto;
+    max-width: 200px;
+}
+
+.container-profile h1 {
+    text-align: center;
+    padding: 20px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.container-profile form.registration {
+    width: 100%;
+    padding: 15px;
+    border-left: 2px solid var(--primary-dark);
+    border-radius: 0 20px 20px 0;
+    background-color: var(--primary-light);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+.container-profile form.registration h3 {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.container-profile form.registration .submit-button {
+    padding: 12px 20px;
+    margin-top: 20px;
+    width: auto;
+    align-self: center;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.container-profile form.registration .submit-button:hover {
+    background-color: var(--accent-right-dark);
+}
+
+.container-profile form.registration .form-input {
+    width: auto;
+}
+
+.container-profile form.registration input[type=text],
+.container-profile form.registration input[type=email] {
+    padding: 10px;
+    border: 1px solid var(--primary-dark);
+    border-radius: 5px;
+    margin-bottom: 15px;
+    transition: border-color 0.3s ease;
+    width: 100%;
+}
+
+.container-profile form.registration input[type=text]:focus,
+.container-profile form.registration input[type=email]:focus {
+    border-color: var(--accent-left-dark);
+}
+
+.container-profile form.registration input[readonly] {
+    background-color: var(--primary-lighter);
+    color: var(--secondary-dark);
+    cursor: not-allowed;
+}
+
+.container-profile form.registration label {
+    font-weight: normal;
+    margin-bottom: 5px;
+}
+
+.personal-info-image {
+    display: block;
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+    padding-bottom: 5px;
+    border-radius: 50%;
+}
+*/
+
+/* Add this CSS to your existing stylesheet */
+
+.achievements {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 20px;
+}
+
+.achievement-card {
+    display: flex;
+    flex-direction: column;
+    width: 280px;
+    margin: 10px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out;
+}
+
+.achievement-card:hover {
+    transform: scale(1.03);
+}
+
+.achievement-card img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+}
+
+.achievement-card .achievement-info {
+    padding: 15px;
+    background: linear-gradient(to bottom, #7B42F6 0%, #B01EFF 100%);
+    color: #ffffff;
+}
+
+.achievement-card .achievement-info .achievement-title {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.achievement-card .achievement-info .achievement-desc {
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+.achievement-card .achievement-info .achievement-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.achievement-card .achievement-info .achievement-meta span {
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 12px;
+}
+
+.achievement-card .achievement-info .achievement-btn {
+    padding: 10px 20px;
+    border: none;
+    background-color: #ffffff;
+    border-radius: 15px;
+    color: #7B42F6;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.achievement-card .achievement-info .achievement-btn:hover {
+    background-color: #f3f3f3;
+}
+
+@media (max-width: 767px) {
+    .achievement-card {
+        width: auto;
+    }
+}
+
+.achievement-card.locked {
+    filter: grayscale(100%);
+    background-color: #cccccc;
+}
+
+.achievement-card.locked .achievement-info {
+    background: #777777;
+}
+
+.achievement-card.locked .achievement-btn {
+    background-color: #aaaaaa;
+    cursor: not-allowed;
+}
+
+.achievement-card.locked .achievement-btn:hover {
+    background-color: #aaaaaa;
 }

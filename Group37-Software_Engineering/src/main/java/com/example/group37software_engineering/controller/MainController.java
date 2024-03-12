@@ -1,8 +1,10 @@
 package com.example.group37software_engineering.controller;
 
+import com.example.group37software_engineering.model.Achievement;
 import com.example.group37software_engineering.model.Course;
 import com.example.group37software_engineering.model.MyUser;
 import com.example.group37software_engineering.model.UserCourses;
+import com.example.group37software_engineering.repo.AchievementRepository;
 import com.example.group37software_engineering.repo.CourseRepository;
 import com.example.group37software_engineering.repo.UserCourseRepository;
 import com.example.group37software_engineering.repo.UserRepository;
@@ -38,6 +40,9 @@ public class MainController {
 
     @Autowired
     private AchievementController achievementController;
+
+    @Autowired
+    private AchievementRepository achievementRepository;
     /**
      * Handles the home page, displaying user information from OAuth2 authentication.
      *
@@ -91,20 +96,30 @@ public class MainController {
     public String getProfile(Model model, Principal principal) {
         MyUser user = userRepository.findByUsername(principal.getName());
         List<UserCourses> userCourses = userCourseRepository.findByUser(user);
+        List<Achievement> achievements = (List<Achievement>) achievementRepository.findAll();
+        model.addAttribute("achievements", achievements);
+        model.addAttribute("user", user);
+        model.addAttribute("notachieved", achievementController.NotAchieved(user));
         model.addAttribute("user", user);
         model.addAttribute("Courses_taken", userCourses.size());
         model.addAttribute("Completed", countCompleted(principal.getName()));
         model.addAttribute("Percentage", hoursCompleted(principal.getName()));
         model.addAttribute("Hours", hoursLeft(principal.getName()));
-        if (user.getPoints() == 0) {
+        if(user.getPoints() == 0){
             model.addAttribute("Rank", "Unranked");
-        } else {
+        }
+        else{
             model.addAttribute("Rank", addRankSuffix(getRank(principal.getName())));
         }
         model.addAttribute("Points", user.getPoints());
-        model.addAttribute("league", user.getLeague().getImageUrl());
+        if (user.getLeague() != null) {
+            model.addAttribute("league", user.getLeague().getImageUrl());
+        } else {
+            model.addAttribute("league", "https://halo.wiki.gallery/images/thumb/3/38/HINF_Unrated_Rank_Icon.png/180px-HINF_Unrated_Rank_Icon.png");
+        }
         return "profile";
     }
+
 
     /**
      * Handles the custom 404 error redirection.
