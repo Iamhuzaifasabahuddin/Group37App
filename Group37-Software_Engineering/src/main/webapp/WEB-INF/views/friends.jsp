@@ -10,161 +10,92 @@
     <body>
 <%@include file="includes/navbar.jsp"%>
 
-<%--<h1>Friends</h1>--%>
-<%--<c:forEach items="${friends}" var="friend">--%>
-<%--    <p>${friend.getUsername()}</p>--%>
-<%--</c:forEach>--%>
+<div class="flex-content" style="margin: 1em">
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+        <a class="nav-link active" href="#friends" data-target="friends">Friends</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#add-friends" data-target="add-friends">Add Friends</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#requests" data-target="requests">Requests</a>
+    </li>
+</ul>
 
-
-<%--<h1>Search Friends</h1>--%>
-<%--<c:forEach items="${senderRequests}" var="request">--%>
-<%--    <p>${request.getReceiver().getUsername()} | Request sent</p>--%>
-<%--</c:forEach>--%>
-<%--<c:forEach items="${users}" var="user">--%>
-<%--    <form action="/addFriend">--%>
-<%--        <p>${user.getUsername()}</p>--%>
-<%--        <input type="hidden" name="receiver" value="${user.getUsername()}">--%>
-<%--        <button>Send Request</button>--%>
-<%--    </form>--%>
-
-<%--<h1>Requests</h1>--%>
-<%--<c:forEach items="${receiverRequests}" var="request">--%>
-<%--    <form action="/acceptRequest">--%>
-<%--        <p>Request from ${request.getSender().getUsername()}</p>--%>
-<%--        <input type="hidden" name="senderUsername" value="${request.getSender().getUsername()}">--%>
-<%--        <button>Accept Request</button>--%>
-<%--    </form>--%>
-<%--</c:forEach>--%>
-
-<div class="tabs-to-dropdown" style="transform: scale(0.8);">
-    <div class="nav-wrapper d-flex align-items-center justify-content-between">
-        <ul class="nav nav-pills d-none d-md-flex" id="pills-tab" role="tablist">
-            <li class="nav-item" role="presentation">
-                <a class="nav-link active" id="pills-company-tab" data-toggle="pill" href="#friends" role="tab" aria-controls="pills-company" aria-selected="true">Friends</a>
-            </li>
-            <li class="nav-item" role="presentation">
-                <a class="nav-link" id="pills-product-tab" data-toggle="pill" href="#search-friends" role="tab" aria-controls="pills-product" aria-selected="false">Search Friends</a>
-            </li>
-            <li class="nav-item" role="presentation">
-                <a class="nav-link" id="pills-news-tab" data-toggle="pill" href="#requests" role="tab" aria-controls="pills-news" aria-selected="false">Requests</a>
-            </li>
-        </ul>
-    </div>
-
-    <div class="tab-content" id="pills-tabContent">
-        <div class="tab-pane fade show active" id="friends" role="tabpanel" aria-labelledby="pills-company-tab">
-            <div class="container-fluid">
-                <h2 class="mb-3 font-weight-bold">Friends</h2>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-8">
-                            <c:forEach items="${friends}" var="friend">
-                                <form action="/removeFriend">
-                                    <div class="people-nearby">
-                                        <div class="nearby-user">
-                                            <div class="row">
-                                                <div class="col-md-2 col-sm-2">
-                                                    <img src="https://eu.ui-avatars.com/api/?name=${(friend.getFirstname())}+${(friend.getLastname())}&size=250"
-                                                         alt="User Initials Image" class="profile-photo-lg"/>
-                                                </div>
-                                                <div class="col-md-7 col-sm-7">
-                                                    <h5><a href="#" class="profile-link">${friend.getUsername()}</a></h5>
-                                                    <p>${friend.getFirstname()} ${friend.getLastname()}</p>
-                                                    <p class="text-muted">${friend.getPoints()} points</p>
-                                                </div>
-                                                <div class="col-md-3 col-sm-3">
-                                                    <input type="hidden" name="receiverUsername" value="${friend.getUsername()}">
-                                                    <button class="btn btn-primary pull-right">Remove Friend</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                            </c:forEach>
-                        </div>
-                    </div>
+<div class="friends" style="margin: 0.5em">
+    <ul class="list-group list-group-flush" style="list-style-type: none">
+        <li class="list-group-item" id="friends-content">
+            <c:forEach items="${friends}" var="friend">
+                <form action="/removeFriend">
+            <div class="row" style="border-bottom: 0.05em solid var(--primary-darker);">
+                <div class="col d-flex align-items-center">
+                <img src="https://eu.ui-avatars.com/api/?name=${(friend.getFirstname())}+${(friend.getLastname())}&size=250"
+                     alt="User Initials Image" class="rounded-circle">
+                    <h5><a href="#" class="profile-link">${friend.getUsername()}</a></h5>
+                </div>
+                <div class="col d-flex align-items-center" style="transform: scale(0.8);">
+                    <input type="hidden" name="receiverUsername" value="${friend.getUsername()}">
+                    <button class="btn btn-primary pull-right">Remove Friend</button>
                 </div>
             </div>
-        </div>
+                </form>
+            </c:forEach>
+        </li>
 
-        <div class="tab-pane fade" id="search-friends" role="tabpanel" aria-labelledby="pills-product-tab">
-            <div class="container-fluid">
-                <h2 class="mb-3 font-weight-bold">Search Friends</h2>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-8">
-                            <c:forEach items="${senderRequests}" var="request">
-                                <p>${request.getReceiver().getUsername()} | Request sent</p>
-                            </c:forEach>
-                            <c:forEach items="${users}" var="user">
-                                <form action="/addFriend">
-                                    <div class="people-nearby">
-                                        <div class="nearby-user">
-                                            <div class="row">
-                                                <div class="col-md-2 col-sm-2">
-                                                    <img src="https://eu.ui-avatars.com/api/?name=${(user.firstname)}+${(user.lastname)}&size=250"
-                                                         alt="User Initials Image" class="profile-photo-lg"/>
-                                                </div>
-                                                <div class="col-md-7 col-sm-7">
-                                                    <h5><a href="#" class="profile-link">${user.getUsername()}</a></h5>
-                                                    <p>${user.getFirstname()} ${user.getLastname()}</p>
-                                                    <p class="text-muted">${user.getPoints()} points</p>
-                                                </div>
-                                                <div class="col-md-3 col-sm-3">
-                                                    <input type="hidden" name="receiver" value="${user.getUsername()}">
-                                                    <button class="btn btn-primary pull-right">Send Request</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                            </c:forEach>
+        <li class="list-group-item" id="add-friends-content">
+            <c:forEach items="${senderRequests}" var="request">
+                    <div class="row" style="border-bottom: 0.05em solid var(--primary-darker);">
+                        <div class="col d-flex align-items-center">
+                        <img src="https://eu.ui-avatars.com/api/?name=${(request.getReceiver().getFirstname())}+${(request.getReceiver().getLastname())}&size=250"
+                             alt="User Initials Image" class="rounded-circle"/>
+                            <h5><a href="#" class="profile-link">${request.getReceiver().getUsername()}</a></h5>
+                        </div>
+                        <div class="col d-flex align-items-center" style="transform: scale(0.8);">
+                            <p class="btn btn-primary pull-right">Request sent</p>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
+            </c:forEach>
 
-        <div class="tab-pane fade" id="requests" role="tabpanel" aria-labelledby="pills-news-tab">
-            <div class="container-fluid">
-                <h2 class="mb-3 font-weight-bold">Requests</h2>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-8">
-                            <c:forEach items="${receiverRequests}" var="request">
-                                <form action="/handleRequest">
-                                    <div class="people-nearby">
-                                        <div class="nearby-user">
-                                            <div class="row">
-                                                <div class="col-md-2 col-sm-2">
-                                                    <img src="https://eu.ui-avatars.com/api/?name=${(request.getSender().getFirstname())}+${(request.getSender().getLastname())}&size=250"
-                                                         alt="User Initials Image" class="profile-photo-lg"/>
-                                                </div>
-                                                <div class="col-md-7 col-sm-7">
-                                                    <h5><a href="#" class="profile-link">${request.getSender().getUsername()}</a></h5>
-                                                    <p>${request.getSender().getFirstname()} ${request.getSender().getLastname()}</p>
-                                                    <p class="text-muted">${request.getSender().getPoints()} points</p>
-                                                </div>
-                                                <div class="col-md-3 col-sm-3">
-                                                    <input type="hidden" name="senderUsername" value="${request.getSender().getUsername()}">
-                                                    <button class="btn btn-primary pull-right" name="decision" value="accept">Accept Request</button>
-                                                    <br/> <br/>
-                                                    <button class="btn btn-primary pull-right" name="decision" value="decline">Decline Request</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                            </c:forEach>
+            <c:forEach items="${users}" var="user">
+                <form action="/addFriend">
+                    <div class="row" style="border-bottom: 0.05em solid var(--primary-darker);">
+                        <div class="col d-flex align-items-center">
+                        <img src="https://eu.ui-avatars.com/api/?name=${(user.getFirstname())}+${(user.getLastname())}&size=250"
+                             alt="User Initials Image" class="rounded-circle"/>
+                            <h5><a href="#" class="profile-link">${user.getUsername()}</a></h5>
+                        </div>
+                        <div class="col d-flex align-items-center" style="transform: scale(0.8);">
+                            <input type="hidden" name="receiver" value="${user.getUsername()}">
+                            <button class="btn btn-primary pull-right">Send Request</button>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
+                </form>
+            </c:forEach>
+        </li>
+
+        <li class="list-group-item" id="requests-content">
+            <c:forEach items="${receiverRequests}" var="request">
+                <form action="/handleRequest">
+                    <div class="row align-items-center" style="border-bottom: 0.05em solid var(--primary-darker);">
+                        <div class="col d-flex align-items-center">
+                        <img src="https://eu.ui-avatars.com/api/?name=${(request.getSender().getFirstname())}+${(request.getSender().getLastname())}&size=250"
+                             alt="User Initials Image" class="rounded-circle"/>
+                            <h5><a href="#" class="profile-link">${request.getSender().getUsername()}</a></h5>
+                        </div>
+                        <div class="col" style="transform: scale(0.7);">
+                            <input type="hidden" name="senderUsername" value="${request.getSender().getUsername()}">
+                            <button class="btn btn-primary pull-right" name="decision" value="accept" style="margin-bottom: 0.2em">Accept Request</button>
+                            <br/>
+                            <button class="btn btn-primary pull-right" name="decision" value="decline">Decline Request</button>
+                        </div>
+                    </div>
+                </form>
+            </c:forEach>
+        </li>
+    </ul>
 </div>
-
-
+</div>
 
 </body>
 
