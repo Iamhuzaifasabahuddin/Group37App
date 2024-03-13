@@ -318,7 +318,7 @@ public class AchievementController {
     public void TheFlash(MyUser user) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mm a");
 
-        Achievement achievement = achievementRepository.findAchievementByTitle("The flash");
+        Achievement achievement = achievementRepository.findAchievementByTitle("The Flash");
         UserAchievement userAchievement = userAchievementRepository.findUserAchievementByUserAndAchievement(user, achievement);
         List<UserCourses> userCourses = userCourseRepository.findByUser(user);
         List<Course> courseList = userCourses.stream()
@@ -459,9 +459,9 @@ public class AchievementController {
      *
      * @param user The user to check for the achievement.
      */
-    public void Octane(MyUser user) {
+    public void Quicksilver(MyUser user) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mm a");
-        Achievement achievement = achievementRepository.findAchievementByTitle("Octane");
+        Achievement achievement = achievementRepository.findAchievementByTitle("QuickSilver");
         UserAchievement userAchievement = userAchievementRepository.findUserAchievementByUserAndAchievement(user, achievement);
         List<UserCourses> userCourses = userCourseRepository.findByUser(user);
         List<Course> courseList = userCourses.stream()
@@ -560,7 +560,7 @@ public class AchievementController {
                 .limit(5)
                 .toList();
 
-        if (myUsers.contains(user)) {
+        if (myUsers.contains(user) && myUsers.size() >= 5) {
             if (userAchievement == null) {
                 userAchievement = new UserAchievement();
                 userAchievement.setUser(user);

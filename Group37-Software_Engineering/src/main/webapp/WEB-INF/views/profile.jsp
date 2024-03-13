@@ -55,7 +55,7 @@
     <div class="row mb-5">
         <div class="col-md-12">
             <h1>The inspirational quote of the day</h1>
-            <p>Delete system32, <c:out value="${user.username}"/>!</p>
+            <h3>"${Quote}"</h3>
         </div>
     </div>
         </div>

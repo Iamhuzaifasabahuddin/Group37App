@@ -18,6 +18,10 @@ public class UserComment {
     private LocalDate dateCommented;
 
     @ManyToOne
+    @JoinColumn(name = "course_id")
+    private Course course;
+
+    @ManyToOne
     @JoinColumn(name = "comment_id")
     private Comment comment;
 
@@ -51,5 +55,13 @@ public class UserComment {
 
     public void setComment(Comment comment) {
         this.comment = comment;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
     }
 }

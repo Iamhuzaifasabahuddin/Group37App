@@ -118,7 +118,7 @@ public class QuizController {
         achievementController.TheFlash(user);
         achievementController.DataSorcerer(user);
         achievementController.IronLegion(user);
-        achievementController.Octane(user);
+        achievementController.Quicksilver(user);
         achievementController.MrFantastic(user);
         achievementController.HyperLethal(user);
         achievementController.TheChosenOne(user);

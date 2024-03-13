@@ -1,13 +1,12 @@
 package com.example.group37software_engineering.controller;
 
-import com.example.group37software_engineering.model.Achievement;
-import com.example.group37software_engineering.model.Course;
-import com.example.group37software_engineering.model.MyUser;
-import com.example.group37software_engineering.model.UserCourses;
+import com.example.group37software_engineering.model.*;
 import com.example.group37software_engineering.repo.AchievementRepository;
 import com.example.group37software_engineering.repo.CourseRepository;
 import com.example.group37software_engineering.repo.UserCourseRepository;
 import com.example.group37software_engineering.repo.UserRepository;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
@@ -16,9 +15,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.security.Principal;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -43,20 +48,6 @@ public class MainController {
 
     @Autowired
     private AchievementRepository achievementRepository;
-    /**
-     * Handles the home page, displaying user information from OAuth2 authentication.
-     *
-     * @param oAuth2AuthenticationToken The OAuth2 authentication token.
-     * @param model                     The model to add attributes to.
-     * @return The view name for the OAuth2 home page.
-     */
-    @GetMapping("/")
-    public String homePage(OAuth2AuthenticationToken oAuth2AuthenticationToken, Model model) {
-        model.addAttribute("user", oAuth2AuthenticationToken.getPrincipal().getName());
-        model.addAttribute("username", oAuth2AuthenticationToken.getPrincipal().getAttributes().get("given_name"));
-        return "oauth";
-
-    }
 
     /**
      * Handles displaying the user dashboard.
@@ -96,28 +87,70 @@ public class MainController {
     public String getProfile(Model model, Principal principal) {
         MyUser user = userRepository.findByUsername(principal.getName());
         List<UserCourses> userCourses = userCourseRepository.findByUser(user);
-        List<Achievement> achievements = (List<Achievement>) achievementRepository.findAll();
-        model.addAttribute("achievements", achievements);
+        List<UserAchievement> sortedUserAchievements = user.getUserAchievements().stream()
+                .sorted(Comparator.comparing(UserAchievement::getDateAchieved))
+                .toList();
+
+//        List<Achievement> Achieved = userAchievements.stream()
+//                .map(UserAchievement::getAchievement)
+////                .toList();
+        model.addAttribute("Achieved", sortedUserAchievements);
+//        model.addAttribute("achievements", achievements);
         model.addAttribute("user", user);
         model.addAttribute("notachieved", achievementController.NotAchieved(user));
-        model.addAttribute("user", user);
         model.addAttribute("Courses_taken", userCourses.size());
         model.addAttribute("Completed", countCompleted(principal.getName()));
         model.addAttribute("Percentage", hoursCompleted(principal.getName()));
         model.addAttribute("Hours", hoursLeft(principal.getName()));
-        if(user.getPoints() == 0){
-            model.addAttribute("Rank", "Unranked");
-        }
-        else{
-            model.addAttribute("Rank", addRankSuffix(getRank(principal.getName())));
-        }
+        model.addAttribute("Rank", addRankSuffix(getRank(principal.getName())));
+
+//        try {
+//            String endpoint1 = "https://api.api-ninjas.com/v1/quotes?category=knowledge";
+//            String endpoint2 = "https://api.api-ninjas.com/v1/quotes?category=dreams";
+//            String endpoint3 = "https://api.api-ninjas.com/v1/quotes?category=inspirational";
+//            String endpoint4 = "https://api.api-ninjas.com/v1/quotes?category=success";
+//            int randomInt = new Random().nextInt(4);
+//            URL url;
+//
+//            switch (randomInt) {
+//                case 0:
+//                    url = new URL(endpoint1);
+//                    break;
+//                case 1:
+//                    url = new URL(endpoint2);
+//                    break;
+//                case 2:
+//                    url = new URL(endpoint3);
+//                    break;
+//                default:
+//                    url = new URL(endpoint4);
+//                    break;
+//            }
+//            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+//            connection.setRequestMethod("GET");
+//            connection.setRequestProperty("X-Api-Key", "movMhmJN0D6VHkp9D7bWbQ==6EG59VfmVFu6L3Hb");
+//            int responseCode = connection.getResponseCode();
+//            System.out.println("Response Code: " + responseCode);
+//            if (responseCode == HttpURLConnection.HTTP_OK) {
+//                InputStream responseStream = connection.getInputStream();
+//                ObjectMapper mapper = new ObjectMapper();
+//                JsonNode root = mapper.readTree(responseStream);
+//                String quote = root.get(0).get("quote").asText();
+//                model.addAttribute("Quote", quote);
+//                responseStream.close();
+//            } else {
+//                System.out.println("Failed to fetch quote. Response code: " + responseCode);
+//                model.addAttribute("Quote", "Failed to fetch quote");
+//            }
+//            connection.disconnect();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+        model.addAttribute("Quote", "Implement it after finalization");
         model.addAttribute("Points", user.getPoints());
-        if (user.getLeague() != null) {
-            model.addAttribute("league", user.getLeague().getImageUrl());
-        } else {
-            model.addAttribute("league", "https://halo.wiki.gallery/images/thumb/3/38/HINF_Unrated_Rank_Icon.png/180px-HINF_Unrated_Rank_Icon.png");
-        }
-        return "profile";
+        model.addAttribute("league", user.getLeague().getImageUrl());
+
+        return "profile2";
     }
 
 

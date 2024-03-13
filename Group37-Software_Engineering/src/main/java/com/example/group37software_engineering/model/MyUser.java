@@ -39,6 +39,10 @@ public class MyUser {
 
     @ManyToOne
     private League league;
+
+    @OneToMany(mappedBy = "user")
+    private List<UserComment> userComments;
+
     public int getId() {
         return id;
     }
@@ -165,5 +169,13 @@ public class MyUser {
 
     public void setLeague(League league) {
         this.league = league;
+    }
+
+    public List<UserComment> getUserComments() {
+        return userComments;
+    }
+
+    public void setUserComments(List<UserComment> userComments) {
+        this.userComments = userComments;
     }
 }

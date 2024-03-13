@@ -1,11 +1,9 @@
 package com.example.group37software_engineering.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 public class Comment {
@@ -19,6 +17,10 @@ public class Comment {
     private LocalDate commentDate;
 
     private double review;
+
+    @OneToMany(mappedBy = "comment")
+    private List<UserComment> userComments;
+
 
     public Integer getId() {
         return id;
@@ -50,5 +52,17 @@ public class Comment {
 
     public void setReview(double review) {
         this.review = review;
+    }
+
+    public void setCommentDate(LocalDate commentDate) {
+        this.commentDate = commentDate;
+    }
+
+    public List<UserComment> getUserComments() {
+        return userComments;
+    }
+
+    public void setUserComments(List<UserComment> userComments) {
+        this.userComments = userComments;
     }
 }

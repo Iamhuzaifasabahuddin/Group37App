@@ -29,13 +29,13 @@
                                 <p class="card-subtitle s-light p-darker rounded-pill d-inline px-2 text-uppercase category">${course.getCourse().getCategory()}</p>
                             </div>
                             <div class="d-flex">
-                                <p class="card-subtitle text-body-secondary col-5"><i class="bi bi-hourglass-split"></i> ${Math.round(course.getCourse().getDuration())} hours</p>
+                                <p class="card-subtitle text-body-secondary col-5 mb-2 mt-2"><i class="bi bi-hourglass-split"></i> ${Math.round(course.getCourse().getDuration())} hours</p>
                                 <c:if test="${not empty course.startTime and not empty course.startDate}">
-                                    <p class="card-subtitle text-body-secondary">Started at ${course.startTime}, ${course.startDate}</p>
+                                    <p class="card-subtitle text-body-secondary mt-2">Started at ${course.startTime}, ${course.startDate}</p>
                                 </c:if>
                             </div>
                             <div class="d-flex">
-                                <p class="card-subtitle text-body-secondary col-5"><i class="bi bi-award"></i> ${Math.round(course.getCourse().getDuration()) * 100} points</p>
+                                <p class="card-subtitle text-body-secondary col-5 mb-2"><i class="bi bi-award"></i> ${Math.round(course.getCourse().getDuration()) * 100} points</p>
                                 <c:if test="${not empty course.endTime and not empty course.endDate}">
                                     <p class="card-subtitle text-body-secondary">Ended at ${course.endTime}, ${course.endDate}</p>
                                 </c:if>

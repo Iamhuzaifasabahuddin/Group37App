@@ -37,6 +37,9 @@ public class Course {
     @OneToMany(mappedBy = "course")
     private List<UserCourses> userCourses;
 
+    @OneToMany(mappedBy = "course")
+    private List<UserComment> userComments;
+
     public Integer getId() {
         return id;
     }
@@ -109,6 +112,14 @@ public class Course {
 
     public void setQuiz(Quiz quiz) {
         this.quiz = quiz;
+    }
+
+    public List<UserComment> getUserComments() {
+        return userComments;
+    }
+
+    public void setUserComments(List<UserComment> userComments) {
+        this.userComments = userComments;
     }
 }
 

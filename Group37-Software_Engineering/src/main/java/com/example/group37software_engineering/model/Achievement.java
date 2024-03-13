@@ -1,6 +1,7 @@
 package com.example.group37software_engineering.model;
 
 import jakarta.persistence.*;
+import org.hibernate.validator.constraints.Length;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +13,8 @@ public class Achievement {
     private Integer id;
     private String title;
     private String description;
+
+    @Column(length = 1000)
     private String imageUrl;
     @OneToMany(mappedBy = "achievement")
     private List<UserAchievement> userAchievements;

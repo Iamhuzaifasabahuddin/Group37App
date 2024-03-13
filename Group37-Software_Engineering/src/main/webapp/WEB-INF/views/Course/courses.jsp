@@ -9,8 +9,8 @@
 
 <div class="p-4">
     <h1 class="text-center my-3">Welcome, ${user.username}!</h1>
-    <div class="row">
-        <form action="${pageContext.request.contextPath}/filter" method="get" class="col-md d-flex gap-2">
+    <div class="row mb-3">
+        <form action="${pageContext.request.contextPath}/filter" method="get" class="col-md d-flex gap-2 mb-3">
             <select id="category" name="category" class="form-select" aria-label="Select category">
                 <option selected disabled>Select Category</option>
                 <option value="Artificial Intelligence">AI</option>
@@ -21,7 +21,7 @@
             <button type="submit" class="btn btn-primary col-3">Filter</button>
         </form>
 
-        <form action="/search" method="get" class="col-md d-flex gap-2">
+        <form action="/search" method="get" class="col-md d-flex gap-2 mb-3">
             <input type="text" class="form-control" name="searchTerm" id="searchTerm" placeholder="Search Course">
             <button type="submit" class="btn btn-primary col-3">Search</button>
         </form>

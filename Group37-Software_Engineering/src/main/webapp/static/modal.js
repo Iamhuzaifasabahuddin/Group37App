@@ -27,7 +27,6 @@ function validateResetEmail(submit=false) {
     $.ajax({
         url: '/checkResetEmail',
         type: 'GET',
-        async: false,
         data: {resetEmail: input.value},
         success: function (data) {
             const parsedData = JSON.parse(data);
