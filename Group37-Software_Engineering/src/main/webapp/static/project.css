@@ -724,3 +724,48 @@ body {
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
     z-index: 1;
 }
+.table-container {
+    width: 80%;
+    margin: 0 auto;
+}
+.page-navigation {
+    text-align: center;
+    margin-top: 20px;
+}
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-container table tr {
+    transition: background-color 0.90s ease-in-out;
+}
+
+.table-container table tr:hover {
+    background-color: #f2f2f2;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    font-size: 20px;
+}
+
+th {
+    background-color: var(--primary-dark);
+    color: white;
+}
+
+tbody tr td {
+    font-weight: bold;
+    font-size: 18px;
+    background-color: var(--primary-lighter);
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+

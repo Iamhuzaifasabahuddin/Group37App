@@ -67,21 +67,17 @@ public class FilterController {
     public String getSearch(@RequestParam String searchTerm, Model model, Principal principal) {
         MyUser user = userRepository.findByUsername(principal.getName());
         model.addAttribute("user", user);
-        if (searchTerm != null && !searchTerm.isBlank()) {
-            List<Course> searched = courseRepository.findCoursesByTitleContaining(searchTerm.trim());
-            if (!searched.isEmpty()) {
-                List<Course> coursesNotEnrolled = new ArrayList<>();
-                for (Course course : searched) {
-                    if (!isUserEnrolledInCourse(user, course)) {
-                        coursesNotEnrolled.add(course);
-                    }
+        List<Course> searched = courseRepository.findCoursesByTitleContaining(searchTerm.trim());
+        if (!searched.isEmpty()) {
+            List<Course> coursesNotEnrolled = new ArrayList<>();
+            for (Course course : searched) {
+                if (!isUserEnrolledInCourse(user, course)) {
+                    coursesNotEnrolled.add(course);
                 }
-                model.addAttribute("courseList", coursesNotEnrolled);
-            } else {
-                model.addAttribute("CourseError", "No such course found!");
             }
+            model.addAttribute("courseList", coursesNotEnrolled);
         } else {
-            model.addAttribute("CourseError", "Please provide a search term.");
+            model.addAttribute("CourseError", "No such course found!");
         }
         return "Course/courses";
     }

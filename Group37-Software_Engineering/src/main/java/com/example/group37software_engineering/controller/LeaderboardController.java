@@ -3,11 +3,18 @@ package com.example.group37software_engineering.controller;
 import com.example.group37software_engineering.model.MyUser;
 import com.example.group37software_engineering.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.awt.print.Pageable;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 /**
@@ -28,15 +35,31 @@ public class LeaderboardController {
      * @param model The model to which the top users will be added for rendering in the view.
      * @return The name of the view to display the leaderboard.
      */
+//    @GetMapping("/leaderboard")
+//    public String getLeaderboard(Model model) {
+//        List<MyUser> myUsers = StreamSupport.stream(userRepository.findAll().spliterator(), false)
+//                .sorted(Comparator.comparingDouble(MyUser::getPoints).reversed())
+//                .toList();
+//        if (myUsers.size() > 5) {
+//            myUsers = myUsers.subList(0, 5);
+//        }
+//        model.addAttribute("Users", myUsers);
+//        return "leaderboard";
+//    }
+
     @GetMapping("/leaderboard")
-    public String getLeaderboard(Model model) {
-        List<MyUser> myUsers = StreamSupport.stream(userRepository.findAll().spliterator(), false)
+    public String getLeaderboard(@RequestParam(defaultValue = "1") int page, Model model) {
+        int pageSize = 1;
+        List<MyUser> allUsers = StreamSupport.stream(userRepository.findAll().spliterator(), false)
                 .sorted(Comparator.comparingDouble(MyUser::getPoints).reversed())
-                .toList();
-        if (myUsers.size() > 5) {
-            myUsers = myUsers.subList(0, 5);
-        }
-        model.addAttribute("Users", myUsers);
+                .collect(Collectors.toList());
+        int start = (page - 1) * pageSize;
+        int end = Math.min(start + pageSize, allUsers.size());
+        List<MyUser> myUsers = allUsers.subList(start, end);
+        System.out.println("Users: " + myUsers);
+        model.addAttribute("users", myUsers);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", (allUsers.size() + pageSize - 1) / pageSize);
         return "leaderboard";
     }
 
