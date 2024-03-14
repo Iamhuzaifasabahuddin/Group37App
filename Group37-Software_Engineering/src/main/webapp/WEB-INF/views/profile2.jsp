@@ -160,7 +160,7 @@
                                         </div>
                                     </div>
                                     <div class="card-footer border-dark">
-                                        <h6 class="mt-2"><i class="bi bi-lock"></i> Locked</h6>
+                                        <h6><i class="bi bi-lock"></i> Locked</h6>
                                     </div>
                                 </div>
                             </div>
