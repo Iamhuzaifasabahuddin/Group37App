@@ -1,6 +1,7 @@
 package com.example.group37software_engineering.controller;
 
 import com.example.group37software_engineering.model.MyUser;
+import com.example.group37software_engineering.repo.LeagueRepository;
 import com.example.group37software_engineering.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.awt.print.Pageable;
+import java.security.Principal;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -48,18 +50,22 @@ public class LeaderboardController {
 //    }
 
     @GetMapping("/leaderboard")
-    public String getLeaderboard(@RequestParam(defaultValue = "1") int page, Model model) {
-        int pageSize = 1;
-        List<MyUser> allUsers = StreamSupport.stream(userRepository.findAll().spliterator(), false)
-                .sorted(Comparator.comparingDouble(MyUser::getPoints).reversed())
-                .collect(Collectors.toList());
-        int start = (page - 1) * pageSize;
-        int end = Math.min(start + pageSize, allUsers.size());
-        List<MyUser> myUsers = allUsers.subList(start, end);
-        System.out.println("Users: " + myUsers);
-        model.addAttribute("users", myUsers);
-        model.addAttribute("currentPage", page);
-        model.addAttribute("totalPages", (allUsers.size() + pageSize - 1) / pageSize);
+    public String getLeaderboard(Model model, Principal principal) {
+        List<MyUser> bronze = userRepository.findAllByLeagueId(1);
+        List<MyUser> silver = userRepository.findAllByLeagueId(2);
+        List<MyUser> gold = userRepository.findAllByLeagueId(3);
+        List<MyUser> platinum = userRepository.findAllByLeagueId(4);
+        List<MyUser> titanium = userRepository.findAllByLeagueId(5);
+        List<MyUser> Elysium = userRepository.findAllByLeagueId(7);
+        MyUser user = userRepository.findByUsername(principal.getName());
+        model.addAttribute("userLeague", user.getLeague().getTitle());
+        model.addAttribute("suffix", new String[]{"st", "nd", "rd", "th", "th", "th", "th", "th", "th", "th"});
+        model.addAttribute("bronze", bronze.stream().sorted(Comparator.comparingDouble(MyUser::getPoints).reversed()).limit(10).collect(Collectors.toList()));
+        model.addAttribute("silver", silver.stream().sorted(Comparator.comparingDouble(MyUser::getPoints).reversed()).limit(10).collect(Collectors.toList()));
+        model.addAttribute("gold", gold.stream().sorted(Comparator.comparingDouble(MyUser::getPoints).reversed()).limit(10).collect(Collectors.toList()));
+        model.addAttribute("platinum", platinum.stream().sorted(Comparator.comparingDouble(MyUser::getPoints).reversed()).limit(10).collect(Collectors.toList()));
+        model.addAttribute("titanium", titanium.stream().sorted(Comparator.comparingDouble(MyUser::getPoints).reversed()).limit(10).collect(Collectors.toList()));
+        model.addAttribute("elysium", Elysium.stream().sorted(Comparator.comparingDouble(MyUser::getPoints).reversed()).limit(10).collect(Collectors.toList()));
         return "leaderboard";
     }
 
