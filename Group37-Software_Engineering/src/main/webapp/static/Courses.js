@@ -1,43 +1,32 @@
-// Initially hide the alert box
 var alertBox = document.querySelector('.alert-danger');
 alertBox.classList.add('d-none');
 
-document.getElementById('filterForm').addEventListener('submit', function(event) {
-    var category = document.getElementById('category');
-    var alertText = alertBox.querySelector('strong');
-    if (category.value === 'Select Category') {
-        event.preventDefault();
-        alertText.textContent = 'Please select a category before submitting the form';
-        alertBox.classList.remove('d-none');
-    } else {
-        alertBox.classList.add('d-none');
-        alertText.textContent = '';
-    }
+var closeButton = alertBox.querySelector('.btn-close');
+
+closeButton.removeAttribute('data-bs-dismiss');
+
+closeButton.addEventListener('click', function() {
+    alertBox.classList.add('d-none');
 });
 
-document.getElementById('durationForm').addEventListener('submit', function(event) {
-    var duration = document.getElementById('duration');
-    var alertText = alertBox.querySelector('strong');
-    if (duration.value === 'Select Duration') {
-        event.preventDefault();
-        alertText.textContent = 'Please select a duration before submitting the form';
-        alertBox.classList.remove('d-none');
-    } else {
-        alertBox.classList.add('d-none');
-        alertText.textContent = '';
-    }
-});
+function showAlert(formId, selectId, errorMessage) {
+    document.getElementById(formId).addEventListener('submit', function(event) {
+        var select = document.getElementById(selectId);
+        var alertText = alertBox.querySelector('strong');
+        alertText.innerHTML = '';
+        if (select.value === 'Select Category' || select.value === 'Select Duration' || select.value.trim() === '') {
+            event.preventDefault();
+            var icon = document.createElement('i');
+            icon.className = 'bi bi-exclamation-triangle-fill';
+            alertText.appendChild(icon);
+            alertText.appendChild(document.createTextNode(' ' + errorMessage));
+            alertBox.classList.remove('d-none');
+        } else {
+            alertBox.classList.add('d-none');
+        }
+    });
+}
 
-
-document.getElementById('searchForm').addEventListener('submit', function(event) {
-    var search = document.getElementById('searchTerm');
-    var alertText = alertBox.querySelector('strong');
-    if (search.value.trim() === '') {
-        event.preventDefault();
-        alertText.textContent = 'Please enter a search term before submitting the form';
-        alertBox.classList.remove('d-none');
-    } else {
-        alertBox.classList.add('d-none');
-        alertText.textContent = '';
-    }
-});
+showAlert('filterForm', 'category', 'Please select a category before submitting the form');
+showAlert('durationForm', 'duration', 'Please select a duration before submitting the form');
+showAlert('searchForm', 'searchTerm', 'Please enter a search term before submitting the form');

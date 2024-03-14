@@ -50,6 +50,9 @@ public class FilterController {
                 coursesNotEnrolled.add(course);
             }
         }
+        if(coursesNotEnrolled.isEmpty()){
+            model.addAttribute("CourseError", "No such course found!");
+        }
         model.addAttribute("user", user);
         model.addAttribute("courseList", coursesNotEnrolled);
         return "Course/courses";
@@ -74,6 +77,9 @@ public class FilterController {
                 if (!isUserEnrolledInCourse(user, course)) {
                     coursesNotEnrolled.add(course);
                 }
+            }
+            if(coursesNotEnrolled.isEmpty()){
+                model.addAttribute("CourseError", "No such course found!");
             }
             model.addAttribute("courseList", coursesNotEnrolled);
         } else {
@@ -102,6 +108,9 @@ public class FilterController {
             if (!isUserEnrolledInCourse(user, course)) {
                 coursesNotEnrolled.add(course);
             }
+        }
+        if(coursesNotEnrolled.isEmpty()){
+            model.addAttribute("CourseError", "No such course found!");
         }
         model.addAttribute("user", user);
         model.addAttribute("courseList", coursesNotEnrolled);

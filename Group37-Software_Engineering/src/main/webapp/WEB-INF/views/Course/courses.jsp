@@ -36,28 +36,34 @@
             </select>
             <button type="submit" class="btn btn-primary col-3">Filter</button>
         </form>
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <strong></strong>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
+    </div>
+
+    <div class="alert alert-danger alert-dismissible fade show custom-alert" role="alert">
+        <strong><i class="bi bi-exclamation-triangle-fill"></i>
+        </strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 
     <h2 class="list_courses">Available courses: </h2>
     <c:if test="${not empty error}">
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <strong>${error}</strong>
+            <strong><i class="bi bi-exclamation-triangle-fill"></i>
+                    ${error}
+            </strong>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     </c:if>
     <section>
-<%--        <div class="course-message-container">--%>
-<%--            <c:if test="${not empty CourseError}">--%>
-<%--                <div class="alert alert-danger alert-dismissible fade show" role="alert">--%>
-<%--                    <strong>${CourseError}</strong>--%>
-<%--                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>--%>
-<%--                </div>--%>
-<%--            </c:if>--%>
-<%--        </div>--%>
+        <div class="course-message-container">
+            <c:if test="${not empty CourseError}">
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong><i class="bi bi-exclamation-triangle-fill"></i>
+                            ${CourseError}
+                    </strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </c:if>
+        </div>
         <div class="courses">
             <c:forEach items="${courseList}" var="course">
                 <div class="card p-lighter">
