@@ -26,7 +26,7 @@
             <button type="submit" class="btn btn-primary col-3">Search</button>
         </form>
 
-        <form action="/duration" method="get" class="col-md d-flex gap-2">
+        <form action="/duration" method="get" class="col-md d-flex gap-2 mb-3">
             <select id="duration" name="duration" class="form-select" aria-label="Select category">
                 <option selected disabled>Select Duration</option>
                 <option value="5.0">5+ hours</option>

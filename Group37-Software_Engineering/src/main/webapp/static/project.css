@@ -724,3 +724,7 @@ body {
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
     z-index: 1;
 }
+
+.league {
+    overflow:hidden;
+}
