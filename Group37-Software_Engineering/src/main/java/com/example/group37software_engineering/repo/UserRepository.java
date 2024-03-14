@@ -11,8 +11,11 @@ public interface UserRepository extends CrudRepository<MyUser, Integer> {
     public MyUser findByEmail(String email);
     MyUser findByUsernameOrEmail(String username, String email);
 
+    List<MyUser> findAllByLeagueId(int leagueId);
 
     MyUser findByPasswordResetToken(String token);
 
     MyUser findByEmailVerificationToken(String token);
+
+    List<MyUser> findAllByLeagueId(Integer id);
 }

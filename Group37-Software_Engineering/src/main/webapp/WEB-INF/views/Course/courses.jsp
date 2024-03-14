@@ -3,6 +3,7 @@
 <head>
     <title>Courses</title>
     <%@include file="../includes/head.jsp"%>
+    <script type="text/javascript" src="static/Courses.js" defer></script>
 </head>
 <body>
 <%@include file="../includes/navbar.jsp"%>
@@ -10,9 +11,9 @@
 <div class="p-4">
     <h1 class="text-center my-3">Welcome, ${user.username}!</h1>
     <div class="row mb-3">
-        <form action="${pageContext.request.contextPath}/filter" method="get" class="col-md d-flex gap-2 mb-3">
+        <form id="filterForm" action="/filter" method="get" class="col-md d-flex gap-2 mb-3">
             <select id="category" name="category" class="form-select" aria-label="Select category">
-                <option selected disabled>Select Category</option>
+                <option selected disabled value="Select Category">Select Category</option>
                 <option value="Artificial Intelligence">AI</option>
                 <option value="Cloud">Cloud</option>
                 <option value="Data Science">Data Science</option>
@@ -21,12 +22,12 @@
             <button type="submit" class="btn btn-primary col-3">Filter</button>
         </form>
 
-        <form action="/search" method="get" class="col-md d-flex gap-2 mb-3">
+        <form id="searchForm" action="/search" method="get" class="col-md d-flex gap-2 mb-3">
             <input type="text" class="form-control" name="searchTerm" id="searchTerm" placeholder="Search Course">
             <button type="submit" class="btn btn-primary col-3">Search</button>
         </form>
 
-        <form action="/duration" method="get" class="col-md d-flex gap-2 mb-3">
+        <form id="durationForm" action="/duration" method="get" class="col-md d-flex gap-2 mb-3">
             <select id="duration" name="duration" class="form-select" aria-label="Select category">
                 <option selected disabled>Select Duration</option>
                 <option value="5.0">5+ hours</option>
@@ -37,10 +38,18 @@
         </form>
     </div>
 
+    <div class="alert alert-danger alert-dismissible fade show custom-alert" role="alert">
+        <strong><i class="bi bi-exclamation-triangle-fill"></i>
+        </strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
     <h2 class="list_courses">Available courses: </h2>
     <c:if test="${not empty error}">
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <strong>${error}</strong>
+            <strong><i class="bi bi-exclamation-triangle-fill"></i>
+                    ${error}
+            </strong>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     </c:if>
@@ -48,7 +57,9 @@
         <div class="course-message-container">
             <c:if test="${not empty CourseError}">
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <strong>${CourseError}</strong>
+                    <strong><i class="bi bi-exclamation-triangle-fill"></i>
+                            ${CourseError}
+                    </strong>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             </c:if>

@@ -11,10 +11,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 import static java.lang.Math.max;
 
@@ -102,9 +99,11 @@ public class QuizController {
         }
         userCourse.setPercentage(max(score, userCourse.getPercentage()));
         List<League> leagues = (List<League>) leagueRepository.findAll();
+        leagues.sort(Comparator.comparing(League::getThreshold).reversed());
         for(League league : leagues) {
             if(league.getThreshold() <= user.getPoints()) {
                 user.setLeague(league);
+                break;
             }
         }
         userRepository.save(user);

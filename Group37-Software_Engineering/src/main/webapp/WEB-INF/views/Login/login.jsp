@@ -48,21 +48,27 @@
                 </div>
                 <c:if test="${not empty error}">
                     <div class="alert alert-danger alert-dismissible fade show mb-3" role="alert">
-                        <strong>${error}</strong>
+                        <strong><i class="bi bi-exclamation-triangle-fill"></i>
+                                ${error}
+                        </strong>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 </c:if>
                 <c:if test="${not empty Message}">
                     <div class="alert alert-success alert-dismissible fade show mb-3" role="alert">
+                        <strong><i class="bi bi-check-circle-fill"></i>
+                        ${Message}
+                        </strong>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        <strong>${Message}</strong>
                     </div>
                 </c:if>
 
                 <c:if test="${not empty EmailError}">
                     <div class="alert alert-danger alert-dismissible fade show mb-3" role="alert">
+                        <strong><i class="bi bi-exclamation-triangle-fill"></i>
+                                ${EmailError}
+                        </strong>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        <strong>${EmailError}</strong>
                     </div>
                 </c:if>
                 <div class="form-check mb-3">
