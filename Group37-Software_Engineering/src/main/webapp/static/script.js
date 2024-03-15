@@ -97,3 +97,13 @@ $('a[data-toggle="tooltip"]').tooltip({
     placement: 'right',
     html: true
 });
+
+$(document).ready(function(){
+    $(".nav-item a").click(function(){
+        $(".nav-item a").removeClass(("active"));
+        $(this).addClass(("active"));
+        var target = $(this).data('target');
+        $(".friends > ul > li").hide();
+        $("#" + target + "-content").show();
+    });
+})

@@ -18,4 +18,5 @@ public interface UserRepository extends CrudRepository<MyUser, Integer> {
     MyUser findByEmailVerificationToken(String token);
 
     List<MyUser> findAllByLeagueId(Integer id);
+
 }

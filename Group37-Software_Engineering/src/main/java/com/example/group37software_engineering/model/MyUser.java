@@ -2,10 +2,12 @@ package com.example.group37software_engineering.model;
 
 
 import com.example.group37software_engineering.repo.LeagueRepository;
+import com.google.gson.annotations.Expose;
 import jakarta.persistence.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -14,8 +16,13 @@ public class MyUser {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
+    @Expose
     private String firstname;
+
+    @Expose
     private String lastname;
+
+    @Expose
     private String username;
     private String password;
     private String email;
@@ -42,6 +49,9 @@ public class MyUser {
 
     @OneToMany(mappedBy = "user")
     private List<UserComment> userComments;
+
+    @ManyToMany
+    private List<MyUser> friends = new ArrayList<>();
 
     public int getId() {
         return id;
@@ -177,5 +187,13 @@ public class MyUser {
 
     public void setUserComments(List<UserComment> userComments) {
         this.userComments = userComments;
+    }
+
+    public List<MyUser> getFriends() {
+        return friends;
+    }
+
+    public void setFriends(List<MyUser> friends) {
+        this.friends = friends;
     }
 }

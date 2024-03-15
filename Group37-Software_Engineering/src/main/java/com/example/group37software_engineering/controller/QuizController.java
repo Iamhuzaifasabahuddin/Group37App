@@ -98,16 +98,6 @@ public class QuizController {
             user.setPoints(user.getPoints() + (int) course.getDuration() * 100);
         }
         userCourse.setPercentage(max(score, userCourse.getPercentage()));
-        List<League> leagues = (List<League>) leagueRepository.findAll();
-        leagues.sort(Comparator.comparing(League::getThreshold).reversed());
-        for(League league : leagues) {
-            if(league.getThreshold() <= user.getPoints()) {
-                user.setLeague(league);
-                break;
-            }
-        }
-        userRepository.save(user);
-        userCourseRepository.save(userCourse);
         achievementController.Fantastic4(user);
         achievementController.Daredevil(user);
         achievementController.TheDarkKnight(user);
@@ -121,6 +111,16 @@ public class QuizController {
         achievementController.MrFantastic(user);
         achievementController.HyperLethal(user);
         achievementController.TheChosenOne(user);
+        List<League> leagues = (List<League>) leagueRepository.findAll();
+        leagues.sort(Comparator.comparing(League::getThreshold).reversed());
+        for(League league : leagues) {
+            if(league.getThreshold() <= user.getPoints()) {
+                user.setLeague(league);
+                break;
+            }
+        }
+        userRepository.save(user);
+        userCourseRepository.save(userCourse);
         model.addAttribute("score", score);
         return "quiz";
     }

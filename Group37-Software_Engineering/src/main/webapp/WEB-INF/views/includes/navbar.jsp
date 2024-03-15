@@ -48,6 +48,9 @@
                     <a class="nav-link s-light" href="/courses">Courses</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link s-light" href="/friends">Friends</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link s-light" href="/leaderboard">Leaderboard</a>
                 </li>
                 <li class="nav-item">
@@ -73,6 +76,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link s-light" href="/courses">Courses</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link s-light" href="/friends">Friends</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link s-light" href="/leaderboard">Leaderboard</a>
