@@ -24,13 +24,13 @@ import java.util.List;
 
 @SpringBootApplication
 public class Group37SoftwareEngineeringApplication implements CommandLineRunner {
-//
-//    @Autowired
-//    private UserRepository userRepository;
-//
-//    @Autowired
-//    private PasswordEncoder passwordEncoder;
-//
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Autowired
     private CourseRepository courseRepository;
 
@@ -52,11 +52,22 @@ public class Group37SoftwareEngineeringApplication implements CommandLineRunner 
 
     @Override
     public void run(String... args) throws Exception {
-        if(courseRepository.count() == 0){
+        if (courseRepository.count() == 0) {
             courseData.readDataAndSaveToRepo("courses_data.csv");
         }
-        if(quizRepository.count() == 0){
+        if (quizRepository.count() == 0) {
             questionsData.importQuestionsFromCSV("questions.csv");
+        }
+        if (userRepository.count() == 0) {
+            for (int i = 0; i < 10; i++) {
+                MyUser user = new MyUser();
+                user.setUsername(String.format("test%d", i));
+                user.setEmailVerificationStatus(true);
+                user.setPassword(passwordEncoder.encode("password"));
+                user.setFirstname("Ansel");
+                user.setLastname("Ong");
+                userRepository.save(user);
+            }
         }
     }
 

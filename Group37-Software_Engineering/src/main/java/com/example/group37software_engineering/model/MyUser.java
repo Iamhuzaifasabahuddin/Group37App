@@ -1,6 +1,7 @@
 package com.example.group37software_engineering.model;
 
 
+import com.google.gson.annotations.Expose;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -14,8 +15,13 @@ public class MyUser {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
+    @Expose
     private String firstname;
+
+    @Expose
     private String lastname;
+
+    @Expose
     private String username;
     private String password;
     private String email;

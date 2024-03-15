@@ -1,5 +1,6 @@
 package com.example.group37software_engineering.model;
 
+import com.google.gson.annotations.Expose;
 import jakarta.persistence.*;
 
 @Entity
@@ -9,8 +10,11 @@ public class FriendRequest {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
+    @Expose
     @ManyToOne
     private MyUser sender;
+
+    @Expose
     @ManyToOne
     private MyUser receiver;
 
