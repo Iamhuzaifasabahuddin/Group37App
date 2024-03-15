@@ -19,4 +19,6 @@ public interface UserRepository extends CrudRepository<MyUser, Integer> {
 
     List<MyUser> findAllByLeagueId(Integer id);
 
+    public boolean existsByUsername(String username);
+
 }

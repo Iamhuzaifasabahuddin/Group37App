@@ -101,9 +101,13 @@ function validateConfirmPassword() {
     return false;
 }
 
-function validateAll() {
+function validateAll(submit) {
     if ([validatePassword(), validateConfirmPassword()].every(f => f)) {
         document.querySelector('button[type="submit"]').disabled = false;
+        if (submit && !submitted) {
+            submitted = true;
+            document.querySelector('form').submit();
+        }
         return true;
     } else {
         document.querySelector('button[type="submit"]').disabled = true;
@@ -113,16 +117,12 @@ function validateAll() {
 
 (() => {
     'use strict'
-    const forms = document.querySelectorAll('form')
-    Array.from(forms).forEach(form => {
-        form.addEventListener('submit', event => {
-            if (!validateAll()) { //change valid method
-                event.preventDefault()
-                event.stopPropagation()
-            }
-            document.querySelectorAll('input.form-control').forEach(element => element.addEventListener('keyup', () => {
-                validateAll();
-            }));
-        }, false)
-    })
+    document.querySelector("button").addEventListener('click', event => {
+        event.preventDefault();
+        event.stopPropagation();
+        validateAll(true);
+        document.querySelectorAll('input.form-control').forEach(element => element.addEventListener('keyup', () => {
+            validateAll(false);
+        }));
+    }, false);
 })()

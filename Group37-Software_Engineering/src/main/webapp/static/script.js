@@ -1,3 +1,5 @@
+let submitted = false;
+
 /* Colour change listener */
 function changeHues() {
     const cards = document.querySelectorAll(".card");

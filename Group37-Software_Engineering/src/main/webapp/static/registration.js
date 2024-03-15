@@ -277,7 +277,13 @@ function syncValidate() {
 function asyncValidate(submit=false, usernameValid=false, emailValid=false) {
     if (syncValidate() && usernameValid && emailValid) {
         if (submit) {
-            document.querySelector('form').submit();
+            if (!submitted) {
+                submitted = true;
+                document.querySelector('form').submit();
+            } else {
+                document.querySelector('button[type="submit"]').disabled = true;
+            }
+
         } else {
             document.querySelector('button[type="submit"]').disabled = false;
         }

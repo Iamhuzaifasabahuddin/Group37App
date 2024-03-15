@@ -48,7 +48,11 @@ function validateResetEmail(submit=false) {
             }
             if (validEmail) {
                 if (submit) {
-                    document.querySelector("#modalForm").submit();
+                    if (!submitted) {
+                        submitted = true;
+                        document.querySelector("#modalForm").submit();
+                    }
+                    document.querySelector(".modal-footer button[type='submit']").disabled = true;
                 } else {
                     document.querySelector(".modal-footer button[type='submit']").disabled = false;
                 }
