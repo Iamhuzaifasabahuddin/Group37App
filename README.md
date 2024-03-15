@@ -47,11 +47,28 @@ git push origin your-branch-name
 
 ### Step 3: Run the application
 
-* If there is an error in creating the database or aws doesnt work try:
+* You will need to create a new **keys.jsk** file to be able to run the application
+* Copy & paste the code below to your IDE terminal and follow the info along as instructed by the commandline
+``` java 
+keytool -genkeypair -alias tomcat -keyalg RSA -keystore ./keys.jks
+```
+* After you are done creating put the keys.jks file from the your application directory i.e **Group37-Software_Engineering** to **Group37-Software_Engineering/src/main/resources** the resources directory and your application should run.
+
+* If there is an error in creating the **database** or **AWS** doesnt work try:
 ```sql
+- You will also need to create a user by going to the MySql Workbench.
+- Create a new Instance and name your connection to co2103db
+- After creating the instance and logging in via root go to administration tab located below the schemas
+- Go to users & privileges and add Account
+- Add the name of account as co2103 and password as password
+- Go to Administrative roles tab and select DBA and click apply
+- Your new user has been created and now you can create a new database called co2103db
+```
+```SQL
+ALternatively You can use root and create a database called co2103db
 - Create a Mysql instance and create a local instance with
-- user: c02103
-- password: password
+- user: root
+- password: "replace it with your password"
 and create a database called co2103db
 - Re-run the application now it should work
 ```
