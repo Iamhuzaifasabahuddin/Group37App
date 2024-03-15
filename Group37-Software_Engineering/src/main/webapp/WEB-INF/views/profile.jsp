@@ -6,63 +6,201 @@
 </head>
 <%@include file="includes/navbar.jsp"%>
 <body>
+<section>
+    <div class="container-fluid" style="max-width: 80%;">
 
-<div class="container-fluid">
- <%--   <h1 class="text-center my-3">Welcome to your profile, ${user.username}!</h1>--%>
-    <div class="row mb-5 mt-5">
-        <div class="col-md-4 d-flex justify-content-center">
-            <img src="https://eu.ui-avatars.com/api/?name=${(user.firstname)}+${(user.lastname)}&size=200"
-                 alt="User Initials Image" class="img-thumbnail"/>
+        <h1 class="text-center p-4">Profile Details</h1>
+
+        <div class="card mb-3 mx-auto text-center" style="max-width: 540px; background-color: var(--primary-lightest); border: 0;">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="https://eu.ui-avatars.com/api/?name=${(user.firstname)}+${(user.lastname)}&size=200"
+                         alt="User Initials Image" class="rounded-circle" style="height: 7rem; width: 7rem; object-fit: cover; border: 0;"/>
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h2 class="mb-1 fs-5">${user.firstname} ${user.lastname}</h2>
+                        <h2 class="mb-1 fs-5">${user.email}</h2>
+                        <h2 class="mb-1 fs-5">@${user.username}</h2>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="col-md-6">
-            <h1>Profile</h1>
-            <h5><strong>Full Name:</strong> ${user.firstname} ${user.lastname}</h5>
-            <h5><strong>Username:</strong> ${user.username}</h5>
-            <h5><strong>Email:</strong> ${user.email}</h5>
-            <h5><strong>League:</strong> ${user.league.title}</h5>
-            <h5><strong>Rank:</strong> ${Rank}</h5>
-            <h5><strong>Points:</strong> ${user.points}</h5>
-        </div>
 
-        <div class="col-md-2 d-flex justify-content-center">
-            <img src="${league}" alt="League" style="width: 200px; height: 200px;" title="${user.getLeague().title}">
-        </div>
+    </div>
+</section>
 
-
-    <div class="row mb-5">
-        <div class="col-md-12">
-            <h1>Achievements</h1>
-            <p>This is all the achievements you have gained until now, <c:out value="${user.username}"/>!</p>
-
-            <div class="row mb-5 achievements">
-                <c:forEach items="${achievements}" var="achievement">
-                    <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-                        <div class="achievement-card ${notachieved.contains(achievement) ? 'locked' : ''}">
-                            <img src="${achievement.imageUrl}" alt="${achievement.title}" class="achievement-image ${notachieved.contains(achievement) ? 'locked-img' : ''}">
-                            <div class="achievement-info">
-                                <h5 class="achievement-title">${achievement.title}</h5>
-                                <p class="achievement-desc">${achievement.description}</p>
-                                <div class="achievement-meta">
-                                    <span class="achievement-time">${achievement.points} points</span>
+<section>
+    <div class="container-fluid">
+        <div class="card mb-3 mx-auto border-dark" style="max-width: 45rem; background-color: whitesmoke;">
+            <div class="row g-0">
+                <div class="col d-flex align-items-center justify-content-center">
+                    <h5 class="card-title fs-1 mt-2 fw-bolder">Statistics</h5>
+                </div>
+                <div class="col">
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item fs-6 border-dark">
+                                <i class="bi bi-backpack3-fill"></i>
+                                <strong>Courses Taken:</strong>
+                                ${Courses_taken}</li>
+                            <li class="list-group-item fs-6 border-dark">
+                                <i class="bi bi-check2-circle"></i>
+                                <strong>Courses Completed:</strong>
+                                ${Completed}</li>
+                            <li class="list-group-item fs-6 border-dark">
+                                <i class="bi bi-percent"></i>
+                                <strong>Percent Completed:</strong>
+                                ${Percentage}</li>
+                            <li class="list-group-item fs-6 border-dark">
+                                <i class="bi bi-hourglass-split"></i>
+                                <strong>Hours Left:</strong>
+                                ${Hours}</li>
+                            <li class="list-group-item fs-6 border-dark">
+                                <i class="bi bi-bar-chart-fill"></i>
+                                <strong>Rank:</strong>
+                                ${Rank}</li>
+                            <li class="list-group-item fs-6 border-dark">
+                                <i class="bi bi-award-fill"></i>
+                                <strong>Points:</strong>
+                                ${user.points}</li>
+                            <li class="list-group-item fs-6 border-dark">
+                                <i class="bi bi-trophy-fill"></i>
+                                <strong>League:</strong>
+                                <div class="league">
+                                    <a data-toggle="tooltip" title="<img src='${user.league.imageUrl}' class='img-fluid' alt='League' style='height: 9em; width: 9em; object-fit: cover;'/>">${user.getLeague().getTitle()}</a>
                                 </div>
-                                <button class="achievement-btn">${notachieved.contains(achievement) ? 'Locked' : 'View'}</button>
+                                <%--                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#league">--%>
+                                <%--                                    ${user.getLeague().getTitle()}--%>
+                                <%--                                </button>--%>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<%--<div class="modal" id="league">--%>
+<%--    <div class="modal-dialog modal-dialog-centered">--%>
+<%--    <div class="modal-content" style="background-color: white">--%>
+<%--    <div class="modal-header mx-auto">--%>
+<%--        <h4 class="modal-title">${user.getLeague().getTitle()}</h4>--%>
+<%--    </div>--%>
+<%--    <div class="modal-body mx-auto">--%>
+<%--        <img src="${user.league.imageUrl}" class="img-fluid" alt="League" style="height: 9em; width: 9em; object-fit: cover;">--%>
+<%--    </div>--%>
+<%--    </div>--%>
+<%--    </div>--%>
+<%--</div>--%>
+
+<section>
+    <div class="container-fluid">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-lg-10">
+                <h1 class="mt-3 text-center">Achievements</h1>
+                <div class="row">
+                    <c:forEach items="${Achieved}" var="achieved">
+                        <div class="col-lg-4 col-md-6 mb-3">
+                            <div class="card custom-card border-success" style="background: whitesmoke;">
+                                <div class="card-body" style="height: 400px">
+                                    <h4 class="card-title"><strong>${achieved.getAchievement().title}</strong></h4>
+                                    <div class="d-flex justify-content-center align-items-center" style="height: 60%;">
+                                        <img src="${achieved.getAchievement().getImageUrl()}" alt="${achieved.getAchievement().title}" class="img-fluid" style="max-width: 100%; max-height: 100%;" width="200px" height="200px">
+                                    </div>
+                                    <div class="d-flex justify-content-between p-2">
+                                        <div>
+                                            <p class="card-text mt-2">${achieved.getAchievement().description}</p>
+                                        </div>
+                                        <div class="mt-2">
+                                            <p><i class="bi bi-award"></i> ${achieved.getAchievement().points}</p>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer border-dark" style="color: black">
+                                        <h6><i class="bi bi-unlock"></i> Achieved at ${achieved.timeAchieved}, ${achieved.dateAchieved}</h6>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </c:forEach>
+                    </c:forEach>
+                </div>
             </div>
+        </div>
+    </div>
+</section>
 
-    <div class="row mb-5">
-        <div class="col-md-12">
-            <h1>The inspirational quote of the day</h1>
-            <h3>"${Quote}"</h3>
+<div class="text-center">
+    <button class="btn btn-primary m-2 col-4 mx-auto" type="button" data-bs-toggle="collapse" data-bs-target="#locked-achievements" aria-expanded="false" aria-controls="collapseExample" onclick="toggleIcon()">
+        View more <br/>
+        <i id="toggle-icon" class="bi bi-plus-circle-fill"></i>
+    </button>
+</div>
+
+<script>
+    function toggleIcon() {
+        var icon = document.getElementById('toggle-icon');
+        if (icon.classList.contains('bi-plus-circle-fill')) {
+            icon.classList.remove('bi-plus-circle-fill');
+            icon.classList.add('bi-dash-circle-fill');
+        } else {
+            icon.classList.remove('bi-dash-circle-fill');
+            icon.classList.add('bi-plus-circle-fill');
+        }
+    }
+</script>
+
+
+<div id="locked-achievements" class="collapse">
+    <div class="container-fluid">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-lg-10">
+                <h1 class="mt-3 text-center">Locked Achievements</h1>
+                <div class="row">
+                    <c:forEach items="${notachieved}" var="notachieved">
+                        <div class="col-lg-4 col-md-6 mb-3">
+                            <div class="card custom-card border-danger" style="background: lightgray;">
+                                <div class="card-body" style="height: 400px;">
+                                    <h4 class="card-title"><strong>${notachieved.title}</strong></h4>
+                                    <div class="d-flex justify-content-center align-items-center" style="height: 60%;">
+                                        <img src="https://images.vexels.com/media/users/3/132074/isolated/preview/0117cb0129593faa02646a8277ca80e3-security-lock-icon-by-vexels.png" alt="Locked" class="img-fluid" style="height: 100%; max-width: 100%; object-fit: cover;">
+                                            <%--                                        <img src="${notachieved.imageUrl}" alt="Locked" class="img-fluid" style="height: 100%; max-width: 100%; object-fit: cover;">--%>
+                                    </div>
+                                    <div class="d-flex justify-content-between p-2">
+                                        <div>
+                                            <p class="card-text mt-2">${notachieved.description}</p>
+                                        </div>
+                                        <div class="mt-2">
+                                            <p><i class="bi bi-award"></i> ${notachieved.points}</p>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer border-dark">
+                                        <h6 class="mt-2"><i class="bi bi-lock"></i> Locked</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </c:forEach>
+                </div>
+            </div>
         </div>
-    </div>
-        </div>
-    </div>
     </div>
 </div>
 
+
+<section>
+    <div class="p-4">
+        <div class="card mx-auto m-2" style="width: 24rem;">
+            <div class="card-header text-center border-dark">
+                Quote of the day <i class="bi bi-chat-quote"></i>
+            </div>
+            <div class="card-body">
+                <blockquote class="blockquote mb-0 text-center">
+                    <p>${Quote}</p>
+                </blockquote>
+            </div>
+        </div>
+    </div>
+</section>
 
 </body>
 </html>

@@ -90,12 +90,7 @@ public class MainController {
         List<UserAchievement> sortedUserAchievements = user.getUserAchievements().stream()
                 .sorted(Comparator.comparing(UserAchievement::getDateAchieved))
                 .toList();
-
-//        List<Achievement> Achieved = userAchievements.stream()
-//                .map(UserAchievement::getAchievement)
-////                .toList();
         model.addAttribute("Achieved", sortedUserAchievements);
-//        model.addAttribute("achievements", achievements);
         model.addAttribute("user", user);
         model.addAttribute("notachieved", achievementController.NotAchieved(user));
         model.addAttribute("Courses_taken", userCourses.size());
@@ -150,7 +145,7 @@ public class MainController {
         model.addAttribute("Points", user.getPoints());
         model.addAttribute("league", user.getLeague().getImageUrl());
 
-        return "profile2";
+        return "profile";
     }
 
 

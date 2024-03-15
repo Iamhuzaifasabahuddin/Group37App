@@ -31,23 +31,15 @@ public class LeaderboardController {
     @Autowired
     private UserRepository userRepository;
 
+
     /**
-     * Retrieves the top 5 users based on points from the UserRepository and adds them to the model.
-     *
-     * @param model The model to which the top users will be added for rendering in the view.
-     * @return The name of the view to display the leaderboard.
+     * The LeaderboardController class handles requests related to displaying the leaderboard.
+     * It retrieves user data from the UserRepository, sorts them based on points, and sends the top 10 users
+     * from each league to the view for display.
+     * @param model the model to be sent to the view
+     * @param principal the current user
+     * @return the leaderboard view
      */
-//    @GetMapping("/leaderboard")
-//    public String getLeaderboard(Model model) {
-//        List<MyUser> myUsers = StreamSupport.stream(userRepository.findAll().spliterator(), false)
-//                .sorted(Comparator.comparingDouble(MyUser::getPoints).reversed())
-//                .toList();
-//        if (myUsers.size() > 5) {
-//            myUsers = myUsers.subList(0, 5);
-//        }
-//        model.addAttribute("Users", myUsers);
-//        return "leaderboard";
-//    }
 
     @GetMapping("/leaderboard")
     public String getLeaderboard(Model model, Principal principal) {
