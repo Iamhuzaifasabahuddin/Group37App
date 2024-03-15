@@ -48,8 +48,11 @@ public class LeaderboardController {
         List<MyUser> gold = userRepository.findAllByLeagueId(3);
         List<MyUser> platinum = userRepository.findAllByLeagueId(4);
         List<MyUser> titanium = userRepository.findAllByLeagueId(5);
-        List<MyUser> Elysium = userRepository.findAllByLeagueId(7);
         MyUser user = userRepository.findByUsername(principal.getName());
+        List<MyUser> Elysium = userRepository.findAllByLeagueId(7);
+        List<MyUser> friends = user.getFriends();
+        List<MyUser> global = (List<MyUser>) userRepository.findAll();
+        model.addAttribute("global", global.stream().sorted(Comparator.comparingDouble(MyUser::getPoints).reversed()).limit(10).collect(Collectors.toList()));
         model.addAttribute("userLeague", user.getLeague().getTitle());
         model.addAttribute("suffix", new String[]{"st", "nd", "rd", "th", "th", "th", "th", "th", "th", "th"});
         model.addAttribute("bronze", bronze.stream().sorted(Comparator.comparingDouble(MyUser::getPoints).reversed()).limit(10).collect(Collectors.toList()));
@@ -58,6 +61,7 @@ public class LeaderboardController {
         model.addAttribute("platinum", platinum.stream().sorted(Comparator.comparingDouble(MyUser::getPoints).reversed()).limit(10).collect(Collectors.toList()));
         model.addAttribute("titanium", titanium.stream().sorted(Comparator.comparingDouble(MyUser::getPoints).reversed()).limit(10).collect(Collectors.toList()));
         model.addAttribute("elysium", Elysium.stream().sorted(Comparator.comparingDouble(MyUser::getPoints).reversed()).limit(10).collect(Collectors.toList()));
+        model.addAttribute("friends", friends);
         return "leaderboard";
     }
 

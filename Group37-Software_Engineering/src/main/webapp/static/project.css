@@ -362,9 +362,13 @@ tr:nth-child(even) {
 }
 #friends-tab:hover {
     color: var(--secondary-dark);
-    background-color: #ffa07a;
+    background-color: hotpink;
 }
 
+#global-tab:hover {
+    color: var(--secondary-dark);
+    background-color: #fcc204;
+}
 .tab-navigation .nav-item a{
     font-size: 18px;
     color: var(--secondary-dark);

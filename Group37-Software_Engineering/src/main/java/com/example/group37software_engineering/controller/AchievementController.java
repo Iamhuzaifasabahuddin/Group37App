@@ -555,23 +555,21 @@ public class AchievementController {
     public void TheChosenOne(MyUser user) {
         Achievement achievement = achievementRepository.findAchievementByTitle("The Chosen One");
         UserAchievement userAchievement = userAchievementRepository.findUserAchievementByUserAndAchievement(user, achievement);
-        List<MyUser> myUsers = StreamSupport.stream(userRepository.findAll().spliterator(), false)
+        List<MyUser> Elysium = userRepository.findAllByLeagueId(7);
+        List<MyUser> top3 = Elysium.stream()
                 .sorted(Comparator.comparingDouble(MyUser::getPoints).reversed())
-                .limit(5)
+                .limit(3)
                 .toList();
-
-        if (myUsers.contains(user) && myUsers.size() >= 5) {
-            if (userAchievement == null) {
-                userAchievement = new UserAchievement();
-                userAchievement.setUser(user);
-                userAchievement.setAchievement(achievement);
-                userAchievement.setAchieved(true);
-                userAchievement.setDateAchieved();
-                userAchievement.setTimeAchieved();
-                user.setPoints(user.getPoints() + achievement.getPoints());
-                userRepository.save(user);
-                userAchievementRepository.save(userAchievement);
-            }
+        if (top3.contains(user) && userAchievement == null) {
+            userAchievement = new UserAchievement();
+            userAchievement.setUser(user);
+            userAchievement.setAchievement(achievement);
+            userAchievement.setAchieved(true);
+            userAchievement.setDateAchieved();
+            userAchievement.setTimeAchieved();
+            user.setPoints(user.getPoints() + achievement.getPoints());
+            userRepository.save(user);
+            userAchievementRepository.save(userAchievement);
         }
     }
 }

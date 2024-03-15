@@ -25,8 +25,6 @@ if (userLeague === "Bronze Scholar") {
     openTab('titanium', 'titanium-tab');
 } else if (userLeague === "Elysium") {
     openTab('elysium', 'elysium-tab');
-} else if (userLeague === "friends") {
-    openTab('friends', 'friends-tab');
 } else {
     openTab('bronze', 'bronze-tab');
 }

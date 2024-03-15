@@ -75,17 +75,91 @@ public class Group37SoftwareEngineeringApplication implements CommandLineRunner 
         }
 
         if (userRepository.count() == 0) {
-            for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < 2; i++) {
                 MyUser user = new MyUser();
                 user.setUsername(String.format("test%d", i));
                 user.setEmailVerificationStatus(true);
                 user.setPassword(passwordEncoder.encode("password"));
-                user.setFirstname("Ansel");
-                user.setLastname("Ong");
+                user.setFirstname(String.format("Test%d", i));
+                user.setLastname(String.format("%d", i));
                 user.setLeague(leagueRepository.findLeagueByTitle("Unranked"));
                 userRepository.save(user);
             }
+
+            for (int i = 0; i < 2; i++) {
+                MyUser user = new MyUser();
+                user.setUsername(String.format("Bronze%d", i));
+                user.setEmailVerificationStatus(true);
+                user.setPassword(passwordEncoder.encode("password"));
+                user.setFirstname(String.format("Bronze%d", i));
+                user.setLastname(String.format("%d", i));
+                user.setPoints(1000);
+                user.setLeague(leagueRepository.findLeagueByTitle("Bronze Scholar"));
+                userRepository.save(user);
+            }
+
+            for (int i = 0; i < 2; i++) {
+                MyUser user = new MyUser();
+                user.setUsername(String.format("Silver%d", i));
+                user.setEmailVerificationStatus(true);
+                user.setPassword(passwordEncoder.encode("password"));
+                user.setFirstname(String.format("Silver%d", i));
+                user.setLastname(String.format("%d", i));
+                user.setPoints(2500);
+                user.setLeague(leagueRepository.findLeagueByTitle("Silver Sage"));
+                userRepository.save(user);
+            }
+
+            for (int i = 0; i < 2; i++) {
+                MyUser user = new MyUser();
+                user.setUsername(String.format("Gold%d", i));
+                user.setEmailVerificationStatus(true);
+                user.setPassword(passwordEncoder.encode("password"));
+                user.setFirstname(String.format("Gold%d", i));
+                user.setLastname(String.format("%d", i));
+                user.setPoints(2500);
+                user.setLeague(leagueRepository.findLeagueByTitle("Gold Guru"));
+                userRepository.save(user);
+            }
+
+            for (int i = 0; i < 2; i++) {
+                MyUser user = new MyUser();
+                user.setUsername(String.format("Platinum%d", i));
+                user.setEmailVerificationStatus(true);
+                user.setPassword(passwordEncoder.encode("password"));
+                user.setFirstname(String.format("Platinum%d", i));
+                user.setLastname(String.format("%d", i));
+                user.setPoints(4000);
+                user.setLeague(leagueRepository.findLeagueByTitle("Platinum Prodigy"));
+                userRepository.save(user);
+            }
+
+            for (int i = 0; i < 2; i++) {
+                MyUser user = new MyUser();
+                user.setUsername(String.format("Titanium%d", i));
+                user.setEmailVerificationStatus(true);
+                user.setPassword(passwordEncoder.encode("password"));
+                user.setFirstname(String.format("Titanium%d", i));
+                user.setLastname(String.format("%d", i));
+                user.setPoints(8000);
+                user.setLeague(leagueRepository.findLeagueByTitle("Titanium Titan"));
+                userRepository.save(user);
+            }
+
+            for (int i = 0; i < 2; i++) {
+                MyUser user = new MyUser();
+                user.setUsername(String.format("Elysium%d", i));
+                user.setEmailVerificationStatus(true);
+                user.setPassword(passwordEncoder.encode("password"));
+                user.setFirstname(String.format("Elysium%d", i));
+                user.setLastname(String.format("%d", i));
+                user.setPoints(16000);
+                user.setLeague(leagueRepository.findLeagueByTitle("Elysium"));
+                userRepository.save(user);
+            }
         }
+
+
     }
 
     @Bean

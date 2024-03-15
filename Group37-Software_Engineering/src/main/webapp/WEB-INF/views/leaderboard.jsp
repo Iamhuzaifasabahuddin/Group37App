@@ -33,12 +33,16 @@
             <a id="elysium-tab" class="nav-link" href="#elysium" onclick="openTab('elysium', 'elysium-tab')">Elysium</a>
         </li>
         <li class="nav-item rounded">
+            <a id="global-tab" class="nav-link" href="#global" onclick="openTab('global', 'global-tab')">Global</a>
+        </li>
+        <li class="nav-item rounded">
             <a id="friends-tab" class="nav-link" href="#friends" onclick="openTab('friends', 'friends-tab')">Friends</a>
         </li>
     </ul>
 </div>
 
-<div id="bronze" class="tab">
+
+<div id="bronze" class="tab pb-4">
     <h1 class="text-center my-3">Bronze League</h1>
     <div class="table-container">
         <table>
@@ -64,7 +68,7 @@
     </div>
 </div>
 
-<div id="silver" class="tab">
+<div id="silver" class="tab pb-4">
     <h1 class="text-center my-3">Silver League</h1>
     <div class="table-container">
         <table>
@@ -90,7 +94,7 @@
     </div>
 </div>
 
-<div id="gold" class="tab">
+<div id="gold" class="tab pb-4">
     <h1 class="text-center my-3">Gold League</h1>
     <div class="table-container">
         <table>
@@ -117,7 +121,7 @@
 </div>
 
 
-<div id="platinum" class="tab">
+<div id="platinum" class="tab pb-4">
     <h1 class="text-center my-3">Platinum League</h1>
     <div class="table-container">
         <table>
@@ -143,7 +147,7 @@
     </div>
 </div>
 
-<div id="titanium" class="tab">
+<div id="titanium" class="tab pb-4">
     <h1 class="text-center my-3">Titanium League</h1>
     <div class="table-container">
         <table>
@@ -169,7 +173,7 @@
     </div>
 </div>
 
-<div id="elysium" class="tab">
+<div id="elysium" class="tab pb-4">
     <h1 class="text-center my-3">Elysium League</h1>
     <div class="table-container">
         <table>
@@ -195,9 +199,8 @@
     </div>
 </div>
 
-
-<div id="friends" class="tab">
-    <h1 class="text-center my-3">Friends League</h1>
+<div id="global" class="tab pb-4">
+    <h1 class="text-center my-3">Global Leaderboard</h1>
     <div class="table-container">
         <table>
             <thead>
@@ -208,7 +211,33 @@
             </tr>
             </thead>
             <tbody>
-            <c:forEach var="user" items="${elysium}" varStatus="status">
+            <c:forEach var="user" items="${global}" varStatus="status">
+                <tr>
+                    <td>
+                        <c:out value="${status.index + 1}"/><c:out value="${suffix[status.index]}"/>.
+                    </td>
+                    <td>${user.username}</td>
+                    <td>${user.points}</td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div id="friends" class="tab pb-4">
+    <h1 class="text-center my-3">Friends Leaderboard</h1>
+    <div class="table-container">
+        <table>
+            <thead>
+            <tr>
+                <th>Rank</th>
+                <th>Username</th>
+                <th>Points</th>
+            </tr>
+            </thead>
+            <tbody>
+            <c:forEach var="user" items="${friends}" varStatus="status">
                 <tr>
                     <td>
                         <c:out value="${status.index + 1}"/><c:out value="${suffix[status.index]}"/>.
