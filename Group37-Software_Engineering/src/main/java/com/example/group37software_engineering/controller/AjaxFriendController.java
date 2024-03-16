@@ -13,8 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.security.Principal;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @RestController
 public class AjaxFriendController {
@@ -78,7 +77,21 @@ public class AjaxFriendController {
         Gson gson = new GsonBuilder()
             .excludeFieldsWithoutExposeAnnotation()
             .create();
-        return ResponseEntity.ok().body("{\"friends\":" + gson.toJson(friends) + ", \"users\":" + gson.toJson(users) + ", \"senderRequests\":" + gson.toJson(senderRequests) + "}");
+
+        List<MyUser> users1 = (List<MyUser>) userRepository.findAll();
+        Dictionary<String, List<String>> mutual = new Hashtable<>();
+        for (MyUser user: users1) {
+            List<MyUser> userFriends = userRepository.findByUsername(user.getUsername()).getFriends();
+            List<String> tempList = new ArrayList<>();
+            for (MyUser friend: friends) {
+                if (userFriends.contains(friend)) {
+                    tempList.add(friend.getUsername());
+                }
+            }
+            mutual.put(user.getUsername(), tempList);
+        }
+
+        return ResponseEntity.ok().body("{\"friends\":" + gson.toJson(friends) + ", \"users\":" + gson.toJson(users) + ", \"senderRequests\":" + gson.toJson(senderRequests) + ", \"mutual\":" + gson.toJson(mutual) + "}");
     }
 
 

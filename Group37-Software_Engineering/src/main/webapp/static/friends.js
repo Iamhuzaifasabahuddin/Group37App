@@ -57,6 +57,7 @@ function getNewFriends(decision) {
         data: {},
         success: function (response) {
             const parsedData = JSON.parse(response);
+            const mutualFriends = parsedData.mutual;
             const friends = document.querySelector("li#friends-content");
             const requests = document.querySelector("li#requests-content");
             if (requests.children.length === 0) {
@@ -68,6 +69,7 @@ function getNewFriends(decision) {
             if (decision) {
                 friends.innerHTML = "";
                 for (const friend of parsedData.friends) {
+
                     const newFriend = document.createElement("div");
                     newFriend.innerHTML = `
                             <div class="row" style="border-bottom: 0.05em solid var(--primary-darker);">
@@ -89,7 +91,7 @@ function getNewFriends(decision) {
                     })
                     friends.appendChild(newFriend.children[0]);
                 }
-            } else {
+            } else {console.log(mutualFriends)
                 const li = document.querySelector("li#add-friends-content");
                 li.innerHTML = "";
                 if (parsedData.senderRequests.length === 0 && parsedData.users.length === 0) {
@@ -97,12 +99,21 @@ function getNewFriends(decision) {
                 }
                 for (const request of parsedData.senderRequests) {
                     const senderRequest = document.createElement("div");
+
                     senderRequest.innerHTML = `
                     <div class="row" style="border-bottom: 0.05em solid var(--primary-darker);">
                         <div class="col d-flex align-items-center">
                         <img src="https://eu.ui-avatars.com/api/?name=${request.receiver.firstname}+${request.receiver.lastname}&size=250"
                              alt="User Initials Image" class="rounded-circle"/>
+                            <div>
                             <h5><a href="#" class="profile-link">${request.receiver.username}</a></h5>
+                            <div class="dropdown">
+                            <a href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: slategray; text-decoration: none;">
+                            ${mutualFriends[request.receiver.username].length === 0 ? "No" : mutualFriends[request.receiver.username].length} Mutual Friends
+                            </a>
+                            <h6 class="dropdown-menu text-center p-2">${mutualFriends[request.receiver.username].length === 0 ? "Nothing to View Here" : mutualFriends[request.receiver.username]}</h6>
+                            </div>
+                            </div>
                         </div>
                         <div class="col d-flex align-items-center" style="transform: scale(0.8);">
                             <p class="btn btn-primary pull-right disabled">Request sent</p>
@@ -119,7 +130,15 @@ function getNewFriends(decision) {
                         <div class="col d-flex align-items-center">
                         <img src="https://eu.ui-avatars.com/api/?name=${request.firstname}+${request.lastname}&size=250"
                              alt="User Initials Image" class="rounded-circle"/>
+                            <div>
                             <h5><a href="#" class="profile-link">${request.username}</a></h5>
+                            <div class="dropdown">
+                            <a href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: slategray; text-decoration: none;">
+                            ${mutualFriends[request.username].length === 0 ? "No" : mutualFriends[request.username].length} Mutual Friends
+                            </a>
+                            <h6 class="dropdown-menu text-center p-2">${mutualFriends[request.username].length === 0 ? "Nothing to view here" : mutualFriends[request.username]}</h6>
+                            </div>
+                            </div>
                         </div>
                         <div class="col d-flex align-items-center" style="transform: scale(0.8);">
                             <input type="hidden" name="receiver" value="${request.username}">

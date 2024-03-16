@@ -23,7 +23,6 @@
 <%--    </div>--%>
 <%--</nav>--%>
 
-
 <div class="d-md-none">
     <!-- Hamburger Menu Navigation Bar -->
     <nav class="navbar p-darker">
@@ -53,6 +52,9 @@
                 <li class="nav-item">
                     <a class="nav-link s-light" href="/leaderboard">Leaderboard</a>
                 </li>
+                <li class="nav-link">
+                    <a class="nav-link s-light" href="/">Notifications</a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link s-light" href="/logout">Logout</a>
                 </li>
@@ -69,9 +71,6 @@
             <div class="col-10">
                 <ul class="navbar-nav d-flex justify-content-end gap-md-3">
                     <li class="nav-item">
-                        <a class="nav-link s-light" href="/profile">Profile</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link s-light" href="/dashboard">Dashboard</a>
                     </li>
                     <li class="nav-item">
@@ -84,7 +83,17 @@
                         <a class="nav-link s-light" href="/leaderboard">Leaderboard</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link s-light" href="/logout">Logout</a>
+                        <div class="dropdown-center">
+                            <button style="background-color: var(--primary-darker);border: 0;" type="button" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
+                                <img src="https://eu.ui-avatars.com/api/?name=${(user.firstname)}+${(user.lastname)}&size=200"
+                                     alt="User Initials Image" class="rounded-circle p-0 m-0" style="height: 2rem; width: 2rem; position:relative;top:0.3rem"/>
+                            </button>
+                            <ul class="dropdown-menu" style="background-color: var(--primary-darker);">
+                                <li><a class="nav-link s-light" href="/profile">Profile</a></li>
+                                <li><a class="nav-link s-light" href="/">Notifications</a></li>
+                                <li><a class="nav-link s-light" href="/logout">Logout</a></li>
+                            </ul>
+                        </div>
                     </li>
                 </ul>
             </div>
