@@ -14,8 +14,6 @@ public class Comment {
 
     private String description;
 
-    private LocalDate commentDate;
-
     private double review;
 
     @OneToMany(mappedBy = "comment")
@@ -38,14 +36,6 @@ public class Comment {
         this.description = description;
     }
 
-    public LocalDate getCommentDate() {
-        return commentDate;
-    }
-
-    public void setCommentDate() {
-        this.commentDate = LocalDate.now();
-    }
-
     public double getReview() {
         return review;
     }
@@ -54,9 +44,6 @@ public class Comment {
         this.review = review;
     }
 
-    public void setCommentDate(LocalDate commentDate) {
-        this.commentDate = commentDate;
-    }
 
     public List<UserComment> getUserComments() {
         return userComments;

@@ -10,6 +10,7 @@
 <h1 class="text-center my-3">Welcome to Your Dashboard, ${user.username}!</h1>
 <c:if test="${not empty error}">
     <div class="alert alert-info alert-dismissible fade show" role="alert">
+        <i class="bi bi-info-circle-fill"></i>
         <strong>${error} <a href="/courses">Find courses here</a></strong>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
@@ -48,8 +49,12 @@
                                     </div>
                                 </c:if>
                             </c:if>
-                            <c:if test="${not empty course.endTime and not empty course.endDate}">
+                            <c:if test="${not empty course.endTime and not empty course.endDate and not course.commented}">
+                                <a class="btn btn-primary container-fluid" href="/comment?courseId=${course.getCourse().getId()}"></a>
+                            </c:if>
+                            <c:if test="${course.commented}">
                                 <button class="btn btn-primary container-fluid" disabled>Completed</button>
+<%--                                <a class="btn btn-primary container-fluid" href="/comment?courseId=${course.getCourse().getId()}"></a>--%>
                             </c:if>
                             <c:if test="${empty course.startTime and empty course.startDate}">
                                 <form id="getStartedForm" class="mb-0" action="/startTime">

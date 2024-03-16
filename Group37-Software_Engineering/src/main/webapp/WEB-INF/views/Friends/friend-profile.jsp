@@ -2,9 +2,9 @@
 <html>
 <head>
     <title>Profile</title>
-    <%@include file="includes/head.jsp"%>
+    <%@include file="../includes/head.jsp"%>
 </head>
-<%@include file="includes/navbar.jsp"%>
+<%@include file="../includes/navbar.jsp"%>
 <body>
 <div class="p-2">
     <button id="backButton" type="button" class="btn btn-primary mb-3">

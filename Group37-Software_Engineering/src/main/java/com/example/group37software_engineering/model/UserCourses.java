@@ -31,6 +31,7 @@ public class UserCourses {
 
     private double percentage;
 
+    private boolean commented = false;
     public LocalDate getStartDate() {
         return startDate;
     }
@@ -97,5 +98,13 @@ public class UserCourses {
 
     public void setCourse(Course course) {
         this.course = course;
+    }
+
+    public boolean isCommented() {
+        return commented;
+    }
+
+    public void setCommented(boolean commented) {
+        this.commented = commented;
     }
 }

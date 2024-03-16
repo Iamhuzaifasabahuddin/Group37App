@@ -46,7 +46,7 @@ public class FriendController {
         List<FriendRequest> receiverRequests = requestRepository.findByReceiverUsername(principal.getName());
         model.addAttribute("receiverRequests", receiverRequests);
         model.addAttribute("user", userRepository.findByUsername(principal.getName()));
-        return "friends";
+        return "Friends/friends";
     }
 
     /**
@@ -67,6 +67,6 @@ public class FriendController {
         String formattedDate = since.format(formatter);
         model.addAttribute("user", user);
         model.addAttribute("since", formattedDate);
-        return "friend-profile";
+        return "Friends/friend-profile";
     }
 }

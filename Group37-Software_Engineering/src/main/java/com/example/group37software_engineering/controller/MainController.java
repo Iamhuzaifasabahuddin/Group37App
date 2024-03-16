@@ -67,7 +67,7 @@ public class MainController {
                 .toList();
         achievementController.Mirage(user);
         if (courseList.isEmpty()) {
-            model.addAttribute("error", "ERROR 404!");
+            model.addAttribute("error", "You have no courses.");
         } else {
             model.addAttribute("courseList", courseList);
             model.addAttribute("userCourses", userCourses);

@@ -5,11 +5,11 @@
 <html>
 <head>
     <title>Friends</title>
-    <%@include file="includes/head.jsp"%>
+    <%@include file="../includes/head.jsp"%>
     <script src="static/friends.js" defer></script>
 </head>
     <body>
-<%@include file="includes/navbar.jsp"%>
+<%@include file="../includes/navbar.jsp"%>
 
 <div class="flex-content p-4">
 <ul class="nav nav-tabs mb-3">
