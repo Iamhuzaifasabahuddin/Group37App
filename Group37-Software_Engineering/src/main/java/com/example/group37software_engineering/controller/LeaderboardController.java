@@ -52,6 +52,7 @@ public class LeaderboardController {
         List<MyUser> Elysium = userRepository.findAllByLeagueId(7);
         List<MyUser> friends = user.getFriends();
         List<MyUser> global = (List<MyUser>) userRepository.findAll();
+        model.addAttribute("user", user);
         model.addAttribute("global", global.stream().sorted(Comparator.comparingDouble(MyUser::getPoints).reversed()).limit(10).collect(Collectors.toList()));
         model.addAttribute("userLeague", user.getLeague().getTitle());
         model.addAttribute("suffix", new String[]{"st", "nd", "rd", "th", "th", "th", "th", "th", "th", "th"});

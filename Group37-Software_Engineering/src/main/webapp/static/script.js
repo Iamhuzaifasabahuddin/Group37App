@@ -100,8 +100,8 @@ $('a[data-toggle="tooltip"]').tooltip({
     html: true
 });
 
-$(document).ready(function(){
-    $(".nav-item a").click(function(){
+$(document).ready(function () {
+    $(".nav-item a").click(function () {
         $(".nav-item a").removeClass(("active"));
         $(this).addClass(("active"));
         var target = $(this).data('target');
@@ -109,3 +109,12 @@ $(document).ready(function(){
         $("#" + target + "-content").show();
     });
 })
+
+$(window).on('resize', function () {
+    var win = $(this); // this = window
+    if (win.width() >= 700 && win.width() <= 990) {
+        $('.btn-group').addClass('dropstart');
+    } else {
+        $('.btn-group').removeClass('dropstart');
+    }
+}).trigger('resize');

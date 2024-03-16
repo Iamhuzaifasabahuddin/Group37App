@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.security.Principal;
 import java.util.*;
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Objects;
 
 @RestController
 public class AjaxFriendController {
@@ -22,6 +25,14 @@ public class AjaxFriendController {
 
     @Autowired
     private FriendRequestRepository requestRepository;
+
+    /**
+     * Handles the "/sendRequest" endpoint to send a friend request.
+     *
+     * @param receiverUsername The username of the user to whom the friend request is sent.
+     * @param principal        The principal representing the currently authenticated user.
+     * @return ResponseEntity indicating the success of the request.
+     */
     @RequestMapping("/sendRequest")
     public ResponseEntity<?> sendRequest(@RequestParam String receiverUsername, Principal principal) {
         MyUser user = userRepository.findByUsername(receiverUsername);
@@ -37,6 +48,14 @@ public class AjaxFriendController {
         return ResponseEntity.ok().body("");
     }
 
+    /**
+     * Handles the "/handleRequest" endpoint to handle a friend request (accept or reject).
+     *
+     * @param senderUsername The username of the user who sent the friend request.
+     * @param decision       The decision of the user regarding the friend request (accept or reject).
+     * @param principal      The principal representing the currently authenticated user.
+     * @return ResponseEntity indicating the success of the request.
+     */
     @RequestMapping("/handleRequest")
     public ResponseEntity<?> handleRequest(@RequestParam String senderUsername, @RequestParam String decision, Principal principal) {
         String receiverUsername = principal.getName();
@@ -47,23 +66,42 @@ public class AjaxFriendController {
             MyUser receiver = userRepository.findByUsername(receiverUsername);
             sender.getFriends().add(receiver);
             receiver.getFriends().add(sender);
+            sender.getFriendsSince().add(LocalDateTime.now());
+            receiver.getFriendsSince().add(LocalDateTime.now());
             userRepository.saveAll(List.of(sender, receiver));
             return ResponseEntity.ok().body("{\"decision\": true}");
         }
         return ResponseEntity.ok().body("{\"decision\": false}");
     }
 
+    /**
+     * Handles the "/removeFriend" endpoint to remove a friend.
+     *
+     * @param receiverUsername The username of the friend to be removed.
+     * @param principal        The principal representing the currently authenticated user.
+     * @return ResponseEntity indicating the success of the request.
+     */
     @RequestMapping("/removeFriend")
     public ResponseEntity<?> removeFriend(@RequestParam String receiverUsername, Principal principal) {
         String senderUsername = principal.getName();
         MyUser sender = userRepository.findByUsername(senderUsername);
         MyUser receiver = userRepository.findByUsername(receiverUsername);
+        int senderIndex = receiver.getFriends().indexOf(sender);
+        int receiverIndex = sender.getFriends().indexOf(receiver);
+        sender.getFriendsSince().remove(receiverIndex);
+        receiver.getFriendsSince().remove(senderIndex);
         sender.getFriends().remove(receiver);
         receiver.getFriends().remove(sender);
         userRepository.saveAll(List.of(sender, receiver));
         return ResponseEntity.ok().body("");
     }
 
+    /**
+     * Handles the "/getFriends" endpoint to retrieve information about friends and potential friends.
+     *
+     * @param principal The principal representing the currently authenticated user.
+     * @return ResponseEntity containing JSON data about friends, potential friends, and friend requests.
+     */
     @RequestMapping("/getFriends")
     public ResponseEntity<?> getFriends(Principal principal) {
         List<MyUser> friends = userRepository.findByUsername(principal.getName()).getFriends();
@@ -78,9 +116,9 @@ public class AjaxFriendController {
             .excludeFieldsWithoutExposeAnnotation()
             .create();
 
-        List<MyUser> users1 = (List<MyUser>) userRepository.findAll();
+        List<MyUser> usersAll = (List<MyUser>) userRepository.findAll();
         Dictionary<String, List<String>> mutual = new Hashtable<>();
-        for (MyUser user: users1) {
+        for (MyUser user: usersAll) {
             List<MyUser> userFriends = userRepository.findByUsername(user.getUsername()).getFriends();
             List<String> tempList = new ArrayList<>();
             for (MyUser friend: friends) {

@@ -76,7 +76,7 @@ function getNewFriends(decision) {
                                 <div class="col d-flex align-items-center">
                                     <img src="https://eu.ui-avatars.com/api/?name=${friend.firstname}+${friend.lastname}&size=250"
                                          alt="User Initials Image" class="rounded-circle">
-                                    <h5><a href="#" class="profile-link">${friend.username}</a></h5>
+                                    <h5><a href="/friend-profile?username=${friend.username}" class="profile-link">${friend.username}</a></h5>
                                 </div>
                                 <div class="col d-flex align-items-center" style="transform: scale(0.8);">
                                     <input type="hidden" name="receiverUsername" value="${friend.username}">

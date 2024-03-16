@@ -53,6 +53,9 @@ public class MyUser {
     @ManyToMany
     private List<MyUser> friends = new ArrayList<>();
 
+    @ElementCollection
+    private List<LocalDateTime> friendsSince = new ArrayList<>();
+
     public int getId() {
         return id;
     }
@@ -195,5 +198,13 @@ public class MyUser {
 
     public void setFriends(List<MyUser> friends) {
         this.friends = friends;
+    }
+
+    public List<LocalDateTime> getFriendsSince() {
+        return friendsSince;
+    }
+
+    public void setFriendsSince(List<LocalDateTime> friendsSince) {
+        this.friendsSince = friendsSince;
     }
 }

@@ -19,8 +19,8 @@
         <c:forEach items="${userCourses}" var="course">
             <div class="card mb-3" style="max-width: 48rem;">
                 <div class="row g-0">
-                    <div class="col-sm-4">
-                        <img src="${course.getCourse().getImageUrl()}" class="img-fluid rounded-start" alt="${course.getCourse().getTitle()}">
+                    <div class="col-sm-4" style="background-color: var(--primary-lighter);">
+                        <img src="${course.getCourse().getImageUrl()}" class="img-fluid rounded-start card-img" alt="${course.getCourse().getTitle()}">
                     </div>
                     <div class="col-sm-8">
                         <div class="card-body h-100 d-flex flex-column justify-content-between p-lighter">
