@@ -70,7 +70,6 @@ public class VerificationService {
                 "        .button {\n" +
                 "            background-color: #007bff;\n" +
                 "            border: none;\n" +
-                "            color: white;\n" +
                 "            padding: 10px 20px;\n" +
                 "            text-align: center;\n" +
                 "            text-decoration: none;\n" +
@@ -103,8 +102,9 @@ public class VerificationService {
                 "        <p>Welcome to our platform! 🚀</p>\n" +
                 "        <p>Thank you for signing up. Please click the button below to verify your email address. This link will expire in <strong> 48 hours</strong>⏳:</p>\n" +
                 "        <div class=\"button_container\">\n" +
-                "           <a href=\"" + verificationLink + "\" class=\"button button_link\">Verify Here</a>\n" +
+                "           <a href=\"" + verificationLink + "\" class=\"button button_link\" style=\"color: white;\">Verify Here</a>\n" +
                 "        </div>\n" +
+            "        <p>If the button above doesn't work, please copy and paste the following link into your internet browser: <a href=\"" + verificationLink + "\">" + verificationLink + "</a></p>\n" +
                 "        <p>If you didn't sign up for our service, you can safely ignore this email.</p>\n" +
                 "    </div>\n" +
                 "    <div class=\"footer\">\n" +

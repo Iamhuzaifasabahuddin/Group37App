@@ -74,7 +74,6 @@ public class PasswordService {
                 "        .button {\n" +
                 "            background-color: #007bff;\n" +
                 "            border: none;\n" +
-                "            color: white;\n" +
                 "            padding: 10px 20px;\n" +
                 "            text-align: center;\n" +
                 "            text-decoration: none;\n" +
@@ -111,8 +110,9 @@ public class PasswordService {
                 "        <p>We've received a request to reset your password.</p>\n" +
                 "        <p>Please click the button below to reset your password. This link will expire in <strong>1 hour</strong> ⏳:</p>\n" +
                 "        <div class=\"button_container\">\n" +
-                "           <a href=\"" + resetLink + "\" class=\"button button_link\">Reset Password</a>\n" +
+                "           <a href=\"" + resetLink + "\" class=\"button button_link\" style=\"color: white;\">Reset Password</a>\n" +
                 "        </div>\n" +
+                "        <p>If the button above doesn't work, please copy and paste the following link into your internet browser: <a href=\"" + resetLink + "\">" + resetLink + "</a></p>\n" +
                 "        <p>If you didn't request this, you can safely ignore this email. ❌</p>\n" +
                 "    </div>\n" +
                 "    <div class=\"footer\">\n" +
