@@ -54,13 +54,13 @@
             </tr>
             </thead>
             <tbody>
-            <c:forEach var="user" items="${bronze}" varStatus="status">
-                <tr>
+            <c:forEach var="player" items="${bronze}" varStatus="status">
+                <tr <c:if test="${player.username == user.username}">class="highlight-user"</c:if>>
                     <td>
                         <c:out value="${status.index + 1}"/><c:out value="${suffix[status.index]}"/>.
                     </td>
-                    <td>${user.username}</td>
-                    <td>${user.points}</td>
+                    <td>${player.username}</td>
+                    <td>${player.points}</td>
                 </tr>
             </c:forEach>
             </tbody>
@@ -80,13 +80,13 @@
             </tr>
             </thead>
             <tbody>
-            <c:forEach var="user" items="${silver}" varStatus="status">
-                <tr>
+            <c:forEach var="player" items="${silver}" varStatus="status">
+                <tr <c:if test="${player.username == user.username}">class="highlight-user"</c:if>>
                     <td>
                         <c:out value="${status.index + 1}"/><c:out value="${suffix[status.index]}"/>.
                     </td>
-                    <td>${user.username}</td>
-                    <td>${user.points}</td>
+                    <td>${player.username}</td>
+                    <td>${player.points}</td>
                 </tr>
             </c:forEach>
             </tbody>
@@ -106,13 +106,13 @@
             </tr>
             </thead>
             <tbody>
-            <c:forEach var="user" items="${gold}" varStatus="status">
-                <tr>
+            <c:forEach var="player" items="${gold}" varStatus="status">
+                <tr <c:if test="${player.username == user.username}">class="highlight-user"</c:if>>
                     <td>
                         <c:out value="${status.index + 1}"/><c:out value="${suffix[status.index]}"/>.
                     </td>
-                    <td>${user.username}</td>
-                    <td>${user.points}</td>
+                    <td>${player.username}</td>
+                    <td>${player.points}</td>
                 </tr>
             </c:forEach>
             </tbody>
@@ -133,13 +133,13 @@
             </tr>
             </thead>
             <tbody>
-            <c:forEach var="user" items="${platinum}" varStatus="status">
-                <tr>
+            <c:forEach var="player" items="${platinum}" varStatus="status">
+                <tr <c:if test="${player.username == user.username}">class="highlight-user"</c:if>>
                     <td>
                         <c:out value="${status.index + 1}"/><c:out value="${suffix[status.index]}"/>.
                     </td>
-                    <td>${user.username}</td>
-                    <td>${user.points}</td>
+                    <td>${player.username}</td>
+                    <td>${player.points}</td>
                 </tr>
             </c:forEach>
             </tbody>
@@ -159,13 +159,13 @@
             </tr>
             </thead>
             <tbody>
-            <c:forEach var="user" items="${titanium}" varStatus="status">
-                <tr>
+            <c:forEach var="player" items="${titanium}" varStatus="status">
+                <tr <c:if test="${player.username == user.username}">class="highlight-user"</c:if>>
                     <td>
                         <c:out value="${status.index + 1}"/><c:out value="${suffix[status.index]}"/>.
                     </td>
-                    <td>${user.username}</td>
-                    <td>${user.points}</td>
+                    <td>${player.username}</td>
+                    <td>${player.points}</td>
                 </tr>
             </c:forEach>
             </tbody>
@@ -174,7 +174,7 @@
 </div>
 
 <div id="elysium" class="tab pb-4">
-    <h1 class="text-center my-3">Elysium League</h1>
+    <h1 class="text-center my-3 league-heading">Elysium League</h1>
     <div class="table-container">
         <table>
             <thead>
@@ -185,13 +185,13 @@
             </tr>
             </thead>
             <tbody>
-            <c:forEach var="user" items="${elysium}" varStatus="status">
-                <tr>
+            <c:forEach var="player" items="${elysium}" varStatus="status">
+                <tr <c:if test="${player.username == user.username}">class="highlight-user"</c:if>>
                     <td>
                         <c:out value="${status.index + 1}"/><c:out value="${suffix[status.index]}"/>.
                     </td>
-                    <td>${user.username}</td>
-                    <td>${user.points}</td>
+                    <td>${player.username}</td>
+                    <td>${player.points}</td>
                 </tr>
             </c:forEach>
             </tbody>
@@ -211,13 +211,16 @@
             </tr>
             </thead>
             <tbody>
-            <c:forEach var="user" items="${global}" varStatus="status">
-                <tr>
+            <c:forEach var="player" items="${global}" varStatus="status">
+                <tr <c:if test="${status.index == 0}">class="highlight-gold"</c:if>
+                    <c:if test="${status.index == 1}">class="highlight-silver"</c:if>
+                    <c:if test="${status.index == 2}">class="highlight-bronze"</c:if>
+                    <c:if test="${player.username == user.username}">class="highlight-user"</c:if>>
                     <td>
                         <c:out value="${status.index + 1}"/><c:out value="${suffix[status.index]}"/>.
                     </td>
-                    <td>${user.username}</td>
-                    <td>${user.points}</td>
+                    <td>${player.username}</td>
+                    <td>${player.points}</td>
                 </tr>
             </c:forEach>
             </tbody>
@@ -237,13 +240,16 @@
             </tr>
             </thead>
             <tbody>
-            <c:forEach var="user" items="${friends}" varStatus="status">
-                <tr>
+            <c:forEach var="player" items="${friends}" varStatus="status">
+                <tr <c:if test="${status.index == 0}">class="highlight-gold"</c:if>
+                    <c:if test="${status.index == 1}">class="highlight-silver"</c:if>
+                    <c:if test="${status.index == 2}">class="highlight-bronze"</c:if>
+                    <c:if test="${player.username == user.username}">class="highlight-user"</c:if>>
                     <td>
                         <c:out value="${status.index + 1}"/><c:out value="${suffix[status.index]}"/>.
                     </td>
-                    <td>${user.username}</td>
-                    <td>${user.points}</td>
+                    <td>${player.username}</td>
+                    <td>${player.points}</td>
                 </tr>
             </c:forEach>
             </tbody>

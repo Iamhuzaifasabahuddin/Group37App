@@ -8,28 +8,25 @@
 <body>
 <section>
     <div class="container-fluid" style="max-width: 80%;">
-
         <h1 class="text-center p-4">Profile Details</h1>
-
-        <div class="card mb-3 mx-auto text-center" style="max-width: 540px; background-color: var(--primary-lightest); border: 0;">
-            <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="https://eu.ui-avatars.com/api/?name=${(user.firstname)}+${(user.lastname)}&size=200"
-                         alt="User Initials Image" class="rounded-circle" style="height: 7rem; width: 7rem; object-fit: cover; border: 0;"/>
-                </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h2 class="mb-1 fs-5">${user.firstname} ${user.lastname}</h2>
-                        <h2 class="mb-1 fs-5">${user.email}</h2>
-                        <h2 class="mb-1 fs-5">@${user.username}</h2>
+        <div class="d-flex justify-content-center">
+            <div class="card mb-3 text-center" style="max-width: 540px; background-color: var(--primary-lightest); border: 0;">
+                <div class="row g-0 align-items-center">
+                    <div class="col-md-4 d-flex justify-content-center pe-0">
+                        <img src="https://eu.ui-avatars.com/api/?name=${(user.firstname)}+${(user.lastname)}&size=200" alt="User Initials Image" class="rounded-circle" style="height: 7rem; width: 7rem; object-fit: cover; border: 0;"/>
+                    </div>
+                    <div class="col-md-8 ps-4">
+                        <div class="card-body">
+                            <h2 class="mb-1 fs-5">${user.firstname} ${user.lastname}</h2>
+                            <h2 class="mb-1 fs-5">${user.email}</h2>
+                            <h2 class="mb-1 fs-5">@${user.username}</h2>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
 </section>
-
 <section>
     <div class="container-fluid">
         <div class="card mb-3 mx-auto border-dark" style="max-width: 45rem; background-color: whitesmoke;">
