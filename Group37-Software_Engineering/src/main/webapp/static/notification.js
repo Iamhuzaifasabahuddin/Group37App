@@ -1,5 +1,10 @@
 const notifications = document.querySelector("#notifications");
 const bell = document.querySelector("#bell");
+const notificationDropdown = document.querySelector(".nav-item.dropdown");
+const standardNav = document.querySelector("#standard-nav");
+const hamburgerNav = document.querySelector("#hamburger-nav");
+const profileCircle = document.querySelector("#profile-circle");
+
 function showNotifications() {
     $.ajax({
         url: '/notifications',
@@ -68,3 +73,23 @@ const callback = (mutationList, observer) => {
 };
 const observer = new MutationObserver(callback);
 observer.observe(bell, config);
+
+moveBell();
+
+function moveBell() {
+    if (window.innerWidth < 768 && standardNav.contains(notificationDropdown)) {
+        standardNav.removeChild(notificationDropdown);
+        standardNav.removeChild(profileCircle);
+        hamburgerNav.appendChild(notificationDropdown);
+        hamburgerNav.appendChild(profileCircle);
+    } else if (window.innerWidth >= 768 && hamburgerNav.contains(notificationDropdown)) {
+        hamburgerNav.removeChild(notificationDropdown);
+        hamburgerNav.removeChild(profileCircle);
+        standardNav.appendChild(notificationDropdown);
+        standardNav.appendChild(profileCircle);
+    }
+}
+
+window.addEventListener("resize", () => {
+    moveBell();
+});

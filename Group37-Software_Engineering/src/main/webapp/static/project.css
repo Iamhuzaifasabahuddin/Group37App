@@ -516,3 +516,7 @@ tbody tr td {
     max-height: 70vh;
     min-width: 40vw;
 }
+
+.navbar-nav .dropdown-menu {
+    position: absolute;
+}
