@@ -117,7 +117,6 @@ public class CourseController {
     }
 
 
-
     /**
      * Checks if a user is enrolled in a specific course.
      *

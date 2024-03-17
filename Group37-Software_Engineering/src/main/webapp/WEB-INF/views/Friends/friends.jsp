@@ -20,7 +20,7 @@
         <a class="nav-link" href="#add-friends" data-target="add-friends">Add Friends</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="#requests" data-target="requests">Requests</a>
+        <a class="nav-link" href="#requests" data-target="requests">Requests <span class="badge text-bg-secondary">${fn:length(receiverRequests)}</span></a>
     </li>
 </ul>
 
@@ -33,12 +33,12 @@
         </li>
 
         <li class="list-group-friends" id="requests-content">
-            <c:forEach items="${receiverRequests}" var="request">
+            <c:forEach items="${receiverRequests}" var="request" varStatus="loop">
                 <div class="row align-items-center" style="border-bottom: 0.05em solid var(--primary-darker);">
                     <div class="col d-flex align-items-center">
                     <img src="https://eu.ui-avatars.com/api/?name=${(request.getSender().getFirstname())}+${(request.getSender().getLastname())}&size=250"
                          alt="User Initials Image" class="rounded-circle"/>
-                        <h5><a href="#" class="profile-link">${request.getSender().getUsername()}</a></h5>
+                        <h5><a class="profile-link" data-bs-toggle="modal" data-bs-target="#friend-profile-${loop.index}">${request.getSender().getUsername()}</a></h5>
                     </div>
                     <div class="col" style="transform: scale(0.7);">
                         <input type="hidden" name="senderUsername" value="${request.getSender().getUsername()}">
@@ -46,7 +46,23 @@
                         <br/>
                         <button class="btn btn-primary pull-right" name="decision" value="decline" data-sender="${request.getSender().getUsername()}">Decline Request</button>
                     </div>
+
+                <div class="modal" id="friend-profile-${loop.index}">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content mx-auto" style="max-width: max-content">
+                            <div class="modal-header m-0" style="background-color: var(--primary-darker); color: var(--secondary-light)">
+                                <h4 class="modal-title">${request.getSender().getUsername()}</h4>
+                            </div>
+                            <div class="modal-body mx-auto" style="background-color: var(--primary-lighter)">
+                                <h5>${request.getSender().getFirstname()} ${request.getSender().getLastname()}</h5>
+                                <h5>${fn:length(request.getSender().getFriends())} Friends</h5>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
+                </div>
+
             </c:forEach>
         </li>
     </ul>

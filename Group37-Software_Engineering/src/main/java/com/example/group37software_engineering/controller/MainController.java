@@ -50,6 +50,19 @@ public class MainController {
     private AchievementRepository achievementRepository;
 
     /**
+     * Display the welcome page with top 3 courses.
+     *
+     * @return The view name for the welcome page.
+     */
+
+    @GetMapping("/welcome")
+    public String welcomePage(Model model) {
+        List<Course> top3Courses = userCourseRepository.findTop3CoursesWithHighestUsers();
+        model.addAttribute("top3Courses", top3Courses);
+        return "welcome";
+    }
+
+    /**
      * Handles displaying the user dashboard.
      * Retrieves user information, user courses, and displays relevant information.
      *

@@ -2,7 +2,7 @@ let submitted = false;
 
 /* Colour change listener */
 function changeHues() {
-    const cards = document.querySelectorAll(".card");
+    const cards = document.querySelectorAll(".card, .carousel-item");
     const categories = ["ARTIFICIAL INTELLIGENCE", "CLOUD", "DATA SCIENCE", "CYBERSECURITY", "SUSTAINABILITY"];
     const angles = [145, 180, 215, 250, 285].reverse();
     cards.forEach(card => {
