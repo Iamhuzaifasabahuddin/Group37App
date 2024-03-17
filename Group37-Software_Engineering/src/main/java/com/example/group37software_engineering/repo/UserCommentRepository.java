@@ -10,10 +10,11 @@ import java.util.List;
 
 public interface UserCommentRepository extends CrudRepository<UserComment, Integer> {
 
-    public UserComment findByUserAndComment(MyUser user, Comment comments);
+    public UserComment findUserCommentByUserAndComment(MyUser user, Comment comments);
+
+    public UserComment findUserCommentById(Integer id);
+
+    List<UserComment> findByCourse(Course course);
 
     List<UserComment> findByUser(MyUser user);
-
-    List<UserComment> findUserCommentByCourse(Course course);
-
 }

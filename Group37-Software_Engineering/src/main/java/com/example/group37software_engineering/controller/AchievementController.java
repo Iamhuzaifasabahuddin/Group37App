@@ -42,6 +42,9 @@ public class AchievementController {
     @Autowired
     private LeagueRepository leagueRepository;
 
+    @Autowired
+    private UserCommentRepository userCommentRepository;
+
     /**
      * Endpoint for showing achievements.
      *
@@ -561,6 +564,41 @@ public class AchievementController {
                 .limit(3)
                 .toList();
         if (top3.contains(user) && userAchievement == null) {
+            userAchievement = new UserAchievement();
+            userAchievement.setUser(user);
+            userAchievement.setAchievement(achievement);
+            userAchievement.setAchieved(true);
+            userAchievement.setDateAchieved();
+            userAchievement.setTimeAchieved();
+            user.setPoints(user.getPoints() + achievement.getPoints());
+            userRepository.save(user);
+            userAchievementRepository.save(userAchievement);
+        }
+    }
+
+    public void DoubleTrouble(MyUser user) {
+        Achievement achievement = achievementRepository.findAchievementByTitle("Double Trouble");
+        UserAchievement userAchievement = userAchievementRepository.findUserAchievementByUserAndAchievement(user, achievement);
+        List<MyUser> friends = user.getFriends();
+
+        if (!friends.isEmpty() && userAchievement == null) {
+            userAchievement = new UserAchievement();
+            userAchievement.setUser(user);
+            userAchievement.setAchievement(achievement);
+            userAchievement.setAchieved(true);
+            userAchievement.setDateAchieved();
+            userAchievement.setTimeAchieved();
+            user.setPoints(user.getPoints() + achievement.getPoints());
+            userRepository.save(user);
+            userAchievementRepository.save(userAchievement);
+        }
+    }
+
+    public void ReviewConqueror(MyUser user) {
+        Achievement achievement = achievementRepository.findAchievementByTitle("Review Conqueror");
+        UserAchievement userAchievement = userAchievementRepository.findUserAchievementByUserAndAchievement(user, achievement);
+        List<UserComment> userComments = userCommentRepository.findByUser(user);
+        if (userComments.size() >= 5 && userAchievement == null) {
             userAchievement = new UserAchievement();
             userAchievement.setUser(user);
             userAchievement.setAchievement(achievement);

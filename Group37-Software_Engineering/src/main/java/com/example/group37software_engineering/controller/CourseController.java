@@ -1,10 +1,10 @@
 package com.example.group37software_engineering.controller;
 
-import com.example.group37software_engineering.model.Comment;
-import com.example.group37software_engineering.model.Course;
-import com.example.group37software_engineering.model.MyUser;
-import com.example.group37software_engineering.model.UserCourses;
-import com.example.group37software_engineering.repo.*;
+import com.example.group37software_engineering.model.*;
+import com.example.group37software_engineering.repo.CourseRepository;
+import com.example.group37software_engineering.repo.UserCommentRepository;
+import com.example.group37software_engineering.repo.UserCourseRepository;
+import com.example.group37software_engineering.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,14 +29,9 @@ public class CourseController {
     @Autowired
     private UserCourseRepository userCourseRepository;
 
-    /*
-    @Autowired
-    private CommentRepository commentRepository;
-
     @Autowired
     private UserCommentRepository userCommentRepository;
 
-     */
     /**
      * Handles displaying available courses to the user.
      * Retrieves the user's information and the list of courses they are not enrolled in.
@@ -51,11 +46,14 @@ public class CourseController {
         model.addAttribute("user", user);
         List<Course> allCourses = (List<Course>) courseRepository.findAll();
         List<Course> coursesNotEnrolled = new ArrayList<>();
-        //List<Comment> allComments = (List<Comment>) commentRepository.findAll();
 
         boolean anyCourseEnrolled = false;
         for (Course course : allCourses) {
             if (isUserEnrolledInCourse(user, course)) {
+                List<UserComment> coursecomments = userCommentRepository.findByCourse(course);
+                double average = coursecomments.stream().map(UserComment::getComment).mapToDouble(Comment::getReview).average().orElse(0.0);
+                course.setAverageRating(average);
+                courseRepository.save(course);
                 anyCourseEnrolled = true;
                 coursesNotEnrolled.add(course);
             }
@@ -66,7 +64,6 @@ public class CourseController {
         } else {
             model.addAttribute("courseList", coursesNotEnrolled);
         }
-        //model.addAttribute("commentList", allComments);
 
         return "Course/courses";
     }
@@ -124,6 +121,7 @@ public class CourseController {
         model.addAttribute("top3Courses", top3Courses);
         return "Course/top3";
     }
+
 
 
     /**

@@ -2,11 +2,7 @@ package com.example.group37software_engineering.controller;
 
 import com.example.group37software_engineering.model.*;
 import com.example.group37software_engineering.repo.*;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -46,6 +42,9 @@ public class MainController {
     @Autowired
     private AchievementRepository achievementRepository;
 
+    @Autowired
+    private UserCommentRepository userCommentRepository;
+
     /**
      * Handles displaying the user dashboard.
      * Retrieves user information, user courses, and displays relevant information.
@@ -62,6 +61,12 @@ public class MainController {
         List<Course> courseList = userCourses.stream()
                 .map(UserCourses::getCourse)
                 .toList();
+        for (Course course : courseList) {
+            List<UserComment> coursecomments = userCommentRepository.findByCourse(course);
+            double average = coursecomments.stream().map(UserComment::getComment).mapToDouble(Comment::getReview).average().orElse(0.0);
+            course.setAverageRating(average);
+            courseRepository.save(course);
+        }
         achievementController.Mirage(user);
         if (courseList.isEmpty()) {
             model.addAttribute("error", "You have no courses.");

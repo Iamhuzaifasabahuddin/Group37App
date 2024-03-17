@@ -165,7 +165,27 @@ body {
         display: block;
     }
 }
+/*.star-rating {*/
+/*    display: inline-block;*/
+/*}*/
 
+/*.stars {*/
+/*    display: inline-block;*/
+/*}*/
+
+/*.star {*/
+/*    font-size: 2rem;*/
+/*    color: gray;*/
+/*    cursor: pointer;*/
+/*}*/
+
+/*input[type="radio"] {*/
+/*    display: none;*/
+/*}*/
+
+/*input[type="radio"]:checked ~ label {*/
+/*    color: orange;*/
+/*}*/
 * {
     box-sizing: border-box;
     margin: 0;
@@ -410,6 +430,20 @@ tbody tr td {
     z-index: 1;
 }
 
+@media (max-width: 1200px) {
+    .custom-card {
+        height: 450px;
+
+    }
+    .truncate-multiline {
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+}
 .league {
     overflow:hidden;
 }
