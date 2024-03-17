@@ -3,6 +3,7 @@ package com.example.group37software_engineering.model;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 @Entity
 public class UserComment {

@@ -76,6 +76,24 @@
                             <p class="card-subtitle text-body-secondary"><i class="bi bi-award"></i> ${Math.round(course.getDuration()) * 100} points</p>
                         </div>
                     </div>
+
+                    <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+                        Comments
+                    </button>
+
+                    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+                        <div class="offcanvas-header">
+                            <h5 class="offcanvas-title" id="offcanvasExampleLabel">Comments:</h5>
+                            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                        </div>
+                        <div class="offcanvas-body">
+                            <div>
+<%--                                <p>${course.getUserComments()}</p>--%>
+                            </div>
+
+                        </div>
+                    </div>
+
                     <button class="btn btn-primary rounded-0 rounded-bottom" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="showConfirmationBox(${course.id}, `${course.getTitle()}`)">
                         Enroll
                     </button>

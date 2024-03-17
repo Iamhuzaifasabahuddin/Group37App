@@ -1,10 +1,7 @@
 package com.example.group37software_engineering.controller;
 
 import com.example.group37software_engineering.model.*;
-import com.example.group37software_engineering.repo.AchievementRepository;
-import com.example.group37software_engineering.repo.CourseRepository;
-import com.example.group37software_engineering.repo.UserCourseRepository;
-import com.example.group37software_engineering.repo.UserRepository;
+import com.example.group37software_engineering.repo.*;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
