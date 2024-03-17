@@ -72,7 +72,7 @@
                         <h4 class="card-title pb-1">${course.getTitle()}</h4>
                         <p class="card-subtitle s-light p-darker rounded-pill d-inline px-2 text-uppercase category">${course.getCategory()}</p>
                         <a class="ratings" href="#" id="ratingLink" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" style="text-decoration-color: var(--secondary-dark)">
-                            <p class="card-subtitle pt-2 text-uppercase" style="color: var(--secondary-dark);">
+                            <p class="card-subtitle pt-2 text-uppercase fw-bold" style="color: var(--secondary-dark);">
                                 <i class="bi bi-star-fill" style="color: #fcc200"></i>
                                     ${course.getAverageRating()}
                             </p>

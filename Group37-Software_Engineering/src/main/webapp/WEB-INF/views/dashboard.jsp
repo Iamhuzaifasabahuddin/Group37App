@@ -29,9 +29,27 @@
                             <div>
                                 <h4 class="card-title">${course.getCourse().getTitle()}</h4>
                                 <p class="card-subtitle s-light p-darker rounded-pill d-inline px-2 text-uppercase category">${course.getCourse().getCategory()}</p>
-                                <p class="card-subtitle d-inline px-2 text-uppercase ">
-                                    <i class="bi bi-star-fill"></i>
-                                        ${course.getCourse().getAverageRating()}</p>
+<%--                                <p class="card-subtitle d-inline px-2 text-uppercase fw-bold" style="color: var(--secondary-dark);">--%>
+<%--                                    <i class="bi bi-star-fill" style="color: #fcc200"></i>--%>
+<%--                                        ${course.getCourse().getAverageRating()}</p>--%>
+                                <a class="ratings" href="#" id="ratingLink" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" style="text-decoration-color: var(--secondary-dark)">
+                                    <p class="card-subtitle d-inline px-2 text-uppercase fw-bold" style="color: var(--secondary-dark);">
+                                        <i class="bi bi-star-fill" style="color: #fcc200"></i>
+                                            ${course.getCourse().getAverageRating()}
+                                    </p>
+                                </a>
+                            </div>
+                            <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+                                <div class="offcanvas-header">
+                                    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Comments:</h5>
+                                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                                </div>
+                                <div class="offcanvas-body">
+                                    <div>
+                                            <%--                                <p>${course.getUserComments()}</p>--%>
+                                    </div>
+
+                                </div>
                             </div>
                             <div class="d-flex">
                                 <p class="card-subtitle text-body-secondary col-5 mb-2 mt-2"><i class="bi bi-hourglass-split"></i> ${Math.round(course.getCourse().getDuration())} hours</p>
