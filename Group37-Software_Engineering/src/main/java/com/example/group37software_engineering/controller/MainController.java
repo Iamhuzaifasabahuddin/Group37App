@@ -14,6 +14,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.security.Principal;
+import java.text.DecimalFormat;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
@@ -53,8 +54,11 @@ public class MainController {
 
     @GetMapping("/welcome")
     public String welcomePage(Model model) {
-        List<Course> top3Courses = userCourseRepository.findTop3CoursesWithHighestUsers();
-        model.addAttribute("top3Courses", top3Courses);
+        List<Course> top5Courses = userCourseRepository.findTop3CoursesWithHighestUsers();
+        List<UserComment> top5Comments = userCommentRepository.findTop5ByCommentReview();
+        model.addAttribute("top5Courses", top5Courses);
+        model.addAttribute("top5Comments", top5Comments);
+        System.out.println("top5Comments: " + top5Comments);
         return "welcome";
     }
 
@@ -77,6 +81,10 @@ public class MainController {
         for (Course course : courseList) {
             List<UserComment> coursecomments = userCommentRepository.findByCourse(course);
             double average = coursecomments.stream().map(UserComment::getComment).mapToDouble(Comment::getReview).average().orElse(0.0);
+
+            DecimalFormat df = new DecimalFormat("#.#");
+            average = Double.parseDouble(df.format(average));
+
             course.setAverageRating(average);
             courseRepository.save(course);
         }

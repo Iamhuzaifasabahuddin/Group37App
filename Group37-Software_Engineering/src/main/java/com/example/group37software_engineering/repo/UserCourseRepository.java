@@ -16,7 +16,7 @@ public interface UserCourseRepository extends CrudRepository<UserCourses, Intege
     @Query("SELECT uc.course " +
             "FROM UserCourses uc " +
             "GROUP BY uc.course " +
-            "ORDER BY COUNT(uc.user) DESC")
+            "ORDER BY COUNT(uc.user) DESC limit 5")
     List<Course> findTop3CoursesWithHighestUsers();
 
 }

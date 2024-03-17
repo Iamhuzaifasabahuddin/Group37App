@@ -13,7 +13,7 @@ function changeValidity(input, feedback, validity) {
 function validateNotEmpty(id) {
     const input = document.querySelector(`#${id}`);
     const feedback = document.querySelector(`.invalid-feedback.${id}`);
-    if (input.value.length === 0) {
+    if (input.value.length === 0 || input.value.trim().length === 0){
         feedback.textContent = 'Cannot be empty!';
         return false;
     }
@@ -23,12 +23,13 @@ function validateNotEmpty(id) {
 function validateAlphabetic(id) {
     const input = document.querySelector(`#${id}`);
     const feedback = document.querySelector(`.invalid-feedback.${id}`);
-    if (!/^[a-zA-Z]+$/.test(input.value)) {
-        feedback.textContent = `Must contain letters only!`;
+    if (!/^[a-zA-Z\s]+$/.test(input.value)) {
+        feedback.textContent = `Must contain letters or spaces only!`;
         return false;
     }
     return true;
 }
+
 
 function validateRange(id, min, max) {
     const input = document.querySelector(`#${id}`);
@@ -40,6 +41,7 @@ function validateRange(id, min, max) {
     return true;
 
 }
+
 function validateDescription() {
     const id = 'description';
     const input = document.querySelector(`#${id}`);
@@ -66,7 +68,6 @@ function validateRating() {
     }
     return false;
 }
-
 
 
 function validateAll(submit) {
@@ -98,7 +99,7 @@ exampleModal.addEventListener('show.bs.modal', function (event) {
     modalTitle.textContent = "Review for " + courseTitle + ":";
     hiddenInput.value = courseId;
 
-    form.addEventListener('submit', function(event) {
+    form.addEventListener('submit', function (event) {
         event.preventDefault();
         validateAll(true);
     });

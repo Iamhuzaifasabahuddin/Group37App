@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,6 +53,8 @@ public class CourseController {
             if (isUserEnrolledInCourse(user, course)) {
                 List<UserComment> coursecomments = userCommentRepository.findByCourse(course);
                 double average = coursecomments.stream().map(UserComment::getComment).mapToDouble(Comment::getReview).average().orElse(0.0);
+                DecimalFormat df = new DecimalFormat("#.#");
+                average = Double.parseDouble(df.format(average));
                 course.setAverageRating(average);
                 courseRepository.save(course);
                 anyCourseEnrolled = true;

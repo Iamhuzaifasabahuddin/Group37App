@@ -69,45 +69,71 @@
         </div>
         <div class="col text-center">
 
-            <h3>Trending Courses:</h3>
-
-            <div id="top3CoursesCarousel" class="carousel slide carousel-fade mx-auto">
+            <h3><i class="bi bi-fire" style="color: #FBB746;"></i>
+                Trending Courses:</h3>
+            <div id="carouselExampleAutoplaying" class="carousel slide mx-auto" data-bs-ride="carousel">
                 <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#top3CoursesCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                    <button type="button" data-bs-target="#top3CoursesCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                    <button type="button" data-bs-target="#top3CoursesCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                    <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                    <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                    <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="4" aria-label="Slide 5"></button>
                 </div>
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="${top3Courses[0].getImageUrl()}" class="d-block w-100" alt="${top3Courses[0].getTitle()}">
-                            <h5>${top3Courses[0].getTitle()}l</h5>
-                            <p class="category" style="display: none">${top3Courses[0].getCategory()}</p>
-                    </div>
 
-                    <div class="carousel-item">
-                        <img src="${top3Courses[1].getImageUrl()}" class="d-block w-100" alt="${top3Courses[1].getTitle()}">
-                            <h5>${top3Courses[1].getTitle()}</h5>
-                            <p class="category" style="display: none">${top3Courses[1].getCategory()}</p>
+                <c:if test="${not empty top5Courses}">
+                    <div class="carousel-inner">
+                        <c:forEach items="${top5Courses}" var="course" varStatus="status">
+                            <div class="carousel-item ${status.index == 0 ? 'active' : ''}">
+                                <img src="${course.getImageUrl()}" class="d-block w-100" alt="${course.getTitle()}">
+                                <h5>${course.getTitle()}</h5>
+                                <p class="category" style="display: none">${course.getCategory()}</p>
+                            </div>
+                        </c:forEach>
                     </div>
-
-                    <div class="carousel-item">
-                        <img src="${top3Courses[2].getImageUrl()}" class="d-block w-100" alt="${top3Courses[2].getTitle()}">
-                            <h5>${top3Courses[2].getTitle()}</h5>
-                            <p class="category" style="display: none">${top3Courses[2].getCategory()}</p>
-                    </div>
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#top3CoursesCarousel" data-bs-slide="prev">
+                </c:if>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Previous</span>
                 </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#top3CoursesCarousel" data-bs-slide="next">
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Next</span>
                 </button>
             </div>
-
         </div>
-    </div>
+<%--            <h3>User Testimonials:</h3>--%>
+<%--            <div id="carouselExampleAutoplaying-comment" class="carousel slide mx-auto" data-bs-ride="carousel">--%>
+<%--                <div class="carousel-indicators">--%>
+<%--                    <button type="button" data-bs-target="#carouselExampleAutoplaying-comment" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>--%>
+<%--                    <button type="button" data-bs-target="#carouselExampleAutoplaying-comment" data-bs-slide-to="1" aria-label="Slide 2"></button>--%>
+<%--                    <button type="button" data-bs-target="#carouselExampleAutoplaying-comment" data-bs-slide-to="2" aria-label="Slide 3"></button>--%>
+<%--                    <button type="button" data-bs-target="#carouselExampleAutoplaying-comment" data-bs-slide-to="3" aria-label="Slide 4"></button>--%>
+<%--                    <button type="button" data-bs-target="#carouselExampleAutoplaying-comment" data-bs-slide-to="4" aria-label="Slide 5"></button>--%>
+<%--                </div>--%>
+
+<%--                <c:if test="${not empty top5Comments}">--%>
+<%--                    <div class="carousel-inner">--%>
+<%--                        <c:forEach items="${top5Comments}" var="comment" varStatus="status">--%>
+<%--                            <div class="carousel-item ${status.index == 0 ? 'active' : ''}">--%>
+<%--                                <img src="https://eu.ui-avatars.com/api/?name=${(comment.getUser() .firstname)}+${(comment.getUser().lastname)}&size=200" alt="User Initials Image"  class="d-block w-100"/>--%>
+<%--&lt;%&ndash;                                <img src="${comment.getUser().}" class="d-block w-100" alt="User Image">&ndash;%&gt;--%>
+<%--                                <h5>${comment.getComment().getDescription()}</h5>--%>
+<%--                                <h5>${comment.getComment().getReview()}</h5>--%>
+<%--                                <p class="category" style="display: none">${comment.getCourse().getTitle()}</p>--%>
+<%--                            </div>--%>
+<%--                        </c:forEach>--%>
+<%--                    </div>--%>
+<%--                </c:if>--%>
+<%--                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying-comment" data-bs-slide="prev">--%>
+<%--                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>--%>
+<%--                    <span class="visually-hidden">Previous</span>--%>
+<%--                </button>--%>
+<%--                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying-comment" data-bs-slide="next">--%>
+<%--                    <span class="carousel-control-next-icon" aria-hidden="true"></span>--%>
+<%--                    <span class="visually-hidden">Next</span>--%>
+<%--                </button>--%>
+<%--            </div>--%>
+        </div>
 </div>
 </body>
 </html>

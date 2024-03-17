@@ -109,3 +109,99 @@ $(document).ready(function () {
         $("#" + target + "-content").show();
     });
 })
+
+function generateStars(rating) {
+    let stars = '';
+    let fullStars = Math.floor(rating);
+    let fractionStar = rating - fullStars;
+
+    for (let i = 0; i < fullStars; i++) {
+        stars += '<i class="bi bi-star-fill" style="color: #fcc200; font-size: 1.5em;"></i>';
+    }
+
+    if (fractionStar >= 0.75) {
+        stars += '<i class="bi bi-star-three-quarters" style="color: #fcc200; font-size: 1.5em;"></i>';
+    } else if (fractionStar >= 0.5) {
+        stars += '<i class="bi bi-star-half" style="color: #fcc200; font-size: 1.5em;"></i>';
+    } else if (fractionStar >= 0.25) {
+        stars += '<i class="bi bi-star-quarter" style="color: #fcc200; font-size: 1.5em;"></i>';
+    }
+
+    return stars;
+}
+
+const commentsContainer = document.querySelector('#commentsContainer');
+
+function fetchComments(courseId, courseTitle) {
+    $.ajax({
+        type: 'GET',
+        url: '/comments?courseId=' + courseId,
+        success: function (response) {
+            const parsedData = JSON.parse(response);
+            commentsContainer.innerHTML = '';
+            for (const comment of parsedData.comments) {
+                // Create a new div for each comment
+                const commentDiv = document.createElement('div');
+
+
+                const avatarImg = document.createElement('img');
+                avatarImg.src = `https://eu.ui-avatars.com/api/?name=${comment.user.firstname}+${comment.user.lastname}&size=100`;
+                avatarImg.alt = 'User Initials Image';
+                avatarImg.style.marginRight = '10px';
+
+                const usernameDiv = document.createElement('div');
+                usernameDiv.innerHTML = `<h1>${comment.user.username}</h1>`;
+                usernameDiv.style.marginTop = '30px';
+                usernameDiv.style.textTransform = 'capitalize';
+
+                const userDiv = document.createElement('div');
+                userDiv.style.display = 'flex';
+                userDiv.appendChild(avatarImg);
+                userDiv.appendChild(usernameDiv);
+
+                const ratingDiv = document.createElement('div');
+                ratingDiv.innerHTML = `${generateStars(comment.comment.review)}`;
+
+                const dateDiv = document.createElement('div');
+                dateDiv.innerHTML = `<p><strong>Date:</strong> ${comment.dateCommented}</p>`;
+                dateDiv.style.marginTop = '12px';
+
+                const CombinedDiv = document.createElement('div');
+                CombinedDiv.style.display = 'flex';
+                CombinedDiv.style.justifyContent = 'space-between';
+                CombinedDiv.appendChild(ratingDiv);
+                CombinedDiv.appendChild(dateDiv);
+                // CombinedDiv.style.marginRight = '10px';
+
+                const DescriptionDiv = document.createElement('div');
+                DescriptionDiv.innerHTML = `<p><strong>Description:</strong> ${comment.comment.description}</p>`;
+
+                DescriptionDiv.style.marginTop = '10px';
+                ratingDiv.style.marginTop = '10px';
+
+                commentDiv.appendChild(userDiv);
+                // commentDiv.appendChild(ratingDiv);
+                // commentDiv.appendChild(dateDiv);
+                commentDiv.appendChild(CombinedDiv);
+                commentDiv.appendChild(DescriptionDiv);
+
+                commentsContainer.appendChild(commentDiv);
+                const hr = document.createElement('hr');
+                commentsContainer.appendChild(hr);
+            }
+            const offcanvasTitle = document.querySelector('#offcanvasExampleLabel');
+            offcanvasTitle.textContent = `Comments for ${courseTitle}:`;
+        },
+        error: function () {
+            console.error('Failed to fetch comments.');
+        }
+    });
+}
+
+$(document).ready(function () {
+    $('.review-course-btn').click(function () {
+        const courseId = $(this).data('course-id');
+        const courseTitle = $(this).data('course-title');
+        fetchComments(courseId, courseTitle);
+    });
+});

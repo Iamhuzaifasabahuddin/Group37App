@@ -1,4 +1,3 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <html>
 <head>
@@ -29,10 +28,7 @@
                             <div>
                                 <h4 class="card-title">${course.getCourse().getTitle()}</h4>
                                 <p class="card-subtitle s-light p-darker rounded-pill d-inline px-2 text-uppercase category">${course.getCourse().getCategory()}</p>
-<%--                                <p class="card-subtitle d-inline px-2 text-uppercase fw-bold" style="color: var(--secondary-dark);">--%>
-<%--                                    <i class="bi bi-star-fill" style="color: #fcc200"></i>--%>
-<%--                                        ${course.getCourse().getAverageRating()}</p>--%>
-                                <a class="ratings" href="#" id="ratingLink" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" style="text-decoration-color: var(--secondary-dark)">
+                                <a class="ratings review-course-btn" href="#" id="ratingLink" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" data-course-id="${course.getCourse().getId()}" data-course-title="${course.getCourse().getTitle()}" aria-controls="offcanvasExample" style="text-decoration-color: var(--secondary-dark)">
                                     <p class="card-subtitle d-inline px-2 text-uppercase fw-bold" style="color: var(--secondary-dark);">
                                         <i class="bi bi-star-fill" style="color: #fcc200"></i>
                                             ${course.getCourse().getAverageRating()}
@@ -41,12 +37,13 @@
                             </div>
                             <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
                                 <div class="offcanvas-header">
-                                    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Comments:</h5>
+                                    <h5 class="offcanvas-title" id="offcanvasExampleLabel"></h5>
                                     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                                 </div>
                                 <div class="offcanvas-body">
-                                    <div>
-                                            <%--                                <p>${course.getUserComments()}</p>--%>
+                                    <div id="commentsContainer">
+
+
                                     </div>
 
                                 </div>
@@ -72,7 +69,6 @@
                                 </c:if>
                             </c:if>
                             <c:if test="${not empty course.endTime and not empty course.endDate and not course.commented}">
-<%--                                <a class="btn btn-primary container-fluid" href="/comment?courseId=${course.getCourse().getId()}"></a>--%>
                                 <a class="btn btn-primary container-fluid" data-bs-toggle="modal" data-bs-target="#exampleModal" data-course-id="${course.getCourse().getId()}" data-course-title="${course.getCourse().getTitle()}" href="#">Review Course</a>
                             </c:if>
 
@@ -125,6 +121,7 @@
                                 <button class="btn btn-primary container-fluid" disabled>Completed</button>
 <%--                                <a class="btn btn-primary container-fluid" href="/comment?courseId=${course.getCourse().getId()}"></a>--%>
                             </c:if>
+
                             <c:if test="${empty course.startTime and empty course.startDate}">
                                 <form id="getStartedForm" class="mb-0" action="/startTime">
                                     <input type="hidden" name="courseId" value="${course.getCourse().id}">

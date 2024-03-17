@@ -4,6 +4,7 @@ import com.example.group37software_engineering.model.Comment;
 import com.example.group37software_engineering.model.Course;
 import com.example.group37software_engineering.model.MyUser;
 import com.example.group37software_engineering.model.UserComment;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
@@ -17,4 +18,10 @@ public interface UserCommentRepository extends CrudRepository<UserComment, Integ
     List<UserComment> findByCourse(Course course);
 
     List<UserComment> findByUser(MyUser user);
+
+
+    @Query("SELECT uc " +
+            "FROM UserComment uc " +
+            "ORDER BY uc.comment.review DESC limit 5")
+    List<UserComment> findTop5ByCommentReview();
 }

@@ -1,5 +1,6 @@
 package com.example.group37software_engineering.model;
 
+import com.google.gson.annotations.Expose;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -12,15 +13,14 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    private String comment;
+    @Expose
+    private String description;
 
+    @Expose
     private double review;
 
     @OneToMany(mappedBy = "comment")
     private List<UserComment> userComments;
-
-
-
 
     public Integer getId() {
         return id;
@@ -30,12 +30,12 @@ public class Comment {
         this.id = id;
     }
 
-    public String getComment() {
-        return comment;
+    public String getDescription() {
+        return description;
     }
 
-    public void setComment(String description) {
-        this.comment = comment;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public double getReview() {

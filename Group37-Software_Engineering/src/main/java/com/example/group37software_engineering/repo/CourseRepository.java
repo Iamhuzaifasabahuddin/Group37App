@@ -15,7 +15,7 @@ public interface CourseRepository extends CrudRepository<Course, Integer> {
 
     List<Course> findAllByCategory(String category);
 
-    public Course findCourseById(Integer id);
+    Course findCourseById(Integer id);
 
     public Course findCoursesByCategory(String category);
 
