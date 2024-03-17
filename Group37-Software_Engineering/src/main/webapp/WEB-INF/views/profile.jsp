@@ -5,6 +5,13 @@
     <%@include file="includes/head.jsp"%>
 </head>
 <%@include file="includes/navbar.jsp"%>
+<style>
+    @media (max-width: 768px) { /* Adjust the breakpoint as needed */
+        .card-body {
+            padding-left: 0 !important; /* Override left padding */
+        }
+    }
+</style>
 <body>
 <section>
     <div class="container-fluid" style="max-width: 80%;">
@@ -16,7 +23,7 @@
                         <img src="https://eu.ui-avatars.com/api/?name=${(user.firstname)}+${(user.lastname)}&size=200" alt="User Initials Image" class="rounded-circle" style="height: 7rem; width: 7rem; object-fit: cover; border: 0;"/>
                     </div>
                     <div class="col-md-8 ps-4">
-                        <div class="card-body">
+                        <div class="card-body card-details">
                             <h2 class="mb-1 fs-5">${user.firstname} ${user.lastname}</h2>
                             <h2 class="mb-1 fs-5">${user.email}</h2>
                             <h2 class="mb-1 fs-5">@${user.username}</h2>
@@ -101,13 +108,13 @@
                         <div class="col-lg-4 col-md-6 mb-3">
                             <div class="card custom-card border-success" style="background: whitesmoke;">
                                 <div class="card-body" style="height: 400px">
-                                    <h4 class="card-title"><strong>${achieved.getAchievement().title}</strong></h4>
+                                    <h4 class="card-title ps-2"><strong>${achieved.getAchievement().title}</strong></h4>
                                     <div class="d-flex justify-content-center align-items-center" style="height: 60%;">
                                         <img src="${achieved.getAchievement().getImageUrl()}" alt="${achieved.getAchievement().title}" class="img-fluid" style="max-width: 100%; max-height: 100%;" width="200px" height="200px">
                                     </div>
-                                    <div class="d-flex justify-content-between p-2">
-                                        <div>
-                                            <p class="card-text mt-2">${achieved.getAchievement().description}</p>
+                                    <div class="d-flex justify-content-between mt-2">
+                                        <div class="ps-2">
+                                            <p class="card-text mt-2 truncate-multiline">${achieved.getAchievement().description}</p>
                                         </div>
                                         <div class="mt-2">
                                             <p><i class="bi bi-award"></i> ${achieved.getAchievement().points}</p>
@@ -157,14 +164,14 @@
                         <div class="col-lg-4 col-md-6 mb-3">
                             <div class="card custom-card border-danger" style="background: lightgray;">
                                 <div class="card-body" style="height: 400px;">
-                                    <h4 class="card-title"><strong>${notachieved.title}</strong></h4>
+                                    <h4 class="card-title ps-2"><strong>${notachieved.title}</strong></h4>
                                     <div class="d-flex justify-content-center align-items-center" style="height: 60%;">
                                         <img src="https://images.vexels.com/media/users/3/132074/isolated/preview/0117cb0129593faa02646a8277ca80e3-security-lock-icon-by-vexels.png" alt="Locked" class="img-fluid" style="height: 100%; max-width: 100%; object-fit: cover;">
                                             <%--                                        <img src="${notachieved.imageUrl}" alt="Locked" class="img-fluid" style="height: 100%; max-width: 100%; object-fit: cover;">--%>
                                     </div>
-                                    <div class="d-flex justify-content-between p-2">
-                                        <div>
-                                            <p class="card-text mt-2">${notachieved.description}</p>
+                                    <div class="d-flex justify-content-between mt-2">
+                                        <div class="ps-2">
+                                            <p class="card-text mt-2 truncate-multiline">${notachieved.description}</p>
                                         </div>
                                         <div class="mt-2">
                                             <p><i class="bi bi-award"></i> ${notachieved.points}</p>

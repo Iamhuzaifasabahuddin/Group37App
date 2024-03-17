@@ -22,17 +22,14 @@ import java.util.Objects;
 @Controller
 public class FriendController {
 
-    /**
-     * Repository for accessing user data.
-     */
     @Autowired
     private UserRepository userRepository;
 
-    /**
-     * Repository for accessing friend request data.
-     */
     @Autowired
     private FriendRequestRepository requestRepository;
+
+    @Autowired
+    private AchievementController achievementController;
 
     /**
      * Handles the "/friends" endpoint to display a user's friend requests and information.
@@ -46,6 +43,7 @@ public class FriendController {
         List<FriendRequest> receiverRequests = requestRepository.findByReceiverUsername(principal.getName());
         model.addAttribute("receiverRequests", receiverRequests);
         model.addAttribute("user", userRepository.findByUsername(principal.getName()));
+        achievementController.DoubleTrouble(userRepository.findByUsername(principal.getName()));
         return "Friends/friends";
     }
 

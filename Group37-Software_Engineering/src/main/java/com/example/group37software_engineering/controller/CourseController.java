@@ -1,9 +1,8 @@
 package com.example.group37software_engineering.controller;
 
-import com.example.group37software_engineering.model.Course;
-import com.example.group37software_engineering.model.MyUser;
-import com.example.group37software_engineering.model.UserCourses;
+import com.example.group37software_engineering.model.*;
 import com.example.group37software_engineering.repo.CourseRepository;
+import com.example.group37software_engineering.repo.UserCommentRepository;
 import com.example.group37software_engineering.repo.UserCourseRepository;
 import com.example.group37software_engineering.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +29,9 @@ public class CourseController {
     @Autowired
     private UserCourseRepository userCourseRepository;
 
+    @Autowired
+    private UserCommentRepository userCommentRepository;
+
     /**
      * Handles displaying available courses to the user.
      * Retrieves the user's information and the list of courses they are not enrolled in.
@@ -48,6 +50,10 @@ public class CourseController {
         boolean anyCourseEnrolled = false;
         for (Course course : allCourses) {
             if (isUserEnrolledInCourse(user, course)) {
+                List<UserComment> coursecomments = userCommentRepository.findByCourse(course);
+                double average = coursecomments.stream().map(UserComment::getComment).mapToDouble(Comment::getReview).average().orElse(0.0);
+                course.setAverageRating(average);
+                courseRepository.save(course);
                 anyCourseEnrolled = true;
                 coursesNotEnrolled.add(course);
             }

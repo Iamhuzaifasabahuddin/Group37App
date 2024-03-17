@@ -32,28 +32,30 @@ public class CommentController {
     @Autowired
     private UserCourseRepository userCourseRepository;
 
-    @GetMapping("/comment")
-    public String Comment(@RequestParam int courseId, Model model){
-        Course course = courseRepository.findCourseById(courseId);
-        model.addAttribute("comment", new Comment());
-        model.addAttribute("courseId", course.getId());
-        return "comment";
-    }
+    @Autowired
+    private AchievementController achievementController;
 
     @RequestMapping("/addComment")
-    public String addComment(@RequestParam int courseId, @ModelAttribute Comment comment, Principal principal){
+    public String addComment(@RequestParam int courseId, @RequestParam String description, @RequestParam double rating, Principal principal){
         Course course = courseRepository.findCourseById(courseId);
         MyUser user = userRepository.findByUsername(principal.getName());
         UserCourses userCourse = userCourseRepository.findByUserAndCourse(user, course);
+        Comment comment = new Comment();
+        comment.setComment(description);
+        comment.setReview(rating);
+
         UserComment userComment = new UserComment();
         commentRepository.save(comment);
         userComment.setComment(comment);
         userComment.setCourse(course);
         userComment.setUser(user);
         userComment.setDateCommented(LocalDate.now());
+
         userCourse.setCommented(true);
+
         userCourseRepository.save(userCourse);
         userCommentRepository.save(userComment);
+        achievementController.ReviewConqueror(user);
         return "redirect:/dashboard";
     }
 }

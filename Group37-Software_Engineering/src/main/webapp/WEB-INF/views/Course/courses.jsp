@@ -71,11 +71,35 @@
                     <div class="card-body">
                         <h4 class="card-title pb-1">${course.getTitle()}</h4>
                         <p class="card-subtitle s-light p-darker rounded-pill d-inline px-2 text-uppercase category">${course.getCategory()}</p>
+                        <a class="ratings" href="#" id="ratingLink" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" style="text-decoration-color: var(--secondary-dark)">
+                            <p class="card-subtitle pt-2 text-uppercase fw-bold" style="color: var(--secondary-dark);">
+                                <i class="bi bi-star-fill" style="color: #fcc200"></i>
+                                    ${course.getAverageRating()}
+                            </p>
+                        </a>
                         <div class="mt-3 d-flex gap-3">
                             <p class="card-subtitle text-body-secondary"><i class="bi bi-hourglass-split"></i> ${Math.round(course.getDuration())} hours</p>
                             <p class="card-subtitle text-body-secondary"><i class="bi bi-award"></i> ${Math.round(course.getDuration()) * 100} points</p>
                         </div>
                     </div>
+
+<%--                    <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">--%>
+<%--                        Comments--%>
+<%--                    </button>--%>
+
+                    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+                        <div class="offcanvas-header">
+                            <h5 class="offcanvas-title" id="offcanvasExampleLabel">Comments:</h5>
+                            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                        </div>
+                        <div class="offcanvas-body">
+                            <div>
+<%--                                <p>${course.getUserComments()}</p>--%>
+                            </div>
+
+                        </div>
+                    </div>
+
                     <button class="btn btn-primary rounded-0 rounded-bottom" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="showConfirmationBox(${course.id}, `${course.getTitle()}`)">
                         Enroll
                     </button>
@@ -102,5 +126,5 @@
         </div>
     </div>
 </div>
-</body>
+</body>-
 </html>

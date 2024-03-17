@@ -34,6 +34,8 @@ public class Course {
     @Column(length = 1000)
     private String link;
 
+    private double averageRating;
+
     @OneToMany(mappedBy = "course")
     private List<UserCourses> userCourses;
 
@@ -120,6 +122,14 @@ public class Course {
 
     public void setUserComments(List<UserComment> userComments) {
         this.userComments = userComments;
+    }
+
+    public double getAverageRating() {
+        return averageRating;
+    }
+
+    public void setAverageRating(double averageRating) {
+        this.averageRating = averageRating;
     }
 }
 
