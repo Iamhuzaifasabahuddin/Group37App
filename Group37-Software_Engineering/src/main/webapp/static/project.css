@@ -504,3 +504,15 @@ tbody tr td {
 .list-group-friends {
     background-color: var(--primary-lightest);
 }
+
+.notification-icon {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    border-radius: 50%;
+}
+
+#notifications {
+    max-height: 70vh;
+    min-width: 40vw;
+}

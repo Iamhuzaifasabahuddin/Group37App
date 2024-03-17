@@ -41,6 +41,9 @@ public class QuizController {
     @Autowired
     private LeagueRepository leagueRepository;
 
+    @Autowired
+    private NotificationRepository notificationRepository;
+
     @InitBinder
     protected void initBinder(WebDataBinder binder) {
         binder.addValidators(new QuizValidator(quizRepository));
@@ -116,6 +119,12 @@ public class QuizController {
         for(League league : leagues) {
             if(league.getThreshold() <= user.getPoints()) {
                 user.setLeague(league);
+                Notification n = new Notification();
+                n.setDescription("You reached the " + league.getTitle() + " league!");
+                n.setPageLink("/leaderboard");
+                n.setIconLink(league.getImageUrl());
+                notificationRepository.save(n);
+                user.getNotifications().add(n);
                 break;
             }
         }

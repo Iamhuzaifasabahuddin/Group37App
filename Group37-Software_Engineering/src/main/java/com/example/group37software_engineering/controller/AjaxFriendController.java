@@ -2,7 +2,9 @@ package com.example.group37software_engineering.controller;
 
 import com.example.group37software_engineering.model.FriendRequest;
 import com.example.group37software_engineering.model.MyUser;
+import com.example.group37software_engineering.model.Notification;
 import com.example.group37software_engineering.repo.FriendRequestRepository;
+import com.example.group37software_engineering.repo.NotificationRepository;
 import com.example.group37software_engineering.repo.UserRepository;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -26,6 +28,9 @@ public class AjaxFriendController {
     @Autowired
     private FriendRequestRepository requestRepository;
 
+    @Autowired
+    private NotificationRepository notificationRepository;
+
     /**
      * Handles the "/sendRequest" endpoint to send a friend request.
      *
@@ -40,9 +45,18 @@ public class AjaxFriendController {
             String senderUsername = principal.getName();
             FriendRequest request = new FriendRequest();
             if (requestRepository.findBySenderUsernameAndReceiverUsername(senderUsername, receiverUsername) == null) {
-                request.setSender(userRepository.findByUsername(senderUsername));
+                MyUser sender = userRepository.findByUsername(senderUsername);
+                request.setSender(sender);
                 request.setReceiver(userRepository.findByUsername(receiverUsername));
                 requestRepository.save(request);
+
+                Notification n = new Notification();
+                n.setDescription(senderUsername + " wants to be friends!");
+                n.setPageLink("/friends");
+                n.setIconLink(String.format("https://eu.ui-avatars.com/api/?name=%s+%s&size=200", sender.getFirstname(), sender.getLastname()));
+                notificationRepository.save(n);
+                user.getNotifications().add(n);
+                userRepository.save(user);
             }
         }
         return ResponseEntity.ok().body("");
@@ -68,6 +82,20 @@ public class AjaxFriendController {
             receiver.getFriends().add(sender);
             sender.getFriendsSince().add(LocalDateTime.now());
             receiver.getFriendsSince().add(LocalDateTime.now());
+
+            Notification n1 = new Notification();
+            n1.setDescription("You are now friends with " + senderUsername + "!");
+            n1.setPageLink("/friends");
+            n1.setIconLink(String.format("https://eu.ui-avatars.com/api/?name=%s+%s&size=200", sender.getFirstname(), sender.getLastname()));
+
+            Notification n2 = new Notification();
+            n2.setDescription("You are now friends with " + receiverUsername + "!");
+            n2.setPageLink("/friends");
+            n2.setIconLink(String.format("https://eu.ui-avatars.com/api/?name=%s+%s&size=200", receiver.getFirstname(), receiver.getLastname()));
+            notificationRepository.saveAll(List.of(n1, n2));
+
+            receiver.getNotifications().add(n1);
+            sender.getNotifications().add(n2);
             userRepository.saveAll(List.of(sender, receiver));
             return ResponseEntity.ok().body("{\"decision\": true}");
         }
