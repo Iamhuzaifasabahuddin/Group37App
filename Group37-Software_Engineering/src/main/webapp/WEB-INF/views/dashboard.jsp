@@ -97,7 +97,7 @@
 <%--                                                </div>--%>
 
                                             <div class="form-floating mb-3">
-                                                <input type="number" id="rating" name="rating" placeholder="Rating" required class="form-control" max="5"></input>
+                                                <input type="number" id="rating" name="rating" placeholder="Rating" required class="form-control" max="5" step=".5"></input>
                                                 <label for="rating" class="form-label">Rating:</label>
                                                 <div class="invalid-feedback rating"></div>
                                             </div>

@@ -23,8 +23,29 @@ function validateNotEmpty(id) {
 function validateAlphabetic(id) {
     const input = document.querySelector(`#${id}`);
     const feedback = document.querySelector(`.invalid-feedback.${id}`);
-    if (!/^[a-zA-Z\s]+$/.test(input.value)) {
-        feedback.textContent = `Must contain letters or spaces only!`;
+    if (!/^[a-zA-Z\s',.!?]+$/.test(input.value)) {
+        feedback.textContent = `Must contain letters, spaces, or common punctuation characters!`;
+        return false;
+    }
+    return true;
+}
+
+
+function validateLength(id) {
+    const input = document.querySelector(`#${id}`);
+    const feedback = document.querySelector(`.invalid-feedback.${id}`);
+
+    if (input.value.trim().length === 0) {
+        feedback.textContent = `Cannot be empty!`;
+        return false;
+    }
+
+    if (input.value.length < 20) {
+        feedback.textContent = `Must be at least 20 characters long!`;
+        return false;
+    }
+    if (/ {2,}/.test(input.value)) {
+        feedback.textContent = `Cannot contain consecutive spaces between words!`;
         return false;
     }
     return true;
@@ -47,7 +68,7 @@ function validateDescription() {
     const input = document.querySelector(`#${id}`);
     const feedback = document.querySelector(`.invalid-feedback.${id}`);
     changeValidity(input, feedback, false);
-    if (validateNotEmpty(id) && validateAlphabetic(id)) {
+    if (validateNotEmpty(id) && validateAlphabetic(id) && validateLength(id)) {
         changeValidity(input, feedback, true);
         feedback.textContent = '';
         return true;
@@ -80,9 +101,11 @@ function validateAll(submit) {
             submitted = true;
             document.querySelector('#modalForm').submit();
         }
+        return true;
     } else {
         document.querySelector('#modalForm button[type="submit"]').disabled = true;
     }
+    return false;
 }
 
 
@@ -101,16 +124,15 @@ exampleModal.addEventListener('show.bs.modal', function (event) {
 
     form.addEventListener('submit', function (event) {
         event.preventDefault();
-        validateAll(true);
+        if (!validateAll(true)) {
+            document.querySelectorAll('input.form-control').forEach(element => {
+                element.removeEventListener('keyup', () => {
+                    validateAll(false);
+                });
+                element.addEventListener('keyup', () => {
+                    validateAll(false);
+                });
+            });
+        }
     });
-
-    form.querySelectorAll('input.form-control').forEach(element => element.addEventListener('keyup', () => {
-        validateAll(false);
-    }));
 });
-
-document.querySelector("button").addEventListener('click', event => {
-    event.preventDefault();
-    event.stopPropagation();
-    validateAll(true);
-}, false);

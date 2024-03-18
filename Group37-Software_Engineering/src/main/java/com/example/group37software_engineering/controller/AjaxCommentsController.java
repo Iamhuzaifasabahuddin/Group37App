@@ -33,7 +33,6 @@ public class AjaxCommentsController {
         Gson gson = new GsonBuilder()
                 .excludeFieldsWithoutExposeAnnotation()
                 .create();
-        System.out.println("{\"comments\":" + gson.toJson(comments) + "}");
         return ResponseEntity.ok().body("{\"comments\":" + gson.toJson(comments) + "}");
     }
 }

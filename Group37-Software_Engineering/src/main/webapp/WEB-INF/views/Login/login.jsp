@@ -5,6 +5,7 @@
 <head>
     <title>Login</title>
     <script src="static/modal.js" defer></script>
+    <script src="static/login.js" defer></script>
     <%@include file="../includes/head.jsp"%>
 </head>
 <body>
@@ -31,18 +32,18 @@
         </div>
         <div class="col">
             <h1>Welcome to our website!</h1>
-            <form action="/login" method="post" class="needs-validation mb-2" novalidate>
+            <form action="/login" method="post" class="mb-2" novalidate>
                 <div class="form-floating mb-3">
                     <input class="form-control" id="username-email" name="username-email" placeholder="Username or email" required>
                     <label for="username-email" class="form-label">Username or email</label>
-                    <div class="invalid-feedback">
+                    <div class="invalid-feedback username-email">
                         Username/Email cannot be empty!
                     </div>
                 </div>
                 <div class="form-floating mb-3">
                     <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
                     <label for="password" class="form-label">Password</label>
-                    <div class="invalid-feedback">
+                    <div class="invalid-feedback password">
                         Password cannot be empty!
                     </div>
                 </div>

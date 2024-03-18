@@ -68,6 +68,10 @@
             <h1>IBM.</h1>
         </div>
         <div class="col text-center">
+            <blockquote class="blockquote mb-0 text-center mb-4">
+                <p>"${quote}"</p>
+                <p>~ ${author}</p>
+            </blockquote>
 
             <h3><i class="bi bi-fire" style="color: #FBB746;"></i>
                 Trending Courses:</h3>

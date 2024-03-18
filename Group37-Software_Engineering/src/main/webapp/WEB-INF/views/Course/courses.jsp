@@ -3,7 +3,7 @@
 <head>
     <title>Courses</title>
     <%@include file="../includes/head.jsp"%>
-    <script type="text/javascript" src="static/Courses.js" defer></script>
+    <script type="text/javascript" src="static/courses.js" defer></script>
 </head>
 <body>
 <%@include file="../includes/navbar.jsp"%>

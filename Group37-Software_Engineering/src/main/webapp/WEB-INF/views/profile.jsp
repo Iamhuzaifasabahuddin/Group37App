@@ -17,16 +17,16 @@
     <div class="container-fluid" style="max-width: 80%;">
         <h1 class="text-center p-4">Profile Details</h1>
         <div class="d-flex justify-content-center">
-            <div class="card mb-3 text-center" style="max-width: 540px; background-color: var(--primary-lightest); border: 0;">
+            <div class="card mb-3 text-center" style="max-width: 600px; background-color: var(--primary-lightest); border: 0;">
                 <div class="row g-0 align-items-center">
-                    <div class="col-md-4 d-flex justify-content-center pe-0">
+                    <div class="col-md-4 d-flex justify-content-center">
                         <img src="https://eu.ui-avatars.com/api/?name=${(user.firstname)}+${(user.lastname)}&size=200" alt="User Initials Image" class="rounded-circle" style="height: 7rem; width: 7rem; object-fit: cover; border: 0;"/>
                     </div>
-                    <div class="col-md-8 ps-4">
+                    <div class="col-md-8 ps-2">
                         <div class="card-body card-details">
-                            <h2 class="mb-1 fs-5">${user.firstname} ${user.lastname}</h2>
-                            <h2 class="mb-1 fs-5">${user.email}</h2>
-                            <h2 class="mb-1 fs-5">@${user.username}</h2>
+                            <p class="mb-1 fs-5">${user.firstname} ${user.lastname}</p>
+                            <p class="mb-1 fs-5">${user.email}</p>
+                            <p class="mb-1 fs-5">@${user.username}</p>
                         </div>
                     </div>
                 </div>
