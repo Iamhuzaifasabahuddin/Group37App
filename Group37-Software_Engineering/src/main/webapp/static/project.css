@@ -505,9 +505,24 @@ tbody tr td {
     background-color: var(--primary-lightest);
 }
 
-.carousel  {
+.carousel {
 
     width: 16rem;
     height: 16rem;
+}
 
+.notification-icon {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    border-radius: 50%;
+}
+
+#notifications {
+    max-height: 70vh;
+    min-width: 40vw;
+}
+
+.navbar-nav .dropdown-menu {
+    position: absolute;
 }

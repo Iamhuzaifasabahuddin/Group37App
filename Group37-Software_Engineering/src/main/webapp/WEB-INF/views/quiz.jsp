@@ -13,6 +13,13 @@
 <br>
 <div class="quiz-container">
     <form:form action="/completeQuiz" modelAttribute="quiz" id="quizForm">
+        <form:errors cssClass="error" path="questions">
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <i class="bi bi-exclamation-triangle-fill"></i>
+                    Please answer all the questions.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </form:errors>
         <form:hidden path="id" value="${courseQuiz.getId()}"></form:hidden>
         <ol><c:forEach var="question" items="${courseQuiz.getQuestions()}" varStatus="questionIndex">
             <li class="quiz-question">${question.getPrompt()}</li>
@@ -28,7 +35,6 @@
         </c:forEach>
         </ol>
         <input type="hidden" name="courseId" value="${courseId}">
-        <form:errors cssClass="error" path="questions"></form:errors>
         <input class="btn btn-primary d-block" type="submit" value="Submit" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
     </form:form>
     <br>

@@ -117,7 +117,7 @@ public class Group37SoftwareEngineeringApplication implements CommandLineRunner 
                 user.setPassword(passwordEncoder.encode("password"));
                 user.setFirstname(String.format("Gold%d", i));
                 user.setLastname(String.format("%d", i));
-                user.setPoints(2500);
+                user.setPoints(4000);
                 user.setLeague(leagueRepository.findLeagueByTitle("Gold Guru"));
                 userRepository.save(user);
             }
@@ -129,7 +129,7 @@ public class Group37SoftwareEngineeringApplication implements CommandLineRunner 
                 user.setPassword(passwordEncoder.encode("password"));
                 user.setFirstname(String.format("Platinum%d", i));
                 user.setLastname(String.format("%d", i));
-                user.setPoints(4000);
+                user.setPoints(8000);
                 user.setLeague(leagueRepository.findLeagueByTitle("Platinum Prodigy"));
                 userRepository.save(user);
             }
@@ -141,7 +141,7 @@ public class Group37SoftwareEngineeringApplication implements CommandLineRunner 
                 user.setPassword(passwordEncoder.encode("password"));
                 user.setFirstname(String.format("Titanium%d", i));
                 user.setLastname(String.format("%d", i));
-                user.setPoints(8000);
+                user.setPoints(12000);
                 user.setLeague(leagueRepository.findLeagueByTitle("Titanium Titan"));
                 userRepository.save(user);
             }

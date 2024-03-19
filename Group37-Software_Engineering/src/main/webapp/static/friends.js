@@ -91,7 +91,7 @@ function getNewFriends(decision) {
                     })
                     friends.appendChild(newFriend.children[0]);
                 }
-            } else {console.log(mutualFriends)
+            } else {
                 const li = document.querySelector("li#add-friends-content");
                 li.innerHTML = "";
                 if (parsedData.senderRequests.length === 0 && parsedData.users.length === 0) {

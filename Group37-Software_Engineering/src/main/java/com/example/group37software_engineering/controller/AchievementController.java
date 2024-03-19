@@ -45,6 +45,9 @@ public class AchievementController {
     @Autowired
     private UserCommentRepository userCommentRepository;
 
+    @Autowired
+    private NotificationRepository notificationRepository;
+
     /**
      * Endpoint for showing achievements.
      *
@@ -106,6 +109,22 @@ public class AchievementController {
     }
 
     /**
+     * This method adds a notification for the user to inform of a completed achievement.
+     *
+     * @param user The user to send notifications to.
+     * @param achievement The achievement the user should be notified of.
+     */
+    private void setNotifications(MyUser user, Achievement achievement) {
+        Notification n = new Notification();
+        n.setDescription("You earned the achievement " + achievement.getTitle() + "!");
+        n.setPageLink("/profile");
+        n.setIconLink(achievement.getImageUrl());
+        notificationRepository.save(n);
+        user.getNotifications().add(n);
+        userRepository.save(user);
+    }
+
+    /**
      * Checks and updates the "Fantastic 4" achievement for a user.
      *
      * @param user the user to check and update the achievement for
@@ -136,6 +155,7 @@ public class AchievementController {
             user.setPoints(user.getPoints() + achievement.getPoints());
             userRepository.save(user);
             userAchievementRepository.save(userAchievement);
+            setNotifications(user, achievement);
         }
     }
 
@@ -159,6 +179,7 @@ public class AchievementController {
             user.setPoints(user.getPoints() + achievement.getPoints());
             userRepository.save(user);
             userAchievementRepository.save(userAchievement);
+            setNotifications(user, achievement);
         }
     }
 
@@ -189,6 +210,7 @@ public class AchievementController {
             user.setPoints(user.getPoints() + achievement.getPoints());
             userRepository.save(user);
             userAchievementRepository.save(userAchievement);
+            setNotifications(user, achievement);
         }
     }
 
@@ -219,6 +241,7 @@ public class AchievementController {
             user.setPoints(user.getPoints() + achievement.getPoints());
             userRepository.save(user);
             userAchievementRepository.save(userAchievement);
+            setNotifications(user, achievement);
         }
     }
 
@@ -249,6 +272,7 @@ public class AchievementController {
             user.setPoints(user.getPoints() + achievement.getPoints());
             userRepository.save(user);
             userAchievementRepository.save(userAchievement);
+            setNotifications(user, achievement);
         }
     }
 
@@ -279,6 +303,7 @@ public class AchievementController {
             user.setPoints(user.getPoints() + achievement.getPoints());
             userRepository.save(user);
             userAchievementRepository.save(userAchievement);
+            setNotifications(user, achievement);
         }
     }
 
@@ -308,6 +333,7 @@ public class AchievementController {
             user.setPoints(user.getPoints() + achievement.getPoints());
             userRepository.save(user);
             userAchievementRepository.save(userAchievement);
+            setNotifications(user, achievement);
         }
     }
 
@@ -350,6 +376,7 @@ public class AchievementController {
             user.setPoints(user.getPoints() + achievement.getPoints());
             userRepository.save(user);
             userAchievementRepository.save(userAchievement);
+            setNotifications(user, achievement);
         }
     }
 
@@ -380,6 +407,7 @@ public class AchievementController {
             user.setPoints(user.getPoints() + achievement.getPoints());
             userRepository.save(user);
             userAchievementRepository.save(userAchievement);
+            setNotifications(user, achievement);
         }
     }
 
@@ -410,6 +438,7 @@ public class AchievementController {
             user.setPoints(user.getPoints() + achievement.getPoints());
             userRepository.save(user);
             userAchievementRepository.save(userAchievement);
+            setNotifications(user, achievement);
         }
     }
 
@@ -452,6 +481,7 @@ public class AchievementController {
             user.setPoints(user.getPoints() + achievement.getPoints());
             userRepository.save(user);
             userAchievementRepository.save(userAchievement);
+            setNotifications(user, achievement);
         }
     }
 
@@ -494,6 +524,7 @@ public class AchievementController {
             user.setPoints(user.getPoints() + achievement.getPoints());
             userRepository.save(user);
             userAchievementRepository.save(userAchievement);
+            setNotifications(user, achievement);
         }
     }
 
@@ -519,6 +550,7 @@ public class AchievementController {
             user.setLeague(league);
             userRepository.save(user);
             userAchievementRepository.save(userAchievement);
+            setNotifications(user, achievement);
         }
 
     }
@@ -545,6 +577,7 @@ public class AchievementController {
             user.setLeague(league);
             userRepository.save(user);
             userAchievementRepository.save(userAchievement);
+            setNotifications(user, achievement);
         }
     }
 
@@ -573,6 +606,7 @@ public class AchievementController {
             user.setPoints(user.getPoints() + achievement.getPoints());
             userRepository.save(user);
             userAchievementRepository.save(userAchievement);
+            setNotifications(user, achievement);
         }
     }
 
@@ -591,6 +625,7 @@ public class AchievementController {
             user.setPoints(user.getPoints() + achievement.getPoints());
             userRepository.save(user);
             userAchievementRepository.save(userAchievement);
+            setNotifications(user, achievement);
         }
     }
 
@@ -608,6 +643,7 @@ public class AchievementController {
             user.setPoints(user.getPoints() + achievement.getPoints());
             userRepository.save(user);
             userAchievementRepository.save(userAchievement);
+            setNotifications(user, achievement);
         }
     }
 }

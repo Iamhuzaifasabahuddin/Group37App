@@ -56,6 +56,9 @@ public class MyUser {
     @ElementCollection
     private List<LocalDateTime> friendsSince = new ArrayList<>();
 
+    @OneToMany
+    private List<Notification> notifications = new ArrayList<>();
+
     public int getId() {
         return id;
     }
@@ -206,5 +209,13 @@ public class MyUser {
 
     public void setFriendsSince(List<LocalDateTime> friendsSince) {
         this.friendsSince = friendsSince;
+    }
+
+    public List<Notification> getNotifications() {
+        return notifications;
+    }
+
+    public void setNotifications(List<Notification> notifications) {
+        this.notifications = notifications;
     }
 }
