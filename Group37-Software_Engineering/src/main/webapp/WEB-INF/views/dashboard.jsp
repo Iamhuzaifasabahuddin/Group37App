@@ -80,30 +80,21 @@
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-<%--                                            <div class="star-rating">--%>
-<%--                                                <input type="number" id="rating" name="rating" placeholder="Rating" required class="form-control" max="5" style="display: none;">--%>
-<%--                                                <label for="rating" class="form-label">Rating:</label>--%>
-<%--                                                <div class="stars">--%>
-<%--                                                    <label for="star-5" class="star">&#9733;</label>--%>
-<%--                                                    <input type="radio" id="star-5" name="rating-star" value="5">--%>
-<%--                                                    <label for="star-4" class="star">&#9733;</label>--%>
-<%--                                                    <input type="radio" id="star-4" name="rating-star" value="4">--%>
-<%--                                                    <label for="star-3" class="star">&#9733;</label>--%>
-<%--                                                    <input type="radio" id="star-3" name="rating-star" value="3">--%>
-<%--                                                    <label for="star-2" class="star">&#9733;</label>--%>
-<%--                                                    <input type="radio" id="star-2" name="rating-star" value="2">--%>
-<%--                                                    <label for="star-1" class="star">&#9733;</label>--%>
-<%--                                                    <input type="radio" id="star-1" name="rating-star" value="1">--%>
-<%--                                                </div>--%>
-
+                                            <div id="stars" class="mb-2">
+                                                <i class="star bi bi-star"></i>
+                                                <i class="star bi bi-star"></i>
+                                                <i class="star bi bi-star"></i>
+                                                <i class="star bi bi-star"></i>
+                                                <i class="star bi bi-star"></i>
+                                            </div>
                                             <div class="form-floating mb-3">
                                                 <input type="number" id="rating" name="rating" placeholder="Rating" required class="form-control" max="5" step=".5"></input>
-                                                <label for="rating" class="form-label">Rating:</label>
+                                                <label for="rating" class="form-label"><strong>Rating:</strong></label>
                                                 <div class="invalid-feedback rating"></div>
                                             </div>
                                             <div class="form-floating mb-3">
                                                 <input type="text" id="description" name="description" placeholder="Description" required class="form-control"></input>
-                                                <label for="description" class="form-label">Description:</label>
+                                                <label for="description" class="form-label"><strong>Description:</strong></label>
                                                 <div class="invalid-feedback description"></div>
                                             </div>
 
@@ -138,4 +129,21 @@
     </div>
 </section>
 </body>
+<style>
+    .bi-star {
+        color: grey;
+    }
+
+    .bi-star-fill {
+        color: #fcc200;
+    }
+
+    .bi-star-half {
+        color: gold;
+    }
+
+    .star {
+        font-size: 1.5em;
+    }
+</style>
 </html>

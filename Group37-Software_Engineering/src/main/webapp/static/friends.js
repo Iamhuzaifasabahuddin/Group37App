@@ -158,6 +158,83 @@ function getNewFriends(decision) {
     });
 }
 
+document.getElementById("searchButton").addEventListener("click", function() {
+    const searchTerm = document.getElementById("searchTerm").value;
+    searchFriends(searchTerm);
+});
+
+
+const searchResultsContainer = document.getElementById("search-results-container");
+
+function searchFriends(searchTerm) {
+    searchResultsContainer.innerHTML = "";
+    if (searchTerm.trim() === "") {
+        searchResultsContainer.appendChild(createAlert("Please enter a search term."));
+        return;
+    }
+    $.ajax({
+        url: '/SearchFriends',
+        type: 'GET',
+        data: { search: searchTerm },
+        success: function (response) {
+            const parsedData = JSON.parse(response);
+            displaySearchResults(parsedData.search, parsedData.mutual);
+        }
+    });
+}
+
+
+function displaySearchResults(users, mutualFriends) {
+    searchResultsContainer.innerHTML = "";
+
+    if (!users || users.length === 0) {
+        searchResultsContainer.appendChild(createAlert("No users found."));
+        return;
+    }
+    for (const user of users) {
+        const userElement = document.createElement("div");
+        userElement.innerHTML = `
+            <div class="row" style="border-bottom: 0.05em solid var(--primary-darker);">
+                        <div class="col d-flex align-items-center">
+                        <img src="https://eu.ui-avatars.com/api/?name=${user.firstname}+${user.lastname}&size=250"
+                             alt="User Initials Image" class="rounded-circle"/>
+                            <div>
+                            <h5><a href="#" class="profile-link">${user.username}</a></h5>
+                            <div class="dropdown">
+                            <a href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: slategray; text-decoration: none;">
+                            ${mutualFriends[user.username].length === 0 ? "No" : mutualFriends[user.username].length} Mutual Friends
+                            </a>
+                            <h6 class="dropdown-menu text-center p-2">${mutualFriends[user.username].length === 0 ? "Nothing to view here" : mutualFriends[user.username]}</h6>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="col d-flex align-items-center" style="transform: scale(0.8);">
+                            <input type="hidden" name="receiver" value="${user.username}">
+                            <button class="btn btn-primary pull-right send-request" data-receiver="${user.username}">Send Request</button>
+                        </div>
+                    </div>
+                            `;
+        const button = userElement.querySelector("button");
+        button.addEventListener("click", e => {
+            sendRequest(e, button.getAttribute("data-receiver"));
+        });
+        searchResultsContainer.appendChild(userElement.children[0]);
+    }
+}
+const searchTermInput = document.getElementById("searchTerm");
+
+searchTermInput.addEventListener("keyup", function(event) {
+    searchFriends(searchTermInput.value);
+});
+
+searchTermInput.addEventListener("keypress", function(event) {
+    if (event.key === "Enter") {
+        event.preventDefault();
+        searchFriends(searchTermInput.value);
+    }
+});
+
+
 window.onload = function() {
     getNewFriends(true);
     getNewFriends(false);

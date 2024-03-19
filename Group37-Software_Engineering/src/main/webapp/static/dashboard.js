@@ -67,6 +67,7 @@ function validateDescription() {
     const id = 'description';
     const input = document.querySelector(`#${id}`);
     const feedback = document.querySelector(`.invalid-feedback.${id}`);
+
     changeValidity(input, feedback, false);
     if (validateNotEmpty(id) && validateAlphabetic(id) && validateLength(id)) {
         changeValidity(input, feedback, true);
@@ -75,6 +76,52 @@ function validateDescription() {
     }
     return false;
 }
+const ratingElement = document.querySelector('#rating');
+
+function updateStars() {
+    const rating = this.value;
+    const stars = document.querySelectorAll('#stars .star');
+
+    if (rating > 5) {
+        stars.forEach((star) => {
+            star.classList.remove('bi-star-fill');
+            star.classList.remove('bi-star-half');
+            star.classList.add('bi-star');
+        });
+    } else {
+        const wholeStars = Math.floor(rating);
+        const fractionStar = rating - wholeStars;
+
+        stars.forEach((star, index) => {
+            if (index < wholeStars) {
+                star.classList.remove('bi-star');
+                star.classList.remove('bi-star-half');
+                star.classList.add('bi-star-fill');
+            } else if (index === wholeStars) {
+                if (fractionStar < 0.5) {
+                    star.classList.remove('bi-star-fill');
+                    star.classList.remove('bi-star-half');
+                    star.classList.add('bi-star');
+                } else if (fractionStar === 0.5) {
+                    star.classList.remove('bi-star');
+                    star.classList.remove('bi-star-fill');
+                    star.classList.add('bi-star-half');
+                } else if (fractionStar > 0.5) {
+                    star.classList.remove('bi-star');
+                    star.classList.remove('bi-star-half');
+                    star.classList.add('bi-star-fill');
+                }
+            } else {
+                star.classList.remove('bi-star-fill');
+                star.classList.remove('bi-star-half');
+                star.classList.add('bi-star');
+            }
+        });
+    }
+}
+
+ratingElement.addEventListener('keyup', updateStars);
+ratingElement.addEventListener('change', updateStars);
 
 function validateRating() {
     const id = 'rating';

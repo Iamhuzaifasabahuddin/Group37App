@@ -119,12 +119,14 @@ function generateStars(rating) {
         stars += '<i class="bi bi-star-fill" style="color: #fcc200; font-size: 1.5em;"></i>';
     }
 
-    if (fractionStar >= 0.75) {
-        stars += '<i class="bi bi-star-three-quarters" style="color: #fcc200; font-size: 1.5em;"></i>';
-    } else if (fractionStar >= 0.5) {
+    if (fractionStar < 0.5 && fractionStar > 0) {
+        // No additional stars, round down
+    } else if (fractionStar === 0.5) {
+        // Half star
         stars += '<i class="bi bi-star-half" style="color: #fcc200; font-size: 1.5em;"></i>';
-    } else if (fractionStar >= 0.25) {
-        stars += '<i class="bi bi-star-quarter" style="color: #fcc200; font-size: 1.5em;"></i>';
+    } else if (fractionStar > 0.5) {
+        // Full star, round up
+        stars += '<i class="bi bi-star-fill" style="color: #fcc200; font-size: 1.5em;"></i>';
     }
 
     return stars;

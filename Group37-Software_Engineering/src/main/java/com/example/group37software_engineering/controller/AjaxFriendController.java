@@ -8,9 +8,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.*;
@@ -132,5 +130,32 @@ public class AjaxFriendController {
         return ResponseEntity.ok().body("{\"friends\":" + gson.toJson(friends) + ", \"users\":" + gson.toJson(users) + ", \"senderRequests\":" + gson.toJson(senderRequests) + ", \"mutual\":" + gson.toJson(mutual) + "}");
     }
 
+    @GetMapping("/SearchFriends")
+    public ResponseEntity<?> searchFriends(@RequestParam String search, Principal principal) {
+        MyUser user = userRepository.findByUsername(principal.getName());
+        List<MyUser> friends = user.getFriends();
+        List<MyUser> users = userRepository.findByUsernameContaining(search);
+        users.removeAll(friends);
+        users.remove(user);
+        List<MyUser> usersAll = (List<MyUser>) userRepository.findAll();
+        Dictionary<String, List<String>> mutual = new Hashtable<>();
+        for (MyUser MutualUser: usersAll) {
+            List<MyUser> userFriends = userRepository.findByUsername(MutualUser.getUsername()).getFriends();
+            List<String> tempList = new ArrayList<>();
+            for (MyUser friend: friends) {
+                if (userFriends.contains(friend)) {
+                    tempList.add(friend.getUsername());
+                }
+            }
+            mutual.put(MutualUser.getUsername(), tempList);
+        }
+        Gson gson = new GsonBuilder()
+                .excludeFieldsWithoutExposeAnnotation()
+                .create();
+        if (!users.isEmpty()) {
+            return ResponseEntity.ok().body("{\"search\":" + gson.toJson(users) + "," + "\"mutual\":" + gson.toJson(mutual) + "}");
+        }
+        return ResponseEntity.ok().body("{\"search\": []}");
+    }
 
 }

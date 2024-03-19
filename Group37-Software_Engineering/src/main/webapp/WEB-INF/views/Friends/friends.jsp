@@ -22,6 +22,9 @@
     <li class="nav-item">
         <a class="nav-link" href="#requests" data-target="requests">Requests <span class="badge text-bg-secondary">${fn:length(receiverRequests)}</span></a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#search" data-target="search">Search</a>
+    </li>
 </ul>
 
 <div class="friends">
@@ -30,6 +33,18 @@
         </li>
 
         <li class="list-group-friends" id="add-friends-content">
+        </li>
+
+        <li class="list-group-friends" id="search-content">
+            <div class="search-container d-flex justify-content-center align-items-center">
+                <div class="form-floating mb-3" style="width: 50%">
+                    <input type="text" id="searchTerm" name="SearchTerm" placeholder="Search Friend" required class="form-control"></input>
+                    <label for="searchTerm" class="form-label"><strong>Search Friend:</strong></label>
+                    <div class="invalid-feedback searchTerm"></div>
+                </div>
+                <button id="searchButton" type="submit" class="btn btn-primary ms-2 mb-3" style="height: 55px;">Search</button>
+            </div>
+            <div id="search-results-container"></div>
         </li>
 
         <li class="list-group-friends" id="requests-content">

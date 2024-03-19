@@ -21,4 +21,6 @@ public interface UserRepository extends CrudRepository<MyUser, Integer> {
 
     public boolean existsByUsername(String username);
 
+    List<MyUser> findByUsernameContaining(String username);
+
 }
