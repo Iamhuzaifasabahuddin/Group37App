@@ -227,12 +227,12 @@ searchTermInput.addEventListener("keyup", function(event) {
     searchFriends(searchTermInput.value);
 });
 
-searchTermInput.addEventListener("keypress", function(event) {
-    if (event.key === "Enter") {
-        event.preventDefault();
-        searchFriends(searchTermInput.value);
-    }
-});
+// searchTermInput.addEventListener("keypress", function(event) {
+//     if (event.key === "Enter") {
+//         event.preventDefault();
+//         searchFriends(searchTermInput.value);
+//     }
+// });
 
 
 window.onload = function() {

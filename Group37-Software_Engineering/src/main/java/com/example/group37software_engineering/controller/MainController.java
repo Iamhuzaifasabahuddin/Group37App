@@ -152,7 +152,10 @@ public class MainController {
         model.addAttribute("Percentage", hoursCompleted(principal.getName()));
         model.addAttribute("Hours", hoursLeft(principal.getName()));
         model.addAttribute("Rank", addRankSuffix(getRank(principal.getName())));
-
+        model.addAttribute("Achievements", user.getUserAchievements().size());
+        model.addAttribute("TotalAchievements", achievementRepository.count());
+        model.addAttribute("friends", user.getFriends().size());
+        model.addAttribute("DateJoined", user.getDateJoined());
 //        try {
 //            String endpoint1 = "https://api.api-ninjas.com/v1/quotes?category=knowledge";
 //            String endpoint2 = "https://api.api-ninjas.com/v1/quotes?category=dreams";

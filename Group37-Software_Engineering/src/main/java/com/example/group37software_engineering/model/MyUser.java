@@ -6,6 +6,7 @@ import com.google.gson.annotations.Expose;
 import jakarta.persistence.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +41,8 @@ public class MyUser {
     private String emailVerificationToken;
     private Boolean emailVerificationStatus = false;
     private LocalDateTime emailVerificationTokenExpiry;
+
+    private String DateJoined;
 
     @OneToMany(mappedBy = "user")
     private List<UserAchievement> userAchievements;
@@ -217,5 +220,12 @@ public class MyUser {
 
     public void setNotifications(List<Notification> notifications) {
         this.notifications = notifications;
+    }
+
+    public String getDateJoined() {
+        return DateJoined;
+    }
+    public void setDateJoined() {
+        DateJoined = String.valueOf(LocalDate.now());
     }
 }

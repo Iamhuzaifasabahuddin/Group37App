@@ -69,6 +69,10 @@
                                 <strong>Points:</strong>
                                 ${user.points}</li>
                             <li class="list-group-item fs-6 border-dark">
+                                <i class="bi bi-controller"></i>
+                                <strong>Achievements:</strong>
+                                ${Achievements} / ${TotalAchievements}</li>
+                            <li class="list-group-item fs-6 border-dark">
                                 <i class="bi bi-trophy-fill"></i>
                                 <strong>League:</strong>
                                 <div class="league">

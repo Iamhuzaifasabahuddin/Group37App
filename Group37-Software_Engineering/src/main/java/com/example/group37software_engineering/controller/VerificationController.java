@@ -36,6 +36,7 @@ public class VerificationController {
             redirectAttributes.addFlashAttribute("EmailError", "Invalid token");
         } else {
             verificationService.verifyEmail(user);
+            user.setDateJoined();
             redirectAttributes.addFlashAttribute("Message", "Email verified successfully!");
             verificationService.successfulEmailVerification(user);
             achievementController.Crypto(user);
