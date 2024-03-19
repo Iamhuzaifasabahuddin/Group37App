@@ -67,7 +67,10 @@
                                 </div>
                             </a>
                             <div class="overflow-auto" id="notifications">
-
+                                <div class="d-flex flex-column justify-content-center align-items-center mt-3">
+                                    <i class="bi bi-inbox mb-1 fs-1"></i>
+                                    <p class="fs-6">You have no notifications currently.</p>
+                                </div>
                             </div>
                             <hr class="m-0 border border-black"/>
                             <div class="d-flex justify-content-end gap-2">

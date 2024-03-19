@@ -12,25 +12,24 @@ function showNotifications() {
         data: {},
         success: function (data) {
             const parsedData = JSON.parse(data);
-            notifications.innerHTML = "";
-            for (const notification of parsedData.notifications.reverse()) {
-                const a = document.querySelector("#template").cloneNode(true);
-                a.classList.remove("d-none");
-                const div = a.querySelector("div");
-                const description = div.querySelector(".notification-description");
-                const time = div.querySelector(".notification-time");
-                const img = div.querySelector("img");
-                description.innerText = notification.description;
-                time.innerText = jQuery.timeago(notification.timeReceived);
-                img.src = notification.iconLink;
-                a.href = notification.pageLink;
-                if (!notification.seen) {
-                    div.classList.add("bg-secondary-subtle");
+            if (parsedData.notifications.length !== 0) {
+                notifications.innerHTML = "";
+                for (const notification of parsedData.notifications.reverse()) {
+                    const a = document.querySelector("#template").cloneNode(true);
+                    a.classList.remove("d-none");
+                    const div = a.querySelector("div");
+                    div.querySelector(".notification-description").innerText = notification.description;
+                    div.querySelector(".notification-time").innerText = jQuery.timeago(notification.timeReceived);
+                    div.querySelector("img").src = notification.iconLink;2
+                    a.href = notification.pageLink;
+                    if (!notification.seen) {
+                        div.classList.add("bg-secondary-subtle");
+                    }
+                    a.addEventListener("click", (e) => {
+                        markAsRead(notification.id);
+                    })
+                    notifications.appendChild(a);
                 }
-                a.addEventListener("click", (e) => {
-                    markAsRead(notification.id);
-                })
-                notifications.appendChild(a);
             }
         }
     });
