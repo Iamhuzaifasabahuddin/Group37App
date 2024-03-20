@@ -159,6 +159,13 @@ public class AjaxFriendController {
         return ResponseEntity.ok().body("{\"friends\":" + gson.toJson(friends) + ", \"users\":" + gson.toJson(users) + ", \"senderRequests\":" + gson.toJson(senderRequests) + ", \"mutual\":" + gson.toJson(mutual) + ", \"receiverRequests\":" + gson.toJson(receiverRequests) + "}");
     }
 
+    /**
+     * Handles the "/SearchFriends" endpoint to search for friends.
+     *
+     * @param search    The search query.
+     * @param principal The principal representing the currently authenticated user.
+     * @return ResponseEntity containing JSON data about search results, mutual friends, and friend requests.
+     */
     @GetMapping("/SearchFriends")
     public ResponseEntity<?> searchFriends(@RequestParam String search, Principal principal) {
         MyUser user = userRepository.findByUsername(principal.getName());
@@ -166,6 +173,7 @@ public class AjaxFriendController {
         List<MyUser> users = userRepository.findByUsernameContaining(search);
         users.removeAll(friends);
         users.remove(user);
+        List<FriendRequest> senderRequests = requestRepository.findBySenderUsername(principal.getName());
         List<MyUser> usersAll = (List<MyUser>) userRepository.findAll();
         Dictionary<String, List<String>> mutual = new Hashtable<>();
         for (MyUser MutualUser: usersAll) {
@@ -182,7 +190,7 @@ public class AjaxFriendController {
                 .excludeFieldsWithoutExposeAnnotation()
                 .create();
         if (!users.isEmpty()) {
-            return ResponseEntity.ok().body("{\"search\":" + gson.toJson(users) + "," + "\"mutual\":" + gson.toJson(mutual) + "}");
+            return ResponseEntity.ok().body("{\"search\":" + gson.toJson(users) + "," + "\"mutual\":" + gson.toJson(mutual) + ", \"senderRequests\":" + gson.toJson(senderRequests) + "}");
         }
         return ResponseEntity.ok().body("{\"search\": []}");
     }

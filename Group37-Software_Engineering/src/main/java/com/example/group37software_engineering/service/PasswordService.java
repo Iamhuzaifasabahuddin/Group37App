@@ -33,7 +33,7 @@ public class PasswordService {
      */
     public void sendPasswordResetEmail(MyUser user, String token) {
         String subject = "Password Reset Request";
-        String resetLink = "https://localhost:8443/reset-password-form?token=" + token;
+        String resetLink = "https://localhost:8443/resetPasswordForm?token=" + token;
         String text = "<!DOCTYPE html>\n" +
                 "<html lang=\"en\">\n" +
                 "<head>\n" +
@@ -189,7 +189,7 @@ public class PasswordService {
                 "    </div>\n" +
                 "    <div class=\"footer\">\n" +
                 "        <p>Thanks,</p>\n" +
-                "        <p>The Team</p>\n" +
+                "        <p>Group-37</p>\n" +
                 "    </div>\n" +
                 "</div>\n" +
                 "</body>\n" +

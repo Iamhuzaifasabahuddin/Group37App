@@ -20,7 +20,7 @@
         <a class="nav-link" href="#add-friends" data-target="add-friends">Add Friends</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="#requests" data-target="requests">Requests <span class="badge text-bg-secondary">${fn:length(receiverRequests)}</span></a>
+        <a class="nav-link" href="#requests" data-target="requests">Requests <span id="request-badge" class="badge text-bg-secondary"></span></a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="#search" data-target="search">Search</a>

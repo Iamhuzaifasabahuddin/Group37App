@@ -3,7 +3,10 @@
  */
 package com.example.group37software_engineering.controller;
 
+import com.example.group37software_engineering.model.Achievement;
 import com.example.group37software_engineering.model.MyUser;
+import com.example.group37software_engineering.model.Notification;
+import com.example.group37software_engineering.repo.NotificationRepository;
 import com.example.group37software_engineering.repo.UserRepository;
 import com.example.group37software_engineering.service.PasswordService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,21 +26,12 @@ public class PasswordController {
     private UserRepository userRepository;
 
     /**
-     * Display the password reset request form.
-     * @return The view for the password reset request form.
-     */
-    @RequestMapping("/reset-email")
-    public String showPasswordResetRequestForm() {
-        return "PasswordReset/ResetEmailForm";
-    }
-
-    /**
      * Handle the password reset request.
      * @param email The email of the user requesting password reset.
      * @param redirectAttributes Redirect attributes to add flash messages.
      * @return Redirect to the login page with appropriate flash message.
      */
-    @GetMapping("/request")
+    @GetMapping("/reset-password")
     public String requestPasswordReset(@RequestParam("email") String email, RedirectAttributes redirectAttributes) {
         MyUser user = userRepository.findByEmail(email);
         if (user == null) {
@@ -45,7 +39,7 @@ public class PasswordController {
             return "redirect:/login";
         }
         passwordResetService.initiatePasswordReset(user);
-        redirectAttributes.addFlashAttribute("Message", "Email sent");
+        redirectAttributes.addFlashAttribute("Message", "Reset password email sent");
         return "redirect:/login";
     }
 
@@ -55,7 +49,7 @@ public class PasswordController {
      * @param redirectAttributes Redirect attributes to add flash messages.
      * @return Redirect to the login page if token is invalid, else display password reset form.
      */
-    @GetMapping("/reset-password-form")
+    @GetMapping("/resetPasswordForm")
     public String showPasswordResetForm(@RequestParam("token") String token, RedirectAttributes redirectAttributes) {
         MyUser user = passwordResetService.findByPasswordResetToken(token);
         if (user == null || user.getPasswordResetTokenExpiry().isBefore(LocalDateTime.now())) {

@@ -12,6 +12,10 @@ import java.security.Principal;
 import java.time.LocalDate;
 import java.util.List;
 
+
+/**
+ * Controller class handling operations related to comments.
+ */
 @Controller
 public class CommentController {
 
@@ -33,6 +37,15 @@ public class CommentController {
     @Autowired
     private AchievementController achievementController;
 
+    /**
+     * Endpoint to add a comment to a course.
+     *
+     * @param courseId    The ID of the course.
+     * @param description The comment description.
+     * @param rating      The rating given to the course.
+     * @param principal   The principal representing the currently authenticated user.
+     * @return A redirect to the dashboard page.
+     */
     @RequestMapping("/addComment")
     public String addComment(@RequestParam int courseId, @RequestParam String description, @RequestParam double rating, Principal principal){
         Course course = courseRepository.findCourseById(courseId);

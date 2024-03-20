@@ -31,25 +31,32 @@ function validateAlphabetic(id) {
 }
 
 
-function validateLength(id) {
-    const input = document.querySelector(`#${id}`);
-    const feedback = document.querySelector(`.invalid-feedback.${id}`);
-
-    if (input.value.trim().length === 0) {
-        feedback.textContent = `Cannot be empty!`;
-        return false;
-    }
-
-    if (input.value.length < 20) {
-        feedback.textContent = `Must be at least 20 characters long!`;
-        return false;
-    }
-    if (/ {2,}/.test(input.value)) {
-        feedback.textContent = `Cannot contain consecutive spaces between words!`;
-        return false;
-    }
-    return true;
-}
+//
+// function validateLength(id) {
+//     const input = document.querySelector(`#${id}`);
+//     const feedback = document.querySelector(`.invalid-feedback.${id}`);
+//
+//     if (input.value.trim().length === 0) {
+//         feedback.textContent = `Cannot be empty!`;
+//         return false;
+//     }
+//
+//     if (input.value.length < 20) {
+//         feedback.textContent = `Must be at least 20 characters long!`;
+//         return false;
+//     }
+//
+//     if (input.value.length >50){
+//         feedback.textContent = `Must be at most 50 characters long!`;
+//         return false;
+//     }
+//
+//     if (/ {2,}/.test(input.value)) {
+//         feedback.textContent = `Cannot contain consecutive spaces between words!`;
+//         return false;
+//     }
+//     return true;
+// }
 
 
 function validateRange(id, min, max) {
@@ -67,15 +74,40 @@ function validateDescription() {
     const id = 'description';
     const input = document.querySelector(`#${id}`);
     const feedback = document.querySelector(`.invalid-feedback.${id}`);
-
     changeValidity(input, feedback, false);
-    if (validateNotEmpty(id) && validateAlphabetic(id) && validateLength(id)) {
-        changeValidity(input, feedback, true);
-        feedback.textContent = '';
-        return true;
+    if (validateNotEmpty(id)) {
+        const profanity = validateProfanity(input.value);
+        if (profanity) {
+            feedback.textContent = 'Contains profanity!';
+            return false;
+        }
+        else if(!/^[a-zA-Z\s',.!?]+$/.test(input.value)) {
+            feedback.textContent = `Must contain letters, spaces, or common punctuation characters!`;
+            return false;
+        }
+        else{
+            changeValidity(input, feedback, true);
+            return true;
+        }
     }
     return false;
 }
+
+function validateProfanity(comment) {
+    let profanity;
+    $.ajax({
+        url: '/checkProfanity',
+        type: 'GET',
+        async: false,
+        data: { comment: comment },
+        success: function (data) {
+            const parsedData = JSON.parse(data);
+            profanity = !!parsedData;
+        },
+    });
+    return profanity;
+}
+
 const ratingElement = document.querySelector('#rating');
 
 function updateStars() {
@@ -134,9 +166,9 @@ function validateRating() {
         ratingFeedback.textContent = '';
         return true;
     }
+    ratingFeedback.textContent = 'Must be between 1 and 5!';
     return false;
 }
-
 
 function validateAll(submit) {
     const isDescriptionValid = validateDescription();
@@ -155,6 +187,26 @@ function validateAll(submit) {
     return false;
 }
 
+document.getElementById('description').addEventListener('input', function() {
+    var characterCount = this.value.length;
+    var remainingCharacters = 50 - characterCount;
+    var wordCountElement = document.getElementById('wordCount');
+    wordCountElement.innerHTML = `<p><strong>${remainingCharacters} characters remaining</strong></p>`;
+
+    if (remainingCharacters < 0) {
+        wordCountElement.style.color = 'red';
+    } else {
+        wordCountElement.style.color = 'initial';
+    }
+
+    if (remainingCharacters <= 0) {
+        document.querySelector('#modalForm button[type="submit"]').disabled = true;
+        this.classList.add('is-invalid');
+    } else {
+        document.querySelector('#modalForm button[type="submit"]').disabled = false;
+        this.classList.remove('is-invalid');
+    }
+});
 
 var exampleModal = document.getElementById('exampleModal')
 exampleModal.addEventListener('show.bs.modal', function (event) {

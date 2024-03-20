@@ -6,9 +6,16 @@ function sendRequest(e, receiverUsername) {
         success: function (data) {
             e.target.textContent = "Request Sent";
             e.target.disabled = true;
+            const searchResultsContainer = document.getElementById("search-results-container");
+            const userElement = searchResultsContainer.querySelector(`[data-receiver="${receiverUsername}"]`).closest(".row");
+            if (userElement) {
+                const buttonElement = userElement.querySelector(".send-request");
+                buttonElement.textContent = "Request Sent";
+                buttonElement.disabled = true;
+            }
+            getNewFriends(false);
         }
     });
-
 }
 
 function removeFriend(e, receiverUsername) {
@@ -58,11 +65,13 @@ function getNewFriends(decision) {
         type: 'GET',
         data: {},
         success: function (response) {
+            var reqCount = 0;
             const parsedData = JSON.parse(response);
             const mutualFriends = parsedData.mutual;
             const friends = document.querySelector("li#friends-content");
             const requests = document.querySelector("li#requests-content");
             if (requests.children.length === 0) {
+                updateRequestsCount(0);
                 requests.appendChild(createAlert("No incoming requests."));
             }
             else {
@@ -73,15 +82,15 @@ function getNewFriends(decision) {
                 const li = document.querySelector("li#requests-content");
 
                 for (const reqs of parsedData.receiverRequests) {
-
-
+                    reqCount++;
                     const elem = li.querySelector(
-
                     `[data-sender-username='${reqs.sender.username}']`
 
                 );
 
-                const newRequests = document.createElement("div");
+                    updateRequestsCount(reqCount);
+                    const newRequests = document.createElement("div");
+
                 newRequests.innerHTML = `
                     <div class="dropdown mutual-friends">
                             <a href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: slategray; text-decoration: none;">
@@ -91,7 +100,6 @@ function getNewFriends(decision) {
                             </div>`;
 
                 elem.appendChild(newRequests);
-
                 }
             }
             if (parsedData.friends.length === 0) {
@@ -188,7 +196,6 @@ function getNewFriends(decision) {
         }
     });
 }
-
 document.getElementById("searchButton").addEventListener("click", function() {
     const searchTerm = document.getElementById("searchTerm").value;
     searchFriends(searchTerm);
@@ -209,46 +216,54 @@ function searchFriends(searchTerm) {
         data: { search: searchTerm },
         success: function (response) {
             const parsedData = JSON.parse(response);
-            displaySearchResults(parsedData.search, parsedData.mutual);
+            displaySearchResults(parsedData.search, parsedData.mutual, parsedData.senderRequests);
         }
     });
 }
 
 
-function displaySearchResults(users, mutualFriends) {
+function displaySearchResults(users, mutualFriends, senderRequests) {
     searchResultsContainer.innerHTML = "";
 
     if (!users || users.length === 0) {
         searchResultsContainer.appendChild(createAlert("No users found."));
         return;
     }
+
     for (const user of users) {
         const userElement = document.createElement("div");
+        const requestSent = senderRequests.some(request => request.receiver.username === user.username);
+
         userElement.innerHTML = `
             <div class="row" style="border-bottom: 0.05em solid var(--primary-darker);">
-                        <div class="col d-flex align-items-center">
-                        <img src="https://eu.ui-avatars.com/api/?name=${user.firstname}+${user.lastname}&size=250"
-                             alt="User Initials Image" class="rounded-circle"/>
-                            <div>
-                            <h5><a href="#" class="profile-link">${user.username}</a></h5>
-                            <div class="dropdown">
+                <div class="col d-flex align-items-center">
+                    <img src="https://eu.ui-avatars.com/api/?name=${user.firstname}+${user.lastname}&size=250" alt="User Initials Image" class="rounded-circle"/>
+                    <div>
+                        <h5><a href="#" class="profile-link">${user.username}</a></h5>
+                        <div class="dropdown">
                             <a href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: slategray; text-decoration: none;">
-                            ${mutualFriends[user.username].length === 0 ? "No" : mutualFriends[user.username].length} Mutual Friends
+                                ${mutualFriends[user.username].length === 0 ? "No" : mutualFriends[user.username].length} Mutual Friends
                             </a>
                             <h6 class="dropdown-menu text-center p-2">${mutualFriends[user.username].length === 0 ? "Nothing to view here" : mutualFriends[user.username]}</h6>
-                            </div>
-                            </div>
-                        </div>
-                        <div class="col d-flex align-items-center" style="transform: scale(0.8);">
-                            <input type="hidden" name="receiver" value="${user.username}">
-                            <button class="btn btn-primary pull-right send-request" data-receiver="${user.username}">Send Request</button>
                         </div>
                     </div>
-                            `;
-        const button = userElement.querySelector("button");
-        button.addEventListener("click", e => {
-            sendRequest(e, button.getAttribute("data-receiver"));
-        });
+                </div>
+                <div class="col d-flex align-items-center" style="transform: scale(0.8);">
+                    <input type="hidden" name="receiver" value="${user.username}">
+                    ${requestSent ? '<p class="btn btn-primary pull-right disabled">Request Sent</p>' 
+            : `<button class="btn btn-primary pull-right send-request" data-receiver="${user.username}">Send Request</button>`
+        }
+                </div>
+            </div>
+        `;
+
+        if (!requestSent) {
+            const button = userElement.querySelector("button");
+            button.addEventListener("click", e => {
+                sendRequest(e, button.getAttribute("data-receiver"));
+            });
+        }
+
         searchResultsContainer.appendChild(userElement.children[0]);
     }
 }
@@ -265,6 +280,11 @@ searchTermInput.addEventListener("keyup", function(event) {
 //     }
 // });
 
+function updateRequestsCount(number) {
+    const requestBadge = document.getElementById("request-badge");
+    requestBadge.innerHTML = number > 10 ? '10+' : number.toString();
+    requestBadge.style.display = 'inline-block';
+}
 
 window.onload = function() {
     getNewFriends(true);

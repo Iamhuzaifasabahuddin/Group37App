@@ -1,6 +1,10 @@
 package com.example.group37software_engineering.controller;
 
+import com.example.group37software_engineering.model.Achievement;
 import com.example.group37software_engineering.model.MyUser;
+import com.example.group37software_engineering.model.Notification;
+import com.example.group37software_engineering.repo.NotificationRepository;
+import com.example.group37software_engineering.repo.UserRepository;
 import com.example.group37software_engineering.service.VerificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
