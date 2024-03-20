@@ -53,8 +53,11 @@
                     <div class="col d-flex align-items-center">
                     <img src="https://eu.ui-avatars.com/api/?name=${(request.getSender().getFirstname())}+${(request.getSender().getLastname())}&size=250"
                          alt="User Initials Image" class="rounded-circle"/>
+                        <div data-sender-username="${request.getSender().getUsername()}">
                         <h5><a class="profile-link" data-bs-toggle="modal" data-bs-target="#friend-profile-${loop.index}">${request.getSender().getUsername()}</a></h5>
                     </div>
+                    </div>
+
                     <div class="col" style="transform: scale(0.7);">
                         <input type="hidden" name="senderUsername" value="${request.getSender().getUsername()}">
                         <button class="btn btn-primary pull-right" name="decision" value="accept" data-sender="${request.getSender().getUsername()}" style="margin-bottom: 0.2em">Accept Request</button>

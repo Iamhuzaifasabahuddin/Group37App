@@ -32,6 +32,8 @@ function handleRequest(e, senderUsername) {
         success: function (data) {
             const parsedData = JSON.parse(data);
             e.target.parentNode.parentNode.remove();
+            const number = document.querySelector(".badge");
+            number.textContent = parseInt(number.textContent) - 1;
             getNewFriends(parsedData.decision);
         }
     });
@@ -62,6 +64,35 @@ function getNewFriends(decision) {
             const requests = document.querySelector("li#requests-content");
             if (requests.children.length === 0) {
                 requests.appendChild(createAlert("No incoming requests."));
+            }
+            else {
+
+                const dropdown = document.querySelectorAll(".dropdown.mutual-friends");
+                dropdown.forEach(dd => {dd.remove()});
+
+                const li = document.querySelector("li#requests-content");
+
+                for (const reqs of parsedData.receiverRequests) {
+
+
+                    const elem = li.querySelector(
+
+                    `[data-sender-username='${reqs.sender.username}']`
+
+                );
+
+                const newRequests = document.createElement("div");
+                newRequests.innerHTML = `
+                    <div class="dropdown mutual-friends">
+                            <a href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: slategray; text-decoration: none;">
+                            ${mutualFriends[reqs.sender.username].length === 0 ? "No" : mutualFriends[reqs.sender.username].length} Mutual Friends
+                            </a>
+                            <h6 class="dropdown-menu text-center p-2">${mutualFriends[reqs.sender.username].length === 0 ? "Nothing to View Here" : mutualFriends[reqs.sender.username]}</h6>
+                            </div>`;
+
+                elem.appendChild(newRequests);
+
+                }
             }
             if (parsedData.friends.length === 0) {
                 friends.appendChild(createAlert("You have no friends."));

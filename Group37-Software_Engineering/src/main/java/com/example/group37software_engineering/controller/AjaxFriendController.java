@@ -73,6 +73,7 @@ public class AjaxFriendController {
         String receiverUsername = principal.getName();
         FriendRequest request = requestRepository.findBySenderUsernameAndReceiverUsername(senderUsername, receiverUsername);
         requestRepository.delete(request);
+
         if (Objects.equals(decision, "accept")) {
             MyUser sender = userRepository.findByUsername(senderUsername);
             MyUser receiver = userRepository.findByUsername(receiverUsername);
@@ -155,7 +156,7 @@ public class AjaxFriendController {
             mutual.put(user.getUsername(), tempList);
         }
 
-        return ResponseEntity.ok().body("{\"friends\":" + gson.toJson(friends) + ", \"users\":" + gson.toJson(users) + ", \"senderRequests\":" + gson.toJson(senderRequests) + ", \"mutual\":" + gson.toJson(mutual) + "}");
+        return ResponseEntity.ok().body("{\"friends\":" + gson.toJson(friends) + ", \"users\":" + gson.toJson(users) + ", \"senderRequests\":" + gson.toJson(senderRequests) + ", \"mutual\":" + gson.toJson(mutual) + ", \"receiverRequests\":" + gson.toJson(receiverRequests) + "}");
     }
 
     @GetMapping("/SearchFriends")
