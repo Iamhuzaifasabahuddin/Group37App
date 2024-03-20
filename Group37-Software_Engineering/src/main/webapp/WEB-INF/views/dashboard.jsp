@@ -10,7 +10,59 @@
 </head>
 <body>
 <%@include file="includes/navbar.jsp"%>
-<h1 class="text-center my-3">Welcome to Your Dashboard, ${user.username}!</h1>
+
+<div class="container-fluid" style="padding-top: 20px;">
+    <div class="row">
+        <div class="col-md-9">
+<%--            <div class="card mb-3 text-left" style="background-color: var(--primary-lightest); border: 0;">--%>
+            <div class="card mb-3 text-left" style="border: 0;">
+                <div class="row g-0 align-items-center">
+                    <div class="col-md-4 d-flex justify-content-center">
+                        <div class="league">
+                            <h1>League:</h1>
+                            <img src='${user.league.imageUrl}' class='img-fluid' alt='League' style='height: 9em; width: 9em; object-fit: cover;'/>
+                            <h3>${user.getLeague().getTitle()}</h3>
+                        </div>
+                    </div>
+                    <div class="col-md-8 ps-2">
+                        <h1 class="text-left my-3">Welcome to Your Dashboard, ${user.username}!</h1>
+                        <h2 class="text-start my-3"><strong>Rank:</strong> ${Rank}</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <h3><i class="bi bi-fire" style="color: #FBB746;"></i>  Trending Courses:</h3>
+            <div id="carouselExampleAutoplaying" class="carousel slide mx-auto" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <c:forEach items="${top5Courses}" var="course" varStatus="status">
+                        <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="${status.index}" class="${status.index == 0 ? 'active' : ''}" aria-label="Slide ${status.index + 1}"></button>
+                    </c:forEach>
+                </div>
+                <c:if test="${not empty top5Courses}">
+                    <div class="carousel-inner">
+                        <c:forEach items="${top5Courses}" var="course" varStatus="status">
+                            <div class="carousel-item ${status.index == 0 ? 'active' : ''}">
+                                <img src="${course.getImageUrl()}" class="d-block w-100" alt="${course.getTitle()}">
+                                <h5>${course.getTitle()}</h5>
+                            </div>
+                        </c:forEach>
+                    </div>
+                </c:if>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%--<h1 class="text-center my-3">Welcome to Your Dashboard, ${user.username}!</h1>--%>
 <c:if test="${not empty error}">
     <div class="alert alert-info alert-dismissible fade show" role="alert">
         <i class="bi bi-info-circle-fill"></i>

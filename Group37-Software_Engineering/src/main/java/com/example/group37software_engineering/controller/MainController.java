@@ -105,6 +105,14 @@ public class MainController {
     public String getDashboard(Model model, Principal principal) {
         MyUser user = userRepository.findByUsername(principal.getName());
         model.addAttribute("user", user);
+        //Updated dashboard code
+        model.addAttribute("Rank", addRankSuffix(getRank(principal.getName())));
+        model.addAttribute("league", user.getLeague().getImageUrl());
+        List<Course> top5Courses = userCourseRepository.findTop3CoursesWithHighestUsers();
+        List<UserComment> top5Comments = userCommentRepository.findTop5ByCommentReview();
+        model.addAttribute("top5Courses", top5Courses);
+        model.addAttribute("top5Comments", top5Comments);
+        //Code end
         List<UserCourses> userCourses = userCourseRepository.findByUser(user);
         List<Course> courseList = userCourses.stream()
                 .map(UserCourses::getCourse)
