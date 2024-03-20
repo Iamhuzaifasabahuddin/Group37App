@@ -159,7 +159,13 @@ public class MainController {
         model.addAttribute("Completed", countCompleted(principal.getName()));
         model.addAttribute("Percentage", hoursCompleted(principal.getName()));
         model.addAttribute("Hours", hoursLeft(principal.getName()));
-        model.addAttribute("Rank", addRankSuffix(getRank(principal.getName())));
+        if(user.getPoints() <=0){
+
+            model.addAttribute("Rank", "N/A");
+        }
+        else{
+            model.addAttribute("Rank", addRankSuffix(getRank(principal.getName())));
+        }
         model.addAttribute("Achievements", user.getUserAchievements().size());
         model.addAttribute("TotalAchievements", achievementRepository.count());
         model.addAttribute("friends", user.getFriends().size());

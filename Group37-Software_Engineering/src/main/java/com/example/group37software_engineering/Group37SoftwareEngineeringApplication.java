@@ -1,5 +1,6 @@
 package com.example.group37software_engineering;
 
+import com.example.group37software_engineering.controller.AchievementController;
 import com.example.group37software_engineering.model.Course;
 import com.example.group37software_engineering.model.MyUser;
 import com.example.group37software_engineering.model.Question;
@@ -54,6 +55,9 @@ public class Group37SoftwareEngineeringApplication implements CommandLineRunner 
     @Autowired
     private AchievementRepository AchievementRepository;
 
+    @Autowired
+    private AchievementController achievementController;
+
     public static void main(String[] args) {
         SpringApplication.run(Group37SoftwareEngineeringApplication.class, args);
     }
@@ -79,83 +83,104 @@ public class Group37SoftwareEngineeringApplication implements CommandLineRunner 
                 MyUser user = new MyUser();
                 user.setUsername(String.format("test%d", i));
                 user.setEmailVerificationStatus(true);
+                user.setDateJoined();
+                user.setEmail(String.format("test%d@test.com", i));
                 user.setPassword(passwordEncoder.encode("password"));
                 user.setFirstname(String.format("Test%d", i));
                 user.setLastname(String.format("%d", i));
                 user.setLeague(leagueRepository.findLeagueByTitle("Unranked"));
                 userRepository.save(user);
+                achievementController.Crypto(user);
             }
 
             for (int i = 0; i < 2; i++) {
                 MyUser user = new MyUser();
                 user.setUsername(String.format("Bronze%d", i));
                 user.setEmailVerificationStatus(true);
+                user.setDateJoined();
+                user.setEmail(String.format("bronze%d@bronze.com", i));
                 user.setPassword(passwordEncoder.encode("password"));
                 user.setFirstname(String.format("Bronze%d", i));
                 user.setLastname(String.format("%d", i));
                 user.setPoints(1000);
                 user.setLeague(leagueRepository.findLeagueByTitle("Bronze Scholar"));
                 userRepository.save(user);
+                achievementController.Crypto(user);
             }
 
             for (int i = 0; i < 2; i++) {
                 MyUser user = new MyUser();
                 user.setUsername(String.format("Silver%d", i));
                 user.setEmailVerificationStatus(true);
+                user.setDateJoined();
+                user.setEmail(String.format("silver%d@silver.com", i));
                 user.setPassword(passwordEncoder.encode("password"));
                 user.setFirstname(String.format("Silver%d", i));
                 user.setLastname(String.format("%d", i));
                 user.setPoints(2500);
                 user.setLeague(leagueRepository.findLeagueByTitle("Silver Sage"));
                 userRepository.save(user);
+                achievementController.Crypto(user);
             }
 
             for (int i = 0; i < 2; i++) {
                 MyUser user = new MyUser();
                 user.setUsername(String.format("Gold%d", i));
                 user.setEmailVerificationStatus(true);
+                user.setDateJoined();
+                user.setEmail(String.format("gold%d@gold.com", i));
                 user.setPassword(passwordEncoder.encode("password"));
                 user.setFirstname(String.format("Gold%d", i));
                 user.setLastname(String.format("%d", i));
                 user.setPoints(4000);
                 user.setLeague(leagueRepository.findLeagueByTitle("Gold Guru"));
                 userRepository.save(user);
+                achievementController.Crypto(user);
             }
 
             for (int i = 0; i < 2; i++) {
                 MyUser user = new MyUser();
                 user.setUsername(String.format("Platinum%d", i));
                 user.setEmailVerificationStatus(true);
+                user.setDateJoined();
+                user.setEmail(String.format("platinum%d@platinum.com", i));
                 user.setPassword(passwordEncoder.encode("password"));
                 user.setFirstname(String.format("Platinum%d", i));
                 user.setLastname(String.format("%d", i));
                 user.setPoints(8000);
                 user.setLeague(leagueRepository.findLeagueByTitle("Platinum Prodigy"));
                 userRepository.save(user);
+                achievementController.Crypto(user);
             }
 
             for (int i = 0; i < 2; i++) {
                 MyUser user = new MyUser();
                 user.setUsername(String.format("Titanium%d", i));
                 user.setEmailVerificationStatus(true);
+                user.setDateJoined();
+                user.setEmail(String.format("titanium%d@titanium.com", i));
                 user.setPassword(passwordEncoder.encode("password"));
                 user.setFirstname(String.format("Titanium%d", i));
                 user.setLastname(String.format("%d", i));
                 user.setPoints(12000);
                 user.setLeague(leagueRepository.findLeagueByTitle("Titanium Titan"));
                 userRepository.save(user);
+                achievementController.Crypto(user);
             }
 
             for (int i = 0; i < 2; i++) {
                 MyUser user = new MyUser();
                 user.setUsername(String.format("Elysium%d", i));
                 user.setEmailVerificationStatus(true);
+                user.setDateJoined();
+                user.setEmail(String.format("elysium%d@elysium.com", i));
                 user.setPassword(passwordEncoder.encode("password"));
                 user.setFirstname(String.format("Elysium%d", i));
                 user.setLastname(String.format("%d", i));
                 user.setPoints(16000);
                 user.setLeague(leagueRepository.findLeagueByTitle("Elysium"));
                 userRepository.save(user);
+                achievementController.Crypto(user);
             }
         }
 

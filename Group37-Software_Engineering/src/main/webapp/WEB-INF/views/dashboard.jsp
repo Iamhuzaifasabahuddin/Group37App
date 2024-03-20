@@ -94,31 +94,31 @@
                                             <a class="btn btn-primary container-fluid" data-bs-toggle="modal" data-bs-target="#exampleModal" data-course-id="${course.getCourse().getId()}" data-course-title="${course.getCourse().getTitle()}" href="#">Review Course</a>
                                         </c:if>
 
-                                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-centered">
-                                                <form:form id="modalForm" class="modal-content" action="/addComment" method="GET" novalidate="true">
-                                                    <div class="modal-header">
-                                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Review for:</h1>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <div id="stars" class="mb-2">
-                                                            <i class="star bi bi-star"></i>
-                                                            <i class="star bi bi-star"></i>
-                                                            <i class="star bi bi-star"></i>
-                                                            <i class="star bi bi-star"></i>
-                                                            <i class="star bi bi-star"></i>
-                                                        </div>
-                                                        <div class="form-floating mb-3">
-                                                            <input type="number" id="rating" name="rating" placeholder="Rating" required class="form-control" max="5" step=".5"></input>
-                                                            <label for="rating" class="form-label"><strong>Rating:</strong></label>
-                                                            <div class="invalid-feedback rating"></div>
-                                                        </div>
-                                                        <div class="form-floating mb-3">
-                                                            <input type="text" id="description" name="description" placeholder="Description" required class="form-control"></input>
-                                                            <label for="description" class="form-label"><strong>Description:</strong></label>
-                                                            <div class="invalid-feedback description"></div>
-                                                        </div>
+                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <form:form id="modalForm" class="modal-content" action="/addComment" method="GET" novalidate="true">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Review for:</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div id="stars" class="mb-2">
+                                                <i class="star bi bi-star"></i>
+                                                <i class="star bi bi-star"></i>
+                                                <i class="star bi bi-star"></i>
+                                                <i class="star bi bi-star"></i>
+                                                <i class="star bi bi-star"></i>
+                                            </div>
+                                            <div class="form-floating mb-3">
+                                                <input type="number" id="rating" name="rating" placeholder="Rating" required class="form-control" max="5" step=".5"></input>
+                                                <label for="rating" class="form-label"><strong>Rating:</strong></label>
+                                                <div class="invalid-feedback rating"></div>
+                                            </div>
+                                            <div class="form-floating mb-3">
+                                                <input type="text" id="description" name="description" placeholder="Description" required class="form-control"></input>
+                                                <label for="description" class="form-label"><strong>Description:</strong></label>
+                                                <div class="invalid-feedback description"></div>
+                                            </div>
 
                                                         <input type="hidden" name="courseId" value="${courseId}">
                                                     </div>

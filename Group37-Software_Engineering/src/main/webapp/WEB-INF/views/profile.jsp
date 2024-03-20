@@ -1,4 +1,3 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>Profile</title>
@@ -6,9 +5,15 @@
 </head>
 <%@include file="includes/navbar.jsp"%>
 <style>
-    @media (max-width: 768px) { /* Adjust the breakpoint as needed */
+    .card-details {
+        text-align: left;
+    }
+    @media (max-width: 768px) {
         .card-body {
-            padding-left: 0 !important; /* Override left padding */
+            padding-left: 0 !important;
+        }
+        .card-details {
+            text-align: center;
         }
     }
 </style>
@@ -20,13 +25,18 @@
             <div class="card mb-3 text-center" style="max-width: 600px; background-color: var(--primary-lightest); border: 0;">
                 <div class="row g-0 align-items-center">
                     <div class="col-md-4 d-flex justify-content-center">
-                        <img src="https://eu.ui-avatars.com/api/?name=${(user.firstname)}+${(user.lastname)}&size=200" alt="User Initials Image" class="rounded-circle" style="height: 7rem; width: 7rem; object-fit: cover; border: 0;"/>
+                        <img src="https://eu.ui-avatars.com/api/?name=${(user.firstname)}+${(user.lastname)}&size=200" alt="User Initials Image" class="rounded-circle" style="height: 8.5rem; width: 8.5rem; object-fit: cover; border: 2px solid var(--secondary-dark);"/>
                     </div>
                     <div class="col-md-8 ps-2">
                         <div class="card-body card-details">
-                            <p class="mb-1 fs-5">${user.firstname} ${user.lastname}</p>
-                            <p class="mb-1 fs-5">${user.email}</p>
-                            <p class="mb-1 fs-5">@${user.username}</p>
+                            <p class="mb-1 fs-5"><strong>Full Name: </strong>${user.firstname} ${user.lastname}</p>
+                            <p class="mb-1 fs-5"><strong>Email: </strong>${user.email}</p>
+                            <p class="mb-1 fs-5"><strong>Username: </strong>@${user.username}</p>
+                            <hr>
+                            <div class="d-flex justify-content-between">
+                                <p class="mb-1 fs-6"><strong>Joined: </strong>${DateJoined}</p>
+                                <p class="mb-1 fs-6"><strong>Friends: </strong>${friends}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -38,10 +48,10 @@
     <div class="container-fluid">
         <div class="card mb-3 mx-auto border-dark" style="max-width: 45rem; background-color: whitesmoke;">
             <div class="row g-0">
-                <div class="col d-flex align-items-center justify-content-center">
+                <div class="col-6 d-flex align-items-center justify-content-center">
                     <h5 class="card-title fs-1 mt-2 fw-bolder">Statistics</h5>
                 </div>
-                <div class="col">
+                <div class="col-6">
                     <div class="card-body">
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item fs-6 border-dark">

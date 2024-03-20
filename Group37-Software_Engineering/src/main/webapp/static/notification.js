@@ -5,6 +5,13 @@ const standardNav = document.querySelector("#standard-nav");
 const hamburgerNav = document.querySelector("#hamburger-nav");
 const profileCircle = document.querySelector("#profile-circle");
 
+function updateBellCount(count) {
+    const bellBadge = document.querySelector("#bell-badge");
+    bellBadge.innerHTML = count > 10 ? '10+' : count.toString();
+    bellBadge.style.display = 'inline-block';
+}
+
+
 function showNotifications() {
     $.ajax({
         url: '/notifications',
@@ -12,6 +19,7 @@ function showNotifications() {
         data: {},
         success: function (data) {
             const parsedData = JSON.parse(data);
+            var UnseenCount = 0;
             if (parsedData.notifications.length !== 0) {
                 notifications.innerHTML = "";
                 for (const notification of parsedData.notifications.reverse()) {
@@ -24,17 +32,19 @@ function showNotifications() {
                     a.href = notification.pageLink;
                     if (!notification.seen) {
                         div.classList.add("bg-secondary-subtle");
+                        UnseenCount++;
                     }
                     a.addEventListener("click", (e) => {
                         markAsRead(notification.id);
                     })
                     notifications.appendChild(a);
                 }
+                updateBellCount(UnseenCount);
             }
         }
     });
 }
-
+showNotifications();
 function markAsRead(id) {
     $.ajax({
         url: '/markAsRead',

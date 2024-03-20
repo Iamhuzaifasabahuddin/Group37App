@@ -48,22 +48,54 @@ public class LeaderboardController {
         List<MyUser> gold = userRepository.findAllByLeagueId(3);
         List<MyUser> platinum = userRepository.findAllByLeagueId(4);
         List<MyUser> titanium = userRepository.findAllByLeagueId(5);
-        MyUser user = userRepository.findByUsername(principal.getName());
+        MyUser CurrentUser = userRepository.findByUsername(principal.getName());
         List<MyUser> Elysium = userRepository.findAllByLeagueId(7);
-        List<MyUser> friends = user.getFriends();
-        friends.add(user);
+        List<MyUser> friends = CurrentUser.getFriends();
+        friends.add(CurrentUser);
         List<MyUser> global = (List<MyUser>) userRepository.findAll();
-        model.addAttribute("user", user);
-        model.addAttribute("global", global.stream().sorted(Comparator.comparingDouble(MyUser::getPoints).reversed()).limit(10).collect(Collectors.toList()));
-        model.addAttribute("userLeague", user.getLeague().getTitle());
         model.addAttribute("suffix", new String[]{"st", "nd", "rd", "th", "th", "th", "th", "th", "th", "th"});
-        model.addAttribute("bronze", bronze.stream().sorted(Comparator.comparingDouble(MyUser::getPoints).reversed()).limit(10).collect(Collectors.toList()));
-        model.addAttribute("silver", silver.stream().sorted(Comparator.comparingDouble(MyUser::getPoints).reversed()).limit(10).collect(Collectors.toList()));
-        model.addAttribute("gold", gold.stream().sorted(Comparator.comparingDouble(MyUser::getPoints).reversed()).limit(10).collect(Collectors.toList()));
-        model.addAttribute("platinum", platinum.stream().sorted(Comparator.comparingDouble(MyUser::getPoints).reversed()).limit(10).collect(Collectors.toList()));
-        model.addAttribute("titanium", titanium.stream().sorted(Comparator.comparingDouble(MyUser::getPoints).reversed()).limit(10).collect(Collectors.toList()));
-        model.addAttribute("elysium", Elysium.stream().sorted(Comparator.comparingDouble(MyUser::getPoints).reversed()).limit(10).collect(Collectors.toList()));
-        model.addAttribute("friends", friends.stream().sorted(Comparator.comparingDouble(MyUser::getPoints).reversed()).limit(10).collect(Collectors.toList()));
+        model.addAttribute("userLeague", CurrentUser.getLeague().getTitle());
+        model.addAttribute("user", CurrentUser);
+        model.addAttribute("global", global.stream()
+                .filter(user -> user.getPoints() > 0)
+                .sorted(Comparator.comparingDouble(MyUser::getPoints).reversed())
+                .limit(10)
+                .collect(Collectors.toList()));
+        model.addAttribute("bronze", bronze.stream()
+                .filter(user -> user.getPoints() > 0)
+                .sorted(Comparator.comparingDouble(MyUser::getPoints).reversed())
+                .limit(10)
+                .collect(Collectors.toList()));
+        model.addAttribute("silver", silver.stream()
+                .filter(user -> user.getPoints() > 0)
+                .sorted(Comparator.comparingDouble(MyUser::getPoints).reversed())
+                .limit(10)
+                .collect(Collectors.toList()));
+        model.addAttribute("gold", gold.stream()
+                .filter(user -> user.getPoints() > 0)
+                .sorted(Comparator.comparingDouble(MyUser::getPoints).reversed())
+                .limit(10)
+                .collect(Collectors.toList()));
+        model.addAttribute("platinum", platinum.stream()
+                .filter(user -> user.getPoints() > 0)
+                .sorted(Comparator.comparingDouble(MyUser::getPoints).reversed())
+                .limit(10)
+                .collect(Collectors.toList()));
+        model.addAttribute("titanium", titanium.stream()
+                .filter(user -> user.getPoints() > 0)
+                .sorted(Comparator.comparingDouble(MyUser::getPoints).reversed())
+                .limit(10)
+                .collect(Collectors.toList()));
+        model.addAttribute("elysium", Elysium.stream()
+                .filter(user -> user.getPoints() > 0)
+                .sorted(Comparator.comparingDouble(MyUser::getPoints).reversed())
+                .limit(10)
+                .collect(Collectors.toList()));
+        model.addAttribute("friends", friends.stream()
+                .filter(user -> user.getPoints() > 0)
+                .sorted(Comparator.comparingDouble(MyUser::getPoints).reversed())
+                .limit(10)
+                .collect(Collectors.toList()));
         return "leaderboard";
     }
 

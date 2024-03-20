@@ -53,7 +53,8 @@
                         <a class="nav-link s-light" href="/leaderboard">Leaderboard</a>
                     </li>
                     <li class="nav-item d-flex justify-content-center align-items-center dropdown py-3">
-                        <i id="bell" class="bi bi-bell s-light" data-bs-toggle="dropdown" aria-expanded="false"></i>
+                        <i id="bell" class="bi bi-bell s-light" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 1.5rem;"></i>
+                        <span id="bell-badge" class="position-absolute top-1 start-100 translate-middle badge rounded-pill bg-danger">0</span>
                         <div class="dropdown-menu dropdown-menu-end mt-3">
                             <h6 class="px-3 mt-2">Notifications</h6>
                             <hr class="mt-2 mb-0 border border-black"/>
@@ -80,7 +81,7 @@
                             </div>
                         </div>
                     </li>
-                    <li class="nav-item d-flex align-items-center" id="profile-circle">
+                    <li class="nav-item d-flex align-items-center ps-2" id="profile-circle">
                         <div class="btn-group">
                             <button style="background-color: var(--primary-darker);border: 0;" type="button" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
                                 <img src="https://eu.ui-avatars.com/api/?name=${(user.firstname)}+${(user.lastname)}&size=200" alt="User Initials Image" class="rounded-circle p-0 m-0" style="height: 2rem; width: 2rem;"/>

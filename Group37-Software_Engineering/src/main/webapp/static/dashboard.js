@@ -166,7 +166,7 @@ exampleModal.addEventListener('show.bs.modal', function (event) {
     var hiddenInput = exampleModal.querySelector('input[name="courseId"]');
 
     form.action = "/addComment?courseId=" + courseId;
-    modalTitle.textContent = "Review for " + courseTitle + ":";
+    modalTitle.innerHTML = `Review for <strong>${courseTitle}</strong>:`;
     hiddenInput.value = courseId;
 
     form.addEventListener('submit', function (event) {

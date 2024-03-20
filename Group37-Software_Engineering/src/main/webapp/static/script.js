@@ -2,7 +2,7 @@ let submitted = false;
 
 /* Colour change listener */
 function changeHues() {
-    const cards = document.querySelectorAll(".card, .carousel-item");
+    const cards = document.querySelectorAll(".dashboard .card,.courses .card, .carousel-item");
     const categories = ["ARTIFICIAL INTELLIGENCE", "CLOUD", "DATA SCIENCE", "CYBERSECURITY", "SUSTAINABILITY"];
     const angles = [145, 180, 215, 250, 285].reverse();
     cards.forEach(card => {
@@ -182,8 +182,6 @@ function fetchComments(courseId, courseTitle) {
                 ratingDiv.style.marginTop = '10px';
 
                 commentDiv.appendChild(userDiv);
-                // commentDiv.appendChild(ratingDiv);
-                // commentDiv.appendChild(dateDiv);
                 commentDiv.appendChild(CombinedDiv);
                 commentDiv.appendChild(DescriptionDiv);
 
@@ -192,7 +190,7 @@ function fetchComments(courseId, courseTitle) {
                 commentsContainer.appendChild(hr);
             }
             const offcanvasTitle = document.querySelector('#offcanvasExampleLabel');
-            offcanvasTitle.textContent = `Comments for ${courseTitle}:`;
+            offcanvasTitle.innerHTML = `Comments for <strong>${courseTitle}:</strong> <hr>`;
         },
         error: function () {
             console.error('Failed to fetch comments.');
