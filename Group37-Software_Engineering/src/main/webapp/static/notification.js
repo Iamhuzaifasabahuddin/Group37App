@@ -4,6 +4,18 @@ const notificationDropdown = document.querySelector(".nav-item.dropdown");
 const standardNav = document.querySelector("#standard-nav");
 const hamburgerNav = document.querySelector("#hamburger-nav");
 const profileCircle = document.querySelector("#profile-circle");
+const noNotifications = document.querySelector(".no-notifications");
+const notificationFooter = document.querySelector("#notification-footer");
+
+function switchDisplay(node, display) {
+    if (display === "flex") {
+        node.classList.add("d-flex");
+        node.classList.remove("d-none");
+    } else {
+        node.classList.remove("d-flex");
+        node.classList.add("d-none");
+    }
+}
 
 function updateBellCount(count) {
     const bellBadge = document.querySelector("#bell-badge");
@@ -19,27 +31,41 @@ function showNotifications() {
         data: {},
         success: function (data) {
             const parsedData = JSON.parse(data);
-            var UnseenCount = 0;
+            let unseenCount = 0;
+            while(notifications.children.length > 1) {
+                notifications.removeChild(notifications.lastElementChild);
+            }
+            if (parsedData.notifications.length === 0) {
+                switchDisplay(noNotifications, "flex");
+                switchDisplay(notificationFooter, "none");
+                updateBellCount(0);
+            }
             if (parsedData.notifications.length !== 0) {
-                notifications.innerHTML = "";
+                switchDisplay(noNotifications, "none");
+                switchDisplay(notificationFooter, "flex");
                 for (const notification of parsedData.notifications.reverse()) {
                     const a = document.querySelector("#template").cloneNode(true);
                     a.classList.remove("d-none");
                     const div = a.querySelector("div");
                     div.querySelector(".notification-description").innerText = notification.description;
                     div.querySelector(".notification-time").innerText = jQuery.timeago(notification.timeReceived);
-                    div.querySelector("img").src = notification.iconLink;2
+                    div.querySelector("img").src = notification.iconLink;
                     a.href = notification.pageLink;
                     if (!notification.seen) {
                         div.classList.add("bg-secondary-subtle");
-                        UnseenCount++;
+                        unseenCount++;
                     }
                     a.addEventListener("click", (e) => {
-                        markAsRead(notification.id);
+                        if (e.target.classList.contains("btn-close")) {
+                            e.preventDefault();
+                            clearNotification(notification.id);
+                        } else {
+                            markAsRead(notification.id);
+                        }
                     })
                     notifications.appendChild(a);
                 }
-                updateBellCount(UnseenCount);
+                updateBellCount(unseenCount);
             }
         }
     });
@@ -55,6 +81,17 @@ function markAsRead(id) {
     })
 }
 
+function clearNotification(id) {
+    $.ajax({
+        url: '/clearNotification',
+        type: 'GET',
+        data: {notificationId: id},
+        success: function (data) {
+            showNotifications();
+        }
+    })
+}
+
 bell.addEventListener("click", () => {
     showNotifications();
 })
@@ -62,6 +99,17 @@ bell.addEventListener("click", () => {
 document.querySelector("#mark-read").addEventListener("click", () => {
     $.ajax({
         url: '/markAsRead',
+        type: 'GET',
+        data: {},
+        success: function (data) {
+            showNotifications();
+        }
+    })
+});
+
+document.querySelector("#clear-notifications").addEventListener("click", () => {
+    $.ajax({
+        url: '/clearNotification',
         type: 'GET',
         data: {},
         success: function (data) {

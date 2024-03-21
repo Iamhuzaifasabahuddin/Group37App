@@ -39,9 +39,10 @@ function handleRequest(e, senderUsername) {
         success: function (data) {
             const parsedData = JSON.parse(data);
             e.target.parentNode.parentNode.remove();
-            const number = document.querySelector(".badge");
+            const number = document.querySelector("#request-badge");
             number.textContent = parseInt(number.textContent) - 1;
             getNewFriends(parsedData.decision);
+            showNotifications();
         }
     });
 }
