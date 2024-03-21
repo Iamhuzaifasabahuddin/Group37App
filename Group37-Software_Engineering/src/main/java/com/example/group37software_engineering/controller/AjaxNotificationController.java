@@ -1,5 +1,6 @@
 package com.example.group37software_engineering.controller;
 
+import com.example.group37software_engineering.model.MyUser;
 import com.example.group37software_engineering.model.Notification;
 import com.example.group37software_engineering.repo.NotificationRepository;
 import com.example.group37software_engineering.repo.UserRepository;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -59,6 +61,27 @@ public class AjaxNotificationController {
                 notification.setSeen(true);
                 notificationRepository.save(notification);
             }
+        }
+        return ResponseEntity.ok().body("");
+    }
+
+    @RequestMapping("/clearNotification")
+    public ResponseEntity<?> clearNotification(Principal principal, @RequestParam(required = false) Integer notificationId) {
+        String username = principal.getName();
+        MyUser user = userRepository.findByUsername(username);
+        if (notificationId != null) {
+            Optional<Notification> n = notificationRepository.findById(notificationId);
+            if (n.isPresent()) {
+                n.get().setSeen(true);
+                user.getNotifications().remove(n.get());
+                userRepository.save(user);
+                notificationRepository.delete(n.get());
+            }
+        }
+        else {
+            List<Notification> notificationList = userRepository.findByUsername(username).getNotifications();
+            user.setNotifications(new ArrayList<>());
+            notificationRepository.deleteAll(notificationList);
         }
         return ResponseEntity.ok().body("");
     }

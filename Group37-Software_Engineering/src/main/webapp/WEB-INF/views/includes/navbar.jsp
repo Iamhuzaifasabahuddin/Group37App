@@ -58,25 +58,33 @@
                             <h6 class="px-3 mt-2">Notifications</h6>
                             <hr class="mt-2 mb-0 border border-black"/>
                             <a id="template" href="" class="s-dark text-decoration-none d-none">
-                                <div class="card border border-top-0 d-flex flex-row gap-3 p-2 rounded-0">
-                                    <img src="" alt="" class="notification-icon border border-dark border-1">
-                                    <div>
-                                        <p class="notification-description card-title"></p>
-                                        <p class="notification-time card-subtitle text-body-secondary"></p>
+                                <div class="card border border-top-0 d-flex flex-row gap-3 p-2 rounded-0 justify-content-between align-items-center">
+                                    <div class="d-flex flex-row gap-3 align-items-center">
+                                        <img src="" alt="" class="notification-icon border border-dark border-1">
+                                        <div>
+                                            <p class="notification-description card-title"></p>
+                                            <p class="notification-time card-subtitle text-body-secondary"></p>
+                                        </div>
                                     </div>
+                                    <button type="button" class="btn-close" aria-label="Close"></button>
                                 </div>
                             </a>
                             <div class="overflow-auto" id="notifications">
-                                <div class="d-flex flex-column justify-content-center align-items-center mt-3">
+                                <div class="d-flex flex-column justify-content-center align-items-center mt-3 no-notifications">
                                     <i class="bi bi-inbox mb-1 fs-1"></i>
-                                    <p class="fs-6">You have no notifications currently.</p>
+                                    <p class="fs-6 text-center">You have no notifications currently.</p>
                                 </div>
                             </div>
-                            <hr class="m-0 border border-black"/>
-                            <div class="d-flex justify-content-end gap-2">
-                                <button class="py-0 px-3 mt-2 btn btn-link text-decoration-none" id="mark-read"><i class="bi bi-envelope-open text-black"></i>
-                                    Mark all as read
-                                </button>
+                            <div id="notification-footer" class="d-flex flex-column">
+                                <hr class="m-0 border border-black"/>
+                                <div class="d-flex justify-content-between gap-2">
+                                    <button class="py-0 px-3 mt-2 btn btn-link text-decoration-none" id="mark-read"><i class="bi bi-envelope-open text-black"></i>
+                                        Mark all as read
+                                    </button>
+                                    <button class="py-0 px-3 mt-2 btn btn-link text-decoration-none" id="clear-notifications"><i class="bi bi-trash3 text-black"></i>
+                                        Clear all
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </li>
