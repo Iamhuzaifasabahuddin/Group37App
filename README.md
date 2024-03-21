@@ -47,13 +47,21 @@ git push origin your-branch-name
 
 ### Step 3: Run the application
 
+## Generating keys
 * You will need to create a new **keys.jsk** file to be able to run the application
 * Copy & paste the code below to your IDE terminal and follow the info along as instructed by the commandline
 ``` java 
 keytool -genkeypair -alias tomcat -keyalg RSA -keystore ./keys.jks
 ```
-* After you are done creating put the keys.jks file from the your application directory i.e **Group37-Software_Engineering** to **Group37-Software_Engineering/src/main/resources** the resources directory and your application should run.
+* After you are done creating put the keys.jks file from the your application directory i.e **Group37-Software_Engineering** to **Group37-Software_Engineering/src/main/resources** the resources directory and now you have to configure your **database**.
 
+* ## Connecting to AWS database
+* Configuration should be available in the **application.properties of the project**
+* click on the icon displaying next to the datasource.url 
+![alt text](image-3.png)
+* Now enter the **password** and click **Ok**.
+![alt text](image-4.png)
+* You should now be able to access the **database** & run the **application**.
 * If there is an error in creating the **database** or **AWS** doesnt work try:
 ```sql
 - You will also need to create a user by going to the MySql Workbench.
@@ -73,14 +81,45 @@ and create a database called co2103db
 - Re-run the application now it should work
 ```
 
-## Prerequisites
+
 ## **Tech stack Used:**
- [![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)](https://www.java.com/) [![Gradle](https://img.shields.io/badge/Gradle-%2302303A.svg?style=for-the-badge&logo=gradle&logoColor=white)](https://gradle.org/) [![Spring](https://img.shields.io/badge/Spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white)](https://spring.io/)
- [![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/HTML) [![CSS](https://img.shields.io/badge/CSS-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS) 
- [![MySQL](https://img.shields.io/badge/MySQL-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white)](https://www.mysql.com/)
- [![AJAX](https://img.shields.io/badge/AJAX-%23F7DF1E.svg?style=for-the-badge&logo=ajax&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/Guide/AJAX)
+
+### Backend
+ [![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)](https://www.java.com/)
+ For backend and jsps.
+
+
+ [![Gradle](https://img.shields.io/badge/Gradle-%2302303A.svg?style=for-the-badge&logo=gradle&logoColor=white)](https://gradle.org/)
+For easier project building/deployment.
+
+ [![Spring](https://img.shields.io/badge/Spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white)](https://spring.io/)
+ For website rendering, handling and Controlling.
+
+### Frontend
+ [![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/HTML) 
+Used along jsps as frontend display
+
+ [![CSS](https://img.shields.io/badge/CSS-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS) 
+Frontend styling
+
  [![Bootstrap](https://img.shields.io/badge/bootstrap-%23563D7C.svg?style=for-the-badge&logo=bootstrap&logoColor=white)](https://getbootstrap.com/)
+ Frontend styling
+
+[![JavaScript](https://img.shields.io/badge/JavaScript-%23F7DF1E.svg?style=for-the-badge&logo=javascript&logoColor=black)](https://www.javascript.com/)
+For client side styling, validation, error prevention and error handling.
+
+
+ [![AJAX](https://img.shields.io/badge/AJAX-%23F7DF1E.svg?style=for-the-badge&logo=ajax&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/Guide/AJAX)
+For server side rendering without needing to refresh pages.
+
+### Storage & deployment
+ [![MySQL](https://img.shields.io/badge/MySQL-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white)](https://www.mysql.com/)
+ For storing data 
+
  [![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white)](https://aws.amazon.com/) 
+ Cloud database to enable access to other people and deployment.
+
  [![Railway Logo](https://img.shields.io/badge/Railway-%23669966.svg?style=for-the-badge&logo=railway&logoColor=white)](https://railway.app/)
+ For application deployment to the web.
 
 

@@ -2,6 +2,8 @@ package com.example.group37software_engineering.controller;
 
 import com.example.group37software_engineering.model.FriendRequest;
 import com.example.group37software_engineering.model.MyUser;
+import com.example.group37software_engineering.model.UserAchievement;
+import com.example.group37software_engineering.repo.AchievementRepository;
 import com.example.group37software_engineering.repo.FriendRequestRepository;
 import com.example.group37software_engineering.repo.UserCourseRepository;
 import com.example.group37software_engineering.repo.UserRepository;
@@ -15,8 +17,11 @@ import javax.sound.midi.SysexMessage;
 import java.security.Principal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
+
 /**
  * Controller class for managing friend-related operations.
  */
@@ -31,6 +36,15 @@ public class FriendController {
 
     @Autowired
     private AchievementController achievementController;
+
+    @Autowired
+    private UserCourseRepository userCourseRepository;
+
+    @Autowired
+    private AchievementRepository achievementRepository;
+
+    @Autowired
+    private MainController mainController;
 
     /**
      * Handles the "/friends" endpoint to display a user's friend requests and information.
@@ -47,25 +61,66 @@ public class FriendController {
         achievementController.DoubleTrouble(userRepository.findByUsername(principal.getName()));
         return "Friends/friends";
     }
-//
-//    /**
-//     * Handles the "friend-profile" endpoint to display information about a friend.
-//     *
-//     * @param model    The model to which attributes are added for rendering the view.
-//     * @param username The username of the friend whose profile is being viewed.
-//     * @param principal The principal representing the currently authenticated user.
-//     * @return The view name for rendering the friend's profile information.
-//     */
-//    @GetMapping("friend-profile")
-//    public String friendProfile(Model model, @RequestParam String username, Principal principal) {
-//        MyUser user = userRepository.findByUsername(username);
-//        MyUser loggedInUser = userRepository.findByUsername(principal.getName());
-//        int index = loggedInUser.getFriends().indexOf(user);
-//        LocalDateTime since = loggedInUser.getFriendsSince().get(index);
-//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM yyyy");
-//        String formattedDate = since.format(formatter);
-//        model.addAttribute("user", user);
-//        model.addAttribute("since", formattedDate);
-//        return "Friends/friend-profile";
-//    }
+
+    /**
+     * Handles the "friend-profile" endpoint to display information about a friend.
+     *
+     * @param model    The model to which attributes are added for rendering the view.
+     * @param username The username of the friend whose profile is being viewed.
+     * @param principal The principal representing the currently authenticated user.
+     * @return The view name for rendering the friend's profile information.
+     */
+    @GetMapping("/friend-profile")
+    public String friendProfile(Model model, @RequestParam String username, Principal principal) {
+        MyUser friend = userRepository.findByUsername(username);
+        MyUser user = userRepository.findByUsername(principal.getName());
+        int index = user.getFriends().indexOf(friend);
+        LocalDateTime since = user.getFriendsSince().get(index);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM yyyy");
+        String formattedDate = since.format(formatter);
+
+        model.addAttribute("friend", friend);
+        model.addAttribute("DateJoined", friend.getDateJoined());
+        model.addAttribute("user", user);
+        model.addAttribute("since", formattedDate);
+        model.addAttribute("Achievements", friend.getUserAchievements().size());
+        model.addAttribute("TotalAchievements", achievementRepository.count());
+
+        model.addAttribute("Courses_taken", userCourseRepository.findByUser(friend).size());
+        model.addAttribute("LoggedInUser_Courses_taken", userCourseRepository.findByUser(user).size());
+
+        model.addAttribute("Completed", mainController.countCompleted(friend.getUsername()));
+        model.addAttribute("LoggedInUser_Completed", mainController.countCompleted(user.getUsername()));
+
+        model.addAttribute("Percentage", mainController.hoursCompleted(friend.getUsername()));
+        model.addAttribute("LoggedInUser_Percentage", mainController.hoursCompleted(user.getUsername()));
+
+        model.addAttribute("Hours", mainController.hoursLeft(friend.getUsername()));
+        model.addAttribute("LoggedInUser_Hours", mainController.hoursLeft(user.getUsername()));
+
+        Integer rank = mainController.getRank(friend.getUsername());
+        if (rank != null) {
+            model.addAttribute("Rank", mainController.addRankSuffix(rank));
+        } else {
+            model.addAttribute("Rank", "N/A");
+        }
+
+        rank = mainController.getRank(user.getUsername());
+        if (rank != null) {
+            model.addAttribute("LoggedInUser_Rank", mainController.addRankSuffix(rank));
+        } else {
+            model.addAttribute("LoggedInUser_Rank", "N/A");
+        }
+
+        model.addAttribute("Points", friend.getPoints());
+        model.addAttribute("LoggedInUser_Points", user.getPoints());
+        model.addAttribute("LoggedInUser_League", user.getLeague());
+        List<UserAchievement> achievements = friend.getUserAchievements().stream()
+                .sorted(Comparator.comparing(UserAchievement::getDateAchieved))
+                .collect(Collectors.toList());
+        model.addAttribute("Achieved", achievements);
+        model.addAttribute("notachieved", achievementRepository.findAll());
+
+        return "Friends/friend-profile";
+    }
 }

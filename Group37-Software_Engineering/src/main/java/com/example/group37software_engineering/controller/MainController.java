@@ -254,7 +254,7 @@ public class MainController {
      * @param username The username of the user.
      * @return The count of completed courses.
      */
-    private Integer countCompleted(String username) {
+    public Integer countCompleted(String username) {
         MyUser user = userRepository.findByUsername(username);
         List<UserCourses> userCourses = userCourseRepository.findByUser(user);
         if (user != null) {
@@ -280,7 +280,7 @@ public class MainController {
      * @param username The username of the user.
      * @return The completion percentage of courses.
      */
-    private Double hoursCompleted(String username) {
+    public Double hoursCompleted(String username) {
         MyUser user = userRepository.findByUsername(username);
         List<UserCourses> userCourses = userCourseRepository.findByUser(user);
 
@@ -305,7 +305,7 @@ public class MainController {
      * @param username The username of the user.
      * @return The remaining hours for courses.
      */
-    private Double hoursLeft(String username) {
+    public Double hoursLeft(String username) {
         MyUser user = userRepository.findByUsername(username);
         if (user == null) {
             return 0.0;
@@ -335,7 +335,7 @@ public class MainController {
      * @param username The username of the user whose rank is to be retrieved.
      * @return The rank of the user if found, or null if the user is not found in the leaderboard.
      */
-    private Integer getRank(String username) {
+    public Integer getRank(String username) {
         List<MyUser> myUsers = StreamSupport.stream(userRepository.findAll().spliterator(), false)
                 .sorted(Comparator.comparingDouble(MyUser::getPoints).reversed())
                 .toList();
@@ -350,7 +350,7 @@ public class MainController {
         return null;
     }
 
-    private String addRankSuffix(int rank) {
+    public String addRankSuffix(int rank) {
         String suffix;
         int lastDigit = rank % 10;
         int lastTwoDigits = rank % 100;
@@ -379,62 +379,4 @@ public class MainController {
         return userIds.size();
     }
 
-        /**
-     * Handles the "friend-profile" endpoint to display information about a friend.
-     *
-     * @param model    The model to which attributes are added for rendering the view.
-     * @param username The username of the friend whose profile is being viewed.
-     * @param principal The principal representing the currently authenticated user.
-     * @return The view name for rendering the friend's profile information.
-     */
-    @GetMapping("/friend-profile")
-    public String friendProfile(Model model, @RequestParam String username, Principal principal) {
-        MyUser friend = userRepository.findByUsername(username);
-        MyUser loggedInUser = userRepository.findByUsername(principal.getName());
-        int index = loggedInUser.getFriends().indexOf(friend);
-        LocalDateTime since = loggedInUser.getFriendsSince().get(index);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM yyyy");
-        String formattedDate = since.format(formatter);
-
-        model.addAttribute("user", friend);
-        model.addAttribute("LoggedUser", loggedInUser);
-        model.addAttribute("since", formattedDate);
-
-        model.addAttribute("Courses_taken", userCourseRepository.findByUser(friend).size());
-        model.addAttribute("LoggedInUser_Courses_taken", userCourseRepository.findByUser(loggedInUser).size());
-
-        model.addAttribute("Completed", countCompleted(friend.getUsername()));
-        model.addAttribute("LoggedInUser_Completed", countCompleted(loggedInUser.getUsername()));
-
-        model.addAttribute("Percentage", hoursCompleted(friend.getUsername()));
-        model.addAttribute("LoggedInUser_Percentage", hoursCompleted(loggedInUser.getUsername()));
-
-        model.addAttribute("Hours", hoursLeft(friend.getUsername()));
-        model.addAttribute("LoggedInUser_Hours", hoursLeft(loggedInUser.getUsername()));
-
-        Integer rank = getRank(friend.getUsername());
-        if (rank != null) {
-            model.addAttribute("Rank", addRankSuffix(rank));
-        } else {
-            model.addAttribute("Rank", "N/A");
-        }
-
-        rank = getRank(loggedInUser.getUsername());
-        if (rank != null) {
-            model.addAttribute("LoggedInUser_Rank", addRankSuffix(rank));
-        } else {
-            model.addAttribute("LoggedInUser_Rank", "N/A");
-        }
-
-        model.addAttribute("Points", friend.getPoints());
-        model.addAttribute("LoggedInUser_Points", loggedInUser.getPoints());
-
-        List<UserAchievement> achievements = friend.getUserAchievements().stream()
-                .sorted(Comparator.comparing(UserAchievement::getDateAchieved))
-                .collect(Collectors.toList());
-        model.addAttribute("Achieved", achievements);
-        model.addAttribute("notachieved", achievementRepository.findAll());
-
-        return "Friends/friend-profile";
-    }
 }
