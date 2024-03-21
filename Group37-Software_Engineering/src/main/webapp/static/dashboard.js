@@ -20,43 +20,19 @@ function validateNotEmpty(id) {
     return true;
 }
 
-function validateAlphabetic(id) {
+function validateLength(id) {
     const input = document.querySelector(`#${id}`);
     const feedback = document.querySelector(`.invalid-feedback.${id}`);
-    if (!/^[a-zA-Z\s',.!?]+$/.test(input.value)) {
-        feedback.textContent = `Must contain letters, spaces, or common punctuation characters!`;
+    if (input.value.length < 20) {
+        feedback.textContent = `Must be at least 20 characters long!`;
+        return false;
+    }
+    if (input.value.length >50){
+        feedback.textContent = "";
         return false;
     }
     return true;
 }
-
-
-//
-// function validateLength(id) {
-//     const input = document.querySelector(`#${id}`);
-//     const feedback = document.querySelector(`.invalid-feedback.${id}`);
-//
-//     if (input.value.trim().length === 0) {
-//         feedback.textContent = `Cannot be empty!`;
-//         return false;
-//     }
-//
-//     if (input.value.length < 20) {
-//         feedback.textContent = `Must be at least 20 characters long!`;
-//         return false;
-//     }
-//
-//     if (input.value.length >50){
-//         feedback.textContent = `Must be at most 50 characters long!`;
-//         return false;
-//     }
-//
-//     if (/ {2,}/.test(input.value)) {
-//         feedback.textContent = `Cannot contain consecutive spaces between words!`;
-//         return false;
-//     }
-//     return true;
-// }
 
 
 function validateRange(id, min, max) {
@@ -70,42 +46,33 @@ function validateRange(id, min, max) {
 
 }
 
-function validateDescription() {
+function validateDescription(submit) {
     const id = 'description';
     const input = document.querySelector(`#${id}`);
     const feedback = document.querySelector(`.invalid-feedback.${id}`);
-    changeValidity(input, feedback, false);
-    if (validateNotEmpty(id)) {
-        const profanity = validateProfanity(input.value);
-        if (profanity) {
-            feedback.textContent = 'Contains profanity!';
-            return false;
-        }
-        else if(!/^[a-zA-Z\s',.!?]+$/.test(input.value)) {
-            feedback.textContent = `Must contain letters, spaces, or common punctuation characters!`;
-            return false;
-        }
-        else{
-            changeValidity(input, feedback, true);
-            return true;
-        }
-    }
-    return false;
-}
-
-function validateProfanity(comment) {
-    let profanity;
     $.ajax({
         url: '/checkProfanity',
         type: 'GET',
-        async: false,
-        data: { comment: comment },
+        data: { comment: input.value },
         success: function (data) {
+            let reviewValid = false;
             const parsedData = JSON.parse(data);
-            profanity = !!parsedData;
+            changeValidity(input, feedback, false);
+            if (validateNotEmpty(id) && validateLength(id)) {
+                if (!!parsedData) {
+                    feedback.textContent = 'Contains profanity!';
+                }
+                else if(!/^[a-zA-Z\s',.!?]+$/.test(input.value)) {
+                    feedback.textContent = `Must contain letters, spaces, or common punctuation characters!`;
+                }
+                else{
+                    reviewValid = true;
+                    changeValidity(input, feedback, true);
+                }
+            }
+            validateReview(submit, reviewValid);
         },
     });
-    return profanity;
 }
 
 const ratingElement = document.querySelector('#rating');
@@ -170,68 +137,72 @@ function validateRating() {
     return false;
 }
 
-function validateAll(submit) {
-    const isDescriptionValid = validateDescription();
-    const isRatingValid = validateRating();
-
-    if (isDescriptionValid && isRatingValid) {
-        document.querySelector('#modalForm button[type="submit"]').disabled = false;
-        if (submit && !submitted) {
-            submitted = true;
-            document.querySelector('#modalForm').submit();
-        }
-        return true;
-    } else {
-        document.querySelector('#modalForm button[type="submit"]').disabled = true;
-    }
-    return false;
-}
-
 document.getElementById('description').addEventListener('input', function() {
-    var characterCount = this.value.length;
-    var remainingCharacters = 50 - characterCount;
-    var wordCountElement = document.getElementById('wordCount');
+    const characterCount = this.value.length;
+    const remainingCharacters = 50 - characterCount;
+    const wordCountElement = document.getElementById('wordCount');
+    const button = document.querySelector('#modalForm button[type="submit"]');
     wordCountElement.innerHTML = `<p><strong>${remainingCharacters} characters remaining</strong></p>`;
 
     if (remainingCharacters < 0) {
         wordCountElement.style.color = 'red';
-    } else {
-        wordCountElement.style.color = 'initial';
-    }
-
-    if (remainingCharacters <= 0) {
         document.querySelector('#modalForm button[type="submit"]').disabled = true;
         this.classList.add('is-invalid');
     } else {
-        document.querySelector('#modalForm button[type="submit"]').disabled = false;
-        this.classList.remove('is-invalid');
+        wordCountElement.style.color = 'initial';
+        if (!hasBeenClicked) {
+            document.querySelector('#modalForm button[type="submit"]').disabled = false;
+            this.classList.remove('is-invalid');
+        }
     }
 });
 
-var exampleModal = document.getElementById('exampleModal')
+function validateReview(submit, reviewValid) {
+    if (validateRating() && reviewValid) {
+        if (submit) {
+            if (!submitted) {
+                submitted = true;
+                document.querySelector('form').submit();
+            } else {
+                document.querySelector('#submit-review').disabled = true;
+            }
+        } else {
+            document.querySelector('#submit-review').disabled = false;
+        }
+    } else {
+        document.querySelector('#submit-review').disabled = true;
+    }
+
+}
+
+const exampleModal = document.getElementById('exampleModal');
+let hasBeenClicked = false;
 exampleModal.addEventListener('show.bs.modal', function (event) {
-    var button = event.relatedTarget
-    var courseId = button.getAttribute('data-course-id')
-    var courseTitle = button.getAttribute('data-course-title')
-    var form = exampleModal.querySelector('form');
-    var modalTitle = exampleModal.querySelector('.modal-title');
-    var hiddenInput = exampleModal.querySelector('input[name="courseId"]');
+    const button = event.relatedTarget;
+    const courseId = button.getAttribute('data-course-id');
+    const courseTitle = button.getAttribute('data-course-title');
+    const form = exampleModal.querySelector('form');
+    const modalTitle = exampleModal.querySelector('.modal-title');
+    const hiddenInput = exampleModal.querySelector('input[name="courseId"]');
 
     form.action = "/addComment?courseId=" + courseId;
     modalTitle.innerHTML = `Review for <strong>${courseTitle}</strong>:`;
     hiddenInput.value = courseId;
 
-    form.addEventListener('submit', function (event) {
+    document.querySelector("#submit-review").addEventListener("click", (event) => {
         event.preventDefault();
-        if (!validateAll(true)) {
-            document.querySelectorAll('input.form-control').forEach(element => {
-                element.removeEventListener('keyup', () => {
-                    validateAll(false);
-                });
-                element.addEventListener('keyup', () => {
-                    validateAll(false);
-                });
+        event.stopPropagation();
+        hasBeenClicked = true;
+        validateDescription(true);
+        document.querySelectorAll('input.form-control').forEach(element => {
+            element.addEventListener('keyup', () => {
+                validateDescription(false);
             });
-        }
+        });
+        document.querySelectorAll('input.form-control').forEach(element => {
+            element.addEventListener('change', () => {
+                validateDescription(false);
+            });
+        });
     });
 });

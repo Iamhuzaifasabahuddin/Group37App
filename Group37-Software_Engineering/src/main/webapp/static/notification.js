@@ -6,7 +6,6 @@ const hamburgerNav = document.querySelector("#hamburger-nav");
 const profileCircle = document.querySelector("#profile-circle");
 const noNotifications = document.querySelector(".no-notifications");
 const notificationFooter = document.querySelector("#notification-footer");
-
 function switchDisplay(node, display) {
     if (display === "flex") {
         node.classList.add("d-flex");
@@ -20,7 +19,13 @@ function switchDisplay(node, display) {
 function updateBellCount(count) {
     const bellBadge = document.querySelector("#bell-badge");
     bellBadge.innerHTML = count > 10 ? '10+' : count.toString();
-    bellBadge.style.display = 'inline-block';
+    if (count === 0) {
+        bellBadge.classList.add('d-none');
+        bellBadge.classList.remove('d-inline-block');
+    } else {
+        bellBadge.classList.add('d-inline-block');
+        bellBadge.classList.remove('d-none');
+    }
 }
 
 
@@ -38,7 +43,7 @@ function showNotifications() {
             if (parsedData.notifications.length === 0) {
                 switchDisplay(noNotifications, "flex");
                 switchDisplay(notificationFooter, "none");
-                updateBellCount(0);
+                updateBellCount(unseenCount);
             }
             if (parsedData.notifications.length !== 0) {
                 switchDisplay(noNotifications, "none");

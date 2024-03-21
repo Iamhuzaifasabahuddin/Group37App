@@ -54,7 +54,7 @@
                     </li>
                     <li class="nav-item d-flex justify-content-center align-items-center dropdown py-3">
                         <i id="bell" class="bi bi-bell s-light" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 1.5rem;"></i>
-                        <span id="bell-badge" class="position-absolute top-1 start-100 translate-middle badge rounded-pill bg-danger">0</span>
+                        <span id="bell-badge" class="position-absolute top-1 start-100 translate-middle badge rounded-pill bg-danger d-none">0</span>
                         <div class="dropdown-menu dropdown-menu-end mt-3">
                             <h6 class="px-3 mt-2">Notifications</h6>
                             <hr class="mt-2 mb-0 border border-black"/>
