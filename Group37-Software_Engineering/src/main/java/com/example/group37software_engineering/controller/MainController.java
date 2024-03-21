@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -18,6 +19,8 @@ import java.net.ProtocolException;
 import java.net.URL;
 import java.security.Principal;
 import java.text.DecimalFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
@@ -374,5 +377,64 @@ public class MainController {
                 .collect(Collectors.toSet());
 
         return userIds.size();
+    }
+
+        /**
+     * Handles the "friend-profile" endpoint to display information about a friend.
+     *
+     * @param model    The model to which attributes are added for rendering the view.
+     * @param username The username of the friend whose profile is being viewed.
+     * @param principal The principal representing the currently authenticated user.
+     * @return The view name for rendering the friend's profile information.
+     */
+    @GetMapping("/friend-profile")
+    public String friendProfile(Model model, @RequestParam String username, Principal principal) {
+        MyUser friend = userRepository.findByUsername(username);
+        MyUser loggedInUser = userRepository.findByUsername(principal.getName());
+        int index = loggedInUser.getFriends().indexOf(friend);
+        LocalDateTime since = loggedInUser.getFriendsSince().get(index);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM yyyy");
+        String formattedDate = since.format(formatter);
+
+        model.addAttribute("user", friend);
+        model.addAttribute("LoggedUser", loggedInUser);
+        model.addAttribute("since", formattedDate);
+
+        model.addAttribute("Courses_taken", userCourseRepository.findByUser(friend).size());
+        model.addAttribute("LoggedInUser_Courses_taken", userCourseRepository.findByUser(loggedInUser).size());
+
+        model.addAttribute("Completed", countCompleted(friend.getUsername()));
+        model.addAttribute("LoggedInUser_Completed", countCompleted(loggedInUser.getUsername()));
+
+        model.addAttribute("Percentage", hoursCompleted(friend.getUsername()));
+        model.addAttribute("LoggedInUser_Percentage", hoursCompleted(loggedInUser.getUsername()));
+
+        model.addAttribute("Hours", hoursLeft(friend.getUsername()));
+        model.addAttribute("LoggedInUser_Hours", hoursLeft(loggedInUser.getUsername()));
+
+        Integer rank = getRank(friend.getUsername());
+        if (rank != null) {
+            model.addAttribute("Rank", addRankSuffix(rank));
+        } else {
+            model.addAttribute("Rank", "N/A");
+        }
+
+        rank = getRank(loggedInUser.getUsername());
+        if (rank != null) {
+            model.addAttribute("LoggedInUser_Rank", addRankSuffix(rank));
+        } else {
+            model.addAttribute("LoggedInUser_Rank", "N/A");
+        }
+
+        model.addAttribute("Points", friend.getPoints());
+        model.addAttribute("LoggedInUser_Points", loggedInUser.getPoints());
+
+        List<UserAchievement> achievements = friend.getUserAchievements().stream()
+                .sorted(Comparator.comparing(UserAchievement::getDateAchieved))
+                .collect(Collectors.toList());
+        model.addAttribute("Achieved", achievements);
+        model.addAttribute("notachieved", achievementRepository.findAll());
+
+        return "Friends/friend-profile";
     }
 }
