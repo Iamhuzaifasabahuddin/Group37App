@@ -22,7 +22,7 @@
 <section>
     <div class="dashboard d-flex flex-column align-items-center p-4">
         <c:forEach items="${userCourses}" var="course">
-            <div class="card mb-3" style="max-width: 60rem;">
+            <div class="card mb-3" style="max-width: 48rem; background-color: var(--primary-lighter);" >
                 <div class="row g-0">
                     <div class="col-sm-4" style="background-color: var(--primary-lighter);">
                         <img src="${course.getCourse().getImageUrl()}" class="img-fluid rounded-start card-img" alt="${course.getCourse().getTitle()}">

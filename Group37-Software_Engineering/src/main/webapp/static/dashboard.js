@@ -138,6 +138,7 @@ function validateRating() {
 }
 
 document.getElementById('description').addEventListener('input', function() {
+    this.value = this.value.replace(/\s{2,}/g, ' ');
     const characterCount = this.value.length;
     const remainingCharacters = 50 - characterCount;
     const wordCountElement = document.getElementById('wordCount');
