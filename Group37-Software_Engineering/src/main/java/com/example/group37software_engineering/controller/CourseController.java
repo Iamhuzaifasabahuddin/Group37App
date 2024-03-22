@@ -120,7 +120,7 @@ public class CourseController {
 
     @GetMapping("/top3")
     public String getTop3Courses(Model model) {
-        List<Course> top3Courses = userCourseRepository.findTop3CoursesWithHighestUsers();
+        List<Course> top3Courses = userCourseRepository.findTop5CoursesWithHighestUsers();
         model.addAttribute("top3Courses", top3Courses);
         return "Course/top3";
     }

@@ -260,5 +260,23 @@
     var userLeague = "${userLeague}";
     setDefaultTab(userLeague);
 </script>
+<footer>
+    <%@include file="includes/footer.jsp"%>
+</footer>
 </body>
+<style>
+    html {
+        position: relative;
+        min-height: 100%;
+    }
+    body {
+        margin-bottom: 150px;
+    }
+    footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+    }
+
+</style>
 </html>

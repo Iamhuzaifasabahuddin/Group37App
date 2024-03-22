@@ -62,11 +62,9 @@ public class MainController {
     public String welcomePage(Model model) throws IOException {
         URL url = new URL("https://zenquotes.io/api/random");
 
-        // Open connection
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
 
-        // Get response
         int responseCode = connection.getResponseCode();
         if (responseCode == HttpURLConnection.HTTP_OK) {
             BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
@@ -82,16 +80,19 @@ public class MainController {
             String jsonResponse = response.toString();
             String quote = jsonResponse.split("\"q\":\"")[1].split("\",\"a\"")[0];
             String author = jsonResponse.split("\"a\":\"")[1].split("\"}")[0].replaceAll(",\"h\":.*", "").replace("\"", "");
-            System.out.println("Inspirational Quote:");
-            System.out.println(quote);
-            System.out.println("~ " + author);
             model.addAttribute("quote", quote);
             model.addAttribute("author", author);
         }
 
-        List<Course> top5Courses = userCourseRepository.findTop3CoursesWithHighestUsers();
+        List<UserComment> rating = userCommentRepository.findTop5ByCommentReview();
+        List<Course> popularity = userCourseRepository.findTop5CoursesWithHighestUsers();
         List<UserComment> top5Comments = userCommentRepository.findTop5ByCommentReview();
-        model.addAttribute("top5Courses", top5Courses);
+        if (!rating.isEmpty()) {
+            model.addAttribute("top5Courses", rating);
+
+        } else {
+            model.addAttribute("top5Courses", popularity);
+        }
         model.addAttribute("top5Comments", top5Comments);
         return "welcome";
     }
@@ -108,14 +109,8 @@ public class MainController {
     public String getDashboard(Model model, Principal principal) {
         MyUser user = userRepository.findByUsername(principal.getName());
         model.addAttribute("user", user);
-        //Updated dashboard code
         model.addAttribute("Rank", addRankSuffix(getRank(principal.getName())));
         model.addAttribute("league", user.getLeague().getImageUrl());
-        List<Course> top5Courses = userCourseRepository.findTop3CoursesWithHighestUsers();
-        List<UserComment> top5Comments = userCommentRepository.findTop5ByCommentReview();
-        model.addAttribute("top5Courses", top5Courses);
-        model.addAttribute("top5Comments", top5Comments);
-        //Code end
         List<UserCourses> userCourses = userCourseRepository.findByUser(user);
         List<Course> courseList = userCourses.stream()
                 .map(UserCourses::getCourse)

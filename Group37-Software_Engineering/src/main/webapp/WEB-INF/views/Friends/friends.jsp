@@ -86,7 +86,24 @@
     </ul>
 </div>
 </div>
+<footer>
+    <%@include file="../includes/footer.jsp"%>
+</footer>
+    </body>
 
-</body>
+<style>
+    html, body {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
 
+    .flex-content {
+        flex: 1 0 auto;
+    }
+
+    footer {
+        flex-shrink: 0;
+    }
+</style>
 </html>

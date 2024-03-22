@@ -22,7 +22,7 @@
 <section>
     <div class="dashboard d-flex flex-column align-items-center p-4">
         <c:forEach items="${userCourses}" var="course">
-            <div class="card mb-3" style="max-width: 48rem;">
+            <div class="card mb-3" style="max-width: 60rem;">
                 <div class="row g-0">
                     <div class="col-sm-4" style="background-color: var(--primary-lighter);">
                         <img src="${course.getCourse().getImageUrl()}" class="img-fluid rounded-start card-img" alt="${course.getCourse().getTitle()}">
@@ -134,6 +134,9 @@
     </div>
 </section>
 
+<footer>
+    <%@include file="includes/footer.jsp"%>
+</footer>
 </body>
 <style>
     .bi-star {
@@ -151,5 +154,18 @@
     .star {
         font-size: 1.5em;
     }
+    html {
+        position: relative;
+        min-height: 100%;
+    }
+    body {
+        margin-bottom: 150px;
+    }
+    footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+    }
 </style>
+
 </html>

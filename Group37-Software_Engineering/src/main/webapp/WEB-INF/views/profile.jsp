@@ -220,5 +220,8 @@
     </div>
 </section>
 
+<footer class="mt-4">
+    <%@include file="includes/footer.jsp"%>
+</footer>
 </body>
 </html>
