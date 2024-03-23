@@ -71,20 +71,16 @@ public class FilterController {
         MyUser user = userRepository.findByUsername(principal.getName());
         model.addAttribute("user", user);
         List<Course> searched = courseRepository.findCoursesByTitleContaining(searchTerm.trim());
-        if (!searched.isEmpty()) {
-            List<Course> coursesNotEnrolled = new ArrayList<>();
-            for (Course course : searched) {
-                if (!isUserEnrolledInCourse(user, course)) {
-                    coursesNotEnrolled.add(course);
-                }
+        List<Course> coursesNotEnrolled = new ArrayList<>();
+        for (Course course : searched) {
+            if (!isUserEnrolledInCourse(user, course)) {
+                coursesNotEnrolled.add(course);
             }
-            if(coursesNotEnrolled.isEmpty()){
-                model.addAttribute("CourseError", "No such course found!");
-            }
-            model.addAttribute("courseList", coursesNotEnrolled);
-        } else {
+        }
+        if(coursesNotEnrolled.isEmpty()){
             model.addAttribute("CourseError", "No such course found!");
         }
+        model.addAttribute("courseList", coursesNotEnrolled);
         return "Course/courses";
     }
 

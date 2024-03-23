@@ -58,7 +58,7 @@
             <c:if test="${not empty CourseError}">
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                     <strong><i class="bi bi-exclamation-triangle-fill"></i>
-                            ${CourseError}
+                            ${CourseError} For all available courses, check <a href="/courses">here</a>
                     </strong>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
@@ -125,4 +125,19 @@
     <%@include file="../includes/footer.jsp"%>
 </footer>
 </body>
+
+<style>
+    html {
+        position: relative;
+        min-height: 100%;
+    }
+    body {
+        margin-bottom: 150px;
+    }
+    footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+    }
+</style>
 </html>
