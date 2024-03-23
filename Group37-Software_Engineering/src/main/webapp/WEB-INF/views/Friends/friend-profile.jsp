@@ -47,9 +47,10 @@
         <div class="card mb-3 mx-auto border-dark" style="max-width: 45rem; background-color: whitesmoke;">
             <div class="row g-0">
                 <div class="col d-flex align-items-center justify-content-center">
-                    <h5 class="card-title fs-1 mt-2 fw-bolder">
+                    <h5 class="card-title fs-1 mt-2 fw-bolder text-center" style="width: 100%;">
                         ${friend.username}'s
-                        Statistics</h5>
+                        Statistics
+                    </h5>
                 </div>
                 <div class="col">
                     <div class="card-body">
