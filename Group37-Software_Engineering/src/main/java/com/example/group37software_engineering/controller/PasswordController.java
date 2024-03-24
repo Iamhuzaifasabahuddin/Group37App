@@ -38,8 +38,12 @@ public class PasswordController {
             redirectAttributes.addFlashAttribute("EmailError", "User not found");
             return "redirect:/login";
         }
-        passwordResetService.initiatePasswordReset(user);
-        redirectAttributes.addFlashAttribute("Message", "Reset password email sent");
+        if (user.getPasswordResetTokenExpiry() == null || user.getPasswordResetTokenExpiry().isBefore(LocalDateTime.now())){
+            passwordResetService.initiatePasswordReset(user);
+            redirectAttributes.addFlashAttribute("Message", "Reset password email sent");
+        } else {
+            redirectAttributes.addFlashAttribute("EmailError", "Reset password email already sent");
+        }
         return "redirect:/login";
     }
 

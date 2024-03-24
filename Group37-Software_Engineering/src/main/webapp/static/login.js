@@ -64,7 +64,7 @@ function validateAll(submit) {
 
 (() => {
     'use strict'
-    document.querySelector("button").addEventListener('click', event => {
+    document.querySelector('button[type="submit"]').addEventListener('click', event => {
         event.preventDefault();
         event.stopPropagation();
         validateAll(true);

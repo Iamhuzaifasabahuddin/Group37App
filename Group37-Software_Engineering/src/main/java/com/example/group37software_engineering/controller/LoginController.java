@@ -69,7 +69,11 @@ public class LoginController {
         Exception exception = (Exception) request.getSession().getAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
         if (exception instanceof InternalAuthenticationServiceException && exception.getMessage().equals("User email not verified")) {
             model.addAttribute("error", "Your email is not verified. Please verify your email before logging in.");
-        } else {
+        }
+        else if(exception instanceof InternalAuthenticationServiceException && exception.getMessage().equals("New verification email sent")){
+            model.addAttribute("error", "A new verification email has been sent");
+        }
+        else {
             model.addAttribute("error", "Invalid Credentials!");
         }
         return "Login/login";

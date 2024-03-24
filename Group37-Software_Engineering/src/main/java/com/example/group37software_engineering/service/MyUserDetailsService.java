@@ -14,6 +14,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +46,10 @@ public class MyUserDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException("User not found with username or email: " + usernameorEmail);
         }
         if (!user.getEmailVerificationStatus()) {
-            verificationService.initiateEmailVerification(user);
+            if(user.getEmailVerificationTokenExpiry().isBefore(LocalDateTime.now())){
+                verificationService.initiateEmailVerification(user);
+                throw new EmailNotVerifiedException("New verification email sent");
+            }
             throw new EmailNotVerifiedException("User email not verified");
         }
 
