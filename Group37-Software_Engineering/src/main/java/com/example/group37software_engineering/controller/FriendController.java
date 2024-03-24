@@ -76,7 +76,7 @@ public class FriendController {
         MyUser user = userRepository.findByUsername(principal.getName());
         int index = user.getFriends().indexOf(friend);
         LocalDateTime since = user.getFriendsSince().get(index);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM''yy");
         String formattedDate = since.format(formatter);
 
         model.addAttribute("friend", friend);

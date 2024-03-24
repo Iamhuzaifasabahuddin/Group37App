@@ -30,9 +30,9 @@
                             <p class="mb-1 fs-5"><strong>Username: </strong>@${friend.username}</p>
                             <hr>
                             <div class="d-flex justify-content-between">
-                                <p class="mb-1 fs-6"><strong>Joined: </strong>${DateJoined}</p>
+                                <p class="mb-1 fs-6"><strong>Joined: </strong> ${DateJoined} </p>
 <%--                                <p class="mb-1 fs-6"><strong>Friends: </strong>${friends}</p>--%>
-                                <p class="mb-1 fs-6"><strong>Friends Since: </strong>${since}</p>
+                                <p class="mb-1 fs-6"><strong>Friends Since: </strong>${since} </p>
                             </div>
                         </div>
                     </div>
@@ -200,7 +200,19 @@
     });
 </script>
 
-
+<style>
+    .card-details {
+        text-align: left;
+    }
+    @media (max-width: 768px) {
+        .card-body {
+            padding-left: 0 !important;
+        }
+        .card-details {
+            text-align: center;
+        }
+    }
+</style>
 </body>
 </html>
 
