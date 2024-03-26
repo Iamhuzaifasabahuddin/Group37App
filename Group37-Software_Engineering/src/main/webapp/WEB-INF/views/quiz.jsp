@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
     <title>Quiz</title>
-    <%@include file="includes/head.jsp"%>
+    <%@include file="includes/head.jsp" %>
 </head>
 <body>
 <br>
@@ -16,7 +16,7 @@
         <form:errors cssClass="error" path="questions">
             <div class="alert alert-warning alert-dismissible fade show" role="alert">
                 <i class="bi bi-exclamation-triangle-fill"></i>
-                    Please answer all the questions.
+                Please answer all the questions.
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         </form:errors>
@@ -35,7 +35,8 @@
         </c:forEach>
         </ol>
         <input type="hidden" name="courseId" value="${courseId}">
-        <input class="btn btn-primary d-block" type="submit" value="Submit" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        <input class="btn btn-primary d-block" type="submit" value="Submit" data-bs-toggle="modal"
+               data-bs-target="#staticBackdrop">
     </form:form>
     <br>
     <c:if test="${not empty score}">

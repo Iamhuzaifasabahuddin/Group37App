@@ -1,17 +1,20 @@
+<!DOCTYPE html>
 <html>
 <head>
     <title>Profile</title>
-    <%@include file="includes/head.jsp"%>
+    <%@include file="includes/head.jsp" %>
 </head>
-<%@include file="includes/navbar.jsp"%>
+<%@include file="includes/navbar.jsp" %>
 <style>
     .card-details {
         text-align: left;
     }
+
     @media (max-width: 768px) {
         .card-body {
             padding-left: 0 !important;
         }
+
         .card-details {
             text-align: center;
         }
@@ -22,10 +25,13 @@
     <div class="container-fluid" style="max-width: 80%;">
         <h1 class="text-center p-4">Profile Details</h1>
         <div class="d-flex justify-content-center">
-            <div class="card mb-3 text-center" style="max-width: 600px; background-color: var(--primary-lightest); border: 0;">
+            <div class="card mb-3 text-center"
+                 style="max-width: 600px; background-color: var(--primary-lightest); border: 0;">
                 <div class="row g-0 align-items-center">
                     <div class="col-md-4 d-flex justify-content-center">
-                        <img src="https://eu.ui-avatars.com/api/?name=${(user.firstname)}+${(user.lastname)}&size=200" alt="User Initials Image" class="rounded-circle" style="height: 8.5rem; width: 8.5rem; object-fit: cover; border: 2px solid var(--secondary-dark);"/>
+                        <img src="https://eu.ui-avatars.com/api/?name=${(user.firstname)}+${(user.lastname)}&size=200"
+                             alt="User Initials Image" class="rounded-circle"
+                             style="height: 8.5rem; width: 8.5rem; object-fit: cover; border: 2px solid var(--secondary-dark);"/>
                     </div>
                     <div class="col-md-8 ps-2">
                         <div class="card-body card-details">
@@ -86,7 +92,8 @@
                                 <i class="bi bi-trophy-fill"></i>
                                 <strong>League:</strong>
                                 <div class="league">
-                                    <a data-toggle="tooltip" title="<img src='${user.league.imageUrl}' class='img-fluid' alt='League' style='height: 9em; width: 9em; object-fit: cover;'/>">${user.getLeague().getTitle()}</a>
+                                    <a data-toggle="tooltip"
+                                       title="<img src='${user.league.imageUrl}' class='img-fluid' alt='League' style='height: 9em; width: 9em; object-fit: cover;'/>">${user.getLeague().getTitle()}</a>
                                 </div>
                                 <%--                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#league">--%>
                                 <%--                                    ${user.getLeague().getTitle()}--%>
@@ -124,7 +131,9 @@
                                 <div class="card-body" style="height: 400px">
                                     <h4 class="card-title ps-2"><strong>${achieved.getAchievement().title}</strong></h4>
                                     <div class="d-flex justify-content-center align-items-center" style="height: 60%;">
-                                        <img src="${achieved.getAchievement().getImageUrl()}" alt="${achieved.getAchievement().title}" class="img-fluid" style="max-width: 100%; max-height: 100%;" width="200px" height="200px">
+                                        <img src="${achieved.getAchievement().getImageUrl()}"
+                                             alt="${achieved.getAchievement().title}" class="img-fluid"
+                                             style="max-width: 100%; max-height: 100%;" width="200px" height="200px">
                                     </div>
                                     <div class="d-flex justify-content-between mt-2">
                                         <div class="ps-2">
@@ -135,7 +144,8 @@
                                         </div>
                                     </div>
                                     <div class="card-footer border-dark" style="color: black">
-                                        <h6><i class="bi bi-unlock"></i> Achieved at ${achieved.timeAchieved}, ${achieved.dateAchieved}</h6>
+                                        <h6><i class="bi bi-unlock"></i> Achieved
+                                            at ${achieved.timeAchieved}, ${achieved.dateAchieved}</h6>
                                     </div>
                                 </div>
                             </div>
@@ -148,7 +158,9 @@
 </section>
 
 <div class="text-center">
-    <button class="btn btn-primary m-2 col-4 mx-auto" type="button" data-bs-toggle="collapse" data-bs-target="#locked-achievements" aria-expanded="false" aria-controls="collapseExample" onclick="toggleIcon()">
+    <button class="btn btn-primary m-2 col-4 mx-auto" type="button" data-bs-toggle="collapse"
+            data-bs-target="#locked-achievements" aria-expanded="false" aria-controls="collapseExample"
+            onclick="toggleIcon()">
         View more <br/>
         <i id="toggle-icon" class="bi bi-plus-circle-fill"></i>
     </button>
@@ -180,7 +192,9 @@
                                 <div class="card-body" style="height: 400px;">
                                     <h4 class="card-title ps-2"><strong>${notachieved.title}</strong></h4>
                                     <div class="d-flex justify-content-center align-items-center" style="height: 60%;">
-                                        <img src="https://images.vexels.com/media/users/3/132074/isolated/preview/0117cb0129593faa02646a8277ca80e3-security-lock-icon-by-vexels.png" alt="Locked" class="img-fluid" style="height: 100%; max-width: 100%; object-fit: cover;">
+                                        <img src="https://images.vexels.com/media/users/3/132074/isolated/preview/0117cb0129593faa02646a8277ca80e3-security-lock-icon-by-vexels.png"
+                                             alt="Locked" class="img-fluid"
+                                             style="height: 100%; max-width: 100%; object-fit: cover;">
                                             <%--                                        <img src="${notachieved.imageUrl}" alt="Locked" class="img-fluid" style="height: 100%; max-width: 100%; object-fit: cover;">--%>
                                     </div>
                                     <div class="d-flex justify-content-between mt-2">
@@ -214,7 +228,7 @@
             <div class="card-body">
                 <blockquote class="blockquote mb-0 text-center">
                     <p>" ${Quote} "
-                    ~ ${Author}
+                        ~ ${Author}
                     </p>
                 </blockquote>
             </div>
@@ -223,7 +237,7 @@
 </section>
 
 <footer class="mt-4">
-    <%@include file="includes/footer.jsp"%>
+    <%@include file="includes/footer.jsp" %>
 </footer>
 </body>
 </html>

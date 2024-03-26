@@ -6,7 +6,7 @@
     <title>Login</title>
     <script src="static/modal.js" defer></script>
     <script src="static/login.js" defer></script>
-    <%@include file="../includes/head.jsp"%>
+    <%@include file="../includes/head.jsp" %>
 </head>
 <body>
 <div class="slant"></div>
@@ -34,14 +34,16 @@
             <h1>Welcome to our website!</h1>
             <form action="/login" method="post" class="mb-2" novalidate>
                 <div class="form-floating mb-3">
-                    <input class="form-control" id="username-email" name="username-email" placeholder="Username or email" required>
+                    <input class="form-control" id="username-email" name="username-email"
+                           placeholder="Username or email" required>
                     <label for="username-email" class="form-label">Username or email</label>
                     <div class="invalid-feedback username-email">
                         Username/Email cannot be empty!
                     </div>
                 </div>
                 <div class="form-floating mb-3">
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Password"
+                           required>
                     <label for="password" class="form-label">Password</label>
                     <div class="invalid-feedback password">
                         Password cannot be empty!
@@ -58,7 +60,7 @@
                 <c:if test="${not empty Message}">
                     <div class="alert alert-success alert-dismissible fade show mb-3" role="alert">
                         <strong><i class="bi bi-check-circle-fill"></i>
-                        ${Message}
+                                ${Message}
                         </strong>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
@@ -85,7 +87,8 @@
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
             </form>
             <p>New user? <a href="${pageContext.request.contextPath}/NewUser">Register Here</a></p>
-            <p>Forgot your password? <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">Reset it here</a>.</p>
+            <p>Forgot your password? <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">Reset it here</a>.
+            </p>
 
         </div>
     </div>

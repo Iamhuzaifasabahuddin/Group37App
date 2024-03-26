@@ -1,16 +1,16 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <%@include file="includes/head.jsp"%>
+    <%@include file="includes/head.jsp" %>
     <script type="text/javascript" src="static/leaderboard.js" defer></script>
     <meta charset="ISO-8859-1">
     <title>Leaderboard</title>
 </head>
-<%@include file="includes/navbar.jsp"%>
+<%@include file="includes/navbar.jsp" %>
 <body>
 <div class="tab-navigation">
     <ul class="nav nav-tabs justify-content-center p-2 border-dark">
@@ -212,10 +212,11 @@
             </thead>
             <tbody>
             <c:forEach var="player" items="${global}" varStatus="status">
-                <tr <c:if test="${status.index == 0}">class="highlight-gold"</c:if>
-                    <c:if test="${status.index == 1}">class="highlight-silver"</c:if>
-                    <c:if test="${status.index == 2}">class="highlight-bronze"</c:if>
-                    <c:if test="${player.username == user.username}">class="highlight-user"</c:if>>
+                <tr
+                        <c:if test="${status.index == 0}">class="highlight-gold"</c:if>
+                        <c:if test="${status.index == 1}">class="highlight-silver"</c:if>
+                        <c:if test="${status.index == 2}">class="highlight-bronze"</c:if>
+                        <c:if test="${player.username == user.username}">class="highlight-user"</c:if>>
                     <td>
                         <c:out value="${status.index + 1}"/><c:out value="${suffix[status.index]}"/>.
                     </td>
@@ -241,10 +242,11 @@
             </thead>
             <tbody>
             <c:forEach var="player" items="${friends}" varStatus="status">
-                <tr <c:if test="${status.index == 0}">class="highlight-gold"</c:if>
-                    <c:if test="${status.index == 1}">class="highlight-silver"</c:if>
-                    <c:if test="${status.index == 2}">class="highlight-bronze"</c:if>
-                    <c:if test="${player.username == user.username}">class="highlight-user"</c:if>>
+                <tr
+                        <c:if test="${status.index == 0}">class="highlight-gold"</c:if>
+                        <c:if test="${status.index == 1}">class="highlight-silver"</c:if>
+                        <c:if test="${status.index == 2}">class="highlight-bronze"</c:if>
+                        <c:if test="${player.username == user.username}">class="highlight-user"</c:if>>
                     <td>
                         <c:out value="${status.index + 1}"/><c:out value="${suffix[status.index]}"/>.
                     </td>
@@ -261,7 +263,7 @@
     setDefaultTab(userLeague);
 </script>
 <footer>
-    <%@include file="includes/footer.jsp"%>
+    <%@include file="includes/footer.jsp" %>
 </footer>
 </body>
 <style>
@@ -269,9 +271,11 @@
         position: relative;
         min-height: 100%;
     }
+
     body {
         margin-bottom: 150px;
     }
+
     footer {
         position: absolute;
         bottom: 0;

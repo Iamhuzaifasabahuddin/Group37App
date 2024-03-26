@@ -6,7 +6,7 @@
 <head>
     <title>Registration</title>
     <script src="static/registration.js" defer></script>
-    <%@include file="../includes/head.jsp"%>
+    <%@include file="../includes/head.jsp" %>
 </head>
 <body>
 <div class="slant"></div>
@@ -60,7 +60,8 @@
                         <div class="input-group mb-3 has-validation">
                             <span class="input-group-text">@</span>
                             <div class="form-floating">
-                                <form:input class="form-control" path="username" placeholder="Username" required="true"/>
+                                <form:input class="form-control" path="username" placeholder="Username"
+                                            required="true"/>
                                 <form:label path="username" class="form-label">Username</form:label>
                                 <form:errors path="username"/>
                             </div>
@@ -69,7 +70,8 @@
                     </div>
                     <div class="col-lg">
                         <div class="form-floating mb-3">
-                            <form:input class="form-control" path="email" placeholder="Email" type="email" required="true"/>
+                            <form:input class="form-control" path="email" placeholder="Email" type="email"
+                                        required="true"/>
                             <form:label path="email" class="form-label">Email</form:label>
                             <form:errors path="email"/>
                             <div class="invalid-feedback email"></div>
@@ -79,7 +81,8 @@
                 <div class="row">
                     <div class="col-sm">
                         <div class="form-floating mb-3">
-                            <form:input class="form-control" path="password" placeholder="Password" type="password" required="true"/>
+                            <form:input class="form-control" path="password" placeholder="Password" type="password"
+                                        required="true"/>
                             <form:label path="password" class="form-label">Password</form:label>
                             <form:errors path="password"/>
                             <div class="invalid-feedback password"></div>
@@ -87,7 +90,8 @@
                     </div>
                     <div class="col-sm">
                         <div class="form-floating mb-3">
-                            <form:input class="form-control" path="confirmPassword" placeholder="Confirm password" type="password" required="true"/>
+                            <form:input class="form-control" path="confirmPassword" placeholder="Confirm password"
+                                        type="password" required="true"/>
                             <form:label path="confirmPassword" class="form-label">Confirm password</form:label>
                             <form:errors path="confirmPassword"/>
                             <div class="invalid-feedback confirmPassword"></div>
@@ -99,7 +103,7 @@
                     Register
                 </button>
             </form:form>
-<%--            <p>Already have an account? <a href="${pageContext.request.contextPath}/login">Log In Here</a></p>--%>
+            <%--            <p>Already have an account? <a href="${pageContext.request.contextPath}/login">Log In Here</a></p>--%>
         </div>
     </div>
 </div>

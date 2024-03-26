@@ -3,7 +3,9 @@
     <nav class="navbar p-darker">
         <div class="container-fluid">
             <div class="d-flex align-items-center gap-2">
-                <button class="navbar-toggler navbar-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler navbar-dark" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <span class="navbar-brand mb-0 h1 col-2 s-light">IBM SkillsBuild</span>
@@ -53,8 +55,10 @@
                         <a class="nav-link s-light" href="/leaderboard">Leaderboard</a>
                     </li>
                     <li class="nav-item d-flex justify-content-center align-items-center dropdown py-3">
-                        <i id="bell" class="bi bi-bell s-light" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 1.5rem;"></i>
-                        <span id="bell-badge" class="position-absolute top-1 start-100 translate-middle badge rounded-pill bg-danger d-none">0</span>
+                        <i id="bell" class="bi bi-bell s-light" data-bs-toggle="dropdown" aria-expanded="false"
+                           style="font-size: 1.5rem;"></i>
+                        <span id="bell-badge"
+                              class="position-absolute top-1 start-100 translate-middle badge rounded-pill bg-danger d-none">0</span>
                         <div class="dropdown-menu dropdown-menu-end mt-3">
                             <h6 class="px-3 mt-2">Notifications</h6>
                             <hr class="mt-2 mb-0 border border-black"/>
@@ -79,10 +83,12 @@
                             <div id="notification-footer" class="d-flex flex-column">
                                 <hr class="m-0 border border-black"/>
                                 <div class="d-flex justify-content-between gap-2">
-                                    <button class="py-0 px-3 mt-2 btn btn-link text-decoration-none" id="mark-read"><i class="bi bi-envelope-open text-black"></i>
+                                    <button class="py-0 px-3 mt-2 btn btn-link text-decoration-none" id="mark-read"><i
+                                            class="bi bi-envelope-open text-black"></i>
                                         Mark all as read
                                     </button>
-                                    <button class="py-0 px-3 mt-2 btn btn-link text-decoration-none" id="clear-notifications"><i class="bi bi-trash3 text-black"></i>
+                                    <button class="py-0 px-3 mt-2 btn btn-link text-decoration-none"
+                                            id="clear-notifications"><i class="bi bi-trash3 text-black"></i>
                                         Clear all
                                     </button>
                                 </div>
@@ -91,8 +97,11 @@
                     </li>
                     <li class="nav-item d-flex align-items-center ps-2" id="profile-circle">
                         <div class="btn-group">
-                            <button style="background-color: var(--primary-darker);border: 0;" type="button" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
-                                <img src="https://eu.ui-avatars.com/api/?name=${(user.firstname)}+${(user.lastname)}&size=200" alt="User Initials Image" class="rounded-circle p-0 m-0" style="height: 2rem; width: 2rem;"/>
+                            <button style="background-color: var(--primary-darker);border: 0;" type="button"
+                                    data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
+                                <img src="https://eu.ui-avatars.com/api/?name=${(user.firstname)}+${(user.lastname)}&size=200"
+                                     alt="User Initials Image" class="rounded-circle p-0 m-0"
+                                     style="height: 2rem; width: 2rem;"/>
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end mt-4 p-darker border-1 border-white">
                                 <li><a class="dropdown-item s-light" href="/profile">Profile</a></li>

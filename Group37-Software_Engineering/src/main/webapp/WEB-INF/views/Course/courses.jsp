@@ -1,12 +1,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
 <html>
 <head>
     <title>Courses</title>
-    <%@include file="../includes/head.jsp"%>
+    <%@include file="../includes/head.jsp" %>
     <script type="text/javascript" src="static/courses.js" defer></script>
 </head>
 <body>
-<%@include file="../includes/navbar.jsp"%>
+<%@include file="../includes/navbar.jsp" %>
 
 <div class="p-4">
     <h1 class="text-center my-3">Welcome, ${user.username}!</h1>
@@ -71,21 +72,28 @@
                     <div class="card-body">
                         <h4 class="card-title pb-1">${course.getTitle()}</h4>
                         <p class="card-subtitle s-light p-darker rounded-pill d-inline px-2 text-uppercase category">${course.getCategory()}</p>
-                        <a class="ratings review-course-btn" href="#" id="ratingLink" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" data-course-id="${course.getId()}" data-course-title="${course.getTitle()}" aria-controls="offcanvasExample" style="text-decoration-color: var(--secondary-dark)">
+                        <a class="ratings review-course-btn" href="#" id="ratingLink" data-bs-toggle="offcanvas"
+                           data-bs-target="#offcanvasExample" data-course-id="${course.getId()}"
+                           data-course-title="${course.getTitle()}" aria-controls="offcanvasExample"
+                           style="text-decoration-color: var(--secondary-dark)">
                             <p class="card-subtitle pt-2 text-uppercase fw-bold" style="color: var(--secondary-dark);">
                                 <i class="bi bi-star-fill" style="color: #fcc200"></i>
                                     ${course.getAverageRating()}
                             </p>
                         </a>
                         <div class="mt-3 d-flex gap-3">
-                            <p class="card-subtitle text-body-secondary"><i class="bi bi-hourglass-split"></i> ${Math.round(course.getDuration())} hours</p>
-                            <p class="card-subtitle text-body-secondary"><i class="bi bi-award"></i> ${Math.round(course.getDuration()) * 100} points</p>
+                            <p class="card-subtitle text-body-secondary"><i
+                                    class="bi bi-hourglass-split"></i> ${Math.round(course.getDuration())} hours</p>
+                            <p class="card-subtitle text-body-secondary"><i
+                                    class="bi bi-award"></i> ${Math.round(course.getDuration()) * 100} points</p>
                         </div>
                     </div>
-                    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+                    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample"
+                         aria-labelledby="offcanvasExampleLabel">
                         <div class="offcanvas-header">
                             <h5 class="offcanvas-title" id="offcanvasExampleLabel"></h5>
-                            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                                    aria-label="Close"></button>
                         </div>
                         <div class="offcanvas-body">
                             <div id="commentsContainer">
@@ -95,14 +103,17 @@
                         </div>
                     </div>
 
-                    <button class="btn btn-primary rounded-0 rounded-bottom" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="showConfirmationBox(${course.getId()}, `${course.getTitle()}`)">
+                    <button class="btn btn-primary rounded-0 rounded-bottom" type="button" data-bs-toggle="modal"
+                            data-bs-target="#staticBackdrop"
+                            onclick="showConfirmationBox(${course.getId()}, `${course.getTitle()}`)">
                         Enroll
                     </button>
                 </div>
             </c:forEach>
         </div>
     </section>
-    <div class="modal fade " id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal fade " id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -122,7 +133,7 @@
     </div>
 </div>
 <footer class="mt-4">
-    <%@include file="../includes/footer.jsp"%>
+    <%@include file="../includes/footer.jsp" %>
 </footer>
 </body>
 
@@ -131,9 +142,11 @@
         position: relative;
         min-height: 100%;
     }
+
     body {
         margin-bottom: 150px;
     }
+
     footer {
         position: absolute;
         bottom: 0;
