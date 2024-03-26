@@ -207,13 +207,15 @@
 
 <section>
     <div class="p-4">
-        <div class="card mx-auto m-2" style="width: 24rem;">
+        <div class="card mx-auto m-2" style="width: 30rem;">
             <div class="card-header text-center border-dark">
                 Quote of the day <i class="bi bi-chat-quote"></i>
             </div>
             <div class="card-body">
                 <blockquote class="blockquote mb-0 text-center">
-                    <p>${Quote}</p>
+                    <p>" ${Quote} "
+                    ~ ${Author}
+                    </p>
                 </blockquote>
             </div>
         </div>

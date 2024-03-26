@@ -49,11 +49,21 @@ git push origin your-branch-name
 
 ## Generating keys
 * You will need to create a new **keys.jsk** file to be able to run the application
-* Copy & paste the code below to your IDE terminal and follow the info along as instructed by the commandline
+
 ``` java 
 keytool -genkeypair -alias tomcat -keyalg RSA -keystore ./keys.jks
 ```
+* To generate Keys paste the code above to your IDE terminal and follow the instructions ensure to have the password as **123456** otherwise it wont work properly.
+
+![alt text](image.png)
+
 * After you are done creating put the keys.jks file from the your application directory i.e **Group37-Software_Engineering** to **Group37-Software_Engineering/src/main/resources** the resources directory and now you have to configure your **database**.
+
+**Example Below:**
+
+![alt text](image-1.png) Move from here to 
+
+![alt text](image-2.png)
 
 * ## Connecting to AWS database
 * Configuration should be available in the **application.properties of the project**

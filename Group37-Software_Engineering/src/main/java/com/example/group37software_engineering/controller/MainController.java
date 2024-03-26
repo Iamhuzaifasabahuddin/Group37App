@@ -2,6 +2,8 @@ package com.example.group37software_engineering.controller;
 
 import com.example.group37software_engineering.model.*;
 import com.example.group37software_engineering.repo.*;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -168,49 +170,50 @@ public class MainController {
         model.addAttribute("TotalAchievements", achievementRepository.count());
         model.addAttribute("friends", user.getFriends().size());
         model.addAttribute("DateJoined", user.getDateJoined());
-//        try {
-//            String endpoint1 = "https://api.api-ninjas.com/v1/quotes?category=knowledge";
-//            String endpoint2 = "https://api.api-ninjas.com/v1/quotes?category=dreams";
-//            String endpoint3 = "https://api.api-ninjas.com/v1/quotes?category=inspirational";
-//            String endpoint4 = "https://api.api-ninjas.com/v1/quotes?category=success";
-//            int randomInt = new Random().nextInt(4);
-//            URL url;
-//
-//            switch (randomInt) {
-//                case 0:
-//                    url = new URL(endpoint1);
-//                    break;
-//                case 1:
-//                    url = new URL(endpoint2);
-//                    break;
-//                case 2:
-//                    url = new URL(endpoint3);
-//                    break;
-//                default:
-//                    url = new URL(endpoint4);
-//                    break;
-//            }
-//            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-//            connection.setRequestMethod("GET");
-//            connection.setRequestProperty("X-Api-Key", "movMhmJN0D6VHkp9D7bWbQ==6EG59VfmVFu6L3Hb");
-//            int responseCode = connection.getResponseCode();
-//            System.out.println("Response Code: " + responseCode);
-//            if (responseCode == HttpURLConnection.HTTP_OK) {
-//                InputStream responseStream = connection.getInputStream();
-//                ObjectMapper mapper = new ObjectMapper();
-//                JsonNode root = mapper.readTree(responseStream);
-//                String quote = root.get(0).get("quote").asText();
-//                model.addAttribute("Quote", quote);
-//                responseStream.close();
-//            } else {
-//                System.out.println("Failed to fetch quote. Response code: " + responseCode);
-//                model.addAttribute("Quote", "Failed to fetch quote");
-//            }
-//            connection.disconnect();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-        model.addAttribute("Quote", "Implement it after finalization");
+        try {
+            String endpoint1 = "https://api.api-ninjas.com/v1/quotes?category=knowledge";
+            String endpoint2 = "https://api.api-ninjas.com/v1/quotes?category=dreams";
+            String endpoint3 = "https://api.api-ninjas.com/v1/quotes?category=inspirational";
+            String endpoint4 = "https://api.api-ninjas.com/v1/quotes?category=success";
+            int randomInt = new Random().nextInt(4);
+            URL url;
+
+            switch (randomInt) {
+                case 0:
+                    url = new URL(endpoint1);
+                    break;
+                case 1:
+                    url = new URL(endpoint2);
+                    break;
+                case 2:
+                    url = new URL(endpoint3);
+                    break;
+                default:
+                    url = new URL(endpoint4);
+                    break;
+            }
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+            connection.setRequestProperty("X-Api-Key", "movMhmJN0D6VHkp9D7bWbQ==6EG59VfmVFu6L3Hb");
+            int responseCode = connection.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                InputStream responseStream = connection.getInputStream();
+                ObjectMapper mapper = new ObjectMapper();
+                JsonNode root = mapper.readTree(responseStream);
+                System.out.println(root);
+                String quote = root.get(0).get("quote").asText();
+                String author = root.get(0).get("author").asText();
+                model.addAttribute("Quote", quote);
+                model.addAttribute("Author", author);
+                responseStream.close();
+            } else {
+                System.out.println("Failed to fetch quote. Response code: " + responseCode);
+                model.addAttribute("Quote", "Failed to fetch quote");
+            }
+            connection.disconnect();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         model.addAttribute("Points", user.getPoints());
         model.addAttribute("league", user.getLeague().getImageUrl());
 
