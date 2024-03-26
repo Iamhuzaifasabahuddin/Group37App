@@ -37,6 +37,9 @@ public class CommentController {
     @Autowired
     private AchievementController achievementController;
 
+    @Autowired
+    private LeaderboardController leaderboardController;
+
     /**
      * Endpoint to add a comment to a course.
      *
@@ -67,6 +70,7 @@ public class CommentController {
         userCourseRepository.save(userCourse);
         userCommentRepository.save(userComment);
         achievementController.ReviewConqueror(user);
+        leaderboardController.updateleagues(user);
         return "redirect:/dashboard";
     }
 }

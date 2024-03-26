@@ -29,6 +29,12 @@ public class AjaxFriendController {
     @Autowired
     private NotificationRepository notificationRepository;
 
+    @Autowired
+    private AchievementController achievementController;
+
+    @Autowired
+    private LeaderboardController leaderboardController;
+
     /**
      * Handles the "/sendRequest" endpoint to send a friend request.
      *
@@ -81,7 +87,8 @@ public class AjaxFriendController {
             receiver.getFriends().add(sender);
             sender.getFriendsSince().add(LocalDateTime.now());
             receiver.getFriendsSince().add(LocalDateTime.now());
-
+            achievementController.DoubleTrouble(sender);
+            achievementController.DoubleTrouble(receiver);
             Notification n1 = new Notification();
             n1.setDescription("You are now friends with " + senderUsername + "!");
             n1.setPageLink("/friends");
@@ -142,7 +149,6 @@ public class AjaxFriendController {
         Gson gson = new GsonBuilder()
             .excludeFieldsWithoutExposeAnnotation()
             .create();
-
         List<MyUser> usersAll = (List<MyUser>) userRepository.findAll();
         Dictionary<String, List<String>> mutual = new Hashtable<>();
         for (MyUser user: usersAll) {
@@ -155,7 +161,6 @@ public class AjaxFriendController {
             }
             mutual.put(user.getUsername(), tempList);
         }
-
         return ResponseEntity.ok().body("{\"friends\":" + gson.toJson(friends) + ", \"users\":" + gson.toJson(users) + ", \"senderRequests\":" + gson.toJson(senderRequests) + ", \"mutual\":" + gson.toJson(mutual) + ", \"receiverRequests\":" + gson.toJson(receiverRequests) + "}");
     }
 

@@ -13,9 +13,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.StreamSupport;
 
 /**
@@ -154,6 +152,7 @@ public class AchievementController {
             userAchievement.setTimeAchieved();
             user.setPoints(user.getPoints() + achievement.getPoints());
             userRepository.save(user);
+
             userAchievementRepository.save(userAchievement);
             setNotifications(user, achievement);
         }
@@ -178,6 +177,7 @@ public class AchievementController {
             userAchievement.setTimeAchieved();
             user.setPoints(user.getPoints() + achievement.getPoints());
             userRepository.save(user);
+
             userAchievementRepository.save(userAchievement);
             setNotifications(user, achievement);
         }
@@ -211,6 +211,7 @@ public class AchievementController {
             userRepository.save(user);
             userAchievementRepository.save(userAchievement);
             setNotifications(user, achievement);
+
         }
     }
 
@@ -242,6 +243,7 @@ public class AchievementController {
             userRepository.save(user);
             userAchievementRepository.save(userAchievement);
             setNotifications(user, achievement);
+
         }
     }
 
@@ -273,6 +275,7 @@ public class AchievementController {
             userRepository.save(user);
             userAchievementRepository.save(userAchievement);
             setNotifications(user, achievement);
+
         }
     }
 
@@ -304,6 +307,7 @@ public class AchievementController {
             userRepository.save(user);
             userAchievementRepository.save(userAchievement);
             setNotifications(user, achievement);
+
         }
     }
 
@@ -334,6 +338,7 @@ public class AchievementController {
             userRepository.save(user);
             userAchievementRepository.save(userAchievement);
             setNotifications(user, achievement);
+
         }
     }
 
@@ -377,6 +382,7 @@ public class AchievementController {
             userRepository.save(user);
             userAchievementRepository.save(userAchievement);
             setNotifications(user, achievement);
+
         }
     }
 
@@ -408,6 +414,7 @@ public class AchievementController {
             userRepository.save(user);
             userAchievementRepository.save(userAchievement);
             setNotifications(user, achievement);
+
         }
     }
 
@@ -439,6 +446,7 @@ public class AchievementController {
             userRepository.save(user);
             userAchievementRepository.save(userAchievement);
             setNotifications(user, achievement);
+
         }
     }
 
@@ -482,6 +490,7 @@ public class AchievementController {
             userRepository.save(user);
             userAchievementRepository.save(userAchievement);
             setNotifications(user, achievement);
+
         }
     }
 
@@ -525,6 +534,7 @@ public class AchievementController {
             userRepository.save(user);
             userAchievementRepository.save(userAchievement);
             setNotifications(user, achievement);
+
         }
     }
 
@@ -551,6 +561,7 @@ public class AchievementController {
             userRepository.save(user);
             userAchievementRepository.save(userAchievement);
             setNotifications(user, achievement);
+
         }
 
     }
@@ -578,6 +589,7 @@ public class AchievementController {
             userRepository.save(user);
             userAchievementRepository.save(userAchievement);
             setNotifications(user, achievement);
+
         }
     }
 
@@ -607,6 +619,7 @@ public class AchievementController {
             userRepository.save(user);
             userAchievementRepository.save(userAchievement);
             setNotifications(user, achievement);
+
         }
     }
 

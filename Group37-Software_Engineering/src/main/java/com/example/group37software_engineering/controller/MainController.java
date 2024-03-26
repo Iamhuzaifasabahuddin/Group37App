@@ -54,6 +54,9 @@ public class MainController {
     @Autowired
     private UserCommentRepository userCommentRepository;
 
+    @Autowired
+    private LeaderboardController leaderboardController;
+
     /**
      * Display the welcome page with top 3 courses.
      *
@@ -120,6 +123,7 @@ public class MainController {
             courseRepository.save(course);
         }
         achievementController.Mirage(user);
+        leaderboardController.updateleagues(user);
         if (courseList.isEmpty()) {
             model.addAttribute("error", "You have no courses.");
         } else {

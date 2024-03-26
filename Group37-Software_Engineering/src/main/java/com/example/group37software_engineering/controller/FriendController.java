@@ -35,9 +35,6 @@ public class FriendController {
     private FriendRequestRepository requestRepository;
 
     @Autowired
-    private AchievementController achievementController;
-
-    @Autowired
     private UserCourseRepository userCourseRepository;
 
     @Autowired
@@ -58,7 +55,6 @@ public class FriendController {
         List<FriendRequest> receiverRequests = requestRepository.findByReceiverUsername(principal.getName());
         model.addAttribute("receiverRequests", receiverRequests);
         model.addAttribute("user", userRepository.findByUsername(principal.getName()));
-        achievementController.DoubleTrouble(userRepository.findByUsername(principal.getName()));
         return "Friends/friends";
     }
 
