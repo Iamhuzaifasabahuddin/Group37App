@@ -38,15 +38,15 @@
 
             <li class="list-group-friends" id="search-content">
                 <div class="search-container d-flex justify-content-center align-items-center">
-                    <div class="form-floating mb-3" style="width: 50%">
-                        <input type="text" id="searchTerm" name="SearchTerm" placeholder="Search Friend" required
-                               class="form-control"></input>
-                        <label for="searchTerm" class="form-label"><strong>Search Friend:</strong></label>
-                        <div class="invalid-feedback searchTerm"></div>
+                    <div class="input-group mb-3" style="width: 50%">
+                        <span class="input-group-text"><i class="bi bi-search"></i></span>
+                        <div class="form-floating">
+                            <input type="text" id="searchTerm" name="SearchTerm" placeholder="Search Friend" required
+                                   class="form-control">
+                            <label for="searchTerm" class="form-label"><strong>Search Friend</strong></label>
+                            <div class="invalid-feedback searchTerm"></div>
+                        </div>
                     </div>
-                    <button id="searchButton" type="submit" class="btn btn-primary ms-2 mb-3" style="height: 55px;">
-                        Search
-                    </button>
                 </div>
                 <div id="search-results-container"></div>
             </li>
@@ -74,21 +74,6 @@
                             <button class="btn btn-primary pull-right" name="decision" value="decline"
                                     data-sender="${request.getSender().getUsername()}">Decline Request
                             </button>
-                        </div>
-
-                        <div class="modal" id="friend-profile-${loop.index}">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content mx-auto" style="max-width: max-content">
-                                    <div class="modal-header m-0"
-                                         style="background-color: var(--primary-darker); color: var(--secondary-light)">
-                                        <h4 class="modal-title">${request.getSender().getUsername()}</h4>
-                                    </div>
-                                    <div class="modal-body mx-auto" style="background-color: var(--primary-lighter)">
-                                        <h5>${request.getSender().getFirstname()} ${request.getSender().getLastname()}</h5>
-                                        <h5>${fn:length(request.getSender().getFriends())} Friends</h5>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
 
                     </div>

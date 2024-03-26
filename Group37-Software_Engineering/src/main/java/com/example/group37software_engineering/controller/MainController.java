@@ -86,15 +86,9 @@ public class MainController {
             model.addAttribute("author", author);
         }
 
-        List<UserComment> rating = userCommentRepository.findTop5ByCommentReview();
         List<Course> popularity = userCourseRepository.findTop5CoursesWithHighestUsers();
         List<UserComment> top5Comments = userCommentRepository.findTop5ByCommentReview();
-        if (!rating.isEmpty()) {
-            model.addAttribute("top5Courses", rating);
-
-        } else {
-            model.addAttribute("top5Courses", popularity);
-        }
+        model.addAttribute("top5Courses", popularity);
         model.addAttribute("top5Comments", top5Comments);
         return "welcome";
     }
@@ -111,8 +105,6 @@ public class MainController {
     public String getDashboard(Model model, Principal principal) {
         MyUser user = userRepository.findByUsername(principal.getName());
         model.addAttribute("user", user);
-        model.addAttribute("Rank", addRankSuffix(getRank(principal.getName())));
-        model.addAttribute("league", user.getLeague().getImageUrl());
         List<UserCourses> userCourses = userCourseRepository.findByUser(user);
         List<Course> courseList = userCourses.stream()
                 .map(UserCourses::getCourse)

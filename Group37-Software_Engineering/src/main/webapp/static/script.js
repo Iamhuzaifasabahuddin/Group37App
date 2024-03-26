@@ -141,6 +141,11 @@ function fetchComments(courseId, courseTitle) {
         success: function (response) {
             const parsedData = JSON.parse(response);
             commentsContainer.innerHTML = '';
+            if (parsedData.comments.length === 0) {
+                const noComments = document.createElement('div');
+                noComments.textContent = 'No comments yet, be the first to review this course!';
+                commentsContainer.appendChild(noComments);
+            }
             for (const comment of parsedData.comments) {
                 // Create a new div for each comment
                 const commentDiv = document.createElement('div');
@@ -205,3 +210,6 @@ $(document).ready(function () {
         fetchComments(courseId, courseTitle);
     });
 });
+
+const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))

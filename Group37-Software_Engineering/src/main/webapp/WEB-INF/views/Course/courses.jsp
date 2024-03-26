@@ -72,13 +72,14 @@
                     <div class="card-body">
                         <h4 class="card-title pb-1">${course.getTitle()}</h4>
                         <p class="card-subtitle s-light p-darker rounded-pill d-inline px-2 text-uppercase category">${course.getCategory()}</p>
-                        <a class="ratings review-course-btn" href="#" id="ratingLink" data-bs-toggle="offcanvas"
+                        <a class="ratings review-course-btn text-decoration-none text-dark-emphasis" href="#" id="ratingLink" data-bs-toggle="offcanvas"
                            data-bs-target="#offcanvasExample" data-course-id="${course.getId()}"
                            data-course-title="${course.getTitle()}" aria-controls="offcanvasExample"
                            style="text-decoration-color: var(--secondary-dark)">
-                            <p class="card-subtitle pt-2 text-uppercase fw-bold" style="color: var(--secondary-dark);">
+                            <p class="card-subtitle pt-2 fw-bold text-dark-emphasis">
                                 <i class="bi bi-star-fill" style="color: #fcc200"></i>
-                                    ${course.getAverageRating()}
+                                    ${course.getAverageRating() > 0 ? course.getAverageRating() : "No reviews"}
+                                <i data-bs-toggle="tooltip" data-bs-title="Click me!" data-bs-placement="bottom" class="text-dark-emphasis bi bi-info-circle-fill"></i>
                             </p>
                         </a>
                         <div class="mt-3 d-flex gap-3">

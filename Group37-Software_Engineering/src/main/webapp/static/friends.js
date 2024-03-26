@@ -146,7 +146,7 @@ function getNewFriends(decision) {
                         <img src="https://eu.ui-avatars.com/api/?name=${request.receiver.firstname}+${request.receiver.lastname}&size=250"
                              alt="User Initials Image" class="rounded-circle"/>
                             <div>
-                            <h5><a href="#" class="profile-link">${request.receiver.username}</a></h5>
+                            <h5><a class="profile-link">${request.receiver.username}</a></h5>
                             <div class="dropdown">
                             <a href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: slategray; text-decoration: none;">
                             ${mutualFriends[request.receiver.username].length === 0 ? "No" : mutualFriends[request.receiver.username].length} Mutual Friends
@@ -171,7 +171,7 @@ function getNewFriends(decision) {
                         <img src="https://eu.ui-avatars.com/api/?name=${request.firstname}+${request.lastname}&size=250"
                              alt="User Initials Image" class="rounded-circle"/>
                             <div>
-                            <h5><a href="#" class="profile-link">${request.username}</a></h5>
+                            <h5><a class="profile-link">${request.username}</a></h5>
                             <div class="dropdown">
                             <a href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: slategray; text-decoration: none;">
                             ${mutualFriends[request.username].length === 0 ? "No" : mutualFriends[request.username].length} Mutual Friends
@@ -197,10 +197,6 @@ function getNewFriends(decision) {
         }
     });
 }
-document.getElementById("searchButton").addEventListener("click", function() {
-    const searchTerm = document.getElementById("searchTerm").value;
-    searchFriends(searchTerm);
-});
 
 
 const searchResultsContainer = document.getElementById("search-results-container");
@@ -240,7 +236,7 @@ function displaySearchResults(users, mutualFriends, senderRequests) {
                 <div class="col d-flex align-items-center">
                     <img src="https://eu.ui-avatars.com/api/?name=${user.firstname}+${user.lastname}&size=250" alt="User Initials Image" class="rounded-circle"/>
                     <div>
-                        <h5><a href="#" class="profile-link">${user.username}</a></h5>
+                        <h5><a class="profile-link">${user.username}</a></h5>
                         <div class="dropdown">
                             <a href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: slategray; text-decoration: none;">
                                 ${mutualFriends[user.username].length === 0 ? "No" : mutualFriends[user.username].length} Mutual Friends
@@ -274,12 +270,6 @@ searchTermInput.addEventListener("keyup", function(event) {
     searchFriends(searchTermInput.value);
 });
 
-// searchTermInput.addEventListener("keypress", function(event) {
-//     if (event.key === "Enter") {
-//         event.preventDefault();
-//         searchFriends(searchTermInput.value);
-//     }
-// });
 
 function updateRequestsCount(number) {
     const requestBadge = document.getElementById("request-badge");

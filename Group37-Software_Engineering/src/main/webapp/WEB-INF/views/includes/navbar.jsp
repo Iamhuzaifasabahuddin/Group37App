@@ -56,7 +56,7 @@
                     </li>
                     <li class="nav-item d-flex justify-content-center align-items-center dropdown py-3">
                         <i id="bell" class="bi bi-bell s-light" data-bs-toggle="dropdown" aria-expanded="false"
-                           style="font-size: 1.5rem;"></i>
+                           style="font-size: 1.2rem;"></i>
                         <span id="bell-badge"
                               class="position-absolute top-1 start-100 translate-middle badge rounded-pill bg-danger d-none">0</span>
                         <div class="dropdown-menu dropdown-menu-end mt-3">

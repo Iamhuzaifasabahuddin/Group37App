@@ -76,9 +76,14 @@
                 <p>"${quote}"</p>
                 <p>~ ${author}</p>
             </blockquote>
+            <c:if test="${empty top5Courses}">
+                <h3 class="mt-5">No trending courses at the moment, check back later!</h3>
+            </c:if>
+            <c:if test="${not empty top5Courses}">
+                <h3><i class="bi bi-fire" style="color: #FBB746;"></i>
+                    Trending Courses:</h3>
+            </c:if>
 
-            <h3><i class="bi bi-fire" style="color: #FBB746;"></i>
-                Trending Courses:</h3>
             <div id="carouselExampleAutoplaying" class="carousel slide mx-auto" data-bs-ride="carousel">
                 <div class="carousel-indicators">
                     <c:forEach items="${top5Courses}" var="course" varStatus="status">

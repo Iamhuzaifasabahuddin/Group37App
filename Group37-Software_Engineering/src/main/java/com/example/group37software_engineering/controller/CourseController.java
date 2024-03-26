@@ -118,14 +118,6 @@ public class CourseController {
         return "redirect:/dashboard";
     }
 
-    @GetMapping("/top3")
-    public String getTop3Courses(Model model) {
-        List<Course> top3Courses = userCourseRepository.findTop5CoursesWithHighestUsers();
-        model.addAttribute("top3Courses", top3Courses);
-        return "Course/top3";
-    }
-
-
     /**
      * Checks if a user is enrolled in a specific course.
      *
