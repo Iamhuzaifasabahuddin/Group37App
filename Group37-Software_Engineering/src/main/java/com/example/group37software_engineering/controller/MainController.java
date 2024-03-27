@@ -122,8 +122,10 @@ public class MainController {
             course.setAverageRating(average);
             courseRepository.save(course);
         }
+        int previousPoints = user.getPoints();
         achievementController.Mirage(user);
-        leaderboardController.updateleagues(user);
+        int currentPoints = user.getPoints();
+        leaderboardController.updateleagues(user, previousPoints, currentPoints);
         if (courseList.isEmpty()) {
             model.addAttribute("error", "You have no courses.");
         } else {

@@ -135,13 +135,18 @@ public class LeaderboardController {
         }
     }
 
-    public void updateleagues(MyUser user){
+    public void updateleagues(MyUser user, int previousPoints, int currentPoints){
+        user.setPoints(previousPoints);
+        userRepository.save(user);
         List<MyUser> previousLeaderboard = userRepository.findAllByLeagueId(user.getLeague().getId()).stream().sorted(Comparator.comparingDouble(MyUser::getPoints).reversed()).toList();
         List<MyUser> previousGlobal = (List<MyUser>) userRepository.findAll();
         previousGlobal = previousGlobal.stream().sorted(Comparator.comparingDouble(MyUser::getPoints).reversed()).toList();
+        int previousRank = previousGlobal.indexOf(user);
         boolean promoted = false;
         List<League> leagues = (List<League>) leagueRepository.findAll();
         leagues.sort(Comparator.comparing(League::getThreshold).reversed());
+        user.setPoints(currentPoints);
+        userRepository.save(user);
         for(League league : leagues) {
             if(league.getThreshold() <= user.getPoints()) {
                 if (user.getLeague() == league) {
@@ -161,7 +166,8 @@ public class LeaderboardController {
         List<MyUser> currentLeaderboard = userRepository.findAllByLeagueId(user.getLeague().getId()).stream().sorted(Comparator.comparingDouble(MyUser::getPoints).reversed()).toList();
         List<MyUser> currentGlobal = (List<MyUser>) userRepository.findAll();
         currentGlobal = currentGlobal.stream().sorted(Comparator.comparingDouble(MyUser::getPoints).reversed()).toList();
-        sendLeaderboardNotifications(previousGlobal, currentGlobal, user, true, true);
+        int currentRank = currentGlobal.indexOf(user);
+        sendLeaderboardNotifications(previousGlobal, currentGlobal, user, previousRank > currentRank, true);
         sendLeaderboardNotifications(previousLeaderboard, currentLeaderboard, user, promoted, false);
         userRepository.save(user);
 

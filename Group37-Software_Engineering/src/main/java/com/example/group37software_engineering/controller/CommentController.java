@@ -69,8 +69,10 @@ public class CommentController {
 
         userCourseRepository.save(userCourse);
         userCommentRepository.save(userComment);
+        int previousPoints = user.getPoints();
         achievementController.ReviewConqueror(user);
-        leaderboardController.updateleagues(user);
+        int currentPoints = user.getPoints();
+        leaderboardController.updateleagues(user, previousPoints, currentPoints);
         return "redirect:/dashboard";
     }
 }

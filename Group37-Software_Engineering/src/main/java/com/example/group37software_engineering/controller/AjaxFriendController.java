@@ -87,8 +87,7 @@ public class AjaxFriendController {
             receiver.getFriends().add(sender);
             sender.getFriendsSince().add(LocalDateTime.now());
             receiver.getFriendsSince().add(LocalDateTime.now());
-            achievementController.DoubleTrouble(sender);
-            achievementController.DoubleTrouble(receiver);
+
             Notification n1 = new Notification();
             n1.setDescription("You are now friends with " + senderUsername + "!");
             n1.setPageLink("/friends");
@@ -103,6 +102,15 @@ public class AjaxFriendController {
             receiver.getNotifications().add(n1);
             sender.getNotifications().add(n2);
             userRepository.saveAll(List.of(sender, receiver));
+
+            int previousPoints = sender.getPoints();
+            achievementController.DoubleTrouble(sender);
+            int currentPoints = sender.getPoints();
+            leaderboardController.updateleagues(sender, previousPoints, currentPoints);
+            previousPoints = receiver.getPoints();
+            achievementController.DoubleTrouble(receiver);
+            currentPoints = receiver.getPoints();
+            leaderboardController.updateleagues(receiver, previousPoints, currentPoints);
             return ResponseEntity.ok().body("{\"decision\": true}");
         }
         return ResponseEntity.ok().body("{\"decision\": false}");
