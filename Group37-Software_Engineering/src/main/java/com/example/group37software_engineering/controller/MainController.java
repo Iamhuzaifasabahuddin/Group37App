@@ -157,11 +157,10 @@ public class MainController {
         model.addAttribute("Completed", countCompleted(principal.getName()));
         model.addAttribute("Percentage", hoursCompleted(principal.getName()));
         model.addAttribute("Hours", hoursLeft(principal.getName()));
-        if(user.getPoints() <=0){
+        if (user.getPoints() <= 0) {
 
             model.addAttribute("Rank", "N/A");
-        }
-        else{
+        } else {
             model.addAttribute("Rank", addRankSuffix(getRank(principal.getName())));
         }
         model.addAttribute("Achievements", user.getUserAchievements().size());
@@ -346,6 +345,13 @@ public class MainController {
         return null;
     }
 
+    /**
+     * This method adds a suffix to a given rank based on its value.
+     * The suffixes are "st" for ranks ending in 1 (except 11), "nd" for ranks ending in 2 (except 12), "rd" for ranks ending in 3 (except 13), and "th" for all other ranks.
+     *
+     * @param rank The rank to add a suffix to.
+     * @return The rank with its corresponding suffix as a string.
+     */
     public String addRankSuffix(int rank) {
         String suffix;
         int lastDigit = rank % 10;

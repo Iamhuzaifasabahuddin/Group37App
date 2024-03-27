@@ -109,7 +109,7 @@ public class AchievementController {
     /**
      * This method adds a notification for the user to inform of a completed achievement.
      *
-     * @param user The user to send notifications to.
+     * @param user        The user to send notifications to.
      * @param achievement The achievement the user should be notified of.
      */
     private void setNotifications(MyUser user, Achievement achievement) {
@@ -623,6 +623,13 @@ public class AchievementController {
         }
     }
 
+    /**
+     * This method checks if the user has any friends. If they do and they haven't already achieved the "Double Trouble" achievement,
+     * it creates a new UserAchievement for the user, sets the achievement to "Double Trouble", marks it as achieved, sets the date and time of achievement,
+     * adds the achievement points to the user's total points, and saves the user and the UserAchievement in their respective repositories.
+     *
+     * @param user The user to check for the achievement.
+     */
     public void DoubleTrouble(MyUser user) {
         Achievement achievement = achievementRepository.findAchievementByTitle("Double Trouble");
         UserAchievement userAchievement = userAchievementRepository.findUserAchievementByUserAndAchievement(user, achievement);
@@ -642,6 +649,13 @@ public class AchievementController {
         }
     }
 
+    /**
+     * This method checks if the user has any friends. If they do and they haven't already achieved the "Double Trouble" achievement,
+     * it creates a new UserAchievement for the user, sets the achievement to "Double Trouble", marks it as achieved, sets the date and time of achievement,
+     * adds the achievement points to the user's total points, and saves the user and the UserAchievement in their respective repositories.
+     *
+     * @param user The user to check for the achievement.
+     */
     public void ReviewConqueror(MyUser user) {
         Achievement achievement = achievementRepository.findAchievementByTitle("Review Conqueror");
         UserAchievement userAchievement = userAchievementRepository.findUserAchievementByUserAndAchievement(user, achievement);

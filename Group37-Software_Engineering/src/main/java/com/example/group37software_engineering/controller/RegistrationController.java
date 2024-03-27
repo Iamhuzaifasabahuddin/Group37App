@@ -3,6 +3,7 @@ package com.example.group37software_engineering.controller;
 import com.example.group37software_engineering.RegistrationService;
 import com.example.group37software_engineering.model.MyUser;
 import com.example.group37software_engineering.repo.UserRepository;
+import com.example.group37software_engineering.service.MyRegistrationService;
 import com.example.group37software_engineering.service.VerificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -28,7 +29,7 @@ public class RegistrationController {
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    private RegistrationService registrationService;
+    private MyRegistrationService registrationService;
 
     @Autowired
     private VerificationService verificationService;

@@ -113,6 +113,12 @@ public class LeaderboardController {
         return "leaderboard";
     }
 
+    /**
+     * This method assigns leagues to all users based on their points.
+     * It retrieves all users from the repository, checks their points, and assigns them to a league.
+     * The leagues and points thresholds used here are just examples, you would need to adjust them to match your application's requirements.
+     * After assigning the league, it saves the user back to the repository with their new league.
+     */
     public void assignLeaguesToUsers() {
         List<MyUser> allUsers = (List<MyUser>) userRepository.findAll();
 
@@ -135,6 +141,20 @@ public class LeaderboardController {
         }
     }
 
+    /**
+     * This method updates the leagues of a specific user based on their points.
+     * It first sets the user's points to the previous points and saves the user.
+     * Then it retrieves the previous leaderboard and global list of users, and calculates the user's previous rank.
+     * It then sets the user's points to the current points and saves the user.
+     * It checks if the user's points meet the threshold for each league, and if so, assigns the user to that league and sends a notification.
+     * It then retrieves the current leaderboard and global list of users, and calculates the user's current rank.
+     * It sends leaderboard notifications based on the user's previous and current ranks.
+     * Finally, it saves the user.
+     *
+     * @param user The user to update the league for.
+     * @param previousPoints The user's previous points.
+     * @param currentPoints The user's current points.
+     */
     public void updateleagues(MyUser user, int previousPoints, int currentPoints){
         user.setPoints(previousPoints);
         userRepository.save(user);
@@ -173,6 +193,18 @@ public class LeaderboardController {
 
     }
 
+    /**
+     * This method sends leaderboard notifications to users.
+     * It calculates the user's previous and current ranks in the leaderboard.
+     * If the user is not unranked or the leaderboard is global, and the user's current rank is in the top 3, and the user's current rank is higher than their previous rank or they were promoted, it sends a notification to the user.
+     * If there is a user who was dropped from their rank due to the user's promotion, it sends a notification to that user.
+     *
+     * @param previousLeaderboard The previous leaderboard.
+     * @param currentLeaderboard The current leaderboard.
+     * @param user The user to send notifications to.
+     * @param promoted Whether the user was promoted.
+     * @param isGlobal Whether the leaderboard is global.
+     */
     public void sendLeaderboardNotifications(List<MyUser> previousLeaderboard, List<MyUser> currentLeaderboard, MyUser user, boolean promoted, boolean isGlobal) {
         int previousRank = previousLeaderboard.indexOf(user);
         int currentRank = currentLeaderboard.indexOf(user);

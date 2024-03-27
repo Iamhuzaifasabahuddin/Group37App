@@ -53,7 +53,17 @@ public class AjaxCommentsController {
         return ResponseEntity.ok().body("{\"comments\":" + gson.toJson(comments) + "}");
     }
 
-
+    /**
+     * Endpoint to check if a comment contains profanity.
+     * This method sends a GET request to the Purgomalum API, which checks if the provided text contains any profane words.
+     * The comment is URL encoded and appended to the request URL as a query parameter.
+     * The API's response is then returned as the body of the ResponseEntity.
+     *
+     * @param comment The comment to check for profanity.
+     * @return ResponseEntity containing a string "true" if the comment contains profanity, "false" otherwise.
+     * @throws IOException          If an I/O error occurs when sending or receiving.
+     * @throws InterruptedException If the operation is interrupted.
+     */
     @GetMapping("/checkProfanity")
     public ResponseEntity<?> checkProfanity(@RequestParam String comment) throws IOException, InterruptedException {
         String encodedComment = URLEncoder.encode(comment, StandardCharsets.UTF_8);
