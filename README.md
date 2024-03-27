@@ -1,21 +1,25 @@
 # *Welcome to Group-37 GitLab Repository*
 
 ## 1. Repository Rules
+
 ```bash
 git status
 ```
-if any changes are detected use:
+If any changes are detected use:
 ```bash
 git pull origin main
 or 
 git pull
 ```
+
 ## 2. Installation Guide
-Follow these steps to install and run the project on your local machine.
-* When the repository has been cloned do create your own branches to avoid **MERGE CONFLICT**
-* Always Check for any recent changes by using
+
+Follow these steps to install and run the project on your local machine:
+* When the repository has been cloned, do create your own branches to avoid **MERGE CONFLICTS**.
+* Always check for any recent changes by using git pull.
 
 ### Step 1: Clone the Repository
+
 * Clone the repository via: 
 ```bash
 git clone https://campus.cs.le.ac.uk/gitlab/co2201-2024/group-37.git
@@ -24,31 +28,33 @@ git clone https://campus.cs.le.ac.uk/gitlab/co2201-2024/group-37.git
 ```bash
 cd group-37
 ```
+
 ### Step 2: To change anything in the repository
-* create a local branch using:
+
+* Create a local branch using:
 ```bash
 git switch -c your-branch-name
 ```
-* After working on your local branch push it to the main branch:
+* After working on your local branch, push it to the main branch:
 ```bash
 git add .
 git commit -a -m "Commit Message"
 git push --set-upstream origin your-branch-name
 ```
 
-* After Setting **upstream** to the origin branch You can use this as normal:
+* After setting **upstream** to the origin branch You can use this as normal:
 ```bash
 git push origin your-branch-name
 ```
 
-* Now Youll need to Merge the Commit from your local branch to the main branch:
+* Now you'll need to Merge the Commit from your local branch to the main branch.
 
-* If you go to **Merge Request** you can use it to merge the commit
+* If you go to **Merge Request** you can use it to merge the commit.
 
 ### Step 3: Run the application
 
-## Generating keys
-* You will need to create a new **keys.jsk** file to be able to run the application
+#### Generating keys
+* You will need to create a new **keys.jsk** file to be able to run the application:
 
 ``` java 
 keytool -genkeypair -alias tomcat -keyalg RSA -keystore ./keys.jks
@@ -65,7 +71,7 @@ keytool -genkeypair -alias tomcat -keyalg RSA -keystore ./keys.jks
 
 ![alt text](image-2.png)
 
-* ## Connecting to AWS database
+#### Connecting to AWS database
 * Configuration should be available in the **application.properties of the project**
 * click on the icon displaying next to the datasource.url 
 ![alt text](image-3.png)
@@ -91,6 +97,16 @@ and create a database called co2103db
 - Re-run the application now it should work
 ```
 
+#### Test accounts
+
+There are 2 test accounts for each league in the database available for use with the usernames below and the password **password**:
+
+| Unranked | Bronze | Silver | Gold | Platinum | Titanium | Elysium |
+| --- | --- | --- | --- | --- | --- | --- |
+| test0 | bronze0 | silver0 | gold0 | platinum0 | titanium0| elysium0 |
+| test1 | bronze1 | silver1 | gold1 | platinum1 | titanium1 | elysium1 |
+
+These accounts are for testing purposes only (mainly for the friends and leaderboard user story) and hence are not subject to the password strength requirements a new account would need to pass. The accounts also may not have the correct achievements unlocked initially as the points were added artificially.
 
 ## **Tech stack Used:**
 
